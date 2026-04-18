@@ -13,8 +13,8 @@ android {
         applicationId = "com.smslink"
         minSdk = 33
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 2
+        versionName = "1.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -27,11 +27,6 @@ android {
             isMinifyEnabled = false
             isDebuggable = true
             // 减少 debug 构建的验证开销
-            packagingOptions {
-                jniLibs {
-                    useLegacyPackaging = false
-                }
-            }
         }
         release {
             isMinifyEnabled = false
@@ -60,6 +55,9 @@ android {
     }
 
     packaging {
+        jniLibs {
+            useLegacyPackaging = false
+        }
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
             excludes += "META-INF/versions/9/OSGI-INF/MANIFEST.MF"
