@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SMS-link</string>
+
+    <!-- Bottom Navigation -->
+    <string name="nav_devices">Devices</string>
+    <string name="nav_notifications">Notifications</string>
+    <string name="nav_connect">Connect</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Connect Page -->
+    <string name="connect_tab_sms">SMS</string>
+    <string name="connect_tab_file">Files</string>
+    <string name="connect_tab_call">Calls</string>
+
+    <!-- Settings Page -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_section_security">Security &amp; Permissions</string>
+    <string name="settings_section_connection">Connection</string>
+    <string name="settings_section_sync">Sync</string>
+    <string name="settings_section_display">Display</string>
+    <string name="settings_section_advanced">Advanced</string>
+    <string name="settings_section_about">About</string>
+
+    <string name="settings_permissions">Permission Center</string>
+    <string name="settings_permissions_subtitle">Manage app permissions</string>
+    <string name="settings_connection_policy">Connection Policy</string>
+    <string name="settings_connection_policy_subtitle">Configure device connection</string>
+    <string name="settings_notification_sync">Notification Sync Policy</string>
+    <string name="settings_notification_sync_subtitle">Configure notification sync rules</string>
+    <string name="settings_theme">Theme</string>
+    <string name="settings_theme_light">Light Mode</string>
+    <string name="settings_theme_dark">Dark Mode</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_language_zh">中文</string>
+    <string name="settings_language_en">English</string>
+    <string name="settings_diagnostics">Diagnostic Logs</string>
+    <string name="settings_diagnostics_subtitle">View app logs</string>
+    <string name="settings_about">About SMS-link</string>
+    <string name="settings_about_subtitle">Version 1.0.0</string>
+
+    <!-- Permission Guide -->
+    <string name="permissions_title">Permission Center</string>
+    <string name="permissions_info">SMS-link requires the following permissions to work properly. Tap a card to jump to system settings and grant permission.</string>
+    <string name="permission_notification">Notification Access</string>
+    <string name="permission_notification_desc">Read and sync system notifications</string>
+    <string name="permission_sms">SMS Permission</string>
+    <string name="permission_sms_desc">Read, send and receive SMS messages</string>
+    <string name="permission_call">Phone Permission</string>
+    <string name="permission_call_desc">Read phone state and call logs</string>
+    <string name="permission_bluetooth">Bluetooth Permission</string>
+    <string name="permission_bluetooth_desc">Discover and connect to Bluetooth devices</string>
+    <string name="permission_location">Location Permission</string>
+    <string name="permission_location_desc">Required for Bluetooth BLE scanning on Android</string>
+    <string name="permission_storage">Storage Permission</string>
+    <string name="permission_storage_desc">File transfer functionality</string>
+    <string name="permission_granted">Granted</string>
+    <string name="permission_not_granted">Not Granted</string>
+
+    <!-- Common -->
+    <string name="back">Back</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
+    <string name="select_theme">Select Theme</string>
+    <string name="select_language">Select Language</string>
+</resources>

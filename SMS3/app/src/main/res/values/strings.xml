@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SMS-link</string>
+
+    <!-- 底部导航 -->
+    <string name="nav_devices">设备</string>
+    <string name="nav_notifications">通知</string>
+    <string name="nav_connect">互联</string>
+    <string name="nav_settings">设置</string>
+
+    <!-- 互联页面 -->
+    <string name="connect_tab_sms">短信</string>
+    <string name="connect_tab_file">文件</string>
+    <string name="connect_tab_call">通话</string>
+
+    <!-- 设置页面 -->
+    <string name="settings_title">设置</string>
+    <string name="settings_section_security">权限与安全</string>
+    <string name="settings_section_connection">连接</string>
+    <string name="settings_section_sync">同步</string>
+    <string name="settings_section_display">显示</string>
+    <string name="settings_section_advanced">高级</string>
+    <string name="settings_section_about">关于</string>
+
+    <string name="settings_permissions">权限中心</string>
+    <string name="settings_permissions_subtitle">管理应用权限</string>
+    <string name="settings_connection_policy">连接策略</string>
+    <string name="settings_connection_policy_subtitle">配置设备连接方式</string>
+    <string name="settings_notification_sync">通知同步策略</string>
+    <string name="settings_notification_sync_subtitle">配置通知同步规则</string>
+    <string name="settings_theme">主题</string>
+    <string name="settings_theme_light">浅色模式</string>
+    <string name="settings_theme_dark">深色模式</string>
+    <string name="settings_language">语言</string>
+    <string name="settings_language_zh">中文</string>
+    <string name="settings_language_en">English</string>
+    <string name="settings_diagnostics">诊断日志</string>
+    <string name="settings_diagnostics_subtitle">查看应用日志</string>
+    <string name="settings_about">关于 SMS-link</string>
+    <string name="settings_about_subtitle">版本 1.0.0</string>
+
+    <!-- 权限引导 -->
+    <string name="permissions_title">权限中心</string>
+    <string name="permissions_info">SMS-link 需要以下权限才能正常工作。点击卡片可跳转到系统设置授予权限。</string>
+    <string name="permission_notification">通知访问权限</string>
+    <string name="permission_notification_desc">用于读取和同步系统通知</string>
+    <string name="permission_sms">短信权限</string>
+    <string name="permission_sms_desc">用于读取、发送和接收短信</string>
+    <string name="permission_call">通话权限</string>
+    <string name="permission_call_desc">用于读取通话状态和通话记录</string>
+    <string name="permission_bluetooth">蓝牙权限</string>
+    <string name="permission_bluetooth_desc">用于蓝牙设备发现和连接</string>
+    <string name="permission_location">位置权限</string>
+    <string name="permission_location_desc">用于蓝牙 BLE 扫描（Android 要求）</string>
+    <string name="permission_storage">存储权限</string>
+    <string name="permission_storage_desc">用于文件传输功能</string>
+    <string name="permission_granted">已授予</string>
+    <string name="permission_not_granted">未授予</string>
+
+    <!-- 通用 -->
+    <string name="back">返回</string>
+    <string name="cancel">取消</string>
+    <string name="confirm">确认</string>
+    <string name="select_theme">选择主题</string>
+    <string name="select_language">选择语言</string>
+</resources>
