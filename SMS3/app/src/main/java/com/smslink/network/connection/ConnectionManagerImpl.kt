@@ -10,6 +10,7 @@ import com.smslink.network.encryption.IEncryption
 import com.smslink.network.monitor.NetworkMonitor
 import com.smslink.network.monitor.NetworkState
 import com.smslink.network.monitor.NetworkType
+import com.smslink.sync.CatchupSyncManager
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.*
@@ -32,6 +33,10 @@ class ConnectionManagerImpl @Inject constructor(
     private val linkSelector: LinkSelector,
     private val encryption: IEncryption
 ) : IConnectionManager {
+
+    // 使用懒加载避免循环依赖
+    @Inject
+    lateinit var catchupSyncManager: dagger.Lazy<CatchupSyncManager>
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
@@ -122,6 +127,16 @@ class ConnectionManagerImpl @Inject constructor(
 
             // 发送链路切换事件
             _linkSwitchFlow.emit(LinkSwitchEvent(deviceId, null, linkType, "Initial connection"))
+
+            // 触发补同步
+            scope.launch {
+                try {
+                    catchupSyncManager.get().performCatchupSync(deviceId)
+                    logger.i(TAG, "Catchup sync triggered for device: $deviceId")
+                } catch (e: Exception) {
+                    logger.e(TAG, "Failed to trigger catchup sync", e)
+                }
+            }
 
             logger.i(TAG, "Successfully connected to device: $deviceId via ${linkType.description}")
 
@@ -257,7 +272,8 @@ class ConnectionManagerImpl @Inject constructor(
                     val socket = withContext(Dispatchers.IO) { serverSocket.accept() }
                     val remoteAddress = socket.inetAddress?.hostAddress ?: "unknown"
                     val remotePort = socket.port
-                    val inboundDeviceId = "tcp-$remoteAddress:$remotePort"
+                    val resolvedDeviceId = tcpConnectionFactory.resolveDeviceIdByIpAddress(remoteAddress)
+                    val inboundDeviceId = resolvedDeviceId ?: "tcp-$remoteAddress:$remotePort"
                     val connection = AcceptedTcpConnection(inboundDeviceId, socket, logger)
 
                     activeConnections[inboundDeviceId] = connection
@@ -273,6 +289,7 @@ class ConnectionManagerImpl @Inject constructor(
                     )
 
                     logger.i(TAG, "Accepted TCP connection from $inboundDeviceId")
+                    startHeartbeat(inboundDeviceId, connection)
                     startReceivingData(inboundDeviceId, connection)
                 }
             } catch (e: Exception) {

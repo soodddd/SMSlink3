@@ -58,7 +58,7 @@ class NotificationViewModel @Inject constructor(
         checkPermissionsAndLoadNotifications()
         observeNewNotifications()
         observeConnectedDevices()
-        deviceManager.startDiscovery()
+        // 不在 init 中自动启动设备发现，由用户主动触发
     }
 
     /**
@@ -109,8 +109,15 @@ class NotificationViewModel @Inject constructor(
                 }
                 .collect { newNotification ->
                     logger.d(TAG, "New notification received: ${newNotification.appName}")
-                    // 刷新通知列表
-                    loadNotifications()
+                    // 直接添加到列表，避免重新查询数据库
+                    val currentList = _notifications.value.toMutableList()
+                    currentList.add(0, newNotification)
+                    _notifications.value = currentList
+
+                    // 更新 UI 状态
+                    if (_uiState.value is NotificationUiState.Empty) {
+                        _uiState.value = NotificationUiState.Success
+                    }
                 }
         }
     }
@@ -307,7 +314,7 @@ class NotificationViewModel @Inject constructor(
     override fun onCleared() {
         super.onCleared()
         notificationsLoadJob?.cancel()
-        deviceManager.stopDiscovery()
+        // 不在 onCleared 中停止设备发现，由用户主动控制
     }
 
     /**

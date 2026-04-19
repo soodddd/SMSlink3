@@ -1,0 +1,31 @@
+[
+  {
+    "case": "notification_start_listening",
+    "texts": " |  |  |  |  |  |  |  | No notifications | Start listening to receive notifications |  | Start Listening |  |  | Notifications |  | 黑白名单 |  |  |  |  |  |  |  |  |  |  |  |  |  | 设备 |  |  |  | 通知 |  |  |  | 短信 |  |  |  | 文件 |  |  |  | 通话 |  |  |  | 设置 |  |  |  | ",
+    "focus": "\nWINDOW MANAGER LAST ANR (dumpsys window lastanr)\n  <no ANR has occurred since boot>\n\nWINDOW MANAGER POLICY STATE (dumpsys window policy)\n    mSafeMode=false mSystemReady=true mSystemBooted=true\n    mCameraLensCoverState=CAMERA_LENS_COVER_ABSENT\n    mWakeGestureEnabledSetting=true\n    mUiMode=UI_MODE_TYPE_NORMALmEnableCarDockHomeCapture=false\n    mLidKeyboardAccessibility=0 mLidNavigationAccessibility=0 getLidBehavior=LID_BEHAVIOR_NONE\n    mLongPressOnBackBehavior=LONG_PRESS_BACK_NOTHING\n    mLo"
+  },
+  {
+    "case": "sms_sync",
+    "texts": " |  |  |  |  |  |  |  | No messages | Your messages will appear here |  | 短信 | Messages |  | 列表 |  |  |  |  |  |  |  |  |  |  | 设备 |  |  |  | 通知 |  |  |  | 短信 |  |  |  | 文件 |  |  |  | 通话 |  |  |  | 设置 |  |  |  | "
+  },
+  {
+    "case": "sms_new_message",
+    "texts": " |  |  |  |  |  |  |  | No messages | Your messages will appear here |  | 短信 | Messages |  | 列表 |  |  |  |  |  |  |  |  |  |  | 设备 |  |  |  | 通知 |  |  |  | 短信 |  |  |  | 文件 |  |  |  | 通话 |  |  |  | 设置 |  |  |  | "
+  },
+  {
+    "case": "call_default_phone_guidance",
+    "texts": " |  |  |  |  |  |  |  | 设置默认电话应用 | 为了实现通话控制功能，SMS Link 需要设置为默认电话应用。&#10;&#10;这将允许应用：&#10;• 接听来电&#10;• 挂断通话&#10;• 静音/取消静音&#10;• 保持/恢复通话&#10;• 跨设备控制通话&#10;&#10;您可以随时在系统设置中更改默认电话应用。&#10;SMS Link 不会干扰您的正常通话功能。 | 设置为默认电话应用后，SMS-link 可以： | • 接听和挂断电话 | • 控制通话状态（静音、保持） | • 远程控制其他设备的通话 |  | 取消 |  |  | 设置 | ",
+    "package_mentions": true
+  },
+  {
+    "case": "manifest_services",
+    "has_notification_service": true,
+    "has_sms_service": false,
+    "has_call_service": true
+  },
+  {
+    "case": "no_crash_single_device",
+    "no_fatal": true,
+    "no_anr": true
+  }
+]

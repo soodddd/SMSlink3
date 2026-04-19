@@ -1,0 +1,7 @@
+interface:
+  display_name: "SMS-link Executor"
+  short_description: "Run Android emulator preflight, drive UI flows, collect screenshots and logs, and return structured evidence."
+  default_prompt: "Use $smslink-executor to run Android emulator QA rounds for SMS-link. Start emulators, gate on health, capture identity evidence before pairing or reconnecting, run UI flows, capture dumpsys and logcat evidence, and stop blaming the app when focus is owned by system dialogs, stale relay data, or emulator UI blockers."
+
+policy:
+  allow_implicit_invocation: true

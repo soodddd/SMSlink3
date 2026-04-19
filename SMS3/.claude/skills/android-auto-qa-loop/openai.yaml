@@ -1,0 +1,7 @@
+interface:
+  display_name: "Android 全自动测试修复循环"
+  short_description: "全自动真机测试修复循环 - 自动测试、快速抓log、自动修复、重新编译安装，循环直到所有测试通过"
+  default_prompt: "Use $android-auto-qa-loop to run full automated testing and fixing loop on real Android devices until all tests pass or termination conditions are met"
+
+policy:
+  allow_implicit_invocation: true

@@ -84,9 +84,12 @@ class SmsLinkInCallService : InCallService() {
                 logger.i(TAG, "Call answered")
                 true
             } else {
-                logger.w(TAG, "No ringing call to answer")
+                logger.w(TAG, "No ringing call to answer, current state: ${call?.state}")
                 false
             }
+        } catch (e: SecurityException) {
+            logger.e(TAG, "Permission denied to answer call - not default phone app?", e)
+            false
         } catch (e: Exception) {
             logger.e(TAG, "Failed to answer call", e)
             false
@@ -107,6 +110,9 @@ class SmsLinkInCallService : InCallService() {
                 logger.w(TAG, "No active call to end")
                 false
             }
+        } catch (e: SecurityException) {
+            logger.e(TAG, "Permission denied to end call - not default phone app?", e)
+            false
         } catch (e: Exception) {
             logger.e(TAG, "Failed to end call", e)
             false

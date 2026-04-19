@@ -2,6 +2,7 @@ package com.smslink.call
 
 import android.os.Build
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.smslink.call.model.CallAction
 import com.smslink.core.log.ILogger
 import com.smslink.core.model.CallDirection
@@ -11,10 +12,6 @@ import com.smslink.core.model.Device
 import com.smslink.core.permission.IPermissionManager
 import com.smslink.device.IDeviceManager
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -42,7 +39,6 @@ class CallViewModel @Inject constructor(
     private val _selectedDeviceId = MutableStateFlow<String?>(null)
     val selectedDeviceId: StateFlow<String?> = _selectedDeviceId.asStateFlow()
     private val allCallLogs = MutableStateFlow<List<CallLog>>(emptyList())
-    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Unconfined)
 
     init {
         observeCallState()
@@ -52,7 +48,7 @@ class CallViewModel @Inject constructor(
     }
 
     private fun observeCallState() {
-        scope.launch {
+        viewModelScope.launch {
             callManager.getCallState()
                 .catch { e -> logger.e(TAG, "Error observing call state", e) }
                 .collect { _currentCallState.value = it }
@@ -60,7 +56,7 @@ class CallViewModel @Inject constructor(
     }
 
     fun loadCallHistory() {
-        scope.launch {
+        viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
             callRepository.getAllCallLogs()
                 .catch { e ->
@@ -75,7 +71,7 @@ class CallViewModel @Inject constructor(
     }
 
     fun syncCallHistory() {
-        scope.launch {
+        viewModelScope.launch {
             _uiState.update { it.copy(isSyncing = true) }
             callRepository.syncFromSystem().fold(
                 onSuccess = { count ->
@@ -90,7 +86,7 @@ class CallViewModel @Inject constructor(
     }
 
     fun makeCall(phoneNumber: String) {
-        scope.launch {
+        viewModelScope.launch {
             if (!permissionManager.hasCallPermission()) {
                 _uiState.update { it.copy(error = "Call permission required") }
                 return@launch
@@ -102,7 +98,7 @@ class CallViewModel @Inject constructor(
     }
 
     fun answerCall(callId: String) {
-        scope.launch {
+        viewModelScope.launch {
             if (!permissionManager.hasCallPermission()) {
                 _uiState.update { it.copy(error = "Call permission required") }
                 return@launch
@@ -114,7 +110,7 @@ class CallViewModel @Inject constructor(
     }
 
     fun endCall(callId: String) {
-        scope.launch {
+        viewModelScope.launch {
             if (!permissionManager.hasCallPermission()) {
                 _uiState.update { it.copy(error = "Call permission required") }
                 return@launch
@@ -126,7 +122,7 @@ class CallViewModel @Inject constructor(
     }
 
     fun deleteCallLog(callLog: CallLog) {
-        scope.launch {
+        viewModelScope.launch {
             try {
                 callRepository.deleteCallLog(callLog)
             } catch (e: Exception) {
@@ -145,7 +141,7 @@ class CallViewModel @Inject constructor(
     }
 
     fun clearCallHistory() {
-        scope.launch {
+        viewModelScope.launch {
             callRepository.clearAllCallLogs()
             allCallLogs.value = emptyList()
             _uiState.update { it.copy(callLogs = emptyList()) }
@@ -162,7 +158,7 @@ class CallViewModel @Inject constructor(
 
     private fun observeConnectedDevices() {
         val manager = deviceManager ?: return
-        scope.launch {
+        viewModelScope.launch {
             manager.getConnectedDevices()
                 .catch { e -> logger.e(TAG, "Error observing connected devices", e) }
                 .collect { _connectedDevices.value = it }
@@ -175,7 +171,7 @@ class CallViewModel @Inject constructor(
     }
 
     fun muteCall(callId: String) {
-        scope.launch {
+        viewModelScope.launch {
             if (!checkCallControlPermissions()) return@launch
             val success = (callManager as? CallManagerImpl)?.muteCall(callId) ?: false
             if (!success) _uiState.update { it.copy(error = "Mute failed") }
@@ -183,7 +179,7 @@ class CallViewModel @Inject constructor(
     }
 
     fun unmuteCall(callId: String) {
-        scope.launch {
+        viewModelScope.launch {
             if (!checkCallControlPermissions()) return@launch
             val success = (callManager as? CallManagerImpl)?.unmuteCall(callId) ?: false
             if (!success) _uiState.update { it.copy(error = "Unmute failed") }
@@ -191,7 +187,7 @@ class CallViewModel @Inject constructor(
     }
 
     fun holdCall(callId: String) {
-        scope.launch {
+        viewModelScope.launch {
             if (!checkCallControlPermissions()) return@launch
             val success = (callManager as? CallManagerImpl)?.holdCall(callId) ?: false
             if (!success) _uiState.update { it.copy(error = "Hold failed") }
@@ -199,7 +195,7 @@ class CallViewModel @Inject constructor(
     }
 
     fun resumeCall(callId: String) {
-        scope.launch {
+        viewModelScope.launch {
             if (!checkCallControlPermissions()) return@launch
             val success = (callManager as? CallManagerImpl)?.resumeCall(callId) ?: false
             if (!success) _uiState.update { it.copy(error = "Resume failed") }
@@ -207,7 +203,7 @@ class CallViewModel @Inject constructor(
     }
 
     fun sendRemoteControl(callState: CallState, action: CallAction) {
-        scope.launch {
+        viewModelScope.launch {
             val targetDeviceId = _selectedDeviceId.value ?: run {
                 _uiState.update { it.copy(error = "Select a target device first") }
                 return@launch
@@ -268,7 +264,6 @@ class CallViewModel @Inject constructor(
     override fun onCleared() {
         super.onCleared()
         stopListening()
-        scope.cancel()
     }
 
     companion object {

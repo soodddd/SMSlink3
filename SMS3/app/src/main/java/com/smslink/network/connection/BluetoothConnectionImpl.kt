@@ -68,16 +68,27 @@ class BluetoothConnectionImpl(
             val btSocket = device.createRfcommSocketToServiceRecord(SPP_UUID)
             socket = btSocket
 
-            // 建立连接
-            btSocket.connect()
+            try {
+                // 建立连接
+                btSocket.connect()
 
-            // 创建输入输出流
-            inputStream = BufferedInputStream(btSocket.inputStream)
-            outputStream = BufferedOutputStream(btSocket.outputStream)
+                // 创建输入输出流
+                inputStream = BufferedInputStream(btSocket.inputStream)
+                outputStream = BufferedOutputStream(btSocket.outputStream)
 
-            connected = true
+                connected = true
 
-            logger.i(TAG, "Successfully connected to Bluetooth device: $deviceId")
+                logger.i(TAG, "Successfully connected to Bluetooth device: $deviceId")
+            } catch (e: Exception) {
+                // 连接失败，关闭 socket
+                try {
+                    btSocket.close()
+                } catch (closeException: Exception) {
+                    logger.e(TAG, "Error closing socket after connection failure", closeException)
+                }
+                socket = null
+                throw e
+            }
 
         } catch (e: Exception) {
             logger.e(TAG, "Failed to connect to Bluetooth device: $deviceId", e)
@@ -87,30 +98,32 @@ class BluetoothConnectionImpl(
     }
 
     override suspend fun send(data: ByteArray) = withContext(Dispatchers.IO) {
-        if (!connected) {
-            throw IOException("Not connected")
-        }
+        synchronized(this@BluetoothConnectionImpl) {
+            if (!connected) {
+                throw IOException("Not connected")
+            }
 
-        try {
-            val output = outputStream ?: throw IOException("Output stream is null")
+            try {
+                val output = outputStream ?: throw IOException("Output stream is null")
 
-            // 写入数据长度（4字节，与 TCP 保持一致）
-            val length = data.size
-            output.write((length shr 24) and 0xFF)
-            output.write((length shr 16) and 0xFF)
-            output.write((length shr 8) and 0xFF)
-            output.write(length and 0xFF)
+                // 写入数据长度（4字节，与 TCP 保持一致）
+                val length = data.size
+                output.write((length shr 24) and 0xFF)
+                output.write((length shr 16) and 0xFF)
+                output.write((length shr 8) and 0xFF)
+                output.write(length and 0xFF)
 
-            // 写入数据
-            output.write(data)
-            output.flush()
+                // 写入数据
+                output.write(data)
+                output.flush()
 
-            logger.d(TAG, "Sent ${data.size} bytes to Bluetooth device: $deviceId")
+                logger.d(TAG, "Sent ${data.size} bytes to Bluetooth device: $deviceId")
 
-        } catch (e: Exception) {
-            logger.e(TAG, "Failed to send data to Bluetooth device: $deviceId", e)
-            connected = false
-            throw e
+            } catch (e: Exception) {
+                logger.e(TAG, "Failed to send data to Bluetooth device: $deviceId", e)
+                connected = false
+                throw e
+            }
         }
     }
 
@@ -211,7 +224,7 @@ class BluetoothConnectionImpl(
 
     companion object {
         private const val TAG = "BluetoothConnection"
-        private const val MAX_MESSAGE_SIZE = 100 * 1024 * 1024 // 100MB
+        private const val MAX_MESSAGE_SIZE = 10 * 1024 * 1024 // 10MB (降低以防止 OOM)
 
         // 标准 SPP UUID (Serial Port Profile)
         private val SPP_UUID: UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")

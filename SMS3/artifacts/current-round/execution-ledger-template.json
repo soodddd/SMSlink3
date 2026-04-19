@@ -1,0 +1,18 @@
+# Execution Ledger - Shared State for Multi-Agent Workflow
+# Purpose: Prevent repeated operations, track device health, record patches
+# All agents (orchestrator, executor, triage, fixer) read/write this file
+
+{
+  "roundId": "",
+  "startTime": "",
+  "lastUpdate": "",
+  "status": "running",
+  "devices": {},
+  "scenarios": {},
+  "patches": [],
+  "metadata": {
+    "maxRestartPerDevice": 1,
+    "maxScenarioAttempts": 2,
+    "requireFreshDiscovery": true
+  }
+}

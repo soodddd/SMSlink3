@@ -1,0 +1,2323 @@
+﻿ACTIVITY MANAGER SERVICES (dumpsys activity services)
+  Last ANR service:
+ServiceRecord{f40b8bf u0 com.android.systemui/.keyguard.KeyguardService}
+    intent={cmp=com.android.systemui/.keyguard.KeyguardService}
+    packageName=com.android.systemui
+    processName=com.android.systemui
+    baseDir=/system_ext/priv-app/SystemUIGoogle/SystemUIGoogle.apk
+    dataDir=/data/user_de/0/com.android.systemui
+    app=ProcessRecord{811b3ec 776:com.android.systemui/u0a167}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=1000
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: android; callingUid: 1000; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { flg=0x100 cmp=com.android.systemui/.keyguard.KeyguardService }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<null>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-20s318ms startingBgTimeout=--
+    lastActivity=-20s317ms restartTime=-20s317ms createdFromFg=true
+    executeNesting=2 executeFg=true executingStart=-20s317ms
+    Bindings:
+    * IntentBindRecord{b417024 CREATE}:
+      intent={flg=0x100 cmp=com.android.systemui/.keyguard.KeyguardService}
+      binder=null
+      requested=true received=false hasBound=true doRebind=false
+      * Client AppBindRecord{adfe78d ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{e9edede u0 CR com.android.systemui/.keyguard.KeyguardService:@a295e19 flags=0x1}
+    All Connections:
+      ConnectionRecord{e9edede u0 CR com.android.systemui/.keyguard.KeyguardService:@a295e19 flags=0x1}
+
+  User 0 active services:
+  * ServiceRecord{8911a6e u0 com.google.android.bluetooth/com.android.bluetooth.hid.HidDeviceService}
+    intent={cmp=com.google.android.bluetooth/com.android.bluetooth.hid.HidDeviceService}
+    packageName=com.google.android.bluetooth
+    processName=com.google.android.bluetooth
+    baseDir=/apex/com.android.btservices/app/BluetoothGoogle@340815010/BluetoothGoogle.apk
+    dataDir=/data/user_de/0/com.google.android.bluetooth
+    app=ProcessRecord{fb229bf 887:com.google.android.bluetooth/1002}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=10167
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.bluetooth; callingUid: 1002; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { cmp=com.google.android.bluetooth/com.android.bluetooth.hid.HidDeviceService (has extras) }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<19c0458 android.bluetooth.adapter.action.STATE_CHANGED/u-1,reasonCode:BLUETOOTH_BROADCAST,duration:10000,callingUid:1000>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-27m15s449ms startingBgTimeout=--
+    lastActivity=-27m15s449ms restartTime=-27m15s449ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=true callStart=true lastStartId=1
+ startCommandResult=2
+    Bindings:
+    * IntentBindRecord{d4cda33}:
+      intent={act=android.bluetooth.IBluetoothHidDevice cmp=com.google.android.bluetooth/com.android.bluetooth.hid.HidDeviceService}
+      binder=android.os.BinderProxy@aa6a1f0
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{dea4369 ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{a1e7a59 u0 com.google.android.bluetooth/com.android.bluetooth.hid.HidDeviceService:@d1e9ea0 flags=0x0}
+    All Connections:
+      ConnectionRecord{a1e7a59 u0 com.google.android.bluetooth/com.android.bluetooth.hid.HidDeviceService:@d1e9ea0 flags=0x0}
+
+  * ServiceRecord{fe9bee8 u0 com.google.android.apps.messaging/com.google.android.ims.service.JibeService}
+    intent={cmp=com.google.android.apps.messaging/com.google.android.ims.service.JibeService}
+    packageName=com.google.android.apps.messaging
+    processName=com.google.android.apps.messaging:rcs
+    baseDir=/product/priv-app/PrebuiltBugle/PrebuiltBugle.apk
+    dataDir=/data/user/0/com.google.android.apps.messaging
+    app=ProcessRecord{4daaeb2 1510:com.google.android.apps.messaging:rcs/u0a131}
+    mAllowWhileInUsePermissionInFgsReason=DENIED
+    allowUiJobScheduling=false
+    recentCallingPackage=com.google.android.apps.messaging
+    recentCallingUid=10131
+    allowStartForeground=PROC_STATE_BFGS
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.apps.messaging; callingUid: 10131; uidState: BFGS; uidBFSL: [BFSL]; intent: Intent { cmp=com.google.android.apps.messaging/com.google.android.ims.service.JibeService }; code:PROC_STATE_BFGS; tempAllowListReason:<null>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-26m51s228ms startingBgTimeout=--
+    lastActivity=-26m8s172ms restartTime=-26m51s227ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=false callStart=true lastStartId=1
+ startCommandResult=1
+    Bindings:
+    * IntentBindRecord{97ee1ee CREATE}:
+      intent={act=com.google.android.ims.rcs.singleregistration.ISingleRegistrationVendorImsController cmp=com.google.android.apps.messaging/com.google.android.ims.service.JibeService}
+      binder=android.os.BinderProxy@ff0e68f
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{16bed1c ProcessRecord{8e415a5 2704:com.google.android.apps.messaging/u0a131}}
+        Per-process Connections:
+          ConnectionRecord{dcfab04 u0 CR com.google.android.apps.messaging/com.google.android.ims.service.JibeService:@f46cb17 flags=0x1}
+    * IntentBindRecord{cdaad25}:
+      intent={act=com.google.android.ims.rcs.engine.IRcsEngineTemporaryController cmp=com.google.android.apps.messaging/com.google.android.ims.service.JibeService}
+      binder=android.os.BinderProxy@97b2efa
+      requested=true received=true hasBound=false doRebind=false
+    All Connections:
+      ConnectionRecord{dcfab04 u0 CR com.google.android.apps.messaging/com.google.android.ims.service.JibeService:@f46cb17 flags=0x1}
+
+  * ServiceRecord{a25367 u0 com.google.android.networkstack.tethering/com.android.networkstack.tethering.TetheringService}
+    intent={act=android.net.ITetheringConnector cmp=com.google.android.networkstack.tethering/com.android.networkstack.tethering.TetheringService}
+    packageName=com.google.android.networkstack.tethering
+    processName=com.android.networkstack.process
+    permission=android.permission.MAINLINE_NETWORK_STACK
+    baseDir=/apex/com.android.tethering/priv-app/TetheringGoogle@340818080/TetheringGoogle.apk
+    dataDir=/data/user_de/0/com.google.android.networkstack.tethering
+    app=ProcessRecord{d700431 841:com.android.networkstack.process/1073}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=1000
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: android; callingUid: 1000; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { act=android.net.ITetheringConnector cmp=com.google.android.networkstack.tethering/com.android.networkstack.tethering.TetheringService }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<null>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-27m26s982ms startingBgTimeout=--
+    lastActivity=-27m26s517ms restartTime=-27m26s517ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{11f5cab CREATE}:
+      intent={act=android.net.ITetheringConnector cmp=com.google.android.networkstack.tethering/com.android.networkstack.tethering.TetheringService}
+      binder=android.os.BinderProxy@fd8bf08
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{1adf6a1 ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{6381a84 u0 CR IMP com.google.android.networkstack.tethering/com.android.networkstack.tethering.TetheringService:@2554897 flags=0x41}
+    All Connections:
+      ConnectionRecord{6381a84 u0 CR IMP com.google.android.networkstack.tethering/com.android.networkstack.tethering.TetheringService:@2554897 flags=0x41}
+
+  * ServiceRecord{e76e5bd u0 com.google.android.gms/.nearby.sharing.ReceiveSurfaceService}
+    intent={cmp=com.google.android.gms/.nearby.sharing.ReceiveSurfaceService}
+    packageName=com.google.android.gms
+    processName=com.google.android.gms.persistent
+    baseDir=/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk
+    dataDir=/data/user/0/com.google.android.gms
+    app=ProcessRecord{ad44190 2537:com.google.android.gms.persistent/u0a128}
+    mAllowWhileInUsePermissionInFgsReason=BACKGROUND_ACTIVITY_PERMISSION
+    allowUiJobScheduling=false
+    recentCallingPackage=com.google.android.gms
+    recentCallingUid=10128
+    allowStartForeground=BACKGROUND_ACTIVITY_PERMISSION
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.gms; callingUid: 10128; uidState: BTOP; uidBFSL: [BFSL]; intent: Intent { cmp=com.google.android.gms/.nearby.sharing.ReceiveSurfaceService }; code:BACKGROUND_ACTIVITY_PERMISSION; tempAllowListReason:<,reasonCode:SYSTEM_ALLOW_LISTED,duration:9223372036854775807,callingUid:-1>; targetSdkVersion:33; callerTargetSdkVersion:33; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-25m54s583ms startingBgTimeout=--
+    lastActivity=-25m54s582ms restartTime=-25m54s582ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=false callStart=true lastStartId=1
+ startCommandResult=1
+
+  * ServiceRecord{69d2315 u0 com.google.android.googlequicksearchbox/com.google.android.apps.gsa.shared.util.keepalive.StandaloneKeepAlive$KeepAliveService}
+    intent={cmp=com.google.android.googlequicksearchbox/com.google.android.apps.gsa.shared.util.keepalive.StandaloneKeepAlive$KeepAliveService}
+    packageName=com.google.android.googlequicksearchbox
+    processName=com.google.android.googlequicksearchbox:search
+    baseDir=/product/priv-app/Velvet/Velvet.apk
+    dataDir=/data/user/0/com.google.android.googlequicksearchbox
+    app=ProcessRecord{a80746e 1719:com.google.android.googlequicksearchbox:search/u0a132}
+    mAllowWhileInUsePermissionInFgsReason=ACTIVITY_STARTER
+    allowUiJobScheduling=false
+    recentCallingPackage=com.google.android.googlequicksearchbox
+    recentCallingUid=10132
+    allowStartForeground=ACTIVITY_STARTER
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.googlequicksearchbox; callingUid: 10132; uidState: BTOP; uidBFSL: [BFSL]; intent: Intent { cmp=com.google.android.googlequicksearchbox/com.google.android.apps.gsa.shared.util.keepalive.StandaloneKeepAlive$KeepAliveService }; code:ACTIVITY_STARTER; tempAllowListReason:<null>; targetSdkVersion:31; callerTargetSdkVersion:31; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-24m13s137ms startingBgTimeout=--
+    lastActivity=-24m13s136ms restartTime=-24m13s136ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=false callStart=true lastStartId=1
+ startCommandResult=1
+
+  * ServiceRecord{23481ef u0 com.google.android.gms/.deviceconnection.service.DeviceConnectionWatcherService}
+    intent={cmp=com.google.android.gms/.deviceconnection.service.DeviceConnectionWatcherService}
+    packageName=com.google.android.gms
+    processName=com.google.android.gms.persistent
+    baseDir=/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk
+    dataDir=/data/user/0/com.google.android.gms
+    app=ProcessRecord{ad44190 2537:com.google.android.gms.persistent/u0a128}
+    mAllowWhileInUsePermissionInFgsReason=BACKGROUND_ACTIVITY_PERMISSION
+    allowUiJobScheduling=false
+    recentCallingPackage=com.google.android.gms
+    recentCallingUid=10128
+    allowStartForeground=BACKGROUND_ACTIVITY_PERMISSION
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.gms; callingUid: 10128; uidState: BTOP; uidBFSL: [BFSL]; intent: Intent { cmp=com.google.android.gms/.deviceconnection.service.DeviceConnectionWatcherService }; code:BACKGROUND_ACTIVITY_PERMISSION; tempAllowListReason:<,reasonCode:SYSTEM_ALLOW_LISTED,duration:9223372036854775807,callingUid:-1>; targetSdkVersion:33; callerTargetSdkVersion:33; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-25m55s169ms startingBgTimeout=--
+    lastActivity=-25m55s168ms restartTime=-25m55s168ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=false callStart=true lastStartId=1
+ startCommandResult=1
+
+  * ServiceRecord{f40b8bf u0 com.android.systemui/.keyguard.KeyguardService}
+    intent={cmp=com.android.systemui/.keyguard.KeyguardService}
+    packageName=com.android.systemui
+    processName=com.android.systemui
+    baseDir=/system_ext/priv-app/SystemUIGoogle/SystemUIGoogle.apk
+    dataDir=/data/user_de/0/com.android.systemui
+    app=ProcessRecord{811b3ec 776:com.android.systemui/u0a167}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=1000
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: android; callingUid: 1000; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { flg=0x100 cmp=com.android.systemui/.keyguard.KeyguardService }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<null>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-27m22s702ms startingBgTimeout=--
+    lastActivity=-27m22s701ms restartTime=-27m22s701ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{b417024 CREATE}:
+      intent={flg=0x100 cmp=com.android.systemui/.keyguard.KeyguardService}
+      binder=android.os.BinderProxy@9bd40c6
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{adfe78d ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{e9edede u0 CR com.android.systemui/.keyguard.KeyguardService:@a295e19 flags=0x1}
+    All Connections:
+      ConnectionRecord{e9edede u0 CR com.android.systemui/.keyguard.KeyguardService:@a295e19 flags=0x1}
+
+  * ServiceRecord{1fb0670 u0 com.google.android.bluetooth/com.android.bluetooth.hfp.HeadsetService}
+    intent={cmp=com.google.android.bluetooth/com.android.bluetooth.hfp.HeadsetService}
+    packageName=com.google.android.bluetooth
+    processName=com.google.android.bluetooth
+    baseDir=/apex/com.android.btservices/app/BluetoothGoogle@340815010/BluetoothGoogle.apk
+    dataDir=/data/user_de/0/com.google.android.bluetooth
+    app=ProcessRecord{fb229bf 887:com.google.android.bluetooth/1002}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=1000
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.bluetooth; callingUid: 1002; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { cmp=com.google.android.bluetooth/com.android.bluetooth.hfp.HeadsetService (has extras) }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<19c0458 android.bluetooth.adapter.action.STATE_CHANGED/u-1,reasonCode:BLUETOOTH_BROADCAST,duration:10000,callingUid:1000>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-27m15s456ms startingBgTimeout=--
+    lastActivity=-27m15s455ms restartTime=-27m15s455ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=true callStart=true lastStartId=1
+ startCommandResult=2
+    Bindings:
+    * IntentBindRecord{e751887}:
+      intent={act=android.bluetooth.IBluetoothHeadset cmp=com.google.android.bluetooth/com.android.bluetooth.hfp.HeadsetService}
+      binder=android.os.BinderProxy@4bec3b4
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{6125bdd ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{678d380 u0 com.google.android.bluetooth/com.android.bluetooth.hfp.HeadsetService:@bc99803 flags=0x0}
+    All Connections:
+      ConnectionRecord{678d380 u0 com.google.android.bluetooth/com.android.bluetooth.hfp.HeadsetService:@bc99803 flags=0x0}
+
+  * ServiceRecord{d4ff240 u0 com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiAugmentedAutofillService}
+    intent={act=android.service.autofill.augmented.AugmentedAutofillService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiAugmentedAutofillService}
+    packageName=com.google.android.as
+    processName=com.google.android.as
+    permission=android.permission.BIND_AUGMENTED_AUTOFILL_SERVICE
+    baseDir=/product/priv-app/DevicePersonalizationPrebuiltPixel2021/DevicePersonalizationPrebuiltPixel2021.apk
+    dataDir=/data/user/0/com.google.android.as
+    app=ProcessRecord{1af5ae4 1390:com.google.android.as/u0a125}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=1000
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: android; callingUid: 1000; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { act=android.service.autofill.augmented.AugmentedAutofillService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiAugmentedAutofillService }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<keychain,reasonCode:KEY_CHAIN,duration:30000,callingUid:1000>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-21m44s798ms startingBgTimeout=--
+    lastActivity=-21m44s797ms restartTime=-21m44s797ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{7bca352 CREATE}:
+      intent={act=android.service.autofill.augmented.AugmentedAutofillService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiAugmentedAutofillService}
+      binder=android.os.BinderProxy@880b623
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{85e6720 ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{a2f9c3 u0 CR com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiAugmentedAutofillService:@ff53172 flags=0x1}
+    All Connections:
+      ConnectionRecord{a2f9c3 u0 CR com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiAugmentedAutofillService:@ff53172 flags=0x1}
+
+  * ServiceRecord{a7ed53d u0 com.google.android.as/com.google.android.apps.miphone.aiai.captions.SystemCaptionsManagerService}
+    intent={act=android.service.systemcaptions.SystemCaptionsManagerService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.captions.SystemCaptionsManagerService}
+    packageName=com.google.android.as
+    processName=com.google.android.as
+    baseDir=/product/priv-app/DevicePersonalizationPrebuiltPixel2021/DevicePersonalizationPrebuiltPixel2021.apk
+    dataDir=/data/user/0/com.google.android.as
+    app=ProcessRecord{1af5ae4 1390:com.google.android.as/u0a125}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=1000
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: android; callingUid: 1000; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { act=android.service.systemcaptions.SystemCaptionsManagerService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.captions.SystemCaptionsManagerService }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<4ef60c3 android.bluetooth.adapter.action.LOCAL_NAME_CHANGED/u-1,reasonCode:BLUETOOTH_BROADCAST,duration:20000,callingUid:1002>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-27m8s748ms startingBgTimeout=--
+    lastActivity=-27m5s875ms restartTime=-27m5s875ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{65dd8d9 CREATE}:
+      intent={act=android.service.systemcaptions.SystemCaptionsManagerService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.captions.SystemCaptionsManagerService}
+      binder=null
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{edda29e ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{a3da705 u0 CR FGS CAPS com.google.android.as/com.google.android.apps.miphone.aiai.captions.SystemCaptionsManagerService:@7b9227c flags=0x4001001}
+    All Connections:
+      ConnectionRecord{a3da705 u0 CR FGS CAPS com.google.android.as/com.google.android.apps.miphone.aiai.captions.SystemCaptionsManagerService:@7b9227c flags=0x4001001}
+
+  * ServiceRecord{2172706 u0 com.google.android.as/com.google.android.apps.miphone.aiai.common.superpacks.impl.AiAiSuperpacksService}
+    intent={cmp=com.google.android.as/com.google.android.apps.miphone.aiai.common.superpacks.impl.AiAiSuperpacksService}
+    packageName=com.google.android.as
+    processName=com.google.android.as
+    baseDir=/product/priv-app/DevicePersonalizationPrebuiltPixel2021/DevicePersonalizationPrebuiltPixel2021.apk
+    dataDir=/data/user/0/com.google.android.as
+    app=ProcessRecord{1af5ae4 1390:com.google.android.as/u0a125}
+    mAllowWhileInUsePermissionInFgsReason=BACKGROUND_ACTIVITY_PERMISSION
+    allowUiJobScheduling=false
+    recentCallingPackage=com.google.android.as
+    recentCallingUid=10125
+    allowStartForeground=BACKGROUND_ACTIVITY_PERMISSION
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.as; callingUid: 10125; uidState: BFGS; uidBFSL: [BFSL]; intent: Intent { cmp=com.google.android.as/com.google.android.apps.miphone.aiai.common.superpacks.impl.AiAiSuperpacksService }; code:BACKGROUND_ACTIVITY_PERMISSION; tempAllowListReason:<null>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-26m52s536ms startingBgTimeout=--
+    lastActivity=-26m42s896ms restartTime=-26m52s535ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{1e917f CREATE}:
+      intent={cmp=com.google.android.as/com.google.android.apps.miphone.aiai.common.superpacks.impl.AiAiSuperpacksService}
+      binder=android.os.BinderProxy@492d54c
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{44a2995 ProcessRecord{1af5ae4 1390:com.google.android.as/u0a125}}
+        Per-process Connections:
+          ConnectionRecord{777b795 u0 CR com.google.android.as/com.google.android.apps.miphone.aiai.common.superpacks.impl.AiAiSuperpacksService:@4e5db4c flags=0x1}
+          ConnectionRecord{7c28de1 u0 CR com.google.android.as/com.google.android.apps.miphone.aiai.common.superpacks.impl.AiAiSuperpacksService:@a102b48 flags=0x1}
+    All Connections:
+      ConnectionRecord{777b795 u0 CR com.google.android.as/com.google.android.apps.miphone.aiai.common.superpacks.impl.AiAiSuperpacksService:@4e5db4c flags=0x1}
+      ConnectionRecord{7c28de1 u0 CR com.google.android.as/com.google.android.apps.miphone.aiai.common.superpacks.impl.AiAiSuperpacksService:@a102b48 flags=0x1}
+
+  * ServiceRecord{6e837c u0 com.google.android.gms/.auth.setup.devicesignals.LockScreenService}
+    intent={cmp=com.google.android.gms/.auth.setup.devicesignals.LockScreenService}
+    packageName=com.google.android.gms
+    processName=com.google.android.gms.persistent
+    baseDir=/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk
+    dataDir=/data/user/0/com.google.android.gms
+    app=ProcessRecord{ad44190 2537:com.google.android.gms.persistent/u0a128}
+    mAllowWhileInUsePermissionInFgsReason=BACKGROUND_ACTIVITY_PERMISSION
+    allowUiJobScheduling=false
+    recentCallingPackage=com.google.android.gms
+    recentCallingUid=10128
+    allowStartForeground=BACKGROUND_ACTIVITY_PERMISSION
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.gms; callingUid: 10128; uidState: BTOP; uidBFSL: [BFSL]; intent: Intent { cmp=com.google.android.gms/.auth.setup.devicesignals.LockScreenService (has extras) }; code:BACKGROUND_ACTIVITY_PERMISSION; tempAllowListReason:<,reasonCode:SYSTEM_ALLOW_LISTED,duration:9223372036854775807,callingUid:-1>; targetSdkVersion:33; callerTargetSdkVersion:33; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-25m55s996ms startingBgTimeout=--
+    lastActivity=-25m55s995ms restartTime=-25m55s995ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=false callStart=true lastStartId=1
+ startCommandResult=1
+
+  * ServiceRecord{f1a5cc4 u0 com.google.android.gms/.gcm.GcmService}
+    intent={pkg=com.google.android.gms cmp=com.google.android.gms/.gcm.GcmService}
+    packageName=com.google.android.gms
+    processName=com.google.android.gms.persistent
+    permission=com.google.android.gtalkservice.permission.GTALK_SERVICE
+    baseDir=/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk
+    dataDir=/data/user/0/com.google.android.gms
+    app=ProcessRecord{ad44190 2537:com.google.android.gms.persistent/u0a128}
+    mAllowWhileInUsePermissionInFgsReason=ACTIVITY_STARTER
+    allowUiJobScheduling=false
+    recentCallingPackage=com.google.android.gms
+    recentCallingUid=10128
+    allowStartForeground=ACTIVITY_STARTER
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.gms; callingUid: 10128; uidState: BTOP; uidBFSL: [BFSL]; intent: Intent { flg=0x89000010 pkg=com.google.android.gms cmp=com.google.android.gms/.gcm.GcmService (has extras) }; code:ACTIVITY_STARTER; tempAllowListReason:<,reasonCode:SYSTEM_ALLOW_LISTED,duration:9223372036854775807,callingUid:-1>; targetSdkVersion:33; callerTargetSdkVersion:33; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-26m12s695ms startingBgTimeout=--
+    lastActivity=-25m52s409ms restartTime=-26m12s694ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=false callStart=true lastStartId=5
+ startCommandResult=1
+
+  * ServiceRecord{19a9547 u0 com.google.android.gms/.chimera.PersistentApiServiceNoInstantApps}
+    intent={act=com.google.android.chimera.BoundService.START dat=chimera-action:com.google.android.gms.nearby.sharing.START_SERVICE cmp=com.google.android.gms/.chimera.PersistentApiServiceNoInstantApps}
+    packageName=com.google.android.gms
+    processName=com.google.android.gms.persistent
+    baseDir=/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk
+    dataDir=/data/user/0/com.google.android.gms
+    app=ProcessRecord{ad44190 2537:com.google.android.gms.persistent/u0a128}
+    mAllowWhileInUsePermissionInFgsReason=BACKGROUND_ACTIVITY_PERMISSION
+    allowUiJobScheduling=false
+    recentCallingPackage=com.google.android.gms
+    recentCallingUid=10128
+    allowStartForeground=BACKGROUND_ACTIVITY_PERMISSION
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.gms; callingUid: 10128; uidState: BTOP; uidBFSL: [BFSL]; intent: Intent { act=com.google.android.chimera.BoundService.START dat=chimera-action: cmp=com.google.android.gms/.chimera.PersistentApiServiceNoInstantApps }; code:BACKGROUND_ACTIVITY_PERMISSION; tempAllowListReason:<,reasonCode:SYSTEM_ALLOW_LISTED,duration:9223372036854775807,callingUid:-1>; targetSdkVersion:33; callerTargetSdkVersion:33; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-25m54s479ms startingBgTimeout=--
+    lastActivity=-2m31s742ms restartTime=-25m54s478ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{a7d4aaa CREATE}:
+      intent={act=com.google.android.chimera.BoundService.START dat=chimera-action:com.google.android.gms.nearby.sharing.START_SERVICE cmp=com.google.android.gms/.chimera.PersistentApiServiceNoInstantApps}
+      binder=android.os.BinderProxy@d94c69b
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{3bdfa38 ProcessRecord{ad44190 2537:com.google.android.gms.persistent/u0a128}}
+        Per-process Connections:
+          ConnectionRecord{7cbb886 u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentApiServiceNoInstantApps:@f107561 flags=0x1081}
+    * IntentBindRecord{970ca11}:
+      intent={act=com.google.android.chimera.BoundService.START dat=chimera-action:com.google.android.gms.nearby.exposurenotification.START cmp=com.google.android.gms/.chimera.PersistentApiServiceNoInstantApps}
+      binder=android.os.BinderProxy@cbd6776
+      requested=true received=true hasBound=false doRebind=false
+    All Connections:
+      ConnectionRecord{7cbb886 u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentApiServiceNoInstantApps:@f107561 flags=0x1081}
+
+  * ServiceRecord{576143a u0 com.google.android.gms/.clearcut.debug.ClearcutDebugDumpService}
+    intent={cmp=com.google.android.gms/.clearcut.debug.ClearcutDebugDumpService}
+    packageName=com.google.android.gms
+    processName=com.google.android.gms.persistent
+    baseDir=/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk
+    dataDir=/data/user/0/com.google.android.gms
+    app=ProcessRecord{ad44190 2537:com.google.android.gms.persistent/u0a128}
+    mAllowWhileInUsePermissionInFgsReason=ACTIVITY_STARTER
+    allowUiJobScheduling=false
+    recentCallingPackage=com.google.android.gms
+    recentCallingUid=10128
+    allowStartForeground=ACTIVITY_STARTER
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.gms; callingUid: 10128; uidState: BTOP; uidBFSL: [BFSL]; intent: Intent { cmp=com.google.android.gms/.clearcut.debug.ClearcutDebugDumpService }; code:ACTIVITY_STARTER; tempAllowListReason:<,reasonCode:SYSTEM_ALLOW_LISTED,duration:9223372036854775807,callingUid:-1>; targetSdkVersion:33; callerTargetSdkVersion:33; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-26m12s630ms startingBgTimeout=--
+    lastActivity=-25m55s258ms restartTime=-26m12s627ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=false callStart=true lastStartId=2
+ startCommandResult=1
+
+  * ServiceRecord{8c23e83 u0 com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService}
+    intent={act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService}
+    packageName=com.google.android.as
+    processName=com.google.android.as
+    permission=android.permission.MANAGE_SMARTSPACE
+    baseDir=/product/priv-app/DevicePersonalizationPrebuiltPixel2021/DevicePersonalizationPrebuiltPixel2021.apk
+    dataDir=/data/user/0/com.google.android.as
+    app=ProcessRecord{1af5ae4 1390:com.google.android.as/u0a125}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=1000
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: android; callingUid: 1000; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<4ef60c3 android.bluetooth.adapter.action.LOCAL_NAME_CHANGED/u-1,reasonCode:BLUETOOTH_BROADCAST,duration:20000,callingUid:1002>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-27m8s686ms startingBgTimeout=--
+    lastActivity=-27m5s861ms restartTime=-27m5s861ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{d6f3177 CREATE}:
+      intent={act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService}
+      binder=android.os.BinderProxy@27481e4
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{586f64d ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{cc9acb9 u0 CR FGS CAPS com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService:@9479e80 flags=0x4001001}
+    All Connections:
+      ConnectionRecord{cc9acb9 u0 CR FGS CAPS com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService:@9479e80 flags=0x4001001}
+
+  * ServiceRecord{81b28d4 u0 com.google.android.apps.messaging/com.google.android.ims.binding.SystemBindingService}
+    intent={cmp=com.google.android.apps.messaging/com.google.android.ims.binding.SystemBindingService}
+    packageName=com.google.android.apps.messaging
+    processName=com.google.android.apps.messaging:rcs
+    permission=android.permission.BIND_CARRIER_MESSAGING_CLIENT_SERVICE
+    baseDir=/product/priv-app/PrebuiltBugle/PrebuiltBugle.apk
+    dataDir=/data/user/0/com.google.android.apps.messaging
+    app=ProcessRecord{4daaeb2 1510:com.google.android.apps.messaging:rcs/u0a131}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=1000
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: android; callingUid: 1000; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { cmp=com.google.android.apps.messaging/com.google.android.ims.binding.SystemBindingService }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<4ef60c3 android.bluetooth.adapter.action.LOCAL_NAME_CHANGED/u-1,reasonCode:BLUETOOTH_BROADCAST,duration:20000,callingUid:1002>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-27m5s115ms startingBgTimeout=--
+    lastActivity=-27m4s131ms restartTime=-27m4s131ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{6108502 CREATE}:
+      intent={cmp=com.google.android.apps.messaging/com.google.android.ims.binding.SystemBindingService}
+      binder=android.os.BinderProxy@f1b6e13
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{fe9d850 ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{d22e24d u0 CR FGS !VIS com.google.android.apps.messaging/com.google.android.ims.binding.SystemBindingService:@9c9de4 flags=0x44000001}
+    All Connections:
+      ConnectionRecord{d22e24d u0 CR FGS !VIS com.google.android.apps.messaging/com.google.android.ims.binding.SystemBindingService:@9c9de4 flags=0x44000001}
+
+  * ServiceRecord{3578533 u0 com.google.android.gms/.chimera.PersistentApiService}
+    intent={act=com.google.android.gms.phenotype.service.START pkg=com.google.android.gms}
+    packageName=com.google.android.gms
+    processName=com.google.android.gms.persistent
+    baseDir=/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk
+    dataDir=/data/user/0/com.google.android.gms
+    app=ProcessRecord{ad44190 2537:com.google.android.gms.persistent/u0a128}
+    mAllowWhileInUsePermissionInFgsReason=BACKGROUND_ACTIVITY_PERMISSION
+    allowUiJobScheduling=false
+    recentCallingPackage=com.google.android.gms
+    recentCallingUid=10128
+    allowStartForeground=BACKGROUND_ACTIVITY_PERMISSION
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.apps.wellbeing; callingUid: 10120; uidState: BFGS; uidBFSL: [BFSL]; intent: Intent { act=com.google.android.gms.phenotype.service.START pkg=com.google.android.gms }; code:BACKGROUND_ACTIVITY_PERMISSION; tempAllowListReason:<null>; targetSdkVersion:33; callerTargetSdkVersion:33; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-27m2s39ms startingBgTimeout=--
+    lastActivity=-2m30s842ms restartTime=-26m42s50ms createdFromFg=false
+    restartCount=0 restartDelay=-25m17s592ms nextRestartTime=-25m17s592ms crashCount=0
+    Bindings:
+    * IntentBindRecord{459aa49}:
+      intent={act=com.google.android.chimera.BoundService.START dat=chimera-action:com.google.android.gms.pseudonymous.service.START cmp=com.google.android.gms/.chimera.PersistentApiService}
+      binder=android.os.BinderProxy@985ef4e
+      requested=true received=true hasBound=false doRebind=false
+    * IntentBindRecord{144d86f}:
+      intent={act=com.google.android.chimera.BoundService.START dat=chimera-action:com.google.android.gms.presencemanager.service.START cmp=com.google.android.gms/.chimera.PersistentApiService}
+      binder=android.os.BinderProxy@91c297c
+      requested=true received=true hasBound=false doRebind=false
+    * IntentBindRecord{789a205 CREATE}:
+      intent={act=com.google.android.gms.phenotype.service.START pkg=com.google.android.gms}
+      binder=android.os.BinderProxy@9d5b25a
+      requested=true received=true hasBound=false doRebind=false
+      * Client AppBindRecord{7f08c8b ProcessRecord{c114fa7 5081:com.google.android.configupdater/u0a129}}
+        Per-process Connections:
+          ConnectionRecord{7668aee u0 CR WACT com.google.android.gms/.chimera.PersistentApiService:@372f069 flags=0x81}
+    * IntentBindRecord{ac06168}:
+      intent={act=com.google.android.chimera.BoundService.START dat=chimera-action:com.google.android.gms.presencemanager.service.INTERNAL_IDENTITY cmp=com.google.android.gms/.chimera.PersistentApiService}
+      binder=android.os.BinderProxy@75981
+      requested=true received=true hasBound=false doRebind=false
+    * IntentBindRecord{b2c9a26 CREATE}:
+      intent={act=com.google.android.chimera.BoundService.START dat=chimera-action:com.google.android.gms.scheduler.ACTION_PROXY_SCHEDULE cmp=com.google.android.gms/.chimera.PersistentApiService}
+      binder=android.os.BinderProxy@8596667
+      requested=true received=true hasBound=false doRebind=false
+      * Client AppBindRecord{5ee2c14 ProcessRecord{72caa04 4035:com.google.android.gms.unstable/u0a128}}
+        Per-process Connections:
+          ConnectionRecord{ab30a7 u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentApiService:@5a2566 flags=0x1081}
+    * IntentBindRecord{34f0cbd}:
+      intent={act=com.google.android.gms.cast.service.BIND_CAST_DEVICE_CONTROLLER_SERVICE pkg=com.google.android.gms}
+      binder=android.os.BinderProxy@5b832b2
+      requested=true received=true hasBound=false doRebind=false
+    * IntentBindRecord{68c0203}:
+      intent={act=com.google.android.chimera.BoundService.START dat=chimera-action:com.google.android.gms.tapandpay.service.BIND cmp=com.google.android.gms/.chimera.PersistentApiService}
+      binder=android.os.BinderProxy@38bf580
+      requested=true received=true hasBound=false doRebind=false
+    * IntentBindRecord{864b7b9}:
+      intent={act=com.google.android.contextmanager.service.ContextManagerService.START pkg=com.google.android.gms}
+      binder=android.os.BinderProxy@4f2c7fe
+      requested=true received=true hasBound=false doRebind=false
+    * IntentBindRecord{c2bb5f}:
+      intent={act=com.google.android.chimera.BoundService.START dat=chimera-action:com.google.android.gms.phenotype.service.START cmp=com.google.android.gms/.chimera.PersistentApiService}
+      binder=android.os.BinderProxy@27ae9ac
+      requested=true received=true hasBound=false doRebind=false
+    * IntentBindRecord{8901675}:
+      intent={act=com.google.android.chimera.BoundService.START dat=chimera-action:com.google.android.gms.auth.account.workaccount.START cmp=com.google.android.gms/.chimera.PersistentApiService}
+      binder=android.os.BinderProxy@faf660a
+      requested=true received=true hasBound=false doRebind=false
+    * IntentBindRecord{481ae7b CREATE}:
+      intent={act=com.google.android.gms.pseudonymous.service.START pkg=com.google.android.gms}
+      binder=android.os.BinderProxy@c82f498
+      requested=true received=true hasBound=false doRebind=false
+      * Client AppBindRecord{fd8a4f1 ProcessRecord{eeb62dc 3353:com.google.android.contacts/u0a154}}
+        Per-process Connections:
+          ConnectionRecord{d0580fd u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentApiService:@9e0c954 flags=0x1081}
+    * IntentBindRecord{4e5d8d6}:
+      intent={act=com.google.android.chimera.BoundService.START dat=chimera-action:com.google.android.gms.icing.LIGHTWEIGHT_INDEX_SERVICE cmp=com.google.android.gms/.chimera.PersistentApiService}
+      binder=android.os.BinderProxy@972b757
+      requested=true received=true hasBound=false doRebind=false
+    All Connections:
+      ConnectionRecord{ab30a7 u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentApiService:@5a2566 flags=0x1081}
+      ConnectionRecord{7668aee u0 CR WACT com.google.android.gms/.chimera.PersistentApiService:@372f069 flags=0x81}
+      ConnectionRecord{d0580fd u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentApiService:@9e0c954 flags=0x1081}
+
+  * ServiceRecord{4ac47e6 u0 com.android.systemui/.wallpapers.ImageWallpaper}
+    intent={act=android.service.wallpaper.WallpaperService cmp=com.android.systemui/.wallpapers.ImageWallpaper}
+    packageName=com.android.systemui
+    processName=com.android.systemui
+    permission=android.permission.BIND_WALLPAPER
+    baseDir=/system_ext/priv-app/SystemUIGoogle/SystemUIGoogle.apk
+    dataDir=/data/user_de/0/com.android.systemui
+    app=ProcessRecord{811b3ec 776:com.android.systemui/u0a167}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=1000
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: android; callingUid: 1000; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { act=android.service.wallpaper.WallpaperService cmp=com.android.systemui/.wallpapers.ImageWallpaper }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<null>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-27m29s117ms startingBgTimeout=--
+    lastActivity=-27m27s373ms restartTime=-27m28s388ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{dfec244 CREATE}:
+      intent={act=android.service.wallpaper.WallpaperService cmp=com.android.systemui/.wallpapers.ImageWallpaper}
+      binder=android.os.BinderProxy@9419f2d
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{93eac62 ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{55d00f9 u0 CR FGSA UI CAPS com.android.systemui/.wallpapers.ImageWallpaper:@bfe9bc0 flags=0x22001001}
+          ConnectionRecord{672d00e u0 CR FGSA UI CAPS com.android.systemui/.wallpapers.ImageWallpaper:@ade9609 flags=0x22001001}
+    All Connections:
+      ConnectionRecord{672d00e u0 CR FGSA UI CAPS com.android.systemui/.wallpapers.ImageWallpaper:@ade9609 flags=0x22001001}
+      ConnectionRecord{55d00f9 u0 CR FGSA UI CAPS com.android.systemui/.wallpapers.ImageWallpaper:@bfe9bc0 flags=0x22001001}
+
+  * ServiceRecord{202bf45 u0 com.google.android.gms/.location.geocode.GeocodeService}
+    intent={act=com.android.location.service.GeocodeProvider cmp=com.google.android.gms/.location.geocode.GeocodeService}
+    packageName=com.google.android.gms
+    processName=com.google.android.gms.persistent
+    baseDir=/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk
+    dataDir=/data/user/0/com.google.android.gms
+    app=ProcessRecord{ad44190 2537:com.google.android.gms.persistent/u0a128}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=1000
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: android; callingUid: 1000; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { act=com.android.location.service.GeocodeProvider cmp=com.google.android.gms/.location.geocode.GeocodeService }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<68c8c67 android.intent.action.BOOT_COMPLETED/u0,reasonCode:BOOT_COMPLETED,duration:20000,callingUid:1000>; targetSdkVersion:33; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-26m17s185ms startingBgTimeout=--
+    lastActivity=-26m17s184ms restartTime=-26m17s184ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{e0171f3 CREATE}:
+      intent={act=com.android.location.service.GeocodeProvider cmp=com.google.android.gms/.location.geocode.GeocodeService}
+      binder=android.os.BinderProxy@c47beb0
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{2c60129 ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{bfe73bc u0 CR !FG !VIS com.google.android.gms/.location.geocode.GeocodeService:@6f4e3af flags=0x40000005}
+    All Connections:
+      ConnectionRecord{bfe73bc u0 CR !FG !VIS com.google.android.gms/.location.geocode.GeocodeService:@6f4e3af flags=0x40000005}
+
+  * ServiceRecord{e65677 u0 com.android.phone/com.android.internal.telephony.CellularNetworkService}
+    intent={act=android.telephony.NetworkService pkg=com.android.phone}
+    packageName=com.android.phone
+    processName=com.android.phone
+    permission=android.permission.BIND_TELEPHONY_NETWORK_SERVICE
+    baseDir=/system/priv-app/TeleService/TeleService.apk
+    dataDir=/data/user_de/0/com.android.phone
+    app=ProcessRecord{ae63074 952:com.android.phone/1001}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=com.android.phone
+    recentCallingUid=1001
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.android.phone; callingUid: 1001; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { act=android.telephony.NetworkService pkg=com.android.phone }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<null>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-27m13s381ms startingBgTimeout=--
+    lastActivity=-27m13s380ms restartTime=-27m13s380ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{15f2cae CREATE}:
+      intent={act=android.telephony.NetworkService pkg=com.android.phone}
+      binder=android.os.BinderProxy@1b73a4f
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{6e215dc ProcessRecord{ae63074 952:com.android.phone/1001}}
+        Per-process Connections:
+          ConnectionRecord{6b60076 u0 CR com.android.phone/com.android.internal.telephony.CellularNetworkService:@df82711 flags=0x1}
+    All Connections:
+      ConnectionRecord{6b60076 u0 CR com.android.phone/com.android.internal.telephony.CellularNetworkService:@df82711 flags=0x1}
+
+  * ServiceRecord{116bf3e u0 com.google.android.gms/.chimera.PersistentBoundBrokerService}
+    intent={act=android.net.action.RECOMMEND_NETWORKS cmp=com.google.android.gms/.chimera.PersistentBoundBrokerService}
+    packageName=com.google.android.gms
+    processName=com.google.android.gms.persistent
+    baseDir=/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk
+    dataDir=/data/user/0/com.google.android.gms
+    app=ProcessRecord{ad44190 2537:com.google.android.gms.persistent/u0a128}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=com.google.android.gms
+    recentCallingUid=10128
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: android; callingUid: 1000; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { act=android.net.action.RECOMMEND_NETWORKS cmp=com.google.android.gms/.chimera.PersistentBoundBrokerService }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<4ef60c3 android.bluetooth.adapter.action.LOCAL_NAME_CHANGED/u-1,reasonCode:BLUETOOTH_BROADCAST,duration:20000,callingUid:1002>; targetSdkVersion:33; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-27m0s611ms startingBgTimeout=--
+    lastActivity=-2m30s484ms restartTime=-- createdFromFg=false
+    restartCount=0 restartDelay=-25m7s593ms nextRestartTime=-25m7s593ms crashCount=0
+    Bindings:
+    * IntentBindRecord{51486e5 CREATE}:
+      intent={act=android.net.action.RECOMMEND_NETWORKS cmp=com.google.android.gms/.chimera.PersistentBoundBrokerService}
+      binder=android.os.BinderProxy@4f565ba
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{9572c6b ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{3cd03f9 u0 CR FGS com.google.android.gms/.chimera.PersistentBoundBrokerService:@bf0cac0 flags=0x4000001}
+    * IntentBindRecord{f68b3c8}:
+      intent={act=com.google.android.gms.clearcut.bootcount.service.START pkg=com.google.android.gms}
+      binder=android.os.BinderProxy@b0bac61
+      requested=true received=true hasBound=false doRebind=true
+    * IntentBindRecord{6842386}:
+      intent={act=com.google.android.gms.semanticlocation.service.START_ODLH pkg=com.google.android.gms}
+      binder=android.os.BinderProxy@8ba2447
+      requested=true received=true hasBound=false doRebind=false
+    * IntentBindRecord{4394474 CREATE}:
+      intent={act=android.intent.action.RESOLVE_INSTANT_APP_PACKAGE cmp=com.google.android.gms/.chimera.PersistentBoundBrokerService}
+      binder=android.os.BinderProxy@4f5ad9d
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{beef212 ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{b427278 u0 CR FGS com.google.android.gms/.chimera.PersistentBoundBrokerService:@57af7db flags=0x4000001}
+    * IntentBindRecord{e6abde3}:
+      intent={act=com.google.android.chimera.BoundService.START dat=chimera-action:com.google.android.gms.gmscompliance.service.START cmp=com.google.android.gms/.chimera.PersistentBoundBrokerService}
+      binder=android.os.BinderProxy@9e033e0
+      requested=true received=true hasBound=false doRebind=false
+    * IntentBindRecord{3848699}:
+      intent={act=com.google.android.chimera.BoundService.START dat=chimera-action:com.google.android.gms.auth.proximity.devicesyncservice.START cmp=com.google.android.gms/.chimera.PersistentBoundBrokerService}
+      binder=android.os.BinderProxy@3c61d5e
+      requested=true received=true hasBound=false doRebind=false
+    * IntentBindRecord{d01553f}:
+      intent={act=com.google.android.chimera.BoundService.START dat=chimera-action:com.google.android.gms.auth.proximity.START cmp=com.google.android.gms/.chimera.PersistentBoundBrokerService}
+      binder=android.os.BinderProxy@f44ae0c
+      requested=true received=true hasBound=false doRebind=false
+    * IntentBindRecord{68df355}:
+      intent={act=com.google.android.gms.auth.account.data.service.START pkg=com.google.android.gms}
+      binder=android.os.BinderProxy@352b16a
+      requested=true received=true hasBound=false doRebind=false
+    * IntentBindRecord{e40065b}:
+      intent={act=com.google.android.chimera.BoundService.START dat=chimera-action:com.google.android.gms.clearcut.bootcount.service.START cmp=com.google.android.gms/.chimera.PersistentBoundBrokerService}
+      binder=android.os.BinderProxy@8949ef8
+      requested=true received=true hasBound=false doRebind=true
+    All Connections:
+      ConnectionRecord{b427278 u0 CR FGS com.google.android.gms/.chimera.PersistentBoundBrokerService:@57af7db flags=0x4000001}
+      ConnectionRecord{3cd03f9 u0 CR FGS com.google.android.gms/.chimera.PersistentBoundBrokerService:@bf0cac0 flags=0x4000001}
+
+  * ServiceRecord{4a8aa17 u0 com.google.android.gms/.tron.CollectionService}
+    intent={act=com.google.android.gms.tron.COLLECT pkg=com.google.android.gms}
+    packageName=com.google.android.gms
+    processName=com.google.android.gms.persistent
+    baseDir=/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk
+    dataDir=/data/user/0/com.google.android.gms
+    app=ProcessRecord{ad44190 2537:com.google.android.gms.persistent/u0a128}
+    mAllowWhileInUsePermissionInFgsReason=ACTIVITY_STARTER
+    allowUiJobScheduling=false
+    recentCallingPackage=com.google.android.gms
+    recentCallingUid=10128
+    allowStartForeground=ACTIVITY_STARTER
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.gms; callingUid: 10128; uidState: BTOP; uidBFSL: [BFSL]; intent: Intent { act=com.google.android.gms.tron.COLLECT pkg=com.google.android.gms (has extras) }; code:ACTIVITY_STARTER; tempAllowListReason:<,reasonCode:SYSTEM_ALLOW_LISTED,duration:9223372036854775807,callingUid:-1>; targetSdkVersion:33; callerTargetSdkVersion:33; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-26m7s871ms startingBgTimeout=--
+    lastActivity=-25m53s699ms restartTime=-26m7s870ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=true callStart=true lastStartId=3
+ startCommandResult=2
+
+  * ServiceRecord{227d748 u0 com.google.android.gms/.fido.fido2.pollux.CableAuthenticatorService}
+    intent={cmp=com.google.android.gms/.fido.fido2.pollux.CableAuthenticatorService}
+    packageName=com.google.android.gms
+    processName=com.google.android.gms.persistent
+    baseDir=/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk
+    dataDir=/data/user/0/com.google.android.gms
+    app=ProcessRecord{ad44190 2537:com.google.android.gms.persistent/u0a128}
+    mAllowWhileInUsePermissionInFgsReason=BACKGROUND_ACTIVITY_PERMISSION
+    allowUiJobScheduling=false
+    recentCallingPackage=com.google.android.gms
+    recentCallingUid=10128
+    allowStartForeground=BACKGROUND_ACTIVITY_PERMISSION
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.gms; callingUid: 10128; uidState: BTOP; uidBFSL: [BFSL]; intent: Intent { cmp=com.google.android.gms/.fido.fido2.pollux.CableAuthenticatorService }; code:BACKGROUND_ACTIVITY_PERMISSION; tempAllowListReason:<,reasonCode:SYSTEM_ALLOW_LISTED,duration:9223372036854775807,callingUid:-1>; targetSdkVersion:33; callerTargetSdkVersion:33; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-25m55s21ms startingBgTimeout=--
+    lastActivity=-25m55s20ms restartTime=-25m55s20ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=false callStart=true lastStartId=1
+ startCommandResult=1
+
+  * ServiceRecord{16a9a60 u0 com.google.android.googlequicksearchbox/com.google.android.apps.gsa.nowoverlayservice.DrawerOverlayService}
+    intent={act=com.android.launcher3.WINDOW_OVERLAY dat=app://com.google.android.apps.nexuslauncher:10169?v=11&cv=20 pkg=com.google.android.googlequicksearchbox}
+    packageName=com.google.android.googlequicksearchbox
+    processName=com.google.android.googlequicksearchbox:search
+    baseDir=/product/priv-app/Velvet/Velvet.apk
+    dataDir=/data/user/0/com.google.android.googlequicksearchbox
+    app=ProcessRecord{a80746e 1719:com.google.android.googlequicksearchbox:search/u0a132}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_TOP
+    allowUiJobScheduling=false
+    recentCallingPackage=com.google.android.apps.nexuslauncher
+    recentCallingUid=10169
+    allowStartForeground=PROC_STATE_TOP
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.apps.nexuslauncher; callingUid: 10169; uidState: TOP ; uidBFSL: [BFSL]; intent: Intent { act=com.android.launcher3.WINDOW_OVERLAY dat=app://com.google.android.apps.nexuslauncher:10169/... pkg=com.google.android.googlequicksearchbox }; code:PROC_STATE_TOP; tempAllowListReason:<null>; targetSdkVersion:31; callerTargetSdkVersion:33; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-26m46s828ms startingBgTimeout=--
+    lastActivity=-2m39s898ms restartTime=-26m46s826ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{b876fd1 CREATE}:
+      intent={act=com.android.launcher3.WINDOW_OVERLAY dat=app://com.google.android.apps.nexuslauncher:10169?v=11&cv=20 pkg=com.google.android.googlequicksearchbox}
+      binder=android.os.BinderProxy@9627a36
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{beead37 ProcessRecord{71f7cda 1115:com.google.android.apps.nexuslauncher/u0a169}}
+        Per-process Connections:
+          ConnectionRecord{69cae63 u0 CR WPRI com.google.android.googlequicksearchbox/com.google.android.apps.gsa.nowoverlayservice.DrawerOverlayService:@be85492 flags=0x21}
+    All Connections:
+      ConnectionRecord{69cae63 u0 CR WPRI com.google.android.googlequicksearchbox/com.google.android.apps.gsa.nowoverlayservice.DrawerOverlayService:@be85492 flags=0x21}
+
+  * ServiceRecord{6e2199c u0 com.google.android.bluetooth/com.android.bluetooth.map.BluetoothMapService}
+    intent={cmp=com.google.android.bluetooth/com.android.bluetooth.map.BluetoothMapService}
+    packageName=com.google.android.bluetooth
+    processName=com.google.android.bluetooth
+    baseDir=/apex/com.android.btservices/app/BluetoothGoogle@340815010/BluetoothGoogle.apk
+    dataDir=/data/user_de/0/com.google.android.bluetooth
+    app=ProcessRecord{fb229bf 887:com.google.android.bluetooth/1002}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=10167
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.bluetooth; callingUid: 1002; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { cmp=com.google.android.bluetooth/com.android.bluetooth.map.BluetoothMapService (has extras) }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<19c0458 android.bluetooth.adapter.action.STATE_CHANGED/u-1,reasonCode:BLUETOOTH_BROADCAST,duration:10000,callingUid:1000>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-27m15s458ms startingBgTimeout=--
+    lastActivity=-27m15s458ms restartTime=-27m15s458ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=true callStart=true lastStartId=1
+ startCommandResult=2
+    Bindings:
+    * IntentBindRecord{cf0b2a4}:
+      intent={act=android.bluetooth.IBluetoothMap cmp=com.google.android.bluetooth/com.android.bluetooth.map.BluetoothMapService}
+      binder=android.os.BinderProxy@7c2380d
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{1d403c2 ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{821f970 u0 com.google.android.bluetooth/com.android.bluetooth.map.BluetoothMapService:@3c8dfb3 flags=0x0}
+    All Connections:
+      ConnectionRecord{821f970 u0 com.google.android.bluetooth/com.android.bluetooth.map.BluetoothMapService:@3c8dfb3 flags=0x0}
+
+  * ServiceRecord{ae9f50f u0 com.google.android.bluetooth/com.android.bluetooth.hid.HidHostService}
+    intent={cmp=com.google.android.bluetooth/com.android.bluetooth.hid.HidHostService}
+    packageName=com.google.android.bluetooth
+    processName=com.google.android.bluetooth
+    baseDir=/apex/com.android.btservices/app/BluetoothGoogle@340815010/BluetoothGoogle.apk
+    dataDir=/data/user_de/0/com.google.android.bluetooth
+    app=ProcessRecord{fb229bf 887:com.google.android.bluetooth/1002}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=10167
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.bluetooth; callingUid: 1002; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { cmp=com.google.android.bluetooth/com.android.bluetooth.hid.HidHostService (has extras) }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<19c0458 android.bluetooth.adapter.action.STATE_CHANGED/u-1,reasonCode:BLUETOOTH_BROADCAST,duration:10000,callingUid:1000>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-27m15s459ms startingBgTimeout=--
+    lastActivity=-27m15s459ms restartTime=-27m15s459ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=true callStart=true lastStartId=1
+ startCommandResult=2
+    Bindings:
+    * IntentBindRecord{a76e5d3}:
+      intent={act=android.bluetooth.IBluetoothHidHost cmp=com.google.android.bluetooth/com.android.bluetooth.hid.HidHostService}
+      binder=android.os.BinderProxy@2d85510
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{a674809 ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{7778688 u0 com.google.android.bluetooth/com.android.bluetooth.hid.HidHostService:@f66922b flags=0x0}
+    All Connections:
+      ConnectionRecord{7778688 u0 com.google.android.bluetooth/com.android.bluetooth.hid.HidHostService:@f66922b flags=0x0}
+
+  * ServiceRecord{f1cfd40 u0 com.google.android.gms/com.google.android.location.fused.FusedLocationService}
+    intent={act=com.android.location.service.FusedLocationProvider cmp=com.google.android.gms/com.google.android.location.fused.FusedLocationService}
+    packageName=com.google.android.gms
+    processName=com.google.android.gms.persistent
+    baseDir=/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk
+    dataDir=/data/user/0/com.google.android.gms
+    app=ProcessRecord{ad44190 2537:com.google.android.gms.persistent/u0a128}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=1000
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: android; callingUid: 1000; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { act=com.android.location.service.FusedLocationProvider cmp=com.google.android.gms/com.google.android.location.fused.FusedLocationService }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<null>; targetSdkVersion:33; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-26m55s135ms startingBgTimeout=--
+    lastActivity=-26m42s48ms restartTime=-26m42s48ms createdFromFg=false
+    restartCount=1 restartDelay=-28m8s105ms nextRestartTime=-26m41s539ms crashCount=0
+    Bindings:
+    * IntentBindRecord{5e29a0e CREATE}:
+      intent={act=com.android.location.service.FusedLocationProvider cmp=com.google.android.gms/com.google.android.location.fused.FusedLocationService}
+      binder=android.os.BinderProxy@1400c2f
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{755b23c ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{2a150c3 u0 CR !FG !VIS com.google.android.gms/com.google.android.location.fused.FusedLocationService:@22a8472 flags=0x40000005}
+    All Connections:
+      ConnectionRecord{2a150c3 u0 CR !FG !VIS com.google.android.gms/com.google.android.location.fused.FusedLocationService:@22a8472 flags=0x40000005}
+
+  * ServiceRecord{6b86f7a u0 com.google.android.bluetooth/com.android.bluetooth.opp.BluetoothOppService}
+    intent={cmp=com.google.android.bluetooth/com.android.bluetooth.opp.BluetoothOppService}
+    packageName=com.google.android.bluetooth
+    processName=com.google.android.bluetooth
+    permission=android.permission.ACCESS_BLUETOOTH_SHARE
+    baseDir=/apex/com.android.btservices/app/BluetoothGoogle@340815010/BluetoothGoogle.apk
+    dataDir=/data/user_de/0/com.google.android.bluetooth
+    app=ProcessRecord{fb229bf 887:com.google.android.bluetooth/1002}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=com.google.android.bluetooth
+    recentCallingUid=1002
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.bluetooth; callingUid: 1002; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { cmp=com.google.android.bluetooth/com.android.bluetooth.opp.BluetoothOppService (has extras) }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<19c0458 android.bluetooth.adapter.action.STATE_CHANGED/u-1,reasonCode:BLUETOOTH_BROADCAST,duration:10000,callingUid:1000>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-27m15s456ms startingBgTimeout=--
+    lastActivity=-27m15s456ms restartTime=-27m15s456ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=true callStart=true lastStartId=1
+ startCommandResult=2
+
+  * ServiceRecord{dad32b u0 com.google.android.bluetooth/com.android.bluetooth.pan.PanService}
+    intent={cmp=com.google.android.bluetooth/com.android.bluetooth.pan.PanService}
+    packageName=com.google.android.bluetooth
+    processName=com.google.android.bluetooth
+    baseDir=/apex/com.android.btservices/app/BluetoothGoogle@340815010/BluetoothGoogle.apk
+    dataDir=/data/user_de/0/com.google.android.bluetooth
+    app=ProcessRecord{fb229bf 887:com.google.android.bluetooth/1002}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=10167
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.bluetooth; callingUid: 1002; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { cmp=com.google.android.bluetooth/com.android.bluetooth.pan.PanService (has extras) }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<19c0458 android.bluetooth.adapter.action.STATE_CHANGED/u-1,reasonCode:BLUETOOTH_BROADCAST,duration:10000,callingUid:1000>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-27m15s455ms startingBgTimeout=--
+    lastActivity=-27m15s455ms restartTime=-27m15s455ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=true callStart=true lastStartId=1
+ startCommandResult=2
+    Bindings:
+    * IntentBindRecord{2335bc5}:
+      intent={act=android.bluetooth.IBluetoothPan cmp=com.google.android.bluetooth/com.android.bluetooth.pan.PanService}
+      binder=android.os.BinderProxy@532491a
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{ccb3c4b ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{dfc1af6 u0 com.google.android.bluetooth/com.android.bluetooth.pan.PanService:@d741b91 flags=0x0}
+    All Connections:
+      ConnectionRecord{dfc1af6 u0 com.google.android.bluetooth/com.android.bluetooth.pan.PanService:@d741b91 flags=0x0}
+
+  * ServiceRecord{bf93e22 u0 com.google.android.bluetooth/com.android.bluetooth.avrcp.AvrcpTargetService}
+    intent={cmp=com.google.android.bluetooth/com.android.bluetooth.avrcp.AvrcpTargetService}
+    packageName=com.google.android.bluetooth
+    processName=com.google.android.bluetooth
+    baseDir=/apex/com.android.btservices/app/BluetoothGoogle@340815010/BluetoothGoogle.apk
+    dataDir=/data/user_de/0/com.google.android.bluetooth
+    app=ProcessRecord{fb229bf 887:com.google.android.bluetooth/1002}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=com.google.android.bluetooth
+    recentCallingUid=1002
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.bluetooth; callingUid: 1002; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { cmp=com.google.android.bluetooth/com.android.bluetooth.avrcp.AvrcpTargetService (has extras) }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<19c0458 android.bluetooth.adapter.action.STATE_CHANGED/u-1,reasonCode:BLUETOOTH_BROADCAST,duration:10000,callingUid:1000>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-27m15s484ms startingBgTimeout=--
+    lastActivity=-27m15s484ms restartTime=-27m15s484ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=true callStart=true lastStartId=1
+ startCommandResult=2
+
+  * ServiceRecord{e9bffea u0 com.google.android.gms/.gcm.nts.SchedulerService}
+    intent={pkg=com.google.android.gms cmp=com.google.android.gms/.gcm.nts.SchedulerService}
+    packageName=com.google.android.gms
+    processName=com.google.android.gms.persistent
+    baseDir=/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk
+    dataDir=/data/user/0/com.google.android.gms
+    app=ProcessRecord{ad44190 2537:com.google.android.gms.persistent/u0a128}
+    mAllowWhileInUsePermissionInFgsReason=ACTIVITY_STARTER
+    allowUiJobScheduling=false
+    recentCallingPackage=com.google.android.gms
+    recentCallingUid=10128
+    allowStartForeground=ACTIVITY_STARTER
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.gms; callingUid: 10128; uidState: BTOP; uidBFSL: [BFSL]; intent: Intent { flg=0x89000010 pkg=com.google.android.gms cmp=com.google.android.gms/.gcm.nts.SchedulerService (has extras) }; code:ACTIVITY_STARTER; tempAllowListReason:<,reasonCode:SYSTEM_ALLOW_LISTED,duration:9223372036854775807,callingUid:-1>; targetSdkVersion:33; callerTargetSdkVersion:33; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-26m12s616ms startingBgTimeout=--
+    lastActivity=-25m54s11ms restartTime=-26m12s554ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=false callStart=true lastStartId=2
+ startCommandResult=1
+
+  * ServiceRecord{4ced449 u0 com.google.android.ext.services/android.ext.services.autofill.InlineSuggestionRenderServiceImpl}
+    intent={act=android.service.autofill.InlineSuggestionRenderService cmp=com.google.android.ext.services/android.ext.services.autofill.InlineSuggestionRenderServiceImpl}
+    packageName=com.google.android.ext.services
+    processName=com.google.android.ext.services
+    permission=android.permission.BIND_INLINE_SUGGESTION_RENDER_SERVICE
+    baseDir=/apex/com.android.extservices/priv-app/GoogleExtServices@340818080/GoogleExtServices.apk
+    dataDir=/data/user/0/com.google.android.ext.services
+    app=ProcessRecord{106d264 1014:com.google.android.ext.services/u0a174}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=1000
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: android; callingUid: 1000; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { act=android.service.autofill.InlineSuggestionRenderService cmp=com.google.android.ext.services/android.ext.services.autofill.InlineSuggestionRenderServiceImpl }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<null>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-27m21s912ms startingBgTimeout=--
+    lastActivity=-27m21s314ms restartTime=-27m21s314ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{be9b628 CREATE}:
+      intent={act=android.service.autofill.InlineSuggestionRenderService cmp=com.google.android.ext.services/android.ext.services.autofill.InlineSuggestionRenderServiceImpl}
+      binder=android.os.BinderProxy@2f2ef41
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{39bdce6 ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{59e23f6 u0 CR FGS CAPS com.google.android.ext.services/android.ext.services.autofill.InlineSuggestionRenderServiceImpl:@fa4a891 flags=0x4001001}
+    All Connections:
+      ConnectionRecord{59e23f6 u0 CR FGS CAPS com.google.android.ext.services/android.ext.services.autofill.InlineSuggestionRenderServiceImpl:@fa4a891 flags=0x4001001}
+
+  * ServiceRecord{5dcdd74 u0 com.google.android.providers.media.module/com.android.providers.media.fuse.ExternalStorageServiceImpl}
+    intent={cmp=com.google.android.providers.media.module/com.android.providers.media.fuse.ExternalStorageServiceImpl}
+    packageName=com.google.android.providers.media.module
+    processName=com.google.android.providers.media.module
+    permission=android.permission.BIND_EXTERNAL_STORAGE_SERVICE
+    baseDir=/apex/com.android.mediaprovider/priv-app/MediaProviderGoogle@340818080/MediaProviderGoogle.apk
+    dataDir=/data/user/0/com.google.android.providers.media.module
+    app=ProcessRecord{da3758c 1383:com.google.android.providers.media.module/u0a186}
+    mAllowWhileInUsePermissionInFgsReason=SYSTEM_UID
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=0
+    allowStartForeground=SYSTEM_UID
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: android; callingUid: 0; uidState: NONE; uidBFSL: n/a; intent: Intent { cmp=com.google.android.providers.media.module/com.android.providers.media.fuse.ExternalStorageServiceImpl }; code:SYSTEM_UID; tempAllowListReason:<null>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-27m9s352ms startingBgTimeout=--
+    lastActivity=-27m8s488ms restartTime=-27m8s488ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{68f5227 CREATE}:
+      intent={cmp=com.google.android.providers.media.module/com.android.providers.media.fuse.ExternalStorageServiceImpl}
+      binder=android.os.BinderProxy@7380cd4
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{6be3e7d ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{5088abf u0 CR IMP com.google.android.providers.media.module/com.android.providers.media.fuse.ExternalStorageServiceImpl:@63ab8de flags=0x41}
+    All Connections:
+      ConnectionRecord{5088abf u0 CR IMP com.google.android.providers.media.module/com.android.providers.media.fuse.ExternalStorageServiceImpl:@63ab8de flags=0x41}
+
+  * ServiceRecord{30f36c2 u0 com.android.phone/com.android.internal.telephony.data.CellularDataService}
+    intent={act=android.telephony.data.DataService pkg=com.android.phone}
+    packageName=com.android.phone
+    processName=com.android.phone
+    permission=android.permission.BIND_TELEPHONY_DATA_SERVICE
+    baseDir=/system/priv-app/TeleService/TeleService.apk
+    dataDir=/data/user_de/0/com.android.phone
+    app=ProcessRecord{ae63074 952:com.android.phone/1001}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=com.android.phone
+    recentCallingUid=1001
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.android.phone; callingUid: 1001; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { act=android.telephony.data.DataService pkg=com.android.phone }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<null>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-27m15s734ms startingBgTimeout=--
+    lastActivity=-27m15s734ms restartTime=-27m15s734ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{7b8e172 CREATE}:
+      intent={act=android.telephony.data.DataService pkg=com.android.phone}
+      binder=android.os.BinderProxy@e94e9c3
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{4732240 ProcessRecord{ae63074 952:com.android.phone/1001}}
+        Per-process Connections:
+          ConnectionRecord{6ee570d u0 CR com.android.phone/com.android.internal.telephony.data.CellularDataService:@cdeda4 flags=0x1}
+    All Connections:
+      ConnectionRecord{6ee570d u0 CR com.android.phone/com.android.internal.telephony.data.CellularDataService:@cdeda4 flags=0x1}
+
+  * ServiceRecord{d259a09 u0 com.google.android.googlequicksearchbox/com.google.android.apps.gsa.nga.engine.viss.NgaService}
+    intent={pkg=com.google.android.googlequicksearchbox cmp=com.google.android.googlequicksearchbox/com.google.android.apps.gsa.nga.engine.viss.NgaService}
+    packageName=com.google.android.googlequicksearchbox
+    processName=com.google.android.googlequicksearchbox:interactor
+    baseDir=/product/priv-app/Velvet/Velvet.apk
+    dataDir=/data/user/0/com.google.android.googlequicksearchbox
+    app=ProcessRecord{f82205c 1470:com.google.android.googlequicksearchbox:interactor/u0a132}
+    mAllowWhileInUsePermissionInFgsReason=ACTIVITY_STARTER
+    allowUiJobScheduling=false
+    recentCallingPackage=com.google.android.googlequicksearchbox
+    recentCallingUid=10132
+    allowStartForeground=ACTIVITY_STARTER
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.googlequicksearchbox; callingUid: 10132; uidState: BTOP; uidBFSL: [BFSL]; intent: Intent { pkg=com.google.android.googlequicksearchbox cmp=com.google.android.googlequicksearchbox/com.google.android.apps.gsa.nga.engine.viss.NgaService }; code:ACTIVITY_STARTER; tempAllowListReason:<null>; targetSdkVersion:31; callerTargetSdkVersion:31; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-26m47s908ms startingBgTimeout=--
+    lastActivity=-26m47s908ms restartTime=-26m47s908ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{6f54579 CREATE}:
+      intent={pkg=com.google.android.googlequicksearchbox cmp=com.google.android.googlequicksearchbox/com.google.android.apps.gsa.nga.engine.viss.NgaService}
+      binder=android.os.BinderProxy@62fa2be
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{2d25f1f ProcessRecord{a80746e 1719:com.google.android.googlequicksearchbox:search/u0a132}}
+        Per-process Connections:
+          ConnectionRecord{f34af10 u0 CR com.google.android.googlequicksearchbox/com.google.android.apps.gsa.nga.engine.viss.NgaService:@b8467d3 flags=0x1}
+    All Connections:
+      ConnectionRecord{f34af10 u0 CR com.google.android.googlequicksearchbox/com.google.android.apps.gsa.nga.engine.viss.NgaService:@b8467d3 flags=0x1}
+
+  * ServiceRecord{b8981ee u0 com.google.android.gms/.thunderbird.EmergencyPersistentService}
+    intent={cmp=com.google.android.gms/.thunderbird.EmergencyPersistentService}
+    packageName=com.google.android.gms
+    processName=com.google.android.gms.persistent
+    baseDir=/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk
+    dataDir=/data/user/0/com.google.android.gms
+    app=ProcessRecord{ad44190 2537:com.google.android.gms.persistent/u0a128}
+    mAllowWhileInUsePermissionInFgsReason=ACTIVITY_STARTER
+    allowUiJobScheduling=false
+    recentCallingPackage=com.google.android.gms
+    recentCallingUid=10128
+    allowStartForeground=ACTIVITY_STARTER
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.gms; callingUid: 10128; uidState: BTOP; uidBFSL: [BFSL]; intent: Intent { cmp=com.google.android.gms/.thunderbird.EmergencyPersistentService }; code:ACTIVITY_STARTER; tempAllowListReason:<,reasonCode:SYSTEM_ALLOW_LISTED,duration:9223372036854775807,callingUid:-1>; targetSdkVersion:33; callerTargetSdkVersion:33; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-25m53s719ms startingBgTimeout=--
+    lastActivity=-25m53s718ms restartTime=-25m53s718ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=false callStart=true lastStartId=1
+ startCommandResult=1
+
+  * ServiceRecord{7647466 u0 com.google.android.apps.nexuslauncher/com.android.launcher3.notification.NotificationListener}
+    intent={act=android.service.notification.NotificationListenerService cmp=com.google.android.apps.nexuslauncher/com.android.launcher3.notification.NotificationListener}
+    packageName=com.google.android.apps.nexuslauncher
+    processName=com.google.android.apps.nexuslauncher
+    permission=android.permission.BIND_NOTIFICATION_LISTENER_SERVICE
+    baseDir=/system_ext/priv-app/NexusLauncherRelease/NexusLauncherRelease.apk
+    dataDir=/data/user/0/com.google.android.apps.nexuslauncher
+    app=ProcessRecord{71f7cda 1115:com.google.android.apps.nexuslauncher/u0a169}
+    allowlistManager=true
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=1000
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: android; callingUid: 1000; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { act=android.service.notification.NotificationListenerService cmp=com.google.android.apps.nexuslauncher/com.android.launcher3.notification.NotificationListener }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<null>; targetSdkVersion:33; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-27m0s62ms startingBgTimeout=--
+    lastActivity=-27m0s48ms restartTime=-27m0s48ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{d88226c CREATE}:
+      intent={act=android.service.notification.NotificationListenerService cmp=com.google.android.apps.nexuslauncher/com.android.launcher3.notification.NotificationListener}
+      binder=android.os.BinderProxy@8fbc035
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{5bf2cca ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{fa934c1 u0 CR FGS !PRCP com.google.android.apps.nexuslauncher/com.android.launcher3.notification.NotificationListener:@b1fa1a8 flags=0x5000101}
+    All Connections:
+      ConnectionRecord{fa934c1 u0 CR FGS !PRCP com.google.android.apps.nexuslauncher/com.android.launcher3.notification.NotificationListener:@b1fa1a8 flags=0x5000101}
+
+  * ServiceRecord{7e2909f u0 com.google.android.as/com.google.android.apps.miphone.aiai.common.notification.service.AiAiNotificationListenerService}
+    intent={act=android.service.notification.NotificationListenerService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.common.notification.service.AiAiNotificationListenerService}
+    packageName=com.google.android.as
+    processName=com.google.android.as
+    permission=android.permission.BIND_NOTIFICATION_LISTENER_SERVICE
+    baseDir=/product/priv-app/DevicePersonalizationPrebuiltPixel2021/DevicePersonalizationPrebuiltPixel2021.apk
+    dataDir=/data/user/0/com.google.android.as
+    app=ProcessRecord{1af5ae4 1390:com.google.android.as/u0a125}
+    allowlistManager=true
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=1000
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: android; callingUid: 1000; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { act=android.service.notification.NotificationListenerService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.common.notification.service.AiAiNotificationListenerService }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<null>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-27m0s28ms startingBgTimeout=--
+    lastActivity=-27m0s22ms restartTime=-27m0s22ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{47ce3b CREATE}:
+      intent={act=android.service.notification.NotificationListenerService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.common.notification.service.AiAiNotificationListenerService}
+      binder=android.os.BinderProxy@c0af958
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{ab52ab1 ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{7ebaf9 u0 CR FGS !PRCP com.google.android.as/com.google.android.apps.miphone.aiai.common.notification.service.AiAiNotificationListenerService:@afdc0 flags=0x5000101}
+    All Connections:
+      ConnectionRecord{7ebaf9 u0 CR FGS !PRCP com.google.android.as/com.google.android.apps.miphone.aiai.common.notification.service.AiAiNotificationListenerService:@afdc0 flags=0x5000101}
+
+  * ServiceRecord{c369b92 u0 com.android.systemui/.SystemUIService}
+    intent={cmp=com.android.systemui/.SystemUIService}
+    packageName=com.android.systemui
+    processName=com.android.systemui
+    baseDir=/system_ext/priv-app/SystemUIGoogle/SystemUIGoogle.apk
+    dataDir=/data/user_de/0/com.android.systemui
+    app=ProcessRecord{811b3ec 776:com.android.systemui/u0a167}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=1000
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: android; callingUid: 1000; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { flg=0x100 cmp=com.android.systemui/.SystemUIService }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<null>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-27m22s715ms startingBgTimeout=--
+    lastActivity=-27m22s715ms restartTime=-27m22s715ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=false callStart=true lastStartId=1
+ startCommandResult=1
+
+  * ServiceRecord{63c2e68 u0 com.google.android.gms/.nearby.exposurenotification.service.ExposureMatchingService}
+    intent={act=com.google.android.gms.nearby.exposurenotification.service.EXPOSURE_MATCHING_START cmp=com.google.android.gms/.nearby.exposurenotification.service.ExposureMatchingService}
+    packageName=com.google.android.gms
+    processName=com.google.android.gms.persistent
+    baseDir=/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk
+    dataDir=/data/user/0/com.google.android.gms
+    app=ProcessRecord{ad44190 2537:com.google.android.gms.persistent/u0a128}
+    mAllowWhileInUsePermissionInFgsReason=BACKGROUND_ACTIVITY_PERMISSION
+    allowUiJobScheduling=false
+    recentCallingPackage=com.google.android.gms
+    recentCallingUid=10128
+    allowStartForeground=BACKGROUND_ACTIVITY_PERMISSION
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.gms; callingUid: 10128; uidState: BTOP; uidBFSL: [BFSL]; intent: Intent { act=com.google.android.gms.nearby.exposurenotification.service.EXPOSURE_MATCHING_START cmp=com.google.android.gms/.nearby.exposurenotification.service.ExposureMatchingService (has extras) }; code:BACKGROUND_ACTIVITY_PERMISSION; tempAllowListReason:<,reasonCode:SYSTEM_ALLOW_LISTED,duration:9223372036854775807,callingUid:-1>; targetSdkVersion:33; callerTargetSdkVersion:33; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-25m54s625ms startingBgTimeout=--
+    lastActivity=-25m54s624ms restartTime=-25m54s624ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=false callStart=true lastStartId=1
+ startCommandResult=1
+
+  * ServiceRecord{bc0a60d u0 android/.hardware.location.GeofenceHardwareService}
+    intent={cmp=android/.hardware.location.GeofenceHardwareService}
+    packageName=android
+    processName=system
+    permission=android.permission.LOCATION_HARDWARE
+    baseDir=/system/framework/framework-res.apk
+    dataDir=/data/system
+    app=ProcessRecord{3d86488 556:system/1000}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=1000
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: android; callingUid: 1000; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { cmp=android/.hardware.location.GeofenceHardwareService }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<null>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-27m27s416ms startingBgTimeout=--
+    lastActivity=-27m27s399ms restartTime=-27m27s399ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{80b4b96 CREATE}:
+      intent={cmp=android/.hardware.location.GeofenceHardwareService}
+      binder=android.hardware.location.GeofenceHardwareService$1@9db1317
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{ce25304 ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{de5a4f8 u0 CR android/.hardware.location.GeofenceHardwareService:@db9645b flags=0x1}
+    All Connections:
+      ConnectionRecord{de5a4f8 u0 CR android/.hardware.location.GeofenceHardwareService:@db9645b flags=0x1}
+
+  * ServiceRecord{321f72f u0 com.android.se/.SecureElementService}
+    intent={cmp=com.android.se/.SecureElementService}
+    packageName=com.android.se
+    processName=com.android.se
+    baseDir=/system/app/SecureElement/SecureElement.apk
+    dataDir=/data/user/0/com.android.se
+    app=ProcessRecord{3974047 915:com.android.se/1068}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=com.android.se
+    recentCallingUid=1068
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.android.se; callingUid: 1068; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { cmp=com.android.se/.SecureElementService }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<null>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-27m22s216ms startingBgTimeout=--
+    lastActivity=-27m22s216ms restartTime=-27m22s216ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=false callStart=true lastStartId=1
+ startCommandResult=1
+
+  * ServiceRecord{e780de9 u0 com.google.android.bluetooth/com.android.bluetooth.hearingaid.HearingAidService}
+    intent={cmp=com.google.android.bluetooth/com.android.bluetooth.hearingaid.HearingAidService}
+    packageName=com.google.android.bluetooth
+    processName=com.google.android.bluetooth
+    baseDir=/apex/com.android.btservices/app/BluetoothGoogle@340815010/BluetoothGoogle.apk
+    dataDir=/data/user_de/0/com.google.android.bluetooth
+    app=ProcessRecord{fb229bf 887:com.google.android.bluetooth/1002}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=10167
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.bluetooth; callingUid: 1002; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { cmp=com.google.android.bluetooth/com.android.bluetooth.hearingaid.HearingAidService (has extras) }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<19c0458 android.bluetooth.adapter.action.STATE_CHANGED/u-1,reasonCode:BLUETOOTH_BROADCAST,duration:10000,callingUid:1000>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-27m15s462ms startingBgTimeout=--
+    lastActivity=-27m15s462ms restartTime=-27m15s462ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=true callStart=true lastStartId=1
+ startCommandResult=2
+    Bindings:
+    * IntentBindRecord{ac0c0ed}:
+      intent={act=android.bluetooth.IBluetoothHearingAid cmp=com.google.android.bluetooth/com.android.bluetooth.hearingaid.HearingAidService}
+      binder=android.os.BinderProxy@3288b22
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{f3c9b3 ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{51c047b u0 com.google.android.bluetooth/com.android.bluetooth.hearingaid.HearingAidService:@f85540a flags=0x0}
+    All Connections:
+      ConnectionRecord{51c047b u0 com.google.android.bluetooth/com.android.bluetooth.hearingaid.HearingAidService:@f85540a flags=0x0}
+
+  * ServiceRecord{e4ee5e u0 com.google.android.gms/.chimera.PersistentDirectBootAwareApiService}
+    intent={act=com.google.android.gms.clearcut.service.START pkg=com.google.android.gms}
+    packageName=com.google.android.gms
+    processName=com.google.android.gms.persistent
+    baseDir=/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk
+    dataDir=/data/user/0/com.google.android.gms
+    app=ProcessRecord{ad44190 2537:com.google.android.gms.persistent/u0a128}
+    mAllowWhileInUsePermissionInFgsReason=BACKGROUND_ACTIVITY_PERMISSION
+    allowUiJobScheduling=false
+    recentCallingPackage=com.google.android.gms
+    recentCallingUid=10128
+    allowStartForeground=BACKGROUND_ACTIVITY_PERMISSION
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.apps.wellbeing; callingUid: 10120; uidState: BFGS; uidBFSL: [BFSL]; intent: Intent { act=com.google.android.gms.clearcut.service.START pkg=com.google.android.gms }; code:BACKGROUND_ACTIVITY_PERMISSION; tempAllowListReason:<null>; targetSdkVersion:33; callerTargetSdkVersion:33; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-27m10s8ms startingBgTimeout=--
+    lastActivity=-2m31s204ms restartTime=-26m42s52ms createdFromFg=false
+    restartCount=0 restartDelay=-24m57s596ms nextRestartTime=-24m57s596ms crashCount=0
+    Bindings:
+    * IntentBindRecord{2b39b70 CREATE}:
+      intent={act=com.google.android.gms.clearcut.service.START pkg=com.google.android.gms}
+      binder=android.os.BinderProxy@8757ee9
+      requested=true received=true hasBound=false doRebind=false
+      * Client AppBindRecord{7e8376e ProcessRecord{a80746e 1719:com.google.android.googlequicksearchbox:search/u0a132}}
+        Per-process Connections:
+          ConnectionRecord{625db82 u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:@6d996cd flags=0x1081}
+    * IntentBindRecord{bd74e0f CREATE}:
+      intent={act=com.google.android.gms.usagereporting.service.START pkg=com.google.android.gms}
+      binder=android.os.BinderProxy@30efe9c
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{79e20a5 ProcessRecord{4daaeb2 1510:com.google.android.apps.messaging:rcs/u0a131}}
+        Per-process Connections:
+          ConnectionRecord{287d3e6 u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:@c86241 flags=0x1081}
+      * Client AppBindRecord{e45c7a ProcessRecord{7b31ff8 1322:com.google.android.apps.wellbeing/u0a120}}
+        Per-process Connections:
+          ConnectionRecord{2937986 u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:@70a9a61 flags=0x1081}
+      * Client AppBindRecord{5c4bc2b ProcessRecord{8e415a5 2704:com.google.android.apps.messaging/u0a131}}
+        Per-process Connections:
+          ConnectionRecord{3bb081f u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:@61d4fbe flags=0x1081}
+      * Client AppBindRecord{a5b6888 ProcessRecord{b686425 1302:com.google.android.inputmethod.latin/u0a143}}
+        Per-process Connections:
+          ConnectionRecord{b13fb2d u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:@c710e44 flags=0x1081}
+      * Client AppBindRecord{3f52221 ProcessRecord{eeb62dc 3353:com.google.android.contacts/u0a154}}
+        Per-process Connections:
+          ConnectionRecord{7362c94 u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:@eb718e7 flags=0x1081}
+    * IntentBindRecord{64bc646}:
+      intent={act=com.google.android.chimera.BoundService.START dat=chimera-action:com.google.android.gms.libs.gmscorelogger.service.START cmp=com.google.android.gms/.chimera.PersistentDirectBootAwareApiService}
+      binder=android.os.BinderProxy@4d0f007
+      requested=true received=true hasBound=false doRebind=false
+    * IntentBindRecord{2828534 CREATE}:
+      intent={act=com.google.android.chimera.BoundService.START dat=chimera-action:com.google.android.gms.clearcut.service.START cmp=com.google.android.gms/.chimera.PersistentDirectBootAwareApiService}
+      binder=android.os.BinderProxy@60bf5d
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{26e00d2 ProcessRecord{72caa04 4035:com.google.android.gms.unstable/u0a128}}
+        Per-process Connections:
+          ConnectionRecord{e09b01d u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:@5e9c0f4 flags=0x1081}
+    * IntentBindRecord{18285a3 CREATE}:
+      intent={act=com.google.android.chimera.BoundService.START dat=chimera-action:com.google.android.gms.usagereporting.service.START cmp=com.google.android.gms/.chimera.PersistentDirectBootAwareApiService}
+      binder=android.os.BinderProxy@85cc0a0
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{deef459 ProcessRecord{207baea 1591:com.google.android.gms/u0a128}}
+        Per-process Connections:
+          ConnectionRecord{e98141 u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:@8375028 flags=0x1081}
+      * Client AppBindRecord{307581e ProcessRecord{72caa04 4035:com.google.android.gms.unstable/u0a128}}
+        Per-process Connections:
+          ConnectionRecord{d6e32cb u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:@45099a flags=0x1081}
+      * Client AppBindRecord{c2dd8ff ProcessRecord{ad44190 2537:com.google.android.gms.persistent/u0a128}}
+        Per-process Connections:
+          ConnectionRecord{438f64b u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:@73aab1a flags=0x1081}
+    All Connections:
+      ConnectionRecord{d6e32cb u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:@45099a flags=0x1081}
+      ConnectionRecord{287d3e6 u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:@c86241 flags=0x1081}
+      ConnectionRecord{e09b01d u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:@5e9c0f4 flags=0x1081}
+      ConnectionRecord{3bb081f u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:@61d4fbe flags=0x1081}
+      ConnectionRecord{625db82 u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:@6d996cd flags=0x1081}
+      ConnectionRecord{2937986 u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:@70a9a61 flags=0x1081}
+      ConnectionRecord{438f64b u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:@73aab1a flags=0x1081}
+      ConnectionRecord{e98141 u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:@8375028 flags=0x1081}
+      ConnectionRecord{b13fb2d u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:@c710e44 flags=0x1081}
+      ConnectionRecord{7362c94 u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:@eb718e7 flags=0x1081}
+
+  * ServiceRecord{36801c u0 com.google.android.gms/.geotimezone.GeoTimeZoneService}
+    intent={act=android.service.timezone.PrimaryLocationTimeZoneProviderService cmp=com.google.android.gms/.geotimezone.GeoTimeZoneService}
+    packageName=com.google.android.gms
+    processName=com.google.android.gms.persistent
+    permission=android.permission.BIND_TIME_ZONE_PROVIDER_SERVICE
+    baseDir=/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk
+    dataDir=/data/user/0/com.google.android.gms
+    app=ProcessRecord{ad44190 2537:com.google.android.gms.persistent/u0a128}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=1000
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: android; callingUid: 1000; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { act=android.service.timezone.PrimaryLocationTimeZoneProviderService cmp=com.google.android.gms/.geotimezone.GeoTimeZoneService }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<68c8c67 android.intent.action.BOOT_COMPLETED/u0,reasonCode:BOOT_COMPLETED,duration:20000,callingUid:1000>; targetSdkVersion:33; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-26m17s105ms startingBgTimeout=--
+    lastActivity=-26m17s105ms restartTime=-26m17s105ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{bdd46cc CREATE}:
+      intent={act=android.service.timezone.PrimaryLocationTimeZoneProviderService cmp=com.google.android.gms/.geotimezone.GeoTimeZoneService}
+      binder=android.os.BinderProxy@6917d15
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{34cd82a ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{5cde58f u0 CR !FG !VIS com.google.android.gms/.geotimezone.GeoTimeZoneService:@ec47cee flags=0x40000005}
+    All Connections:
+      ConnectionRecord{5cde58f u0 CR !FG !VIS com.google.android.gms/.geotimezone.GeoTimeZoneService:@ec47cee flags=0x40000005}
+
+  * ServiceRecord{df3d0f u0 com.google.android.gms/.location.persistent.LocationPersistentService}
+    intent={cmp=com.google.android.gms/.location.persistent.LocationPersistentService}
+    packageName=com.google.android.gms
+    processName=com.google.android.gms.persistent
+    baseDir=/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk
+    dataDir=/data/user/0/com.google.android.gms
+    app=ProcessRecord{ad44190 2537:com.google.android.gms.persistent/u0a128}
+    mAllowWhileInUsePermissionInFgsReason=ACTIVITY_STARTER
+    allowUiJobScheduling=false
+    recentCallingPackage=com.google.android.gms
+    recentCallingUid=10128
+    allowStartForeground=ACTIVITY_STARTER
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.gms; callingUid: 10128; uidState: BTOP; uidBFSL: [BFSL]; intent: Intent { cmp=com.google.android.gms/.location.persistent.LocationPersistentService }; code:ACTIVITY_STARTER; tempAllowListReason:<,reasonCode:SYSTEM_ALLOW_LISTED,duration:9223372036854775807,callingUid:-1>; targetSdkVersion:33; callerTargetSdkVersion:33; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-25m53s431ms startingBgTimeout=--
+    lastActivity=-25m53s426ms restartTime=-25m53s426ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=false callStart=true lastStartId=1
+ startCommandResult=1
+
+  * ServiceRecord{6bc8f82 u0 com.google.android.gms/.nearby.discovery.service.DiscoveryService}
+    intent={act=com.google.android.gms.nearby.discovery:ACTION_PERMISSION_CHANGE cmp=com.google.android.gms/.nearby.discovery.service.DiscoveryService}
+    packageName=com.google.android.gms
+    processName=com.google.android.gms.persistent
+    permission=com.google.android.gms.permission.NEARBY_START_DISCOVERER
+    baseDir=/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk
+    dataDir=/data/user/0/com.google.android.gms
+    app=ProcessRecord{ad44190 2537:com.google.android.gms.persistent/u0a128}
+    mAllowWhileInUsePermissionInFgsReason=ACTIVITY_STARTER
+    allowUiJobScheduling=false
+    recentCallingPackage=com.google.android.gms
+    recentCallingUid=10128
+    allowStartForeground=ACTIVITY_STARTER
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.gms; callingUid: 10128; uidState: BTOP; uidBFSL: [BFSL]; intent: Intent { act=com.google.android.gms.nearby.discovery:ACTION_PERMISSION_CHANGE cmp=com.google.android.gms/.nearby.discovery.service.DiscoveryService }; code:ACTIVITY_STARTER; tempAllowListReason:<,reasonCode:SYSTEM_ALLOW_LISTED,duration:9223372036854775807,callingUid:-1>; targetSdkVersion:33; callerTargetSdkVersion:33; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-26m9s236ms startingBgTimeout=--
+    lastActivity=-25m54s665ms restartTime=-26m9s231ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=true callStart=true lastStartId=3
+ startCommandResult=2
+
+  * ServiceRecord{6d17001 u0 com.google.android.gms/com.google.android.location.internal.PendingIntentCallbackService}
+    intent={act=com.google.android.location.internal.action.FLP_FULL_POWER_LOCATION_RESULT pkg=com.google.android.gms cmp=com.google.android.gms/com.google.android.location.internal.PendingIntentCallbackService}
+    packageName=com.google.android.gms
+    processName=com.google.android.gms.persistent
+    baseDir=/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk
+    dataDir=/data/user/0/com.google.android.gms
+    app=ProcessRecord{ad44190 2537:com.google.android.gms.persistent/u0a128}
+    mAllowWhileInUsePermissionInFgsReason=ACTIVITY_STARTER
+    allowUiJobScheduling=false
+    recentCallingPackage=com.google.android.gms
+    recentCallingUid=10128
+    allowStartForeground=ACTIVITY_STARTER
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.gms; callingUid: 10128; uidState: BTOP; uidBFSL: [BFSL]; intent: Intent { act=com.google.android.location.internal.action.FLP_FULL_POWER_LOCATION_RESULT pkg=com.google.android.gms cmp=com.google.android.gms/com.google.android.location.internal.PendingIntentCallbackService (has extras) }; code:ACTIVITY_STARTER; tempAllowListReason:<,reasonCode:SYSTEM_ALLOW_LISTED,duration:9223372036854775807,callingUid:-1>; targetSdkVersion:33; callerTargetSdkVersion:33; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-26m22s128ms startingBgTimeout=--
+    lastActivity=-26m4s783ms restartTime=-26m22s127ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=true callStart=true lastStartId=6
+ startCommandResult=2
+
+  * ServiceRecord{69bb5b6 u0 com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiPredictionService}
+    intent={act=android.service.appprediction.AppPredictionService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiPredictionService}
+    packageName=com.google.android.as
+    processName=com.google.android.as
+    permission=android.permission.MANAGE_APP_PREDICTIONS
+    baseDir=/product/priv-app/DevicePersonalizationPrebuiltPixel2021/DevicePersonalizationPrebuiltPixel2021.apk
+    dataDir=/data/user/0/com.google.android.as
+    app=ProcessRecord{1af5ae4 1390:com.google.android.as/u0a125}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=1000
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: android; callingUid: 1000; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { act=android.service.appprediction.AppPredictionService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiPredictionService }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<68c8c67 android.intent.action.BOOT_COMPLETED/u0,reasonCode:BOOT_COMPLETED,duration:20000,callingUid:1000>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-26m41s205ms startingBgTimeout=--
+    lastActivity=-26m41s205ms restartTime=-26m41s205ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{c11061b CREATE}:
+      intent={act=android.service.appprediction.AppPredictionService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiPredictionService}
+      binder=android.os.BinderProxy@6fe03b8
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{799d591 ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{c3a6951 u0 CR FGS CAPS com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiPredictionService:@7b98e78 flags=0x4001001}
+    All Connections:
+      ConnectionRecord{c3a6951 u0 CR FGS CAPS com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiPredictionService:@7b98e78 flags=0x4001001}
+
+  * ServiceRecord{b5614d9 u0 com.google.android.bluetooth/com.android.bluetooth.btservice.AdapterService}
+    intent={act=android.bluetooth.IBluetooth cmp=com.google.android.bluetooth/com.android.bluetooth.btservice.AdapterService}
+    packageName=com.google.android.bluetooth
+    processName=com.google.android.bluetooth
+    permission=android.permission.ACCESS_BLUETOOTH_SHARE
+    baseDir=/apex/com.android.btservices/app/BluetoothGoogle@340815010/BluetoothGoogle.apk
+    dataDir=/data/user_de/0/com.google.android.bluetooth
+    app=ProcessRecord{fb229bf 887:com.google.android.bluetooth/1002}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=1000
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: android; callingUid: 1000; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { act=android.bluetooth.IBluetooth cmp=com.google.android.bluetooth/com.android.bluetooth.btservice.AdapterService }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<null>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-27m25s202ms startingBgTimeout=--
+    lastActivity=-27m25s39ms restartTime=-27m25s39ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{ab84cf6 CREATE}:
+      intent={act=android.bluetooth.IBluetooth cmp=com.google.android.bluetooth/com.android.bluetooth.btservice.AdapterService}
+      binder=android.os.BinderProxy@42fe8f7
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{76ba364 ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{71b73de u0 CR IMP com.google.android.bluetooth/com.android.bluetooth.btservice.AdapterService:@d172719 flags=0x41}
+    All Connections:
+      ConnectionRecord{71b73de u0 CR IMP com.google.android.bluetooth/com.android.bluetooth.btservice.AdapterService:@d172719 flags=0x41}
+
+  * ServiceRecord{d703dc7 u0 com.google.android.gms/.fido.authenticator.service.AuthenticatorService}
+    intent={cmp=com.google.android.gms/.fido.authenticator.service.AuthenticatorService}
+    packageName=com.google.android.gms
+    processName=com.google.android.gms.persistent
+    baseDir=/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk
+    dataDir=/data/user/0/com.google.android.gms
+    app=ProcessRecord{ad44190 2537:com.google.android.gms.persistent/u0a128}
+    mAllowWhileInUsePermissionInFgsReason=BACKGROUND_ACTIVITY_PERMISSION
+    allowUiJobScheduling=false
+    recentCallingPackage=com.google.android.gms
+    recentCallingUid=10128
+    allowStartForeground=BACKGROUND_ACTIVITY_PERMISSION
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.gms; callingUid: 10128; uidState: BTOP; uidBFSL: [BFSL]; intent: Intent { cmp=com.google.android.gms/.fido.authenticator.service.AuthenticatorService }; code:BACKGROUND_ACTIVITY_PERMISSION; tempAllowListReason:<,reasonCode:SYSTEM_ALLOW_LISTED,duration:9223372036854775807,callingUid:-1>; targetSdkVersion:33; callerTargetSdkVersion:33; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-25m55s14ms startingBgTimeout=--
+    lastActivity=-25m55s13ms restartTime=-25m55s13ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=false callStart=true lastStartId=1
+ startCommandResult=1
+
+  * ServiceRecord{d55c694 u0 com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiContentCaptureService}
+    intent={act=android.service.contentcapture.ContentCaptureService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiContentCaptureService}
+    packageName=com.google.android.as
+    processName=com.google.android.as
+    permission=android.permission.BIND_CONTENT_CAPTURE_SERVICE
+    baseDir=/product/priv-app/DevicePersonalizationPrebuiltPixel2021/DevicePersonalizationPrebuiltPixel2021.apk
+    dataDir=/data/user/0/com.google.android.as
+    app=ProcessRecord{1af5ae4 1390:com.google.android.as/u0a125}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=1000
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: android; callingUid: 1000; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { act=android.service.contentcapture.ContentCaptureService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiContentCaptureService }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<4ef60c3 android.bluetooth.adapter.action.LOCAL_NAME_CHANGED/u-1,reasonCode:BLUETOOTH_BROADCAST,duration:20000,callingUid:1002>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-27m8s757ms startingBgTimeout=--
+    lastActivity=-27m5s885ms restartTime=-27m5s885ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{7f539cd CREATE}:
+      intent={act=android.service.contentcapture.ContentCaptureService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiContentCaptureService}
+      binder=android.os.BinderProxy@c944282
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{9f01d93 ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{582004e u0 CR FGS CAPS com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiContentCaptureService:@b675f49 flags=0x4001001}
+    All Connections:
+      ConnectionRecord{582004e u0 CR FGS CAPS com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiContentCaptureService:@b675f49 flags=0x4001001}
+
+  * ServiceRecord{b16bf4b u0 com.google.android.gms/com.google.android.location.internal.server.GoogleLocationService}
+    intent={act=com.google.android.location.internal.GMS_NLP pkg=com.google.android.gms}
+    packageName=com.google.android.gms
+    processName=com.google.android.gms.persistent
+    permission=android.permission.ACCESS_COARSE_LOCATION
+    baseDir=/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk
+    dataDir=/data/user/0/com.google.android.gms
+    app=ProcessRecord{ad44190 2537:com.google.android.gms.persistent/u0a128}
+    mAllowWhileInUsePermissionInFgsReason=BACKGROUND_ACTIVITY_PERMISSION
+    allowUiJobScheduling=false
+    recentCallingPackage=com.google.android.gms
+    recentCallingUid=10128
+    allowStartForeground=BACKGROUND_ACTIVITY_PERMISSION
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.gms; callingUid: 10128; uidState: BTOP; uidBFSL: [BFSL]; intent: Intent { act=com.google.android.location.internal.GMS_NLP pkg=com.google.android.gms (has extras) }; code:BACKGROUND_ACTIVITY_PERMISSION; tempAllowListReason:<,reasonCode:SYSTEM_ALLOW_LISTED,duration:9223372036854775807,callingUid:-1>; targetSdkVersion:33; callerTargetSdkVersion:33; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-26m49s980ms startingBgTimeout=--
+    lastActivity=-25m52s124ms restartTime=-26m42s49ms createdFromFg=false
+    startRequested=true delayedStop=false stopIfKilled=false callStart=true lastStartId=71
+ startCommandResult=1
+    restartCount=1 restartDelay=-27m54s187ms nextRestartTime=-26m27s597ms crashCount=0
+
+  * ServiceRecord{f500cad u0 com.google.android.gms/com.google.android.contextmanager.service.ContextManagerService}
+    intent={cmp=com.google.android.gms/com.google.android.contextmanager.service.ContextManagerService}
+    packageName=com.google.android.gms
+    processName=com.google.android.gms.persistent
+    baseDir=/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk
+    dataDir=/data/user/0/com.google.android.gms
+    app=ProcessRecord{ad44190 2537:com.google.android.gms.persistent/u0a128}
+    mAllowWhileInUsePermissionInFgsReason=BACKGROUND_ACTIVITY_PERMISSION
+    allowUiJobScheduling=false
+    recentCallingPackage=com.google.android.gms
+    recentCallingUid=10128
+    allowStartForeground=BACKGROUND_ACTIVITY_PERMISSION
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.gms; callingUid: 10128; uidState: BTOP; uidBFSL: [BFSL]; intent: Intent { cmp=com.google.android.gms/com.google.android.contextmanager.service.ContextManagerService (has extras) }; code:BACKGROUND_ACTIVITY_PERMISSION; tempAllowListReason:<,reasonCode:SYSTEM_ALLOW_LISTED,duration:9223372036854775807,callingUid:-1>; targetSdkVersion:33; callerTargetSdkVersion:33; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-26m33s379ms startingBgTimeout=--
+    lastActivity=-26m33s378ms restartTime=-26m33s378ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=false callStart=true lastStartId=1
+ startCommandResult=1
+
+  * ServiceRecord{f7cc7a6 u0 com.android.systemui/.dump.SystemUIAuxiliaryDumpService}
+    intent={cmp=com.android.systemui/.dump.SystemUIAuxiliaryDumpService}
+    packageName=com.android.systemui
+    processName=com.android.systemui
+    permission=com.android.systemui.permission.SELF
+    baseDir=/system_ext/priv-app/SystemUIGoogle/SystemUIGoogle.apk
+    dataDir=/data/user_de/0/com.android.systemui
+    app=ProcessRecord{811b3ec 776:com.android.systemui/u0a167}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=com.android.systemui
+    recentCallingUid=10167
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.android.systemui; callingUid: 10167; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { cmp=com.android.systemui/.dump.SystemUIAuxiliaryDumpService }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<d2e1a92 android.intent.action.LOCKED_BOOT_COMPLETED/u0,reasonCode:LOCKED_BOOT_COMPLETED,duration:20000,callingUid:1000>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-26m56s482ms startingBgTimeout=--
+    lastActivity=-26m56s480ms restartTime=-26m56s480ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=false callStart=true lastStartId=1
+ startCommandResult=1
+
+  * ServiceRecord{6d58f22 u0 com.google.android.gms/com.google.android.location.network.NetworkLocationService}
+    intent={act=com.android.location.service.v3.NetworkLocationProvider cmp=com.google.android.gms/com.google.android.location.network.NetworkLocationService}
+    packageName=com.google.android.gms
+    processName=com.google.android.gms.persistent
+    permission=android.permission.WRITE_SECURE_SETTINGS
+    baseDir=/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk
+    dataDir=/data/user/0/com.google.android.gms
+    app=ProcessRecord{ad44190 2537:com.google.android.gms.persistent/u0a128}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=com.google.android.gms
+    recentCallingUid=10128
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: android; callingUid: 1000; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { act=com.android.location.service.v3.NetworkLocationProvider cmp=com.google.android.gms/com.google.android.location.network.NetworkLocationService }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<68c8c67 android.intent.action.BOOT_COMPLETED/u0,reasonCode:BOOT_COMPLETED,duration:20000,callingUid:1000>; targetSdkVersion:33; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-26m24s717ms startingBgTimeout=--
+    lastActivity=-26m4s804ms restartTime=-26m24s716ms createdFromFg=true
+    startRequested=false delayedStop=false stopIfKilled=true callStart=false lastStartId=3
+ startCommandResult=2
+    Bindings:
+    * IntentBindRecord{6f191d0 CREATE}:
+      intent={act=com.android.location.service.v3.NetworkLocationProvider cmp=com.google.android.gms/com.google.android.location.network.NetworkLocationService}
+      binder=android.os.BinderProxy@628a5c9
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{44804ce ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{4af54ed u0 CR !FG !VIS com.google.android.gms/com.google.android.location.network.NetworkLocationService:@ddeb704 flags=0x40000005}
+    All Connections:
+      ConnectionRecord{4af54ed u0 CR !FG !VIS com.google.android.gms/com.google.android.location.network.NetworkLocationService:@ddeb704 flags=0x40000005}
+
+  * ServiceRecord{9e7b75c u0 com.android.stk/.StkAppService}
+    intent={cmp=com.android.stk/.StkAppService}
+    packageName=com.android.stk
+    processName=com.android.phone
+    baseDir=/system/app/Stk/Stk.apk
+    dataDir=/data/user_de/0/com.android.stk
+    app=ProcessRecord{ae63074 952:com.android.phone/1001}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=com.android.stk
+    recentCallingUid=1001
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.android.stk; callingUid: 1001; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { cmp=com.android.stk/.StkAppService (has extras) }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<null>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-27m12s80ms startingBgTimeout=--
+    lastActivity=-26m28s283ms restartTime=-27m12s79ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=false callStart=true lastStartId=3
+ startCommandResult=1
+
+  * ServiceRecord{6d23d2 u0 com.google.android.gms/com.google.android.location.internal.GoogleLocationManagerService}
+    intent={act=com.android.location.service.GeofenceProvider cmp=com.google.android.gms/com.google.android.location.internal.GoogleLocationManagerService}
+    packageName=com.google.android.gms
+    processName=com.google.android.gms.persistent
+    baseDir=/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk
+    dataDir=/data/user/0/com.google.android.gms
+    app=ProcessRecord{ad44190 2537:com.google.android.gms.persistent/u0a128}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=com.google.android.googlequicksearchbox
+    recentCallingUid=10132
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: android; callingUid: 1000; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { act=com.android.location.service.GeofenceProvider cmp=com.google.android.gms/com.google.android.location.internal.GoogleLocationManagerService }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<null>; targetSdkVersion:33; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-26m55s50ms startingBgTimeout=--
+    lastActivity=-7m52s434ms restartTime=-- createdFromFg=false
+    startRequested=true delayedStop=false stopIfKilled=false callStart=true lastStartId=13
+ startCommandResult=1
+    restartCount=0 restartDelay=-24m37s597ms nextRestartTime=-24m37s597ms crashCount=0
+    Bindings:
+    * IntentBindRecord{974ffef CREATE}:
+      intent={act=com.google.android.location.internal.GoogleLocationManagerService.START pkg=com.google.android.gms}
+      binder=android.os.BinderProxy@ea5fafc
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{a0cd585 ProcessRecord{ad44190 2537:com.google.android.gms.persistent/u0a128}}
+        Per-process Connections:
+          ConnectionRecord{82d7f4 u0 CR WACT CAPS com.google.android.gms/com.google.android.location.internal.GoogleLocationManagerService:@3a7d5c7 flags=0x1081}
+    * IntentBindRecord{a639fda CREATE}:
+      intent={act=com.android.location.service.GeofenceProvider cmp=com.google.android.gms/com.google.android.location.internal.GoogleLocationManagerService}
+      binder=android.os.BinderProxy@3bbac0b
+      requested=true received=true hasBound=false doRebind=false
+      * Client AppBindRecord{d5cae8 ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{dac64a0 u0 CR !FG !VIS com.google.android.gms/com.google.android.location.internal.GoogleLocationManagerService:@97a39a3 flags=0x40000005}
+    All Connections:
+      ConnectionRecord{82d7f4 u0 CR WACT CAPS com.google.android.gms/com.google.android.location.internal.GoogleLocationManagerService:@3a7d5c7 flags=0x1081}
+      ConnectionRecord{dac64a0 u0 CR !FG !VIS com.google.android.gms/com.google.android.location.internal.GoogleLocationManagerService:@97a39a3 flags=0x40000005}
+
+  * ServiceRecord{10f4dde u0 com.google.android.inputmethod.latin/com.android.inputmethod.latin.LatinIME}
+    intent={act=android.view.InputMethod cmp=com.google.android.inputmethod.latin/com.android.inputmethod.latin.LatinIME}
+    packageName=com.google.android.inputmethod.latin
+    processName=com.google.android.inputmethod.latin
+    permission=android.permission.BIND_INPUT_METHOD
+    baseDir=/product/app/LatinIMEGooglePrebuilt/LatinIMEGooglePrebuilt.apk
+    dataDir=/data/user/0/com.google.android.inputmethod.latin
+    app=ProcessRecord{b686425 1302:com.google.android.inputmethod.latin/u0a143}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=1000
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: android; callingUid: 1000; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { act=android.view.InputMethod cmp=com.google.android.inputmethod.latin/com.android.inputmethod.latin.LatinIME }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<4ef60c3 android.bluetooth.adapter.action.LOCAL_NAME_CHANGED/u-1,reasonCode:BLUETOOTH_BROADCAST,duration:20000,callingUid:1002>; targetSdkVersion:33; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-27m11s638ms startingBgTimeout=--
+    lastActivity=-27m10s826ms restartTime=-27m10s826ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{64a4501 CREATE}:
+      intent={act=android.view.InputMethod cmp=com.google.android.inputmethod.latin/com.android.inputmethod.latin.LatinIME}
+      binder=android.os.BinderProxy@e6bdfa6
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{276fde7 ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{aac0933 u0 CR !FG IMPB SLTA !VIS com.google.android.inputmethod.latin/com.android.inputmethod.latin.LatinIME:@ea418a2 flags=0x40880005}
+    All Connections:
+      ConnectionRecord{aac0933 u0 CR !FG IMPB SLTA !VIS com.google.android.inputmethod.latin/com.android.inputmethod.latin.LatinIME:@ea418a2 flags=0x40880005}
+
+  * ServiceRecord{8c24f41 u0 com.android.server.telecom/.components.TelecomService}
+    intent={act=com.android.ITelecomService cmp=com.android.server.telecom/.components.TelecomService}
+    packageName=com.android.server.telecom
+    processName=system
+    baseDir=/system/priv-app/Telecom/Telecom.apk
+    dataDir=/data/user_de/0/com.android.server.telecom
+    app=ProcessRecord{3d86488 556:system/1000}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=1000
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: android; callingUid: 1000; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { act=com.android.ITelecomService cmp=com.android.server.telecom/.components.TelecomService }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<null>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-27m29s679ms startingBgTimeout=--
+    lastActivity=-27m29s678ms restartTime=-27m29s678ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{5b0ad94 CREATE}:
+      intent={act=com.android.ITelecomService cmp=com.android.server.telecom/.components.TelecomService}
+      binder=com.android.server.telecom.components.TelecomService$1@595303d
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{1665032 ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{3da9628 u0 CR IMP FGS com.android.server.telecom/.components.TelecomService:@c739c4b flags=0x4000041}
+    All Connections:
+      ConnectionRecord{3da9628 u0 CR IMP FGS com.android.server.telecom/.components.TelecomService:@c739c4b flags=0x4000041}
+
+  * ServiceRecord{3c93e81 u0 com.google.android.networkstack/com.android.server.NetworkStackService}
+    intent={act=android.net.INetworkStackConnector cmp=com.google.android.networkstack/com.android.server.NetworkStackService}
+    packageName=com.google.android.networkstack
+    processName=com.android.networkstack.process
+    permission=android.permission.MAINLINE_NETWORK_STACK
+    baseDir=/system/priv-app/NetworkStackGoogle/NetworkStackGoogle.apk
+    dataDir=/data/user_de/0/com.google.android.networkstack
+    app=ProcessRecord{d700431 841:com.android.networkstack.process/1073}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=1000
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: android; callingUid: 1000; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { act=android.net.INetworkStackConnector cmp=com.google.android.networkstack/com.android.server.NetworkStackService }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<null>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-27m27s15ms startingBgTimeout=--
+    lastActivity=-27m26s545ms restartTime=-27m26s545ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{dab9183 CREATE}:
+      intent={act=android.net.INetworkStackConnector cmp=com.google.android.networkstack/com.android.server.NetworkStackService}
+      binder=android.os.BinderProxy@6b50f00
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{fa99339 ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{2eb48d8 u0 CR IMP com.google.android.networkstack/com.android.server.NetworkStackService:@341abbb flags=0x41}
+    All Connections:
+      ConnectionRecord{2eb48d8 u0 CR IMP com.google.android.networkstack/com.android.server.NetworkStackService:@341abbb flags=0x41}
+
+  * ServiceRecord{6c9c64f u0 com.google.android.googlequicksearchbox/com.google.android.voiceinteraction.GsaVoiceInteractionService}
+    intent={act=android.service.voice.VoiceInteractionService cmp=com.google.android.googlequicksearchbox/com.google.android.voiceinteraction.GsaVoiceInteractionService}
+    packageName=com.google.android.googlequicksearchbox
+    processName=com.google.android.googlequicksearchbox:interactor
+    permission=android.permission.BIND_VOICE_INTERACTION
+    baseDir=/product/priv-app/Velvet/Velvet.apk
+    dataDir=/data/user/0/com.google.android.googlequicksearchbox
+    app=ProcessRecord{f82205c 1470:com.google.android.googlequicksearchbox:interactor/u0a132}
+    mIsAllowedBgActivityStartsByBinding=true
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=1000
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: android; callingUid: 1000; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { act=android.service.voice.VoiceInteractionService cmp=com.google.android.googlequicksearchbox/com.google.android.voiceinteraction.GsaVoiceInteractionService }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<4ef60c3 android.bluetooth.adapter.action.LOCAL_NAME_CHANGED/u-1,reasonCode:BLUETOOTH_BROADCAST,duration:20000,callingUid:1002>; targetSdkVersion:31; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-27m5s769ms startingBgTimeout=--
+    lastActivity=-27m4s578ms restartTime=-27m4s578ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{d253d7e CREATE}:
+      intent={act=android.service.voice.VoiceInteractionService cmp=com.google.android.googlequicksearchbox/com.google.android.voiceinteraction.GsaVoiceInteractionService}
+      binder=android.os.BinderProxy@f0bc2df
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{4dc1b2c ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{73ef1a9 u0 CR FGS CAPS com.google.android.googlequicksearchbox/com.google.android.voiceinteraction.GsaVoiceInteractionService:@1442130 flags=0x4101001}
+    All Connections:
+      ConnectionRecord{73ef1a9 u0 CR FGS CAPS com.google.android.googlequicksearchbox/com.google.android.voiceinteraction.GsaVoiceInteractionService:@1442130 flags=0x4101001}
+
+  * ServiceRecord{66a0e58 u0 com.android.emulator.multidisplay/.MultiDisplayService}
+    intent={cmp=com.android.emulator.multidisplay/.MultiDisplayService}
+    packageName=com.android.emulator.multidisplay
+    processName=com.android.emulator.multidisplay
+    baseDir=/system_ext/priv-app/MultiDisplayProvider/MultiDisplayProvider.apk
+    dataDir=/data/user/0/com.android.emulator.multidisplay
+    app=ProcessRecord{a88982f 1531:com.android.emulator.multidisplay/1000}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=com.android.emulator.multidisplay
+    recentCallingUid=1000
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.android.emulator.multidisplay; callingUid: 1000; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { cmp=com.android.emulator.multidisplay/.MultiDisplayService }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<null>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-26m59s436ms startingBgTimeout=--
+    lastActivity=-26m59s359ms restartTime=-26m59s359ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=false callStart=true lastStartId=1
+ startCommandResult=1
+
+  * ServiceRecord{cc17877 u0 com.google.android.bluetooth/com.android.bluetooth.gatt.GattService}
+    intent={cmp=com.google.android.bluetooth/com.android.bluetooth.gatt.GattService}
+    packageName=com.google.android.bluetooth
+    processName=com.google.android.bluetooth
+    permission=android.permission.ACCESS_BLUETOOTH_SHARE
+    baseDir=/apex/com.android.btservices/app/BluetoothGoogle@340815010/BluetoothGoogle.apk
+    dataDir=/data/user_de/0/com.google.android.bluetooth
+    app=ProcessRecord{fb229bf 887:com.google.android.bluetooth/1002}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=1000
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.bluetooth; callingUid: 1002; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { cmp=com.google.android.bluetooth/com.android.bluetooth.gatt.GattService (has extras) }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<null>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-27m16s313ms startingBgTimeout=--
+    lastActivity=-27m15s543ms restartTime=-27m16s312ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=true callStart=true lastStartId=1
+ startCommandResult=2
+    Bindings:
+    * IntentBindRecord{20729f5 CREATE}:
+      intent={act=android.bluetooth.IBluetoothGatt cmp=com.google.android.bluetooth/com.android.bluetooth.gatt.GattService}
+      binder=android.os.BinderProxy@453b38a
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{f13adfb ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{96a7f35 u0 CR IMP com.google.android.bluetooth/com.android.bluetooth.gatt.GattService:@d172719 flags=0x41}
+    All Connections:
+      ConnectionRecord{96a7f35 u0 CR IMP com.google.android.bluetooth/com.android.bluetooth.gatt.GattService:@d172719 flags=0x41}
+
+  * ServiceRecord{32c63f0 u0 com.google.android.as/com.google.android.apps.miphone.aiai.common.notification.service.AiAiNotificationAssistantService}
+    intent={act=android.service.notification.NotificationAssistantService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.common.notification.service.AiAiNotificationAssistantService}
+    packageName=com.google.android.as
+    processName=com.google.android.as
+    permission=android.permission.BIND_NOTIFICATION_ASSISTANT_SERVICE
+    baseDir=/product/priv-app/DevicePersonalizationPrebuiltPixel2021/DevicePersonalizationPrebuiltPixel2021.apk
+    dataDir=/data/user/0/com.google.android.as
+    app=ProcessRecord{1af5ae4 1390:com.google.android.as/u0a125}
+    allowlistManager=true
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=1000
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: android; callingUid: 1000; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { act=android.service.notification.NotificationAssistantService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.common.notification.service.AiAiNotificationAssistantService }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<null>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-27m0s593ms startingBgTimeout=--
+    lastActivity=-27m0s593ms restartTime=-27m0s593ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{585be18 CREATE}:
+      intent={act=android.service.notification.NotificationAssistantService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.common.notification.service.AiAiNotificationAssistantService}
+      binder=android.os.BinderProxy@86d7071
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{7417e56 ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{5286433 u0 CR FGS com.google.android.as/com.google.android.apps.miphone.aiai.common.notification.service.AiAiNotificationAssistantService:@c3cffa2 flags=0x5000001}
+    All Connections:
+      ConnectionRecord{5286433 u0 CR FGS com.google.android.as/com.google.android.apps.miphone.aiai.common.notification.service.AiAiNotificationAssistantService:@c3cffa2 flags=0x5000001}
+
+  * ServiceRecord{cba9fa5 u0 com.google.android.bluetooth/com.android.bluetooth.mcp.McpService}
+    intent={cmp=com.google.android.bluetooth/com.android.bluetooth.mcp.McpService}
+    packageName=com.google.android.bluetooth
+    processName=com.google.android.bluetooth
+    baseDir=/apex/com.android.btservices/app/BluetoothGoogle@340815010/BluetoothGoogle.apk
+    dataDir=/data/user_de/0/com.google.android.bluetooth
+    app=ProcessRecord{fb229bf 887:com.google.android.bluetooth/1002}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=com.google.android.bluetooth
+    recentCallingUid=1002
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.bluetooth; callingUid: 1002; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { cmp=com.google.android.bluetooth/com.android.bluetooth.mcp.McpService (has extras) }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<19c0458 android.bluetooth.adapter.action.STATE_CHANGED/u-1,reasonCode:BLUETOOTH_BROADCAST,duration:10000,callingUid:1000>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-27m15s461ms startingBgTimeout=--
+    lastActivity=-27m15s461ms restartTime=-27m15s461ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=true callStart=true lastStartId=1
+ startCommandResult=2
+
+  * ServiceRecord{b6e20bf u0 com.android.ons/.OpportunisticNetworkService}
+    intent={cmp=com.android.ons/.OpportunisticNetworkService}
+    packageName=com.android.ons
+    processName=com.android.phone
+    baseDir=/system/priv-app/ONS/ONS.apk
+    dataDir=/data/user/0/com.android.ons
+    app=ProcessRecord{ae63074 952:com.android.phone/1001}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=com.android.ons
+    recentCallingUid=1001
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.android.ons; callingUid: 1001; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { cmp=com.android.ons/.OpportunisticNetworkService }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<d2e1a92 android.intent.action.LOCKED_BOOT_COMPLETED/u0,reasonCode:LOCKED_BOOT_COMPLETED,duration:20000,callingUid:1000>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-26m50s924ms startingBgTimeout=--
+    lastActivity=-26m25s994ms restartTime=-26m50s923ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=false callStart=true lastStartId=3
+ startCommandResult=1
+
+  * ServiceRecord{b6cc791 u0 com.google.android.gms/.common.stats.GmsCoreStatsService}
+    intent={act=com.google.android.gms.common.stats.START cmp=com.google.android.gms/.common.stats.GmsCoreStatsService}
+    packageName=com.google.android.gms
+    processName=com.google.android.gms.persistent
+    baseDir=/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk
+    dataDir=/data/user/0/com.google.android.gms
+    app=ProcessRecord{ad44190 2537:com.google.android.gms.persistent/u0a128}
+    mAllowWhileInUsePermissionInFgsReason=BACKGROUND_ACTIVITY_PERMISSION
+    allowUiJobScheduling=false
+    recentCallingPackage=com.google.android.gms
+    recentCallingUid=10128
+    allowStartForeground=BACKGROUND_ACTIVITY_PERMISSION
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.gms; callingUid: 10128; uidState: BTOP; uidBFSL: [BFSL]; intent: Intent { act=com.google.android.gms.common.stats.START cmp=com.google.android.gms/.common.stats.GmsCoreStatsService }; code:BACKGROUND_ACTIVITY_PERMISSION; tempAllowListReason:<,reasonCode:SYSTEM_ALLOW_LISTED,duration:9223372036854775807,callingUid:-1>; targetSdkVersion:33; callerTargetSdkVersion:33; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-25m55s240ms startingBgTimeout=--
+    lastActivity=-25m55s240ms restartTime=-25m55s240ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=false callStart=true lastStartId=1
+ startCommandResult=1
+
+  * ServiceRecord{3ca6116 u0 com.google.android.gms/com.google.android.location.internal.server.HardwareArProviderService}
+    intent={act=com.android.location.service.ActivityRecognitionProvider cmp=com.google.android.gms/com.google.android.location.internal.server.HardwareArProviderService}
+    packageName=com.google.android.gms
+    processName=com.google.android.gms.persistent
+    baseDir=/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk
+    dataDir=/data/user/0/com.google.android.gms
+    app=ProcessRecord{ad44190 2537:com.google.android.gms.persistent/u0a128}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=1000
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: android; callingUid: 1000; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { act=com.android.location.service.ActivityRecognitionProvider cmp=com.google.android.gms/com.google.android.location.internal.server.HardwareArProviderService }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<68c8c67 android.intent.action.BOOT_COMPLETED/u0,reasonCode:BOOT_COMPLETED,duration:20000,callingUid:1000>; targetSdkVersion:33; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-26m17s138ms startingBgTimeout=--
+    lastActivity=-26m17s137ms restartTime=-26m17s137ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{7e52ed7 CREATE}:
+      intent={act=com.android.location.service.ActivityRecognitionProvider cmp=com.google.android.gms/com.google.android.location.internal.server.HardwareArProviderService}
+      binder=android.os.BinderProxy@224a3c4
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{117a2ad ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{f552631 u0 CR !FG !VIS com.google.android.gms/com.google.android.location.internal.server.HardwareArProviderService:@a87b2d8 flags=0x40000005}
+    All Connections:
+      ConnectionRecord{f552631 u0 CR !FG !VIS com.google.android.gms/com.google.android.location.internal.server.HardwareArProviderService:@a87b2d8 flags=0x40000005}
+
+  * ServiceRecord{7c53388 u0 com.google.android.bluetooth/com.android.bluetooth.pbap.BluetoothPbapService}
+    intent={cmp=com.google.android.bluetooth/com.android.bluetooth.pbap.BluetoothPbapService}
+    packageName=com.google.android.bluetooth
+    processName=com.google.android.bluetooth
+    permission=android.permission.BLUETOOTH_PRIVILEGED
+    baseDir=/apex/com.android.btservices/app/BluetoothGoogle@340815010/BluetoothGoogle.apk
+    dataDir=/data/user_de/0/com.google.android.bluetooth
+    app=ProcessRecord{fb229bf 887:com.google.android.bluetooth/1002}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=10167
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.bluetooth; callingUid: 1002; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { cmp=com.google.android.bluetooth/com.android.bluetooth.pbap.BluetoothPbapService (has extras) }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<19c0458 android.bluetooth.adapter.action.STATE_CHANGED/u-1,reasonCode:BLUETOOTH_BROADCAST,duration:10000,callingUid:1000>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-27m15s459ms startingBgTimeout=--
+    lastActivity=-27m15s459ms restartTime=-27m15s459ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=true callStart=true lastStartId=1
+ startCommandResult=2
+    Bindings:
+    * IntentBindRecord{96f29e2}:
+      intent={act=android.bluetooth.IBluetoothPbap cmp=com.google.android.bluetooth/com.android.bluetooth.pbap.BluetoothPbapService}
+      binder=android.os.BinderProxy@9e3e173
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{6aa3830 ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{6e6efd0 u0 com.google.android.bluetooth/com.android.bluetooth.pbap.BluetoothPbapService:@1083393 flags=0x0}
+    All Connections:
+      ConnectionRecord{6e6efd0 u0 com.google.android.bluetooth/com.android.bluetooth.pbap.BluetoothPbapService:@1083393 flags=0x0}
+
+  * ServiceRecord{81dfff6 u0 com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiContentSuggestionsService}
+    intent={act=android.service.contentsuggestions.ContentSuggestionsService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiContentSuggestionsService}
+    packageName=com.google.android.as
+    processName=com.google.android.as
+    permission=android.permission.BIND_CONTENT_SUGGESTIONS_SERVICE
+    baseDir=/product/priv-app/DevicePersonalizationPrebuiltPixel2021/DevicePersonalizationPrebuiltPixel2021.apk
+    dataDir=/data/user/0/com.google.android.as
+    app=ProcessRecord{1af5ae4 1390:com.google.android.as/u0a125}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=1000
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: android; callingUid: 1000; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { act=android.service.contentsuggestions.ContentSuggestionsService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiContentSuggestionsService }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<null>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-26m54s897ms startingBgTimeout=--
+    lastActivity=-26m54s896ms restartTime=-26m54s896ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{8b8bca9 CREATE}:
+      intent={act=android.service.contentsuggestions.ContentSuggestionsService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiContentSuggestionsService}
+      binder=android.os.BinderProxy@3da022e
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{e1121cf ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{70a7491 u0 CR FGS CAPS com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiContentSuggestionsService:@761beb8 flags=0x4001001}
+    All Connections:
+      ConnectionRecord{70a7491 u0 CR FGS CAPS com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiContentSuggestionsService:@761beb8 flags=0x4001001}
+
+  * ServiceRecord{236d1c8 u0 com.android.phone/.TelephonyDebugService}
+    intent={cmp=com.android.phone/.TelephonyDebugService}
+    packageName=com.android.phone
+    processName=com.android.phone
+    permission=android.permission.DUMP
+    baseDir=/system/priv-app/TeleService/TeleService.apk
+    dataDir=/data/user_de/0/com.android.phone
+    app=ProcessRecord{ae63074 952:com.android.phone/1001}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=com.android.phone
+    recentCallingUid=1001
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.android.phone; callingUid: 1001; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { cmp=com.android.phone/.TelephonyDebugService }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<null>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-27m14s507ms startingBgTimeout=--
+    lastActivity=-27m14s506ms restartTime=-27m14s506ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=false callStart=true lastStartId=1
+ startCommandResult=1
+
+  * ServiceRecord{4685fed u0 com.google.android.bluetooth/com.android.bluetooth.a2dp.A2dpService}
+    intent={cmp=com.google.android.bluetooth/com.android.bluetooth.a2dp.A2dpService}
+    packageName=com.google.android.bluetooth
+    processName=com.google.android.bluetooth
+    baseDir=/apex/com.android.btservices/app/BluetoothGoogle@340815010/BluetoothGoogle.apk
+    dataDir=/data/user_de/0/com.google.android.bluetooth
+    app=ProcessRecord{fb229bf 887:com.google.android.bluetooth/1002}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=1000
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.google.android.bluetooth; callingUid: 1002; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { cmp=com.google.android.bluetooth/com.android.bluetooth.a2dp.A2dpService (has extras) }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<19c0458 android.bluetooth.adapter.action.STATE_CHANGED/u-1,reasonCode:BLUETOOTH_BROADCAST,duration:10000,callingUid:1000>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+    createTime=-27m15s495ms startingBgTimeout=--
+    lastActivity=-27m15s490ms restartTime=-27m15s490ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=true callStart=true lastStartId=1
+ startCommandResult=2
+    Bindings:
+    * IntentBindRecord{ab2a75c}:
+      intent={act=android.bluetooth.IBluetoothA2dp cmp=com.google.android.bluetooth/com.android.bluetooth.a2dp.A2dpService}
+      binder=android.os.BinderProxy@a377a65
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{8133a ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{8f20729 u0 com.google.android.bluetooth/com.android.bluetooth.a2dp.A2dpService:@b281cb0 flags=0x0}
+    All Connections:
+      ConnectionRecord{8f20729 u0 com.google.android.bluetooth/com.android.bluetooth.a2dp.A2dpService:@b281cb0 flags=0x0}
+
+  * ServiceRecord{5926d80 u0 com.google.android.apps.nexuslauncher/com.android.quickstep.TouchInteractionService}
+    intent={act=android.intent.action.QUICKSTEP_SERVICE pkg=com.google.android.apps.nexuslauncher}
+    packageName=com.google.android.apps.nexuslauncher
+    processName=com.google.android.apps.nexuslauncher
+    permission=android.permission.STATUS_BAR_SERVICE
+    baseDir=/system_ext/priv-app/NexusLauncherRelease/NexusLauncherRelease.apk
+    dataDir=/data/user/0/com.google.android.apps.nexuslauncher
+    app=ProcessRecord{71f7cda 1115:com.google.android.apps.nexuslauncher/u0a169}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=com.google.android.apps.nexuslauncher
+    recentCallingUid=10169
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.android.systemui; callingUid: 10167; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { act=android.intent.action.QUICKSTEP_SERVICE pkg=com.google.android.apps.nexuslauncher }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<null>; targetSdkVersion:33; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-27m18s853ms startingBgTimeout=--
+    lastActivity=-27m17s743ms restartTime=-27m17s743ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{2280beb CREATE}:
+      intent={act=android.intent.action.QUICKSTEP_SERVICE pkg=com.google.android.apps.nexuslauncher}
+      binder=android.os.BinderProxy@170dd48
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{e2a57e1 ProcessRecord{811b3ec 776:com.android.systemui/u0a167}}
+        Per-process Connections:
+          ConnectionRecord{d854ffc u0 CR FGSA com.google.android.apps.nexuslauncher/com.android.quickstep.TouchInteractionService:@79888ef flags=0x2000001}
+    * IntentBindRecord{7d42906}:
+      intent={cmp=com.google.android.apps.nexuslauncher/com.android.quickstep.TouchInteractionService}
+      binder=android.os.BinderProxy@170dd48
+      requested=true received=true hasBound=false doRebind=false
+      * Client AppBindRecord{a797bc7 ProcessRecord{71f7cda 1115:com.google.android.apps.nexuslauncher/u0a169}}
+        Per-process Connections:
+          ConnectionRecord{66ad9fa u0 com.google.android.apps.nexuslauncher/com.android.quickstep.TouchInteractionService:@c622425 flags=0x0}
+    All Connections:
+      ConnectionRecord{d854ffc u0 CR FGSA com.google.android.apps.nexuslauncher/com.android.quickstep.TouchInteractionService:@79888ef flags=0x2000001}
+      ConnectionRecord{66ad9fa u0 com.google.android.apps.nexuslauncher/com.android.quickstep.TouchInteractionService:@c622425 flags=0x0}
+
+  * ServiceRecord{a42132c u0 com.google.android.cellbroadcastservice/com.android.cellbroadcastservice.DefaultCellBroadcastService}
+    intent={act=android.telephony.CellBroadcastService pkg=com.google.android.cellbroadcastservice}
+    packageName=com.google.android.cellbroadcastservice
+    processName=com.android.networkstack.process
+    permission=android.permission.BIND_CELL_BROADCAST_SERVICE
+    baseDir=/apex/com.android.cellbroadcast/priv-app/GoogleCellBroadcastServiceModule@340818080/GoogleCellBroadcastServiceModule.apk
+    dataDir=/data/user_de/0/com.google.android.cellbroadcastservice
+    app=ProcessRecord{d700431 841:com.android.networkstack.process/1073}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=com.android.phone
+    recentCallingUid=1001
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.android.phone; callingUid: 1001; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { act=android.telephony.CellBroadcastService pkg=com.google.android.cellbroadcastservice }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<null>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-27m16s843ms startingBgTimeout=--
+    lastActivity=-27m16s622ms restartTime=-27m16s835ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{c5a85f4 CREATE}:
+      intent={act=android.telephony.CellBroadcastService pkg=com.google.android.cellbroadcastservice}
+      binder=android.os.BinderProxy@613911d
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{5f9cf92 ProcessRecord{ae63074 952:com.android.phone/1001}}
+        Per-process Connections:
+          ConnectionRecord{2ee9adf u0 CR com.google.android.cellbroadcastservice/com.android.cellbroadcastservice.DefaultCellBroadcastService:@9ec757e flags=0x1}
+          ConnectionRecord{a5f291d u0 CR com.google.android.cellbroadcastservice/com.android.cellbroadcastservice.DefaultCellBroadcastService:@9ec757e flags=0x1}
+    All Connections:
+      ConnectionRecord{2ee9adf u0 CR com.google.android.cellbroadcastservice/com.android.cellbroadcastservice.DefaultCellBroadcastService:@9ec757e flags=0x1}
+      ConnectionRecord{a5f291d u0 CR com.google.android.cellbroadcastservice/com.android.cellbroadcastservice.DefaultCellBroadcastService:@9ec757e flags=0x1}
+
+  * ServiceRecord{dfaa0f0 u0 com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSearchUiService}
+    intent={act=android.service.search.SearchUiService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSearchUiService}
+    packageName=com.google.android.as
+    processName=com.google.android.as
+    permission=android.permission.MANAGE_SEARCH_UI
+    baseDir=/product/priv-app/DevicePersonalizationPrebuiltPixel2021/DevicePersonalizationPrebuiltPixel2021.apk
+    dataDir=/data/user/0/com.google.android.as
+    app=ProcessRecord{1af5ae4 1390:com.google.android.as/u0a125}
+    mAllowWhileInUsePermissionInFgsReason=PROC_STATE_PERSISTENT
+    allowUiJobScheduling=false
+    recentCallingPackage=android
+    recentCallingUid=1000
+    allowStartForeground=PROC_STATE_PERSISTENT
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: android; callingUid: 1000; uidState: PER ; uidBFSL: [BFSL]; intent: Intent { act=android.service.search.SearchUiService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSearchUiService }; code:PROC_STATE_PERSISTENT; tempAllowListReason:<68c8c67 android.intent.action.BOOT_COMPLETED/u0,reasonCode:BOOT_COMPLETED,duration:20000,callingUid:1000>; targetSdkVersion:34; callerTargetSdkVersion:34; startForegroundCount:0; bindFromPackage:null: isBindService:true]
+    createTime=-26m37s210ms startingBgTimeout=--
+    lastActivity=-26m37s210ms restartTime=-26m37s210ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{5880d63 CREATE}:
+      intent={act=android.service.search.SearchUiService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSearchUiService}
+      binder=android.os.BinderProxy@c940d60
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{f5d2219 ProcessRecord{3d86488 556:system/1000}}
+        Per-process Connections:
+          ConnectionRecord{f857533 u0 CR FGS CAPS com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSearchUiService:@a8fb4a2 flags=0x4001001}
+    All Connections:
+      ConnectionRecord{f857533 u0 CR FGS CAPS com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSearchUiService:@a8fb4a2 flags=0x4001001}
+
+  Connection bindings to services:
+  * ConnectionRecord{7ebaf9 u0 CR FGS !PRCP com.google.android.as/com.google.android.apps.miphone.aiai.common.notification.service.AiAiNotificationListenerService:@afdc0 flags=0x5000101}
+    binding=AppBindRecord{ab52ab1 com.google.android.as/com.google.android.apps.miphone.aiai.common.notification.service.AiAiNotificationListenerService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@afdc0 flags=0x5000101
+  * ConnectionRecord{d6e32cb u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:@45099a flags=0x1081}
+    binding=AppBindRecord{307581e com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:com.google.android.gms.unstable}
+    conn=android.os.BinderProxy@45099a flags=0x1081
+  * ConnectionRecord{ab30a7 u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentApiService:@5a2566 flags=0x1081}
+    binding=AppBindRecord{5ee2c14 com.google.android.gms/.chimera.PersistentApiService:com.google.android.gms.unstable}
+    conn=android.os.BinderProxy@5a2566 flags=0x1081
+  * ConnectionRecord{d22e24d u0 CR FGS !VIS com.google.android.apps.messaging/com.google.android.ims.binding.SystemBindingService:@9c9de4 flags=0x44000001}
+    binding=AppBindRecord{fe9d850 com.google.android.apps.messaging/com.google.android.ims.binding.SystemBindingService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@9c9de4 flags=0x44000001
+  * ConnectionRecord{287d3e6 u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:@c86241 flags=0x1081}
+    binding=AppBindRecord{79e20a5 com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:com.google.android.apps.messaging:rcs}
+    conn=android.os.BinderProxy@c86241 flags=0x1081
+  * ConnectionRecord{6ee570d u0 CR com.android.phone/com.android.internal.telephony.data.CellularDataService:@cdeda4 flags=0x1}
+    binding=AppBindRecord{4732240 com.android.phone/com.android.internal.telephony.data.CellularDataService:com.android.phone}
+    conn=android.os.BinderProxy@cdeda4 flags=0x1
+  * ConnectionRecord{6e6efd0 u0 com.google.android.bluetooth/com.android.bluetooth.pbap.BluetoothPbapService:@1083393 flags=0x0}
+    binding=AppBindRecord{6aa3830 com.google.android.bluetooth/com.android.bluetooth.pbap.BluetoothPbapService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@1083393 flags=0x0
+  * ConnectionRecord{73ef1a9 u0 CR FGS CAPS com.google.android.googlequicksearchbox/com.google.android.voiceinteraction.GsaVoiceInteractionService:@1442130 flags=0x4101001}
+    binding=AppBindRecord{4dc1b2c com.google.android.googlequicksearchbox/com.google.android.voiceinteraction.GsaVoiceInteractionService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@1442130 flags=0x4101001
+  * ConnectionRecord{2a150c3 u0 CR !FG !VIS com.google.android.gms/com.google.android.location.fused.FusedLocationService:@22a8472 flags=0x40000005}
+    binding=AppBindRecord{755b23c com.google.android.gms/com.google.android.location.fused.FusedLocationService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@22a8472 flags=0x40000005
+  * ConnectionRecord{6381a84 u0 CR IMP com.google.android.networkstack.tethering/com.android.networkstack.tethering.TetheringService:@2554897 flags=0x41}
+    binding=AppBindRecord{1adf6a1 com.google.android.networkstack.tethering/com.android.networkstack.tethering.TetheringService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@2554897 flags=0x41
+  * ConnectionRecord{2eb48d8 u0 CR IMP com.google.android.networkstack/com.android.server.NetworkStackService:@341abbb flags=0x41}
+    binding=AppBindRecord{fa99339 com.google.android.networkstack/com.android.server.NetworkStackService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@341abbb flags=0x41
+  * ConnectionRecord{7668aee u0 CR WACT com.google.android.gms/.chimera.PersistentApiService:@372f069 flags=0x81}
+    binding=AppBindRecord{7f08c8b com.google.android.gms/.chimera.PersistentApiService:com.google.android.configupdater}
+    conn=android.os.BinderProxy@372f069 flags=0x81
+  * ConnectionRecord{82d7f4 u0 CR WACT CAPS com.google.android.gms/com.google.android.location.internal.GoogleLocationManagerService:@3a7d5c7 flags=0x1081}
+    binding=AppBindRecord{a0cd585 com.google.android.gms/com.google.android.location.internal.GoogleLocationManagerService:com.google.android.gms.persistent}
+    conn=android.os.BinderProxy@3a7d5c7 flags=0x1081
+  * ConnectionRecord{821f970 u0 com.google.android.bluetooth/com.android.bluetooth.map.BluetoothMapService:@3c8dfb3 flags=0x0}
+    binding=AppBindRecord{1d403c2 com.google.android.bluetooth/com.android.bluetooth.map.BluetoothMapService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@3c8dfb3 flags=0x0
+  * ConnectionRecord{777b795 u0 CR com.google.android.as/com.google.android.apps.miphone.aiai.common.superpacks.impl.AiAiSuperpacksService:@4e5db4c flags=0x1}
+    binding=AppBindRecord{44a2995 com.google.android.as/com.google.android.apps.miphone.aiai.common.superpacks.impl.AiAiSuperpacksService:com.google.android.as}
+    conn=android.os.BinderProxy@4e5db4c flags=0x1
+  * ConnectionRecord{b427278 u0 CR FGS com.google.android.gms/.chimera.PersistentBoundBrokerService:@57af7db flags=0x4000001}
+    binding=AppBindRecord{beef212 com.google.android.gms/.chimera.PersistentBoundBrokerService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@57af7db flags=0x4000001
+  * ConnectionRecord{e09b01d u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:@5e9c0f4 flags=0x1081}
+    binding=AppBindRecord{26e00d2 com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:com.google.android.gms.unstable}
+    conn=android.os.BinderProxy@5e9c0f4 flags=0x1081
+  * ConnectionRecord{3bb081f u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:@61d4fbe flags=0x1081}
+    binding=AppBindRecord{5c4bc2b com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:com.google.android.apps.messaging}
+    conn=android.os.BinderProxy@61d4fbe flags=0x1081
+  * ConnectionRecord{5088abf u0 CR IMP com.google.android.providers.media.module/com.android.providers.media.fuse.ExternalStorageServiceImpl:@63ab8de flags=0x41}
+    binding=AppBindRecord{6be3e7d com.google.android.providers.media.module/com.android.providers.media.fuse.ExternalStorageServiceImpl:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@63ab8de flags=0x41
+  * ConnectionRecord{625db82 u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:@6d996cd flags=0x1081}
+    binding=AppBindRecord{7e8376e com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:com.google.android.googlequicksearchbox:search}
+    conn=android.os.BinderProxy@6d996cd flags=0x1081
+  * ConnectionRecord{bfe73bc u0 CR !FG !VIS com.google.android.gms/.location.geocode.GeocodeService:@6f4e3af flags=0x40000005}
+    binding=AppBindRecord{2c60129 com.google.android.gms/.location.geocode.GeocodeService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@6f4e3af flags=0x40000005
+  * ConnectionRecord{2937986 u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:@70a9a61 flags=0x1081}
+    binding=AppBindRecord{e45c7a com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:com.google.android.apps.wellbeing}
+    conn=android.os.BinderProxy@70a9a61 flags=0x1081
+  * ConnectionRecord{438f64b u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:@73aab1a flags=0x1081}
+    binding=AppBindRecord{c2dd8ff com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:com.google.android.gms.persistent}
+    conn=android.os.BinderProxy@73aab1a flags=0x1081
+  * ConnectionRecord{70a7491 u0 CR FGS CAPS com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiContentSuggestionsService:@761beb8 flags=0x4001001}
+    binding=AppBindRecord{e1121cf com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiContentSuggestionsService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@761beb8 flags=0x4001001
+  * ConnectionRecord{d854ffc u0 CR FGSA com.google.android.apps.nexuslauncher/com.android.quickstep.TouchInteractionService:@79888ef flags=0x2000001}
+    binding=AppBindRecord{e2a57e1 com.google.android.apps.nexuslauncher/com.android.quickstep.TouchInteractionService:com.android.systemui}
+    conn=android.os.BinderProxy@79888ef flags=0x2000001
+  * ConnectionRecord{a3da705 u0 CR FGS CAPS com.google.android.as/com.google.android.apps.miphone.aiai.captions.SystemCaptionsManagerService:@7b9227c flags=0x4001001}
+    binding=AppBindRecord{edda29e com.google.android.as/com.google.android.apps.miphone.aiai.captions.SystemCaptionsManagerService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@7b9227c flags=0x4001001
+  * ConnectionRecord{c3a6951 u0 CR FGS CAPS com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiPredictionService:@7b98e78 flags=0x4001001}
+    binding=AppBindRecord{799d591 com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiPredictionService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@7b98e78 flags=0x4001001
+  * ConnectionRecord{e98141 u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:@8375028 flags=0x1081}
+    binding=AppBindRecord{deef459 com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:com.google.android.gms}
+    conn=android.os.BinderProxy@8375028 flags=0x1081
+  * ConnectionRecord{cc9acb9 u0 CR FGS CAPS com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService:@9479e80 flags=0x4001001}
+    binding=AppBindRecord{586f64d com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@9479e80 flags=0x4001001
+  * ConnectionRecord{dac64a0 u0 CR !FG !VIS com.google.android.gms/com.google.android.location.internal.GoogleLocationManagerService:@97a39a3 flags=0x40000005}
+    binding=AppBindRecord{d5cae8 com.google.android.gms/com.google.android.location.internal.GoogleLocationManagerService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@97a39a3 flags=0x40000005
+  * ConnectionRecord{d0580fd u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentApiService:@9e0c954 flags=0x1081}
+    binding=AppBindRecord{fd8a4f1 com.google.android.gms/.chimera.PersistentApiService:com.google.android.contacts}
+    conn=android.os.BinderProxy@9e0c954 flags=0x1081
+  * ConnectionRecord{2ee9adf u0 CR com.google.android.cellbroadcastservice/com.android.cellbroadcastservice.DefaultCellBroadcastService:@9ec757e flags=0x1}
+    binding=AppBindRecord{5f9cf92 com.google.android.cellbroadcastservice/com.android.cellbroadcastservice.DefaultCellBroadcastService:com.android.phone}
+    conn=android.os.BinderProxy@9ec757e flags=0x1
+  * ConnectionRecord{a5f291d u0 CR com.google.android.cellbroadcastservice/com.android.cellbroadcastservice.DefaultCellBroadcastService:@9ec757e flags=0x1}
+    binding=AppBindRecord{5f9cf92 com.google.android.cellbroadcastservice/com.android.cellbroadcastservice.DefaultCellBroadcastService:com.android.phone}
+    conn=android.os.BinderProxy@9ec757e flags=0x1
+  * ConnectionRecord{7c28de1 u0 CR com.google.android.as/com.google.android.apps.miphone.aiai.common.superpacks.impl.AiAiSuperpacksService:@a102b48 flags=0x1}
+    binding=AppBindRecord{44a2995 com.google.android.as/com.google.android.apps.miphone.aiai.common.superpacks.impl.AiAiSuperpacksService:com.google.android.as}
+    conn=android.os.BinderProxy@a102b48 flags=0x1
+  * ConnectionRecord{e9edede u0 CR com.android.systemui/.keyguard.KeyguardService:@a295e19 flags=0x1}
+    binding=AppBindRecord{adfe78d com.android.systemui/.keyguard.KeyguardService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@a295e19 flags=0x1
+  * ConnectionRecord{f552631 u0 CR !FG !VIS com.google.android.gms/com.google.android.location.internal.server.HardwareArProviderService:@a87b2d8 flags=0x40000005}
+    binding=AppBindRecord{117a2ad com.google.android.gms/com.google.android.location.internal.server.HardwareArProviderService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@a87b2d8 flags=0x40000005
+  * ConnectionRecord{f857533 u0 CR FGS CAPS com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSearchUiService:@a8fb4a2 flags=0x4001001}
+    binding=AppBindRecord{f5d2219 com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSearchUiService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@a8fb4a2 flags=0x4001001
+  * ConnectionRecord{672d00e u0 CR FGSA UI CAPS com.android.systemui/.wallpapers.ImageWallpaper:@ade9609 flags=0x22001001}
+    binding=AppBindRecord{93eac62 com.android.systemui/.wallpapers.ImageWallpaper:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@ade9609 flags=0x22001001
+  * ConnectionRecord{fa934c1 u0 CR FGS !PRCP com.google.android.apps.nexuslauncher/com.android.launcher3.notification.NotificationListener:@b1fa1a8 flags=0x5000101}
+    binding=AppBindRecord{5bf2cca com.google.android.apps.nexuslauncher/com.android.launcher3.notification.NotificationListener:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@b1fa1a8 flags=0x5000101
+  * ConnectionRecord{8f20729 u0 com.google.android.bluetooth/com.android.bluetooth.a2dp.A2dpService:@b281cb0 flags=0x0}
+    binding=AppBindRecord{8133a com.google.android.bluetooth/com.android.bluetooth.a2dp.A2dpService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@b281cb0 flags=0x0
+  * ConnectionRecord{582004e u0 CR FGS CAPS com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiContentCaptureService:@b675f49 flags=0x4001001}
+    binding=AppBindRecord{9f01d93 com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiContentCaptureService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@b675f49 flags=0x4001001
+  * ConnectionRecord{f34af10 u0 CR com.google.android.googlequicksearchbox/com.google.android.apps.gsa.nga.engine.viss.NgaService:@b8467d3 flags=0x1}
+    binding=AppBindRecord{2d25f1f com.google.android.googlequicksearchbox/com.google.android.apps.gsa.nga.engine.viss.NgaService:com.google.android.googlequicksearchbox:search}
+    conn=android.os.BinderProxy@b8467d3 flags=0x1
+  * ConnectionRecord{678d380 u0 com.google.android.bluetooth/com.android.bluetooth.hfp.HeadsetService:@bc99803 flags=0x0}
+    binding=AppBindRecord{6125bdd com.google.android.bluetooth/com.android.bluetooth.hfp.HeadsetService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@bc99803 flags=0x0
+  * ConnectionRecord{69cae63 u0 CR WPRI com.google.android.googlequicksearchbox/com.google.android.apps.gsa.nowoverlayservice.DrawerOverlayService:@be85492 flags=0x21}
+    binding=AppBindRecord{beead37 com.google.android.googlequicksearchbox/com.google.android.apps.gsa.nowoverlayservice.DrawerOverlayService:com.google.android.apps.nexuslauncher}
+    conn=android.os.BinderProxy@be85492 flags=0x21
+  * ConnectionRecord{3cd03f9 u0 CR FGS com.google.android.gms/.chimera.PersistentBoundBrokerService:@bf0cac0 flags=0x4000001}
+    binding=AppBindRecord{9572c6b com.google.android.gms/.chimera.PersistentBoundBrokerService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@bf0cac0 flags=0x4000001
+  * ConnectionRecord{55d00f9 u0 CR FGSA UI CAPS com.android.systemui/.wallpapers.ImageWallpaper:@bfe9bc0 flags=0x22001001}
+    binding=AppBindRecord{93eac62 com.android.systemui/.wallpapers.ImageWallpaper:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@bfe9bc0 flags=0x22001001
+  * ConnectionRecord{5286433 u0 CR FGS com.google.android.as/com.google.android.apps.miphone.aiai.common.notification.service.AiAiNotificationAssistantService:@c3cffa2 flags=0x5000001}
+    binding=AppBindRecord{7417e56 com.google.android.as/com.google.android.apps.miphone.aiai.common.notification.service.AiAiNotificationAssistantService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@c3cffa2 flags=0x5000001
+  * ConnectionRecord{66ad9fa u0 com.google.android.apps.nexuslauncher/com.android.quickstep.TouchInteractionService:@c622425 flags=0x0}
+    binding=AppBindRecord{a797bc7 com.google.android.apps.nexuslauncher/com.android.quickstep.TouchInteractionService:com.google.android.apps.nexuslauncher}
+    activity=ActivityRecord{a8f018c u0 com.google.android.apps.nexuslauncher/.NexusLauncherActivity t24}
+    conn=android.os.BinderProxy@c622425 flags=0x0
+  * ConnectionRecord{b13fb2d u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:@c710e44 flags=0x1081}
+    binding=AppBindRecord{a5b6888 com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:com.google.android.inputmethod.latin}
+    conn=android.os.BinderProxy@c710e44 flags=0x1081
+  * ConnectionRecord{3da9628 u0 CR IMP FGS com.android.server.telecom/.components.TelecomService:@c739c4b flags=0x4000041}
+    binding=AppBindRecord{1665032 com.android.server.telecom/.components.TelecomService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@c739c4b flags=0x4000041
+  * ConnectionRecord{71b73de u0 CR IMP com.google.android.bluetooth/com.android.bluetooth.btservice.AdapterService:@d172719 flags=0x41}
+    binding=AppBindRecord{76ba364 com.google.android.bluetooth/com.android.bluetooth.btservice.AdapterService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@d172719 flags=0x41
+  * ConnectionRecord{96a7f35 u0 CR IMP com.google.android.bluetooth/com.android.bluetooth.gatt.GattService:@d172719 flags=0x41}
+    binding=AppBindRecord{f13adfb com.google.android.bluetooth/com.android.bluetooth.gatt.GattService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@d172719 flags=0x41
+  * ConnectionRecord{a1e7a59 u0 com.google.android.bluetooth/com.android.bluetooth.hid.HidDeviceService:@d1e9ea0 flags=0x0}
+    binding=AppBindRecord{dea4369 com.google.android.bluetooth/com.android.bluetooth.hid.HidDeviceService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@d1e9ea0 flags=0x0
+  * ConnectionRecord{dfc1af6 u0 com.google.android.bluetooth/com.android.bluetooth.pan.PanService:@d741b91 flags=0x0}
+    binding=AppBindRecord{ccb3c4b com.google.android.bluetooth/com.android.bluetooth.pan.PanService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@d741b91 flags=0x0
+  * ConnectionRecord{de5a4f8 u0 CR android/.hardware.location.GeofenceHardwareService:@db9645b flags=0x1}
+    binding=AppBindRecord{ce25304 android/.hardware.location.GeofenceHardwareService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@db9645b flags=0x1
+  * ConnectionRecord{4af54ed u0 CR !FG !VIS com.google.android.gms/com.google.android.location.network.NetworkLocationService:@ddeb704 flags=0x40000005}
+    binding=AppBindRecord{44804ce com.google.android.gms/com.google.android.location.network.NetworkLocationService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@ddeb704 flags=0x40000005
+  * ConnectionRecord{6b60076 u0 CR com.android.phone/com.android.internal.telephony.CellularNetworkService:@df82711 flags=0x1}
+    binding=AppBindRecord{6e215dc com.android.phone/com.android.internal.telephony.CellularNetworkService:com.android.phone}
+    conn=android.os.BinderProxy@df82711 flags=0x1
+  * ConnectionRecord{aac0933 u0 CR !FG IMPB SLTA !VIS com.google.android.inputmethod.latin/com.android.inputmethod.latin.LatinIME:@ea418a2 flags=0x40880005}
+    binding=AppBindRecord{276fde7 com.google.android.inputmethod.latin/com.android.inputmethod.latin.LatinIME:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@ea418a2 flags=0x40880005
+  * ConnectionRecord{7362c94 u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:@eb718e7 flags=0x1081}
+    binding=AppBindRecord{3f52221 com.google.android.gms/.chimera.PersistentDirectBootAwareApiService:com.google.android.contacts}
+    conn=android.os.BinderProxy@eb718e7 flags=0x1081
+  * ConnectionRecord{5cde58f u0 CR !FG !VIS com.google.android.gms/.geotimezone.GeoTimeZoneService:@ec47cee flags=0x40000005}
+    binding=AppBindRecord{34cd82a com.google.android.gms/.geotimezone.GeoTimeZoneService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@ec47cee flags=0x40000005
+  * ConnectionRecord{7cbb886 u0 CR WACT CAPS com.google.android.gms/.chimera.PersistentApiServiceNoInstantApps:@f107561 flags=0x1081}
+    binding=AppBindRecord{3bdfa38 com.google.android.gms/.chimera.PersistentApiServiceNoInstantApps:com.google.android.gms.persistent}
+    conn=android.os.BinderProxy@f107561 flags=0x1081
+  * ConnectionRecord{dcfab04 u0 CR com.google.android.apps.messaging/com.google.android.ims.service.JibeService:@f46cb17 flags=0x1}
+    binding=AppBindRecord{16bed1c com.google.android.apps.messaging/com.google.android.ims.service.JibeService:com.google.android.apps.messaging}
+    conn=android.os.BinderProxy@f46cb17 flags=0x1
+  * ConnectionRecord{7778688 u0 com.google.android.bluetooth/com.android.bluetooth.hid.HidHostService:@f66922b flags=0x0}
+    binding=AppBindRecord{a674809 com.google.android.bluetooth/com.android.bluetooth.hid.HidHostService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@f66922b flags=0x0
+  * ConnectionRecord{51c047b u0 com.google.android.bluetooth/com.android.bluetooth.hearingaid.HearingAidService:@f85540a flags=0x0}
+    binding=AppBindRecord{f3c9b3 com.google.android.bluetooth/com.android.bluetooth.hearingaid.HearingAidService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@f85540a flags=0x0
+  * ConnectionRecord{59e23f6 u0 CR FGS CAPS com.google.android.ext.services/android.ext.services.autofill.InlineSuggestionRenderServiceImpl:@fa4a891 flags=0x4001001}
+    binding=AppBindRecord{39bdce6 com.google.android.ext.services/android.ext.services.autofill.InlineSuggestionRenderServiceImpl:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@fa4a891 flags=0x4001001
+  * ConnectionRecord{a2f9c3 u0 CR com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiAugmentedAutofillService:@ff53172 flags=0x1}
+    binding=AppBindRecord{85e6720 com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiAugmentedAutofillService:system}
+    conn=android.app.LoadedApk$ServiceDispatcher$InnerConnection@ff53172 flags=0x1

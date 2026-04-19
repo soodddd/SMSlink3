@@ -1,12 +1,19 @@
 package com.smslink.core.model
 
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
 /**
  * Device entity.
  */
-@Entity(tableName = "devices")
+@Entity(
+    tableName = "devices",
+    indices = [
+        Index(value = ["isPaired"]),
+        Index(value = ["lastSeen"])
+    ]
+)
 data class Device(
     @PrimaryKey val id: String,
     val name: String,

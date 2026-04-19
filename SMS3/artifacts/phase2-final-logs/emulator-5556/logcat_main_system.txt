@@ -1,0 +1,267 @@
+﻿--------- beginning of main
+04-18 02:57:16.771  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:57:17.344  7502  7525 D TrafficStats: tagSocket(118) with statsTag=0xffffffff, statsUid=-1
+04-18 02:57:17.775  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:57:18.188  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:57:19.274  7502  7523 W DeviceDiscovery: Failed to fetch relay peers: failed to connect to /10.0.2.2 (port 1816) from /10.0.2.15 (port 59100) after 3000ms
+04-18 02:57:19.316  2937  3160 W A       : v2 eligibility check failed
+04-18 02:57:19.316  2937  3160 W A       : com.google.android.libraries.search.q.a.b: com.google.frameworks.client.data.android.ab: Http networking stack error
+04-18 02:57:19.316  2937  3160 W A       : 	at com.google.android.libraries.search.q.a.j.apply(PG:3)
+04-18 02:57:19.316  2937  3160 W A       : 	at com.google.apps.tiktok.tracing.eo.apply(PG:2)
+04-18 02:57:19.316  2937  3160 W A       : 	at com.google.common.util.concurrent.a.e(PG:2)
+04-18 02:57:19.316  2937  3160 W A       : 	at com.google.common.util.concurrent.c.run(PG:12)
+04-18 02:57:19.316  2937  3160 W A       : 	at com.google.android.libraries.i.ae.run(PG:1)
+04-18 02:57:19.316  2937  3160 W A       : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+04-18 02:57:19.316  2937  3160 W A       : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+04-18 02:57:19.316  2937  3160 W A       : 	at com.google.android.libraries.i.k.run(PG:2)
+04-18 02:57:19.316  2937  3160 W A       : 	at com.google.android.libraries.i.p.run(PG:4)
+04-18 02:57:19.316  2937  3160 W A       : 	at java.lang.Thread.run(Thread.java:1012)
+04-18 02:57:19.316  2937  3160 W A       : Caused by: com.google.frameworks.client.data.android.ab: Http networking stack error
+04-18 02:57:19.316  2937  3160 W A       : 	at com.google.frameworks.client.data.android.y.run(PG:7)
+04-18 02:57:19.316  2937  3160 W A       : 	... 6 more
+04-18 02:57:19.316  2937  3160 W A       : Caused by: iq: Exception in CronetUrlRequest: net::ERR_CONNECTION_TIMED_OUT, ErrorCode=6, InternalErrorCode=-118, Retryable=true
+04-18 02:57:19.316  2937  3160 W A       : 	at org.chromium.net.impl.CronetUrlRequest.onError(:com.google.android.gms.dynamite_cronetdynamite@231818047@23.18.18 (190800-0):5)
+04-18 02:57:19.323  2937  3160 W A       : unable to retrieve gws prefs while getting consent state
+04-18 02:57:19.323  2937  3160 W A       : com.google.android.libraries.search.q.a.b: com.google.frameworks.client.data.android.ab: Http networking stack error
+04-18 02:57:19.323  2937  3160 W A       : 	at com.google.android.libraries.search.q.a.j.apply(PG:3)
+04-18 02:57:19.323  2937  3160 W A       : 	at com.google.apps.tiktok.tracing.eo.apply(PG:2)
+04-18 02:57:19.323  2937  3160 W A       : 	at com.google.common.util.concurrent.a.e(PG:2)
+04-18 02:57:19.323  2937  3160 W A       : 	at com.google.common.util.concurrent.c.run(PG:12)
+04-18 02:57:19.323  2937  3160 W A       : 	at com.google.android.libraries.i.ae.run(PG:1)
+04-18 02:57:19.323  2937  3160 W A       : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+04-18 02:57:19.323  2937  3160 W A       : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+04-18 02:57:19.323  2937  3160 W A       : 	at com.google.android.libraries.i.k.run(PG:2)
+04-18 02:57:19.323  2937  3160 W A       : 	at com.google.android.libraries.i.p.run(PG:4)
+04-18 02:57:19.323  2937  3160 W A       : 	at java.lang.Thread.run(Thread.java:1012)
+04-18 02:57:19.323  2937  3160 W A       : Caused by: com.google.frameworks.client.data.android.ab: Http networking stack error
+04-18 02:57:19.323  2937  3160 W A       : 	at com.google.frameworks.client.data.android.y.run(PG:7)
+04-18 02:57:19.323  2937  3160 W A       : 	... 6 more
+04-18 02:57:19.323  2937  3160 W A       : Caused by: iq: Exception in CronetUrlRequest: net::ERR_CONNECTION_TIMED_OUT, ErrorCode=6, InternalErrorCode=-118, Retryable=true
+04-18 02:57:19.323  2937  3160 W A       : 	at org.chromium.net.impl.CronetUrlRequest.onError(:com.google.android.gms.dynamite_cronetdynamite@231818047@23.18.18 (190800-0):5)
+04-18 02:57:19.366  1046  1046 D SearchTargetUtil:  query= size=15
+04-18 02:57:19.367  1046  2784 I IPCThreadState: oneway function results for code 2 on binder at 0x76e1dbdc1ad0 will be dropped but finished with status UNKNOWN_TRANSACTION
+04-18 02:57:19.371  1046  1046 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=north korean destroyer choe hyon,group_id=web473718,response_id=3431eb00-e4ce-4def-b442-bd4c453b695a,support_query_builder=false,} searchAction=north korean destroyer choe hyon searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 54fd392f-1669-423f-b756-1832f1b74bae
+04-18 02:57:19.371  1046  1046 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=hooters,group_id=web473718,response_id=3431eb00-e4ce-4def-b442-bd4c453b695a,support_query_builder=false,} searchAction=hooters searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 6a0ddac0-9def-469b-8073-306fea0d21f2
+04-18 02:57:19.371  1046  1046 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=green bay packers mock draft,group_id=web473718,response_id=3431eb00-e4ce-4def-b442-bd4c453b695a,support_query_builder=false,} searchAction=green bay packers mock draft searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 22e24694-c8e5-4d1c-9754-5db2afda7a5f
+04-18 02:57:19.372  1046  1046 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=google messages customization update,group_id=web473718,response_id=3431eb00-e4ce-4def-b442-bd4c453b695a,support_query_builder=false,} searchAction=google messages customization update searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 4574b40a-6712-4ad2-ae18-4b4a3f05bed5
+04-18 02:57:19.372  1046  1046 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=the boys season 5 episode 3,group_id=web473718,response_id=3431eb00-e4ce-4def-b442-bd4c453b695a,support_query_builder=false,} searchAction=the boys season 5 episode 3 searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 34c1c42a-96c7-49aa-9cda-47b510daa497
+04-18 02:57:19.372  1046  1046 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=fda recalled cough drops,group_id=web473718,response_id=3431eb00-e4ce-4def-b442-bd4c453b695a,support_query_builder=false,} searchAction=fda recalled cough drops searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 16c8b141-ac05-451d-a830-aeffd0ce82d7
+04-18 02:57:19.372  1046  1046 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=animal crossing new horizons patch notes,group_id=web473718,response_id=3431eb00-e4ce-4def-b442-bd4c453b695a,support_query_builder=false,} searchAction=animal crossing new horizons patch notes searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 6a16bb2e-c878-4713-88ec-3147519860df
+04-18 02:57:19.373  1046  1046 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=daredevil born again vanessa fisk,group_id=web473718,response_id=3431eb00-e4ce-4def-b442-bd4c453b695a,support_query_builder=false,} searchAction=daredevil born again vanessa fisk searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: efbf5ee4-5e09-4050-8520-f9412a2a8536
+04-18 02:57:19.375  1046  1046 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=denny hamlin comments busch struggles,group_id=web473718,response_id=3431eb00-e4ce-4def-b442-bd4c453b695a,support_query_builder=false,} searchAction=denny hamlin comments busch struggles searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 900df968-d22f-4c02-8751-b9245a3a2371
+04-18 02:57:19.377  1046  1046 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=cheboygan michigan flooding,group_id=web473718,response_id=3431eb00-e4ce-4def-b442-bd4c453b695a,support_query_builder=false,} searchAction=cheboygan michigan flooding searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: ef38502b-cadd-4364-8224-8e380e0d1dc2
+04-18 02:57:19.378  1046  1046 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=dow jones stock markets,group_id=web473718,response_id=3431eb00-e4ce-4def-b442-bd4c453b695a,support_query_builder=false,} searchAction=dow jones stock markets searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 2343e670-fd42-4a85-a2ae-6959dbe05abb
+04-18 02:57:19.379  1046  1046 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=taurus rpc 9mm,group_id=web473718,response_id=3431eb00-e4ce-4def-b442-bd4c453b695a,support_query_builder=false,} searchAction=taurus rpc 9mm searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 8d6c9887-eecc-4214-a12b-ce9d4fe3a761
+04-18 02:57:19.379  1046  1046 D SearchTargetUtil: layoutType=extra_tall_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{bitmap_url=data:image/png;base64,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,suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=true,is_personal=false,suggest_raw_text=overwatch switch,group_id=web473718,response_id=3431eb00-e4ce-4def-b442-bd4c453b695a,support_query_builder=false,} searchAction=overwatch switch searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: b3688a13-8d72-4fa3-a2fa-dcb652e720b0
+04-18 02:57:19.380  1046  1046 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=hannah stuelke wnba draft,group_id=web473718,response_id=3431eb00-e4ce-4def-b442-bd4c453b695a,support_query_builder=false,} searchAction=hannah stuelke wnba draft searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: fb1b10e4-184e-4379-b476-20074431766f
+04-18 02:57:19.380  1046  1046 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=lausd strike update,group_id=web473718,response_id=3431eb00-e4ce-4def-b442-bd4c453b695a,support_query_builder=false,} searchAction=lausd strike update searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 28c9cdcd-f448-452b-9460-f2be44e7fb90
+04-18 02:57:19.787  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:57:20.795  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:57:21.282  7502  7523 D TrafficStats: tagSocket(99) with statsTag=0xffffffff, statsUid=-1
+04-18 02:57:23.806  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:57:24.292  7502  7523 W DeviceDiscovery: Failed to fetch relay peers: failed to connect to /10.0.2.2 (port 1816) from /10.0.2.15 (port 59118) after 3000ms
+04-18 02:57:24.822  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:57:25.819  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:57:26.304  7502  7524 D TrafficStats: tagSocket(99) with statsTag=0xffffffff, statsUid=-1
+04-18 02:57:26.875  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:57:28.249  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:57:28.861  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:57:29.311  7502  7524 W DeviceDiscovery: Failed to fetch relay peers: failed to connect to /10.0.2.2 (port 1816) from /10.0.2.15 (port 33520) after 3000ms
+04-18 02:57:31.191  7502  7524 D DeviceDiscovery: Removed 3 stale devices
+04-18 02:57:31.322  7502  7524 D TrafficStats: tagSocket(99) with statsTag=0xffffffff, statsUid=-1
+04-18 02:57:31.369  7502  7527 D EGL_emulation: app_time_stats: avg=17020.60ms min=17020.60ms max=17020.60ms count=1
+04-18 02:57:31.873  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:57:33.881  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:57:34.331  7502  7524 W DeviceDiscovery: Failed to fetch relay peers: failed to connect to /10.0.2.2 (port 1816) from /10.0.2.15 (port 33532) after 3000ms
+04-18 02:57:36.344  7502  7523 D TrafficStats: tagSocket(99) with statsTag=0xffffffff, statsUid=-1
+04-18 02:57:36.896  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:57:38.184  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:57:38.903  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:57:39.351  7502  7523 W DeviceDiscovery: Failed to fetch relay peers: failed to connect to /10.0.2.2 (port 1816) from /10.0.2.15 (port 53994) after 3000ms
+04-18 02:57:41.365  7502  7523 D TrafficStats: tagSocket(99) with statsTag=0xffffffff, statsUid=-1
+04-18 02:57:41.919  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:57:43.931  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:57:44.387  7502  7523 W DeviceDiscovery: Failed to fetch relay peers: failed to connect to /10.0.2.2 (port 1816) from /10.0.2.15 (port 54000) after 3000ms
+04-18 02:57:46.412  7502  7524 D TrafficStats: tagSocket(99) with statsTag=0xffffffff, statsUid=-1
+04-18 02:57:46.968  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:57:48.182  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:57:49.419  7502  7524 W DeviceDiscovery: Failed to fetch relay peers: failed to connect to /10.0.2.2 (port 1816) from /10.0.2.15 (port 48118) after 2999ms
+04-18 02:57:49.979  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:57:51.427  7502  7524 D TrafficStats: tagSocket(99) with statsTag=0xffffffff, statsUid=-1
+04-18 02:57:51.989  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:57:53.993  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:57:54.433  7502  7524 W DeviceDiscovery: Failed to fetch relay peers: failed to connect to /10.0.2.2 (port 1816) from /10.0.2.15 (port 48120) after 3000ms
+04-18 02:57:56.442  7502  7523 D TrafficStats: tagSocket(99) with statsTag=0xffffffff, statsUid=-1
+04-18 02:57:57.006  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:57:58.013  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:57:58.190  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:57:58.208  2768  2991 D EGL_emulation: app_time_stats: avg=55722.62ms min=55722.62ms max=55722.62ms count=1
+04-18 02:57:59.025  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:57:59.398  7502  7522 D TrafficStats: tagSocket(108) with statsTag=0xffffffff, statsUid=-1
+04-18 02:57:59.412  7502  7522 I ConnectionManager: Accepted TCP connection from tcp-127.0.0.1:34137
+04-18 02:57:59.449  7502  7523 W DeviceDiscovery: Failed to fetch relay peers: failed to connect to /10.0.2.2 (port 1816) from /10.0.2.15 (port 42180) after 3000ms
+04-18 02:58:00.051  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:00.087  2768  2991 D EGL_emulation: app_time_stats: avg=1874.09ms min=1874.09ms max=1874.09ms count=1
+04-18 02:58:00.094  2228  2470 I AiAiEcho: Predicting[0]: 
+04-18 02:58:00.096  2228  2470 I AiAiEcho: EchoTargets: 
+04-18 02:58:00.096  2228  2470 I AiAiEcho: Filtered by AiAi flag check: 
+04-18 02:58:00.097  2228  2470 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata: 
+04-18 02:58:00.102  2228  2470 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0 (types=[])
+04-18 02:58:00.112  2768  2768 W PageIndicator: Total number of pages invalid: 0. Assuming 1 page.
+04-18 02:58:00.306  7502  7638 D AcceptedTcpConnection: Received 83 bytes from inbound peer: tcp-127.0.0.1:34137
+04-18 02:58:00.309  7502  7523 D ConnectionManager: Received 83 bytes from device: tcp-127.0.0.1:34137
+04-18 02:58:00.399  7502  7637 I FileTransfer: File request received: phase2-sample-transfer.txt, waiting for user confirmation
+04-18 02:58:01.041  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:01.312  7502  7638 D AcceptedTcpConnection: Received 83 bytes from inbound peer: tcp-127.0.0.1:34137
+04-18 02:58:01.321  7502  7637 D ConnectionManager: Received 83 bytes from device: tcp-127.0.0.1:34137
+04-18 02:58:01.324  7502  7638 D AcceptedTcpConnection: Received 86 bytes from inbound peer: tcp-127.0.0.1:34137
+04-18 02:58:01.325  7502  7637 D ConnectionManager: Received 86 bytes from device: tcp-127.0.0.1:34137
+04-18 02:58:01.346  7502  7643 I FileTransfer: Receiving file: phase2-sample-transfer.txt
+04-18 02:58:01.351  7502  7638 D AcceptedTcpConnection: Received 37 bytes from inbound peer: tcp-127.0.0.1:34137
+04-18 02:58:01.352  7502  7639 D ConnectionManager: Received 37 bytes from device: tcp-127.0.0.1:34137
+04-18 02:58:01.384  7502  7523 I FileTransfer: File received successfully: phase2-sample-transfer.txt
+04-18 02:58:01.457  7502  7523 D TrafficStats: tagSocket(99) with statsTag=0xffffffff, statsUid=-1
+04-18 02:58:02.043  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:04.047  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:04.463  7502  7523 W DeviceDiscovery: Failed to fetch relay peers: failed to connect to /10.0.2.2 (port 1816) from /10.0.2.15 (port 42182) after 3000ms
+04-18 02:58:06.474  7502  7524 D TrafficStats: tagSocket(99) with statsTag=0xffffffff, statsUid=-1
+04-18 02:58:07.059  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:08.179  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:09.072  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:09.483  7502  7524 W DeviceDiscovery: Failed to fetch relay peers: failed to connect to /10.0.2.2 (port 1816) from /10.0.2.15 (port 42680) after 3000ms
+04-18 02:58:11.488  7502  7523 D TrafficStats: tagSocket(99) with statsTag=0xffffffff, statsUid=-1
+04-18 02:58:12.084  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:14.095  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:14.495  7502  7523 W DeviceDiscovery: Failed to fetch relay peers: failed to connect to /10.0.2.2 (port 1816) from /10.0.2.15 (port 42694) after 2999ms
+04-18 02:58:16.357  5935  5965 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:265 ack_pause: Client already in paused state
+04-18 02:58:16.421  5935  5965 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:596 OnCommandComplete: Received command complete with op_code LE_SET_RANDOM_ADDRESS
+04-18 02:58:16.422  5935  5965 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:616 OnCommandComplete: update random address : xx:xx:xx:xx:eb:ac
+04-18 02:58:16.423  5935  5965 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:294 resume_registered_clients: Resuming registered clients
+04-18 02:58:16.505  7502  7523 D TrafficStats: tagSocket(99) with statsTag=0xffffffff, statsUid=-1
+04-18 02:58:17.109  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:18.188  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:19.116  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:19.512  7502  7523 W DeviceDiscovery: Failed to fetch relay peers: failed to connect to /10.0.2.2 (port 1816) from /10.0.2.15 (port 46182) after 3000ms
+04-18 02:58:21.520  7502  7523 D TrafficStats: tagSocket(99) with statsTag=0xffffffff, statsUid=-1
+04-18 02:58:22.129  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:24.137  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:24.528  7502  7523 W DeviceDiscovery: Failed to fetch relay peers: failed to connect to /10.0.2.2 (port 1816) from /10.0.2.15 (port 46192) after 3000ms
+04-18 02:58:26.539  7502  7523 D TrafficStats: tagSocket(99) with statsTag=0xffffffff, statsUid=-1
+04-18 02:58:27.162  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:28.183  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:29.178  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:29.546  7502  7523 W DeviceDiscovery: Failed to fetch relay peers: failed to connect to /10.0.2.2 (port 1816) from /10.0.2.15 (port 50578) after 3000ms
+04-18 02:58:30.187  7502  7638 D AcceptedTcpConnection: Received 9 bytes from inbound peer: tcp-127.0.0.1:34137
+04-18 02:58:30.190  7502  7523 D ConnectionManager: Received 9 bytes from device: tcp-127.0.0.1:34137
+04-18 02:58:31.187  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:31.557  7502  7524 D TrafficStats: tagSocket(99) with statsTag=0xffffffff, statsUid=-1
+04-18 02:58:32.186  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:34.201  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:34.563  7502  7524 W DeviceDiscovery: Failed to fetch relay peers: failed to connect to /10.0.2.2 (port 1816) from /10.0.2.15 (port 50590) after 3000ms
+04-18 02:58:36.212  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:36.570  7502  7642 D TrafficStats: tagSocket(99) with statsTag=0xffffffff, statsUid=-1
+04-18 02:58:37.219  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:38.216  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:38.224  2768  2991 D EGL_emulation: app_time_stats: avg=38135.54ms min=38135.54ms max=38135.54ms count=1
+04-18 02:58:39.221  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:39.575  7502  7642 W DeviceDiscovery: Failed to fetch relay peers: failed to connect to /10.0.2.2 (port 1816) from /10.0.2.15 (port 56454) after 3000ms
+04-18 02:58:41.231  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:41.665  7502  7642 D TrafficStats: tagSocket(99) with statsTag=0xffffffff, statsUid=-1
+04-18 02:58:42.344  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:44.323  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:44.690  7502  7642 W DeviceDiscovery: Failed to fetch relay peers: failed to connect to /10.0.2.2 (port 1816) from /10.0.2.15 (port 56460) after 2995ms
+04-18 02:58:46.350  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:46.703  7502  7642 D TrafficStats: tagSocket(99) with statsTag=0xffffffff, statsUid=-1
+04-18 02:58:47.349  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:47.748   563   704 E WifiScoringParams: Invalid frequency(-1), using 5G as default rssi array
+04-18 02:58:48.186  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:48.363  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:49.359  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:49.711  7502  7642 W DeviceDiscovery: Failed to fetch relay peers: failed to connect to /10.0.2.2 (port 1816) from /10.0.2.15 (port 35080) after 2999ms
+04-18 02:58:51.364  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:51.531   563  2160 D WifiNl80211Manager: Scan result ready event
+04-18 02:58:51.531   563  2160 D WifiNative: Scan result ready event
+04-18 02:58:51.719  7502  7642 D TrafficStats: tagSocket(99) with statsTag=0xffffffff, statsUid=-1
+04-18 02:58:52.369  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:54.378  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:54.725  7502  7642 W DeviceDiscovery: Failed to fetch relay peers: failed to connect to /10.0.2.2 (port 1816) from /10.0.2.15 (port 35096) after 3000ms
+04-18 02:58:56.520  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:56.754  7502  7642 D TrafficStats: tagSocket(99) with statsTag=0xffffffff, statsUid=-1
+04-18 02:58:57.442  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:58.183  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:59.468  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:58:59.767  7502  7642 W DeviceDiscovery: Failed to fetch relay peers: failed to connect to /10.0.2.2 (port 1816) from /10.0.2.15 (port 32886) after 3000ms
+04-18 02:59:00.085  2228  2470 I AiAiEcho: Predicting[0]: 
+04-18 02:59:00.086  2768  2991 D EGL_emulation: app_time_stats: avg=21861.29ms min=21861.29ms max=21861.29ms count=1
+04-18 02:59:00.087  2228  2470 I AiAiEcho: EchoTargets: 
+04-18 02:59:00.087  2228  2470 I AiAiEcho: Filtered by AiAi flag check: 
+04-18 02:59:00.091  2228  2470 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata: 
+04-18 02:59:00.097  2228  2470 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0 (types=[])
+04-18 02:59:00.114  2768  2768 W PageIndicator: Total number of pages invalid: 0. Assuming 1 page.
+04-18 02:59:00.218  7502  7638 I AcceptedTcpConnection: Inbound TCP peer closed connection: tcp-127.0.0.1:34137
+04-18 02:59:01.217   446   446 W adbd    : timeout expired while flushing socket, closing
+04-18 02:59:01.259  7502  7522 D TrafficStats: tagSocket(99) with statsTag=0xffffffff, statsUid=-1
+04-18 02:59:01.263  7502  7522 I ConnectionManager: Accepted TCP connection from tcp-127.0.0.1:50889
+04-18 02:59:01.468  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:01.774  7502  7524 D TrafficStats: tagSocket(143) with statsTag=0xffffffff, statsUid=-1
+04-18 02:59:02.473  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:04.484  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:04.780  7502  7524 W DeviceDiscovery: Failed to fetch relay peers: failed to connect to /10.0.2.2 (port 1816) from /10.0.2.15 (port 32890) after 3000ms
+04-18 02:59:06.491  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:06.791  7502  7524 D TrafficStats: tagSocket(143) with statsTag=0xffffffff, statsUid=-1
+04-18 02:59:07.501  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:08.185  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:09.510  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:09.796  7502  7524 W DeviceDiscovery: Failed to fetch relay peers: failed to connect to /10.0.2.2 (port 1816) from /10.0.2.15 (port 55096) after 3000ms
+04-18 02:59:11.521  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:11.805  7502  7524 D TrafficStats: tagSocket(143) with statsTag=0xffffffff, statsUid=-1
+04-18 02:59:12.522  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:14.542  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:14.813  7502  7524 W DeviceDiscovery: Failed to fetch relay peers: failed to connect to /10.0.2.2 (port 1816) from /10.0.2.15 (port 55102) after 3000ms
+04-18 02:59:16.549  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:16.822  7502  7524 D TrafficStats: tagSocket(143) with statsTag=0xffffffff, statsUid=-1
+04-18 02:59:17.550  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:18.190  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:18.214  2768  2991 D EGL_emulation: app_time_stats: avg=18126.91ms min=18126.91ms max=18126.91ms count=1
+04-18 02:59:19.584  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:19.827  7502  7524 W DeviceDiscovery: Failed to fetch relay peers: failed to connect to /10.0.2.2 (port 1816) from /10.0.2.15 (port 44474) after 3000ms
+04-18 02:59:21.594  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:21.836  7502  7524 D TrafficStats: tagSocket(143) with statsTag=0xffffffff, statsUid=-1
+04-18 02:59:22.597  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:24.612  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:24.845  7502  7524 W DeviceDiscovery: Failed to fetch relay peers: failed to connect to /10.0.2.2 (port 1816) from /10.0.2.15 (port 44484) after 3000ms
+04-18 02:59:26.615  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:26.855  7502  7638 D TrafficStats: tagSocket(143) with statsTag=0xffffffff, statsUid=-1
+04-18 02:59:27.627  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:28.188  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:28.314  7502  7525 W DeviceDiscovery: Failed to post relay identity: Failed to connect to /10.0.2.2:1816
+04-18 02:59:29.636  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:29.862  7502  7638 W DeviceDiscovery: Failed to fetch relay peers: failed to connect to /10.0.2.2 (port 1816) from /10.0.2.15 (port 39946) after 3000ms
+04-18 02:59:31.393  7502  7638 D TrafficStats: tagSocket(118) with statsTag=0xffffffff, statsUid=-1
+04-18 02:59:31.688  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:31.913  7502  7525 D TrafficStats: tagSocket(143) with statsTag=0xffffffff, statsUid=-1
+04-18 02:59:31.943  7502  7642 D AcceptedTcpConnection: Received 9 bytes from inbound peer: tcp-127.0.0.1:50889
+04-18 02:59:31.964  7502  7524 D ConnectionManager: Received 9 bytes from device: tcp-127.0.0.1:50889
+04-18 02:59:32.693  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:34.922  7502  7525 W DeviceDiscovery: Failed to fetch relay peers: failed to connect to /10.0.2.2 (port 1816) from /10.0.2.15 (port 39952) after 3000ms
+04-18 02:59:35.685  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:36.687  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:36.929  7502  7525 D TrafficStats: tagSocket(143) with statsTag=0xffffffff, statsUid=-1
+04-18 02:59:37.692  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:38.181  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:39.701  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:39.934  7502  7525 W DeviceDiscovery: Failed to fetch relay peers: failed to connect to /10.0.2.2 (port 1816) from /10.0.2.15 (port 45738) after 2999ms
+04-18 02:59:41.713  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:41.945  7502  7648 D TrafficStats: tagSocket(143) with statsTag=0xffffffff, statsUid=-1
+04-18 02:59:42.718  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:44.723  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:44.951  7502  7648 W DeviceDiscovery: Failed to fetch relay peers: failed to connect to /10.0.2.2 (port 1816) from /10.0.2.15 (port 45742) after 3000ms
+04-18 02:59:46.734  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:46.963  7502  7648 D TrafficStats: tagSocket(143) with statsTag=0xffffffff, statsUid=-1
+04-18 02:59:47.747  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:48.187  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:49.755  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:49.972  7502  7648 W DeviceDiscovery: Failed to fetch relay peers: failed to connect to /10.0.2.2 (port 1816) from /10.0.2.15 (port 38916) after 3000ms
+04-18 02:59:51.766  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:59:51.983  7502  7525 D TrafficStats: tagSocket(143) with statsTag=0xffffffff, statsUid=-1
+04-18 02:59:52.807  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled

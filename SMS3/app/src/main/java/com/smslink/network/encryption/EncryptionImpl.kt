@@ -62,8 +62,14 @@ class EncryptionImpl @Inject constructor(
     private val keyStore: KeyStore by lazy {
         KeyStore.getInstance(LOCAL_KEYSTORE_TYPE).apply {
             if (localKeyStoreFile.exists()) {
-                FileInputStream(localKeyStoreFile).use { input ->
-                    load(input, LOCAL_KEYSTORE_PASSWORD)
+                try {
+                    FileInputStream(localKeyStoreFile).use { input ->
+                        load(input, LOCAL_KEYSTORE_PASSWORD)
+                    }
+                } catch (e: Exception) {
+                    logger.w(TAG, "Corrupted keystore file detected, recreating: ${e.message}")
+                    localKeyStoreFile.delete()
+                    load(null, LOCAL_KEYSTORE_PASSWORD)
                 }
             } else {
                 load(null, LOCAL_KEYSTORE_PASSWORD)

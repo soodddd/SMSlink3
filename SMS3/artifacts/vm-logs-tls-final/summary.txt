@@ -1,0 +1,14 @@
+sender_connected=True
+sender_sent=True
+sender_progress_complete=True
+receiver_tls_listener=True
+receiver_accepted=True
+receiver_file_request=True
+receiver_receiving=True
+receiver_received=True
+no_sender_fatal=True
+no_receiver_fatal=True
+no_ssl_handshake=True
+no_receive_error_tail=True
+proxy_bytes={'c2r': 642, 'r2c': 1180}
+proxy_errors=[]

@@ -1,0 +1,443 @@
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:checkKotlinGradlePluginConfigurationErrors
+> Task :app:checkDebugAarMetadata UP-TO-DATE
+> Task :app:generateDebugResValues UP-TO-DATE
+> Task :app:mapDebugSourceSetPaths UP-TO-DATE
+> Task :app:generateDebugResources UP-TO-DATE
+> Task :app:mergeDebugResources UP-TO-DATE
+> Task :app:packageDebugResources UP-TO-DATE
+> Task :app:parseDebugLocalResources UP-TO-DATE
+> Task :app:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDebug UP-TO-DATE
+> Task :app:processDebugMainManifest UP-TO-DATE
+> Task :app:processDebugManifest UP-TO-DATE
+> Task :app:processDebugManifestForPackage UP-TO-DATE
+> Task :app:processDebugResources UP-TO-DATE
+> Task :app:kspDebugKotlin UP-TO-DATE
+> Task :app:compileDebugKotlin UP-TO-DATE
+> Task :app:javaPreCompileDebug UP-TO-DATE
+> Task :app:compileDebugJavaWithJavac UP-TO-DATE
+> Task :app:hiltAggregateDepsDebug UP-TO-DATE
+> Task :app:hiltJavaCompileDebug UP-TO-DATE
+> Task :app:transformDebugClassesWithAsm UP-TO-DATE
+> Task :app:preDebugUnitTestBuild UP-TO-DATE
+> Task :app:processDebugJavaRes UP-TO-DATE
+> Task :app:javaPreCompileDebugUnitTest
+> Task :app:bundleDebugClassesToRuntimeJar
+> Task :app:bundleDebugClassesToCompileJar
+> Task :app:kspDebugUnitTestKotlin
+
+> Task :app:compileDebugUnitTestKotlin FAILED
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallManagerImplTest.kt:14:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallManagerImplTest.kt:15:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallManagerImplTest.kt:43:13 No value passed for parameter 'messageTransport'
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallManagerImplTest.kt:43:13 No value passed for parameter 'deviceManager'
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallManagerImplTest.kt:80:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallManagerImplTest.kt:94:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallManagerImplTest.kt:155:9 Unresolved reference: assertNotNull
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallManagerImplTest.kt:167:9 Unresolved reference: assertNotNull
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallManagerImplTest.kt:188:9 Unresolved reference: assertNotNull
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:15:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:66:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:123:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:130:37 Type mismatch: inferred type is String but CallLog was expected
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:133:38 Type mismatch: inferred type is String but CallLog was expected
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:136:38 Type mismatch: inferred type is String but CallLog was expected
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:158:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:182:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:199:30 Unresolved reference: getByType
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:199:74 Type mismatch: inferred type is Flow<List<CallLog>> but Unit was expected
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:202:37 Unresolved reference: getIncomingCalls
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:205:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:206:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:206:33 Unresolved reference: it
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:223:30 Unresolved reference: getByType
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:223:74 Type mismatch: inferred type is Flow<List<CallLog>> but Unit was expected
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:226:37 Unresolved reference: getOutgoingCalls
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:229:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:230:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:230:33 Unresolved reference: it
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:241:38 Unresolved reference: MISSED
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:247:30 Unresolved reference: getByType
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:247:54 Unresolved reference: MISSED
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:247:72 Type mismatch: inferred type is Flow<List<CallLog>> but Unit was expected
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:250:37 Unresolved reference: getMissedCalls
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:253:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:254:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:254:33 Unresolved reference: it
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:254:58 Unresolved reference: MISSED
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:260:30 Unresolved reference: deleteAll
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:263:24 Unresolved reference: clearAllCallLogs
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:266:31 Unresolved reference: deleteAll
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:273:30 Unresolved reference: getCount
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:273:51 Type mismatch: inferred type is Int but Unit was expected
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:276:37 Unresolved reference: getCallLogCount
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:279:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:288:39 Too many arguments for public final suspend fun syncFromSystem(): Result<Int> defined in com.smslink.call.CallRepository
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallRepositoryTest.kt:293:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallStateListenerTest.kt:15:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallStateListenerTest.kt:16:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallStateListenerTest.kt:17:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallStateListenerTest.kt:77:9 Unresolved reference: assertNull
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallStateListenerTest.kt:86:9 Unresolved reference: assertNull
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallStateListenerTest.kt:95:9 Unresolved reference: assertNull
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallStateListenerTest.kt:118:9 Unresolved reference: assertNull
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallStateListenerTest.kt:128:9 Unresolved reference: assertNull
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallStateListenerTest.kt:138:9 Unresolved reference: assertNull
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallViewModelTest.kt:17:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallViewModelTest.kt:18:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallViewModelTest.kt:19:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallViewModelTest.kt:51:13 No value passed for parameter 'deviceManager'
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallViewModelTest.kt:51:13 No value passed for parameter 'defaultPhoneAppGuide'
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallViewModelTest.kt:83:9 Unresolved reference: assertFalse
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallViewModelTest.kt:84:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallViewModelTest.kt:114:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallViewModelTest.kt:128:9 Unresolved reference: assertFalse
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallViewModelTest.kt:129:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallViewModelTest.kt:203:34 Unresolved reference: clearAllCallLogs
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallViewModelTest.kt:206:19 Unresolved reference: clearCallHistory
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallViewModelTest.kt:210:35 Unresolved reference: clearAllCallLogs
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallViewModelTest.kt:240:19 Unresolved reference: filterByType
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallViewModelTest.kt:245:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallViewModelTest.kt:267:13 No value passed for parameter 'deviceManager'
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallViewModelTest.kt:267:13 No value passed for parameter 'defaultPhoneAppGuide'
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallViewModelTest.kt:273:9 Unresolved reference: assertNotNull
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallViewModelTest.kt:287:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallViewModelTest.kt:293:71 Type mismatch: inferred type is () -> Nothing but List<CallLog> was expected
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallViewModelTest.kt:294:13 Type mismatch: inferred type is () -> Nothing but List<CallLog> was expected
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/CallViewModelTest.kt:303:9 Unresolved reference: assertNotNull
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/SmsLinkInCallServiceTest.kt:13:12 Unresolved reference: robolectric
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/SmsLinkInCallServiceTest.kt:14:12 Unresolved reference: robolectric
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/SmsLinkInCallServiceTest.kt:15:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/SmsLinkInCallServiceTest.kt:16:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/SmsLinkInCallServiceTest.kt:17:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/SmsLinkInCallServiceTest.kt:26:10 Unresolved reference: RobolectricTestRunner
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/SmsLinkInCallServiceTest.kt:26:10 An annotation argument must be a compile-time constant
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/SmsLinkInCallServiceTest.kt:27:2 Unresolved reference: Config
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/SmsLinkInCallServiceTest.kt:56:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/SmsLinkInCallServiceTest.kt:65:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/SmsLinkInCallServiceTest.kt:85:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/SmsLinkInCallServiceTest.kt:92:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/SmsLinkInCallServiceTest.kt:114:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/SmsLinkInCallServiceTest.kt:136:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/SmsLinkInCallServiceTest.kt:171:9 Unresolved reference: assertNull
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/call/SmsLinkInCallServiceTest.kt:186:13 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DeviceManagerImplTest.kt:15:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DeviceManagerImplTest.kt:16:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DeviceManagerImplTest.kt:104:31 Overload resolution ambiguity: 
+public final fun pairDevice(device: Device, discoveredDevice: DiscoveredDevice? = ..., qrCode: String? = ...): Flow<PairResult> defined in com.smslink.device.DevicePairingImpl
+public final fun pairDevice(device: Device, qrCode: String): Flow<PairResult> defined in com.smslink.device.DevicePairingImpl
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DeviceManagerImplTest.kt:104:66 Type mismatch: inferred type is Flow<PairResult> but Unit was expected
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DeviceManagerImplTest.kt:112:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DeviceManagerImplTest.kt:127:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DeviceManagerImplTest.kt:128:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DeviceManagerImplTest.kt:140:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DeviceManagerImplTest.kt:141:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DeviceManagerImplTest.kt:168:9 Unresolved reference: assertNotNull
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DeviceManagerImplTest.kt:169:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DeviceManagerImplTest.kt:170:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DeviceManagerImplTest.kt:182:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DeviceManagerImplTest.kt:195:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DeviceManagerImplTest.kt:210:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DevicePairingImplTest.kt:14:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DevicePairingImplTest.kt:15:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DevicePairingImplTest.kt:16:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DevicePairingImplTest.kt:17:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DevicePairingImplTest.kt:42:54 Type mismatch: inferred type is ILogger but BleGattClient was expected
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DevicePairingImplTest.kt:42:54 No value passed for parameter 'logger'
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DevicePairingImplTest.kt:56:9 Unresolved reference: assertNotNull
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DevicePairingImplTest.kt:57:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DevicePairingImplTest.kt:58:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DevicePairingImplTest.kt:59:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DevicePairingImplTest.kt:71:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DevicePairingImplTest.kt:72:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DevicePairingImplTest.kt:73:9 Unresolved reference: assertNotNull
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DevicePairingImplTest.kt:74:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DevicePairingImplTest.kt:87:9 Unresolved reference: assertFalse
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DevicePairingImplTest.kt:88:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DevicePairingImplTest.kt:100:9 Unresolved reference: assertFalse
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DevicePairingImplTest.kt:101:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DevicePairingImplTest.kt:110:9 Unresolved reference: assertNotNull
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DevicePairingImplTest.kt:112:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DevicePairingImplTest.kt:113:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DevicePairingImplTest.kt:114:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DevicePairingImplTest.kt:126:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DevicePairingImplTest.kt:127:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DevicePairingImplTest.kt:128:9 Unresolved reference: assertNotNull
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DevicePairingImplTest.kt:129:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DevicePairingImplTest.kt:134:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DevicePairingImplTest.kt:143:9 Unresolved reference: assertFalse
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DevicePairingImplTest.kt:144:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DevicePairingImplTest.kt:157:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DevicePairingImplTest.kt:167:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DevicePairingImplTest.kt:174:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DevicePairingImplTest.kt:188:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DeviceRepositoryTest.kt:15:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DeviceRepositoryTest.kt:16:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DeviceRepositoryTest.kt:17:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DeviceRepositoryTest.kt:89:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DeviceRepositoryTest.kt:101:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DeviceRepositoryTest.kt:114:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DeviceRepositoryTest.kt:132:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DeviceRepositoryTest.kt:133:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DeviceRepositoryTest.kt:167:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DeviceRepositoryTest.kt:180:9 Unresolved reference: assertFalse
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/device/DeviceRepositoryTest.kt:192:9 Unresolved reference: assertFalse
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:13:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:14:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:15:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:99:9 Unresolved reference: assertNotNull
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:100:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:100:40 Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type FileTransfer?
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:101:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:101:40 Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type FileTransfer?
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:114:9 Unresolved reference: assertNull
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:130:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:131:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:132:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:145:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:146:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:173:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:187:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:235:35 Unresolved reference: getByState
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:235:81 Type mismatch: inferred type is List<FileTransferEntity> but Unit was expected
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:238:37 Unresolved reference: getCompletedTransfers
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:241:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:242:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:242:33 Unresolved reference: it
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:251:35 Unresolved reference: getByState
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:251:78 Type mismatch: inferred type is List<FileTransferEntity> but Unit was expected
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:254:37 Unresolved reference: getFailedTransfers
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:257:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:258:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:269:35 Unresolved reference: getByDevice
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:269:67 Type mismatch: inferred type is List<FileTransferEntity> but Unit was expected
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:272:37 Unresolved reference: getTransfersByDevice
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:275:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:276:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:276:33 Unresolved reference: it
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:282:35 Unresolved reference: deleteByState
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:285:24 Unresolved reference: clearCompletedTransfers
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:288:36 Unresolved reference: deleteByState
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:295:35 Unresolved reference: getCount
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:295:56 Type mismatch: inferred type is Int but Unit was expected
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:298:37 Unresolved reference: getTransferCount
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileRepositoryTest.kt:301:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferManagerImplTest.kt:17:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferManagerImplTest.kt:18:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferManagerImplTest.kt:74:9 Unresolved reference: assertNotNull
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferManagerImplTest.kt:75:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferManagerImplTest.kt:76:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferManagerImplTest.kt:77:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferManagerImplTest.kt:78:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferManagerImplTest.kt:79:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferManagerImplTest.kt:126:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferManagerImplTest.kt:127:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferManagerImplTest.kt:153:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferManagerImplTest.kt:154:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferManagerImplTest.kt:180:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferManagerImplTest.kt:181:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferManagerImplTest.kt:182:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferManagerImplTest.kt:195:13 Unresolved reference: fail
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferManagerImplTest.kt:197:13 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferManagerImplTest.kt:212:13 Unresolved reference: fail
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferManagerImplTest.kt:214:13 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferManagerImplTest.kt:228:13 Unresolved reference: fail
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferManagerImplTest.kt:230:13 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferManagerImplTest.kt:277:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferManagerImplTest.kt:296:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferManagerImplTest.kt:297:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferViewModelTest.kt:19:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferViewModelTest.kt:20:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferViewModelTest.kt:21:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferViewModelTest.kt:22:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferViewModelTest.kt:23:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferViewModelTest.kt:78:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferViewModelTest.kt:164:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferViewModelTest.kt:177:9 Unresolved reference: assertNull
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferViewModelTest.kt:197:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferViewModelTest.kt:217:9 Unresolved reference: assertFalse
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferViewModelTest.kt:223:33 Not enough information to infer type variable V
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferViewModelTest.kt:224:63 Not enough information to infer type variable B
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferViewModelTest.kt:224:66 Not enough information to infer type variable T
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferViewModelTest.kt:227:64 Not enough information to infer type variable B
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferViewModelTest.kt:227:67 Not enough information to infer type variable T
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/file/FileTransferViewModelTest.kt:246:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/BluetoothConnectionImplTest.kt:12:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/BluetoothConnectionImplTest.kt:13:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/BluetoothConnectionImplTest.kt:14:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/BluetoothConnectionImplTest.kt:53:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/BluetoothConnectionImplTest.kt:62:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/BluetoothConnectionImplTest.kt:71:9 Unresolved reference: assertFalse
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/BluetoothConnectionImplTest.kt:80:9 Unresolved reference: assertFalse
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/ConnectionManagerImplTest.kt:17:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/ConnectionManagerImplTest.kt:18:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/ConnectionManagerImplTest.kt:19:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/ConnectionManagerImplTest.kt:46:13 Cannot find a parameter with this name: tcpConnectionFactory
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/ConnectionManagerImplTest.kt:46:13 No value passed for parameter 'connectionFactory'
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/ConnectionManagerImplTest.kt:46:13 No value passed for parameter 'linkSelector'
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/ConnectionManagerImplTest.kt:73:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/ConnectionManagerImplTest.kt:100:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/ConnectionManagerImplTest.kt:114:9 Unresolved reference: assertFalse
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/ConnectionManagerImplTest.kt:138:9 Unresolved reference: assertFalse
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/LinkSelectorTest.kt:11:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/LinkSelectorTest.kt:12:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/LinkSelectorTest.kt:13:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/LinkSelectorTest.kt:14:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/LinkSelectorTest.kt:48:9 Unresolved reference: assertNotNull
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/LinkSelectorTest.kt:61:9 Unresolved reference: assertFalse
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/LinkSelectorTest.kt:73:9 Unresolved reference: assertFalse
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/LinkSelectorTest.kt:85:9 Unresolved reference: assertNotNull
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/LinkSelectorTest.kt:94:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/LinkTypeTest.kt:4:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/LinkTypeTest.kt:5:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/LinkTypeTest.kt:6:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/LinkTypeTest.kt:15:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/LinkTypeTest.kt:20:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/LinkTypeTest.kt:25:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/LinkTypeTest.kt:30:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/LinkTypeTest.kt:35:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/LinkTypeTest.kt:40:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/LinkTypeTest.kt:45:9 Unresolved reference: assertFalse
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/LinkTypeTest.kt:52:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/LinkTypeTest.kt:53:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/LinkTypeTest.kt:54:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/connection/LinkTypeTest.kt:55:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/encryption/EncryptionImplTest.kt:14:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/encryption/EncryptionImplTest.kt:15:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/encryption/EncryptionImplTest.kt:57:9 Unresolved reference: assertNotNull
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/encryption/EncryptionImplTest.kt:58:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/encryption/EncryptionImplTest.kt:70:9 Unresolved reference: assertNull
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/encryption/EncryptionImplTest.kt:83:9 Unresolved reference: assertFalse
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/monitor/NetworkMonitorTest.kt:14:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/monitor/NetworkMonitorTest.kt:15:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/monitor/NetworkMonitorTest.kt:61:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/monitor/NetworkMonitorTest.kt:73:9 Unresolved reference: assertFalse
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/monitor/NetworkMonitorTest.kt:90:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/monitor/NetworkMonitorTest.kt:102:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/transport/MessageTransportImplTest.kt:17:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/transport/MessageTransportImplTest.kt:18:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/transport/MessageTransportImplTest.kt:39:13 No value passed for parameter 'deviceManager'
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/transport/MessageTransportImplTest.kt:67:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/transport/MessageTransportImplTest.kt:68:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/transport/MessageTransportImplTest.kt:77:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/network/transport/MessageTransportImplTest.kt:87:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/notification/NotificationFilterTest.kt:27:34 Unresolved reference: just
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/notification/NotificationFilterTest.kt:27:39 Unresolved reference: runs
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/notification/NotificationManagerImplTest.kt:29:76 Type mismatch: inferred type is ILogger but IMessageTransport was expected
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/notification/NotificationManagerImplTest.kt:29:76 No value passed for parameter 'deviceManager'
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/notification/NotificationManagerImplTest.kt:29:76 No value passed for parameter 'preferences'
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/notification/NotificationManagerImplTest.kt:29:76 No value passed for parameter 'logger'
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/notification/NotificationSyncTest.kt:22:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/notification/NotificationSyncTest.kt:23:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/notification/NotificationSyncTest.kt:24:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/notification/NotificationSyncTest.kt:233:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/notification/NotificationSyncTest.kt:234:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/notification/NotificationSyncTest.kt:235:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/notification/NotificationSyncTest.kt:236:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/notification/NotificationSyncTest.kt:237:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/notification/NotificationSyncTest.kt:263:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/notification/NotificationSyncTest.kt:264:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/notification/NotificationSyncTest.kt:265:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/notification/NotificationSyncTest.kt:266:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/notification/NotificationSyncTest.kt:267:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/notification/NotificationSyncTest.kt:268:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/notification/NotificationSyncTest.kt:269:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/notification/NotificationSyncTest.kt:287:9 Unresolved reference: assertFalse
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/notification/NotificationSyncTest.kt:307:9 Unresolved reference: assertFalse
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsManagerImplTest.kt:18:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsManagerImplTest.kt:19:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsManagerImplTest.kt:20:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsManagerImplTest.kt:39:58 Type mismatch: inferred type is ILogger but IMessageTransport was expected
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsManagerImplTest.kt:39:58 No value passed for parameter 'deviceManager'
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsManagerImplTest.kt:39:58 No value passed for parameter 'logger'
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsManagerImplTest.kt:60:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsManagerImplTest.kt:75:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsManagerImplTest.kt:90:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsManagerImplTest.kt:143:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsManagerImplTest.kt:157:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsManagerImplTest.kt:166:9 Unresolved reference: assertNotNull
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsManagerImplTest.kt:181:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsManagerImplTest.kt:196:9 Unresolved reference: assertFalse
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsRepositoryTest.kt:14:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsRepositoryTest.kt:49:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsRepositoryTest.kt:64:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsRepositoryTest.kt:133:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsRepositoryTest.kt:148:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsRepositoryTest.kt:168:30 Unresolved reference: deleteAll
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsRepositoryTest.kt:171:20 Unresolved reference: deleteAllMessages
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsRepositoryTest.kt:174:31 Unresolved reference: deleteAll
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsRepositoryTest.kt:182:30 Unresolved reference: getByAddress
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsRepositoryTest.kt:182:62 Type mismatch: inferred type is Flow<List<Message>> but Unit was expected
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsRepositoryTest.kt:185:33 Unresolved reference: getMessagesByAddress
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsRepositoryTest.kt:188:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsRepositoryTest.kt:189:31 Unresolved reference: getByAddress
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsRepositoryTest.kt:197:30 Unresolved reference: getByType
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsRepositoryTest.kt:197:68 Type mismatch: inferred type is Flow<List<Message>> but Unit was expected
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsRepositoryTest.kt:200:33 Unresolved reference: getSentMessages
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsRepositoryTest.kt:203:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsRepositoryTest.kt:204:31 Unresolved reference: getByType
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsRepositoryTest.kt:212:30 Unresolved reference: getByType
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsRepositoryTest.kt:212:69 Type mismatch: inferred type is Flow<List<Message>> but Unit was expected
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsRepositoryTest.kt:215:33 Unresolved reference: getReceivedMessages
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsRepositoryTest.kt:218:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsRepositoryTest.kt:219:31 Unresolved reference: getByType
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsRepositoryTest.kt:226:30 Unresolved reference: markThreadAsRead
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsRepositoryTest.kt:229:20 Unresolved reference: markThreadAsRead
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsRepositoryTest.kt:232:31 Unresolved reference: markThreadAsRead
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsRepositoryTest.kt:242:30 Unresolved reference: getUnreadMessages
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsRepositoryTest.kt:242:60 Type mismatch: inferred type is Flow<List<Message>> but Unit was expected
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsRepositoryTest.kt:245:33 Unresolved reference: getUnreadMessages
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsRepositoryTest.kt:248:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsRepositoryTest.kt:249:9 Unresolved reference: assertFalse
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsRepositoryTest.kt:250:9 Unresolved reference: assertFalse
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsViewModelTest.kt:20:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsViewModelTest.kt:21:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsViewModelTest.kt:22:15 Unresolved reference: test
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsViewModelTest.kt:89:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsViewModelTest.kt:90:9 Unresolved reference: assertIs
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsViewModelTest.kt:102:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsViewModelTest.kt:103:9 Unresolved reference: assertIs
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsViewModelTest.kt:110:72 Type mismatch: inferred type is () -> Nothing but List<Message> was expected
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsViewModelTest.kt:111:13 Type mismatch: inferred type is () -> Nothing but List<Message> was expected
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsViewModelTest.kt:119:9 Unresolved reference: assertIs
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsViewModelTest.kt:120:9 Unresolved reference: assertTrue
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsViewModelTest.kt:120:26 Unresolved reference: message
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsViewModelTest.kt:136:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsViewModelTest.kt:137:9 Unresolved reference: assertIs
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsViewModelTest.kt:151:9 Unresolved reference: assertIs
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsViewModelTest.kt:167:9 Unresolved reference: assertIs
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsViewModelTest.kt:177:9 Unresolved reference: assertIs
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsViewModelTest.kt:188:9 Unresolved reference: assertIs
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsViewModelTest.kt:201:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsViewModelTest.kt:213:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsViewModelTest.kt:222:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsViewModelTest.kt:261:9 Unresolved reference: assertIs
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsViewModelTest.kt:279:9 Unresolved reference: assertIs
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsViewModelTest.kt:298:9 Unresolved reference: assertEquals
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsViewModelTest.kt:330:54 Unresolved reference: ANDROID
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsViewModelTest.kt:333:13 Cannot find a parameter with this name: isConnected
+e: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/test/java/com/smslink/sms/SmsViewModelTest.kt:334:13 No value passed for parameter 'publicKey'
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:compileDebugUnitTestKotlin'.
+> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
+   > Compilation error. See log for more details
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.7/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 51s
+27 actionable tasks: 6 executed, 21 up-to-date

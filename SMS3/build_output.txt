@@ -1,0 +1,114 @@
+Starting a Gradle Daemon, 2 stopped Daemons could not be reused, use --status for details
+Warning: SDK processing. This version only understands SDK XML versions up to 3 but an SDK XML file of version 4 was encountered. This can happen if you use versions of Android Studio and the command-line tools that were released at different times.
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:checkKotlinGradlePluginConfigurationErrors
+> Task :app:generateDebugResValues
+> Task :app:checkDebugAarMetadata
+> Task :app:mapDebugSourceSetPaths
+> Task :app:generateDebugResources
+> Task :app:packageDebugResources
+> Task :app:createDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksDebug
+> Task :app:parseDebugLocalResources
+> Task :app:mergeDebugResources
+> Task :app:processDebugMainManifest
+> Task :app:processDebugManifest
+> Task :app:javaPreCompileDebug
+> Task :app:mergeDebugShaders
+> Task :app:compileDebugShaders NO-SOURCE
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :app:mergeDebugAssets
+> Task :app:compressDebugAssets
+> Task :app:desugarDebugFileDependencies
+> Task :app:mergeDebugJniLibFolders
+> Task :app:mergeDebugNativeLibs NO-SOURCE
+> Task :app:stripDebugDebugSymbols NO-SOURCE
+> Task :app:checkDebugDuplicateClasses
+> Task :app:validateSigningDebug
+> Task :app:processDebugManifestForPackage
+> Task :app:mergeLibDexDebug
+> Task :app:writeDebugAppMetadata
+> Task :app:writeDebugSigningConfigVersions
+> Task :app:processDebugResources
+> Task :app:mergeExtDexDebug
+> Task :app:kspDebugKotlin
+> Task :app:compileDebugKotlin
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/call/CallManagerImpl.kt:74:44 Unchecked cast: StateFlow<CallState?> to Flow<CallState>
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/call/CallManagerImpl.kt:110:37 'acceptRingingCall(): Unit' is deprecated. Deprecated in Java
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/call/CallManagerImpl.kt:141:37 'endCall(): Boolean' is deprecated. Deprecated in Java
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/call/CallStateListener.kt:4:26 'PhoneStateListener' is deprecated. Deprecated in Java
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/call/CallStateListener.kt:45:22 This declaration overrides deprecated member but not marked as deprecated itself. Please add @Deprecated annotation or suppress. See https://youtrack.jetbrains.com/issue/KT-47902 for details
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/call/SmsLinkInCallService.kt:82:38 'getter for state: Int' is deprecated. Deprecated in Java
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/call/SmsLinkInCallService.kt:150:38 'getter for state: Int' is deprecated. Deprecated in Java
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/call/SmsLinkInCallService.kt:170:38 'getter for state: Int' is deprecated. Deprecated in Java
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/call/SmsLinkInCallService.kt:188:36 'getter for state: Int' is deprecated. Deprecated in Java
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/call/SmsLinkInCallService.kt:194:39 Parameter 'call' is never used
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/device/DeviceDiscoveryImpl.kt:114:66 Parameter 'bleDevice' is never used, could be renamed to _
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/device/DeviceDiscoveryImpl.kt:381:39 Type mismatch: inferred type is String? but String was expected
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/device/DeviceManagerImpl.kt:71:30 'pairDevice(Device, String): Flow<PairResult>' is deprecated. Use pairDevice(device, discoveredDevice, qrCode) instead
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/device/DevicePairingImpl.kt:361:48 Parameter 'deviceId' is never used
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/device/ble/BleGattClient.kt:180:28 'setter for value: ByteArray!' is deprecated. Deprecated in Java
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/device/ble/BleGattClient.kt:186:34 'writeCharacteristic(BluetoothGattCharacteristic!): Boolean' is deprecated. Deprecated in Java
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/device/ble/BleGattClient.kt:250:22 This declaration overrides deprecated member but not marked as deprecated itself. Please add @Deprecated annotation or suppress. See https://youtrack.jetbrains.com/issue/KT-47902 for details
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/device/ble/BleGattClient.kt:260:51 'getter for value: ByteArray!' is deprecated. Deprecated in Java
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/device/ble/BleGattClient.kt:284:22 This declaration overrides deprecated member but not marked as deprecated itself. Please add @Deprecated annotation or suppress. See https://youtrack.jetbrains.com/issue/KT-47902 for details
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/device/ble/BleGattClient.kt:292:76 'getter for value: ByteArray!' is deprecated. Deprecated in Java
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/device/ble/BleGattServer.kt:135:34 Unnecessary safe call on a non-null receiver of type BluetoothLeAdvertiser?
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/device/ble/BleGattServer.kt:364:33 'setter for value: ByteArray!' is deprecated. Deprecated in Java
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/device/ble/BleGattServer.kt:365:29 'notifyCharacteristicChanged(BluetoothDevice!, BluetoothGattCharacteristic!, Boolean): Boolean' is deprecated. Deprecated in Java
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/file/ui/ShareActivity.kt:73:24 'getParcelableExtra(String!): T?' is deprecated. Deprecated in Java
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/file/ui/ShareActivity.kt:78:24 'getParcelableArrayListExtra(String!): ArrayList<T!>?' is deprecated. Deprecated in Java
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/network/connection/ConnectionFactory.kt:24:72 'getDefaultAdapter(): BluetoothAdapter!' is deprecated. Deprecated in Java
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/network/connection/ConnectionFactory.kt:32:13 Variable 'device' is never used
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/network/connection/ConnectionFactory.kt:126:44 Parameter 'deviceId' is never used
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/network/connection/ConnectionFactory.kt:135:51 Parameter 'deviceId' is never used
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/network/connection/LinkSelector.kt:28:72 'getDefaultAdapter(): BluetoothAdapter!' is deprecated. Deprecated in Java
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/network/connection/LinkSelector.kt:108:40 'getter for connectionInfo: WifiInfo!' is deprecated. Deprecated in Java
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/network/connection/LinkSelector.kt:109:38 'getter for ipAddress: Int' is deprecated. Deprecated in Java
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/network/connection/LinkSelector.kt:172:40 'getter for connectionInfo: WifiInfo!' is deprecated. Deprecated in Java
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/network/connection/LinkSelector.kt:173:44 'getter for ipAddress: Int' is deprecated. Deprecated in Java
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/network/connection/LinkSelector.kt:174:47 'getter for dhcpInfo: DhcpInfo!' is deprecated. Deprecated in Java
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/network/connection/TcpConnectionFactory.kt:27:13 Variable 'device' is never used
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/network/connection/TcpConnectionFactory.kt:64:46 Parameter 'deviceId' is never used
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/network/connection/TcpConnectionFactory.kt:73:51 Parameter 'deviceId' is never used
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/network/connection/TcpConnectionFactory.kt:81:49 Parameter 'deviceId' is never used
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/network/monitor/NetworkMonitor.kt:32:72 'getDefaultAdapter(): BluetoothAdapter!' is deprecated. Deprecated in Java
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/network/monitor/NetworkMonitor.kt:168:40 'getter for connectionInfo: WifiInfo!' is deprecated. Deprecated in Java
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/network/monitor/NetworkMonitor.kt:169:38 'getter for ipAddress: Int' is deprecated. Deprecated in Java
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/network/monitor/NetworkMonitor.kt:186:40 'getter for connectionInfo: WifiInfo!' is deprecated. Deprecated in Java
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/network/monitor/NetworkMonitor.kt:187:37 'getter for ipAddress: Int' is deprecated. Deprecated in Java
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/notification/NotificationManagerImpl.kt:330:75 Parameter 'targetDeviceId' is never used
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/notification/NotificationManagerImpl.kt:352:61 Parameter 'replyText' is never used
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/sms/SmsManagerImpl.kt:48:41 'getDefault(): SmsManager!' is deprecated. Deprecated in Java
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/sms/SmsManagerImpl.kt:73:32 'getSmsManagerForSubscriptionId(Int): SmsManager!' is deprecated. Deprecated in Java
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/sms/SmsManagerImpl.kt:617:32 Parameter 'address' is never used
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/sms/SmsReceiver.kt:57:13 Variable 'subId' is never used
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/sms/SmsReceiver.kt:95:36 Parameter 'intent' is never used
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/sms/ui/SmsExampleActivity.kt:56:15 'onRequestPermissionsResult(Int, Array<(out) String!>, IntArray): Unit' is deprecated. Deprecated in Java
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/sms/ui/SmsExampleActivity.kt:88:45 Parameter 'deniedPermissions' is never used
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/sms/ui/SmsExampleActivity.kt:108:5 Parameter 'onRequestPermissions' is never used
+w: file:///C:/Users/forek/Desktop/ccwork/SMS3/app/src/main/java/com/smslink/ui/settings/SettingsScreen.kt:27:9 Variable 'context' is never used
+
+> Task :app:compileDebugJavaWithJavac
+> Task :app:hiltAggregateDepsDebug
+> Task :app:hiltJavaCompileDebug
+> Task :app:processDebugJavaRes
+> Task :app:mergeDebugJavaResource
+> Task :app:transformDebugClassesWithAsm
+> Task :app:dexBuilderDebug
+> Task :app:mergeDebugGlobalSynthetics
+> Task :app:mergeProjectDexDebug
+> Task :app:packageDebug
+> Task :app:createDebugApkListingFileRedirect
+> Task :app:assembleDebug
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.7/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 3m 11s
+39 actionable tasks: 39 executed

@@ -54,6 +54,24 @@ class TcpConnectionFactory @Inject constructor(
         )
     }
 
+    /**
+     * Resolve a paired/discovered device id from its current IP address.
+     *
+     * The inbound TCP listener only sees the remote socket address, so the
+     * connection manager uses this helper to recover the real logical device id.
+     */
+    fun resolveDeviceIdByIpAddress(ipAddress: String): String? {
+        val trimmedIp = ipAddress.trim()
+        if (trimmedIp.isEmpty()) {
+            return null
+        }
+
+        return deviceDiscovery.discoveredDevices.value
+            .firstOrNull { it.ipAddress == trimmedIp }
+            ?.device
+            ?.id
+    }
+
     private suspend fun getDeviceWifiAddress(deviceId: String): String {
         val discoveredAddress = deviceDiscovery.discoveredDevices.value
             .firstOrNull { it.device.id == deviceId }

@@ -1,0 +1,404 @@
+﻿--------- beginning of main
+04-18 22:26:30.410 10521 10575 D QLM-Service: check_headroom_zone: Timer EVT, Temp: 35904
+04-18 22:26:30.547 29864 29864 I adbd    : in ShellService: getprop sys.boot_completed
+04-18 22:26:30.687 29864 29864 I adbd    : in ShellService: getprop dev.bootcomplete
+04-18 22:26:30.746  9294  9294 D ControlCenterHeaderExpandController: onExpansionChanged: progress =  0.0
+04-18 22:26:30.747  9294  9294 D ControlCenterHeaderExpandController: onExpansionChanged: progress =  0.0
+04-18 22:26:30.748  9294  9294 D ControlCenterHeaderExpandController: onExpansionChanged: progress =  0.0
+04-18 22:26:30.760  2056  2704 I vendor.qti.hardware.display.composer-service: Sensor: notify citsensorservice to trigger cwb, misForced = 0
+04-18 22:26:30.761  2276  2276 I MI-SF   : surfaceflinger setAffinity mode=0
+04-18 22:26:30.762  2276  2276 E MI-SF   : surfaceflinger setAffinity success
+04-18 22:26:30.764  3137  7335 I libsensor-parseRGB: request dump start for mRequestDisplayId 0
+04-18 22:26:30.764  3137  7335 D vendor.xiaomi.sensor.citsensorservice.aidl: handle id:21 wxh:1280x2772 uwxuh:1280x2772 size: 10645504 fd:13 fd_meta:14 flags:0x228 usage:0x33  format:0x3 layer_count: 1 reserved_size = 0 custom_content_md_reserved_size = 0
+04-18 22:26:30.765  2276  2684 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+04-18 22:26:30.765  2056  2974 D SDM     : HWCSession::PostBuffer: CWB config passed by cwb_client : tappoint 1  CWB_ROI : (567.000000 161.000000 748.000000 342.000000)
+04-18 22:26:30.796  2056 24646 D SDM     : CompManager::NotifyCwbDone: display 0 notify cwb callback, status = 0
+04-18 22:26:30.797  2056  7353 D SDM     : HWCSession::NotifyCWBStatus: Notify the client about buffer status 0.
+04-18 22:26:30.797  2056  7353 D SDM     : HWCSession::ProcessCWBStatus: CWB queue is empty. Display: 0
+04-18 22:26:30.797  3137  3284 E libsensor-parseRGB: CWB NotifyCWBBufferDone  error 0
+04-18 22:26:30.806 12757 14934 D JavaheapMonitor: Java heap used=18M max=256M, proc: com.miui.securitycenter.remote
+04-18 22:26:30.806 12757 14934 V JavaheapMonitor: Check java heap usage finished! Next check delay: 300000
+04-18 22:26:30.825 29864 29864 I adbd    : in ShellService: pm list packages
+04-18 22:26:30.857  2056  2544 I SDM     : DisplayBase::CommitThread: Received idle timeout, panel: video, timeout: 79999 us
+04-18 22:26:30.875  2056  2544 D SDM     : HWDeviceDRM::SetupConcurrentWriteback: Tear down the Concurrent Writeback topology
+04-18 22:26:30.877  2276  2276 I MI-SF   : surfaceflinger setAffinity mode=1
+04-18 22:26:30.877  2276  2276 E MI-SF   : surfaceflinger setAffinity success
+04-18 22:26:30.877  2276  2276 I MI-SF   : surfaceflinger setreAffinity reTid=2396
+04-18 22:26:30.877  2276  2276 E MI-SF   : surfaceflinger setAffinity success
+04-18 22:26:30.937  3291  9848 I NetworkAccelerateSwitchService: EVENT_RSSI_POLL. mRssiPoll=true
+04-18 22:26:30.937  3291  9848 I NetworkAccelerateSwitchService: checkWifiRssiAndLinkSpeed rssi:59
+04-18 22:26:30.937  3291  9848 I NetworkAccelerateSwitchService: checkWifiRssiAndLinkSpeed mWifiFastFade:false mWifiFastFadeAdjustThreshold:false
+04-18 22:26:30.937  3291  9848 I NetworkAccelerateSwitchService: getAverageWifiRssi:58
+04-18 22:26:30.938  3291  9848 D NetworkAccelerateSwitchService: checkIntervalModeChange mMovementState:false mIntervalMode:0 mIsBadLinkLayerQoE:false mBadLinkLayerQoETimes = 0
+04-18 22:26:30.992 29864 29864 I adbd    : in ShellService: dumpsys window
+04-18 22:26:31.009  3291  8534 I MiuiNetworkPolicy: bandwidth: 0 KB/s, Max bandwidth: 1572 KB/s
+04-18 22:26:31.032  1936  1936 W dumpsys : Thread Pool max thread count is 0. Cannot cache binder as linkToDeath cannot be implemented. serviceName: window
+04-18 22:26:31.034  3291 10571 D MessageMonitor: Dump Looper message took 0ms
+04-18 22:26:31.036  3291 10571 I system_server: AssetManager2(0xb40000756025fa38) locale list changing from [] to [zh-CN]
+04-18 22:26:31.038  3291 10571 I system_server: AssetManager2(0xb400007560202478) locale list changing from [] to [zh-CN]
+04-18 22:26:31.045  3291 10571 I system_server: AssetManager2(0xb40000756026c238) locale list changing from [] to [zh-CN]
+04-18 22:26:31.047  3291 10571 I system_server: AssetManager2(0xb40000756025ce78) locale list changing from [] to [zh-CN]
+04-18 22:26:31.050  3291 10571 I system_server: AssetManager2(0xb4000075601e3398) locale list changing from [] to [zh-CN]
+04-18 22:26:31.054  3291 10571 I system_server: AssetManager2(0xb40000756029fb38) locale list changing from [] to [zh-CN]
+04-18 22:26:31.265 29864 29864 I adbd    : in ShellService: dumpsys activity top
+04-18 22:26:31.304  1945  1945 W dumpsys : Thread Pool max thread count is 0. Cannot cache binder as linkToDeath cannot be implemented. serviceName: activity
+--------- beginning of system
+04-18 22:26:31.322  3291  8602 D AurogonImmobulusMode:  update wallpaper pacakge name status mLockWallPaperPackageName =  mLockWallPaperUid = -1 mDeskWallPaperPackageName = com.miui.miwallpaper mDeskWallPaperUid = 10182
+04-18 22:26:31.330  3291  8602 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+04-18 22:26:31.333  3291  8602 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+04-18 22:26:31.333  3291  8602 D InetDiagMessage: Destroyed live tcp sockets for uids={10312} in 6ms
+04-18 22:26:31.334  3291  8602 D ActionExecute: frozen uid = 10312 reason=check binder
+04-18 22:26:31.334  3291  8602 D ExternalInterface: setUidState, uid = 10312 allow = false
+04-18 22:26:31.335  3291  8602 D MiSensorServiceImpl: PowerKeeperSensor stop iUid:10312 but app has Controlled
+04-18 22:26:31.737  3291  8602 D AurogonImmobulusMode:  update wallpaper pacakge name status mLockWallPaperPackageName =  mLockWallPaperUid = -1 mDeskWallPaperPackageName = com.miui.miwallpaper mDeskWallPaperUid = 10182
+04-18 22:26:32.125 13013 13802 D JavaheapMonitor: Java heap used=2M max=256M, proc: com.miui.misightservice
+04-18 22:26:32.125 13013 13802 V JavaheapMonitor: Check java heap usage finished! Next check delay: 300000
+04-18 22:26:32.385  3291  8537 D MiuiWifiCommonBase: band: 1, compensate: 0
+04-18 22:26:32.413  9294  9294 D ControlCenterHeaderExpandController: onExpansionChanged: progress =  0.0
+04-18 22:26:32.415  9294  9294 D ControlCenterHeaderExpandController: onExpansionChanged: progress =  0.0
+04-18 22:26:32.415  9294  9294 D ControlCenterHeaderExpandController: onExpansionChanged: progress =  0.0
+04-18 22:26:32.444  2056  2704 I vendor.qti.hardware.display.composer-service: Sensor: notify citsensorservice to trigger cwb, misForced = 0
+04-18 22:26:32.445  3137  7335 I libsensor-parseRGB: request dump start for mRequestDisplayId 0
+04-18 22:26:32.445  3137  7335 D vendor.xiaomi.sensor.citsensorservice.aidl: handle id:21 wxh:1280x2772 uwxuh:1280x2772 size: 10645504 fd:13 fd_meta:14 flags:0x228 usage:0x33  format:0x3 layer_count: 1 reserved_size = 0 custom_content_md_reserved_size = 0
+04-18 22:26:32.446  2276  2276 I MI-SF   : surfaceflinger setAffinity mode=0
+04-18 22:26:32.446  2276  2276 E MI-SF   : surfaceflinger setAffinity success
+04-18 22:26:32.447  2056  2974 D SDM     : HWCSession::PostBuffer: CWB config passed by cwb_client : tappoint 1  CWB_ROI : (567.000000 161.000000 748.000000 342.000000)
+04-18 22:26:32.449  2276  2684 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+04-18 22:26:32.478  2056 24646 D SDM     : CompManager::NotifyCwbDone: display 0 notify cwb callback, status = 0
+04-18 22:26:32.478  2056  7353 D SDM     : HWCSession::NotifyCWBStatus: Notify the client about buffer status 0.
+04-18 22:26:32.479  2056  7353 D SDM     : HWCSession::ProcessCWBStatus: CWB queue is empty. Display: 0
+04-18 22:26:32.479  3137  3285 E libsensor-parseRGB: CWB NotifyCWBBufferDone  error 0
+04-18 22:26:32.540  2056  2544 I SDM     : DisplayBase::CommitThread: Received idle timeout, panel: video, timeout: 80000 us
+04-18 22:26:32.559  2056  2544 D SDM     : HWDeviceDRM::SetupConcurrentWriteback: Tear down the Concurrent Writeback topology
+04-18 22:26:32.562  2276  2276 I MI-SF   : surfaceflinger setAffinity mode=1
+04-18 22:26:32.563  2276  2276 E MI-SF   : surfaceflinger setAffinity success
+04-18 22:26:32.563  2276  2276 I MI-SF   : surfaceflinger setreAffinity reTid=2396
+04-18 22:26:32.563  2276  2276 E MI-SF   : surfaceflinger setAffinity success
+04-18 22:26:32.638  3291  9905 W ActivityManagerServiceImpl: Sending non-protected broadcast com.modemenhance.ACTION_MODEMWIFI_RSSI_POLL from system 9255:com.android.phone/1001 pkg com.android.phone. Callers=
+04-18 22:26:32.651  9255  9255 D SlaveWifiManager: getWifiSlaveConnectionInfo
+04-18 22:26:32.732  9255 10367 E PhoneAdapter: get ntnphones failed, exception: java.lang.IllegalStateException: not support satellite!
+04-18 22:26:32.738  3291  8544 E AmlWifiScoreReportInjector: current network is in roaming environment
+04-18 22:26:33.942  3291  9848 I NetworkAccelerateSwitchService: EVENT_RSSI_POLL. mRssiPoll=true
+04-18 22:26:33.942  3291  9848 I NetworkAccelerateSwitchService: checkWifiRssiAndLinkSpeed rssi:59
+04-18 22:26:33.942  3291  9848 I NetworkAccelerateSwitchService: checkWifiRssiAndLinkSpeed mWifiFastFade:false mWifiFastFadeAdjustThreshold:false
+04-18 22:26:33.942  3291  9848 I NetworkAccelerateSwitchService: getAverageWifiRssi:58
+04-18 22:26:33.943  3291  9848 D NetworkAccelerateSwitchService: checkIntervalModeChange mMovementState:false mIntervalMode:0 mIsBadLinkLayerQoE:false mBadLinkLayerQoETimes = 0
+04-18 22:26:34.014  3291  8534 I MiuiNetworkPolicy: bandwidth: 0 KB/s, Max bandwidth: 1572 KB/s
+04-18 22:26:34.097  3291  9905 D FileUtils: Rounded bytes from 11909140480 to 16000000000
+04-18 22:26:34.101 27661 29443 D MemorySizeMonitor: Current memory: 157608KB, ratio: 1%, total: 11630020KB
+04-18 22:26:34.101 27661 29443 W MemorySizeMonitor: Memory threshold exceeded continuously! duration=579888ms
+04-18 22:26:34.101 27661 29443 D MemorySizeMonitor: Skip report due to report interval (10002ms < 60000ms)
+04-18 22:26:34.180  3291  8602 D AurogonImmobulusMode:  update wallpaper pacakge name status mLockWallPaperPackageName =  mLockWallPaperUid = -1 mDeskWallPaperPackageName = com.miui.miwallpaper mDeskWallPaperUid = 10182
+04-18 22:26:34.180  3291  8602 D PolicyMaker: fg uid=10311
+04-18 22:26:34.180  3291  8602 D PolicyMaker: HasForegroundService pkgName=com.cctv.yangshipin.app.androidp uid:10311
+04-18 22:26:34.180  3291  8602 D PolicyMaker: uid =10311 pkg=com.cctv.yangshipin.app.androidp reason=fgservice
+04-18 22:26:34.599  3291  8602 D AurogonImmobulusMode:  update wallpaper pacakge name status mLockWallPaperPackageName =  mLockWallPaperUid = -1 mDeskWallPaperPackageName = com.miui.miwallpaper mDeskWallPaperUid = 10182
+04-18 22:26:34.604  3291  8602 D GreezeManager: uid = 10290 adj
+04-18 22:26:34.763  9294  9294 D ControlCenterHeaderExpandController: onExpansionChanged: progress =  0.0
+04-18 22:26:34.766  9294  9294 D ControlCenterHeaderExpandController: onExpansionChanged: progress =  0.0
+04-18 22:26:34.767  9294  9294 D ControlCenterHeaderExpandController: onExpansionChanged: progress =  0.0
+04-18 22:26:34.791  2056  2704 I vendor.qti.hardware.display.composer-service: Sensor: notify citsensorservice to trigger cwb, misForced = 0
+04-18 22:26:34.791  3137  7335 I libsensor-parseRGB: request dump start for mRequestDisplayId 0
+04-18 22:26:34.791  3137  7335 D vendor.xiaomi.sensor.citsensorservice.aidl: handle id:21 wxh:1280x2772 uwxuh:1280x2772 size: 10645504 fd:13 fd_meta:14 flags:0x228 usage:0x33  format:0x3 layer_count: 1 reserved_size = 0 custom_content_md_reserved_size = 0
+04-18 22:26:34.791  2276  2276 I MI-SF   : surfaceflinger setAffinity mode=0
+04-18 22:26:34.792  2056  2974 D SDM     : HWCSession::PostBuffer: CWB config passed by cwb_client : tappoint 1  CWB_ROI : (567.000000 161.000000 748.000000 342.000000)
+04-18 22:26:34.793  2276  2276 E MI-SF   : surfaceflinger setAffinity success
+04-18 22:26:34.794  2276  2276 D MI-SF   : isTpIdleScene ,mAverageFrameRate is 0, 0 
+04-18 22:26:34.794  2276  2276 D DisplayModeController: setDesiredMode 4630947004276117122 {mode={fps=120.00 Hz, modePtr={id=0, vsyncRate=120.00 Hz, peakRefreshRate=120.00 Hz}}, emitEvent=true, force=false}
+04-18 22:26:34.797  2276  2684 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+04-18 22:26:34.807  2056  2974 I SDM     : HWCDisplay::SetActiveConfigWithConstraints: display:62-0, config: 0, WxH 1280x2772, fps 120
+04-18 22:26:34.808  2056  2974 W SDM     : HWDeviceDRM::GetSupportedBitClkRate: Requested rate not supported: 1110990000
+04-18 22:26:34.808  2056  2974 I SDM     : HWDeviceDRM::UpdateMixerAttributes: Mixer WxH 1280x2772-0 for Peripheral
+04-18 22:26:34.809  2056  2974 I SDM     : HWCDisplay::SubmitDisplayConfig: Active configuration changed from config 2 to 0
+04-18 22:26:34.809  2056  2974 I SDM     : HWCDisplay::SubmitDisplayConfig: Active WxH 1280x2772 ,ddic_mode:normal, timing_fps: 120, sf_fps: 120
+04-18 22:26:34.812  2056  2544 I SDM     : HWDeviceDRM::SetDisplaySwitchMode: Mode 0 already set
+04-18 22:26:34.816  2094  2364 D FPSMonitor: threadFuncFpsMonitor display 0, fps 120
+04-18 22:26:34.826  2056  2544 D SDM     : HWDeviceDRM::SetupConcurrentWriteback: Tear down the Concurrent Writeback topology
+04-18 22:26:34.842  2056 24646 D SDM     : CompManager::NotifyCwbDone: display 0 notify cwb callback, status = 0
+04-18 22:26:34.843  2056  7353 D SDM     : HWCSession::NotifyCWBStatus: Notify the client about buffer status 0.
+04-18 22:26:34.844  2056  7353 D SDM     : HWCSession::ProcessCWBStatus: CWB queue is empty. Display: 0
+04-18 22:26:34.844  3137 31301 E libsensor-parseRGB: CWB NotifyCWBBufferDone  error 0
+04-18 22:26:34.915  2056  2544 I SDM     : DisplayBase::CommitThread: Received idle timeout, panel: video, timeout: 79999 us
+04-18 22:26:34.927  2276  2276 I MI-SF   : surfaceflinger setAffinity mode=1
+04-18 22:26:34.928  2276  2276 E MI-SF   : surfaceflinger setAffinity success
+04-18 22:26:34.928  2276  2276 I MI-SF   : surfaceflinger setreAffinity reTid=2396
+04-18 22:26:34.928  2276  2276 E MI-SF   : surfaceflinger setAffinity success
+04-18 22:26:34.946  9707 11735 D JavaheapMonitor: Java heap used=10M max=256M, proc: com.xiaomi.mirror
+04-18 22:26:34.947  9707 11735 V JavaheapMonitor: Check java heap usage finished! Next check delay: 300000
+04-18 22:26:35.035 13175 16894 D JavaheapMonitor: Java heap used=14M max=512M, proc: com.xiaomi.aicr:cognitionService
+04-18 22:26:35.035 13175 16894 V JavaheapMonitor: Check java heap usage finished! Next check delay: 300000
+04-18 22:26:35.076  2056  2704 I vendor.qti.hardware.display.composer-service: Sensor: notify citsensorservice to trigger cwb, misForced = 1
+04-18 22:26:35.077  3137  7335 I libsensor-parseRGB: request dump start for mRequestDisplayId 0
+04-18 22:26:35.077  3137  7335 D vendor.xiaomi.sensor.citsensorservice.aidl: handle id:21 wxh:1280x2772 uwxuh:1280x2772 size: 10645504 fd:13 fd_meta:14 flags:0x228 usage:0x33  format:0x3 layer_count: 1 reserved_size = 0 custom_content_md_reserved_size = 0
+04-18 22:26:35.078  2056  2974 D SDM     : HWCSession::PostBuffer: CWB config passed by cwb_client : tappoint 1  CWB_ROI : (567.000000 161.000000 748.000000 342.000000)
+04-18 22:26:35.092  2276  2276 I MI-SF   : surfaceflinger setAffinity mode=0
+04-18 22:26:35.093  2276  2276 E MI-SF   : surfaceflinger setAffinity success
+04-18 22:26:35.095  2276  2684 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+04-18 22:26:35.109  2056 24646 D SDM     : CompManager::NotifyCwbDone: display 0 notify cwb callback, status = 0
+04-18 22:26:35.109  2056  7353 D SDM     : HWCSession::NotifyCWBStatus: Notify the client about buffer status 0.
+04-18 22:26:35.110  2056  7353 D SDM     : HWCSession::ProcessCWBStatus: CWB queue is empty. Display: 0
+04-18 22:26:35.110  3137 31301 E libsensor-parseRGB: CWB NotifyCWBBufferDone  error 0
+04-18 22:26:35.173  2056  2544 I SDM     : DisplayBase::CommitThread: Received idle timeout, panel: video, timeout: 80000 us
+04-18 22:26:35.185  2056  2544 D SDM     : HWDeviceDRM::SetupConcurrentWriteback: Tear down the Concurrent Writeback topology
+04-18 22:26:35.280  3291  7042 D AlarmManager: mBroadcastRefCount -> 1
+04-18 22:26:35.284  3291  7042 D BatteryStatsManagerStub: notifyEvent for resId=128 used 0ms
+04-18 22:26:35.284  3291  8632 I whetstone.activity: processNotifyEvent1 resId = 128, bundle = Bundle[{startTime=35210009, sourcePkg=com.xiaomi.xmsf, type=ELAPSED_WAKEUP, statsTag=*walarm*:com.xiaomi.push.PING_TIMER, creatorUid=10197, elapsedRealtime=35210000}]
+04-18 22:26:35.285 14559 22204 I EventMonitor: notifyEvent resId=128
+04-18 22:26:35.289 12549 13143 W PushService: [Tid:361] SleepModeMonitor check and upload.
+04-18 22:26:35.306 12549 13866 D MyLog   : -->log(1): [Tid:398] [Alarm] heartbeat alarm has been triggered.
+04-18 22:26:35.306 12549 13866 D MyLog   : -->log(1): [Tid:398] [Alarm] Ping XMChannelService on timer
+04-18 22:26:35.310 12549 12549 W PushService: [Tid:2] [XMPushService] onStart() with intent.Action = com.xiaomi.push.timer, chid = null, pkg = null|null
+04-18 22:26:35.311 12549 13881 W PushService: [Tid:399] [Job] Handle intent action = com.xiaomi.push.timer
+04-18 22:26:35.311 12549 13881 W PushService: [Tid:399] [Alarm] Service called on timer
+04-18 22:26:35.311 12549 13881 W PushService: [Tid:399] [HwKaMgr] update fall down state: false
+04-18 22:26:35.311 12549 13881 W PushService: [Tid:399] [Alarm] register alarm. (false)
+04-18 22:26:35.312 12549 13881 W PushService: [Tid:399] [HwKaMgr] [Available] MdKa is Unavailable. reason: not supported
+04-18 22:26:35.312 12549 13881 D MyLog   : -->log(0): [Tid:399] [HB] short ping interval count: 2
+04-18 22:26:35.312 12549 13881 W PushService: [Tid:399] [HB] ping interval:235000
+04-18 22:26:35.312 12549 13881 W PushService: [Tid:399] registerPing, firstPing=false, interval=235000, nextTime=35445000
+04-18 22:26:35.315  3291  9905 E AlarmManager: not align this alarm: Alarm{3b9a339 type 2 origWhen 35445000 whenElapsed 35445000 com.xiaomi.xmsf}, reason=0
+04-18 22:26:35.315 12549 13881 D MyLog   : -->log(1): [Tid:399] [Alarm] register timer 35445000, delta=234960ms
+04-18 22:26:35.316 12549 13881 W PushService: [Tid:399] [HwKaMgr] [ping] start ping action
+04-18 22:26:35.317 12549 13881 W PushService: [Tid:399] [Slim] SND ping id=0
+04-18 22:26:35.320 12549 13881 D MyLog   : -->log(1): [Tid:399] [Slim] Wrote {cmd=PING;chid=0;len=12}
+04-18 22:26:35.320 12549 13881 W PushService: [Tid:399] [HwKaMgr] [socket] send message
+04-18 22:26:35.320 12549 13881 D MyLog   : -->log(1): [Tid:399] [Slim] 10:26:35 下午 Sent  Blob [PING,0,0]
+04-18 22:26:35.320 12549 13881 W PushService: [Tid:399] [HwKaMgr] [Available] MdKa is Unavailable. reason: not supported
+04-18 22:26:35.321 12549 13866 W PushService: [Tid:398] [Alarm] heartbeat alarm finish in 15
+04-18 22:26:35.322  3291  3291 D AlarmManager: mBroadcastRefCount -> 0
+04-18 22:26:35.322  3291  3291 D AlarmManager: mPendingIntent -> PendingIntent{cdc0d7e: PendingIntentRecord{bb8aaab com.xiaomi.xmsf broadcastIntent}}
+04-18 22:26:35.380 12549 10279 D MyLog   : -->log(1): [Tid:1265] [Slim] Read {cmd=PING;chid=0;len=8}
+04-18 22:26:35.380 12549 10279 W PushService: [Tid:1265] [HwKaMgr] [socket] receive message
+04-18 22:26:35.380 12549 10279 W PushService: [Tid:1265] [Slim] RCV ping id=0
+04-18 22:26:35.381 12549 10279 D MyLog   : -->log(1): [Tid:1265] [Slim] 10:26:35 下午 RCV  Blob [PING,0,0]
+04-18 22:26:35.381 12549 13881 E PushService: [Tid:399] stats key not found
+04-18 22:26:35.382 12549 13881 W PushService: [Tid:399] -->onPong()
+04-18 22:26:35.382 12549 13881 W PushService: [Tid:399] [HwKaMgr] [Available] MdKa is Unavailable. reason: not supported
+04-18 22:26:35.406  3291  8537 D MiuiWifiCommonBase: band: 1, compensate: 0
+04-18 22:26:35.416 10521 10575 D QLM-Service: check_headroom_zone: Timer EVT, Temp: 35691
+04-18 22:26:35.698  3291  9905 W ActivityManagerServiceImpl: Sending non-protected broadcast com.modemenhance.ACTION_MODEMWIFI_RSSI_POLL from system 9255:com.android.phone/1001 pkg com.android.phone. Callers=
+04-18 22:26:35.708  9255  9255 D SlaveWifiManager: getWifiSlaveConnectionInfo
+04-18 22:26:35.748  9255 10367 E PhoneAdapter: get ntnphones failed, exception: java.lang.IllegalStateException: not support satellite!
+04-18 22:26:35.754  3291  8544 E AmlWifiScoreReportInjector: current network is in roaming environment
+04-18 22:26:35.888  2276  2276 D MI-SF   : setIdleFps choose FPS:60, mode:0
+04-18 22:26:35.888  2276  2276 D DisplayModeController: setDesiredMode 4630947004276117122 {mode={fps=60.00 Hz, modePtr={id=2, vsyncRate=60.00 Hz, peakRefreshRate=60.00 Hz}}, emitEvent=false, force=false}
+04-18 22:26:35.895  2056  2974 I SDM     : HWCDisplay::SetActiveConfigWithConstraints: display:62-0, config: 2, WxH 1280x2772, fps 60
+04-18 22:26:35.896 12173 18045 D JavaheapMonitor: Java heap used=24M max=256M, proc: com.xiaomi.touchservice
+04-18 22:26:35.896 12173 18045 V JavaheapMonitor: Check java heap usage finished! Next check delay: 300000
+04-18 22:26:35.897  2056  2974 W SDM     : HWDeviceDRM::GetSupportedBitClkRate: Requested rate not supported: 1110990000
+04-18 22:26:35.897  2056  2974 I SDM     : HWDeviceDRM::UpdateMixerAttributes: Mixer WxH 1280x2772-0 for Peripheral
+04-18 22:26:35.898  2056  2974 I SDM     : HWCDisplay::SubmitDisplayConfig: Active configuration changed from config 0 to 2
+04-18 22:26:35.898  2056  2974 I SDM     : HWCDisplay::SubmitDisplayConfig: Active WxH 1280x2772 ,ddic_mode:normal, timing_fps: 60, sf_fps: 60
+04-18 22:26:35.900  2056  2544 I SDM     : HWDeviceDRM::SetDisplaySwitchMode: Mode 2 already set
+04-18 22:26:35.900  2056  2704 I vendor.qti.hardware.display.composer-service: Sensor: notify citsensorservice to trigger cwb, misForced = 0
+04-18 22:26:35.901  3137  7335 I libsensor-parseRGB: request dump start for mRequestDisplayId 0
+04-18 22:26:35.901  3137  7335 D vendor.xiaomi.sensor.citsensorservice.aidl: handle id:21 wxh:1280x2772 uwxuh:1280x2772 size: 10645504 fd:13 fd_meta:14 flags:0x228 usage:0x33  format:0x3 layer_count: 1 reserved_size = 0 custom_content_md_reserved_size = 0
+04-18 22:26:35.903  2056  2974 D SDM     : HWCSession::PostBuffer: CWB config passed by cwb_client : tappoint 1  CWB_ROI : (567.000000 161.000000 748.000000 342.000000)
+04-18 22:26:35.905  2094  2364 D FPSMonitor: threadFuncFpsMonitor display 0, fps 60
+04-18 22:26:35.931  2056  2544 D SDM     : HWDeviceDRM::SetupConcurrentWriteback: Tear down the Concurrent Writeback topology
+04-18 22:26:35.933  2056 24646 D SDM     : CompManager::NotifyCwbDone: display 0 notify cwb callback, status = 0
+04-18 22:26:35.934  2056  7353 D SDM     : HWCSession::NotifyCWBStatus: Notify the client about buffer status 0.
+04-18 22:26:35.934  2056  7353 D SDM     : HWCSession::ProcessCWBStatus: CWB queue is empty. Display: 0
+04-18 22:26:35.935  3137  3284 E libsensor-parseRGB: CWB NotifyCWBBufferDone  error 0
+04-18 22:26:35.935  2276  2684 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+04-18 22:26:36.012  2056  2544 I SDM     : DisplayBase::CommitThread: Received idle timeout, panel: video, timeout: 80000 us
+04-18 22:26:36.182  2056  2704 I vendor.qti.hardware.display.composer-service: Sensor: notify citsensorservice to trigger cwb, misForced = 1
+04-18 22:26:36.183  3137  7335 I libsensor-parseRGB: request dump start for mRequestDisplayId 0
+04-18 22:26:36.183  3137  7335 D vendor.xiaomi.sensor.citsensorservice.aidl: handle id:21 wxh:1280x2772 uwxuh:1280x2772 size: 10645504 fd:13 fd_meta:14 flags:0x228 usage:0x33  format:0x3 layer_count: 1 reserved_size = 0 custom_content_md_reserved_size = 0
+04-18 22:26:36.185  2056  2974 D SDM     : HWCSession::PostBuffer: CWB config passed by cwb_client : tappoint 1  CWB_ROI : (567.000000 161.000000 748.000000 342.000000)
+04-18 22:26:36.203  2276  2684 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+04-18 22:26:36.216  2056 24646 D SDM     : CompManager::NotifyCwbDone: display 0 notify cwb callback, status = 0
+04-18 22:26:36.217  2056  7353 D SDM     : HWCSession::NotifyCWBStatus: Notify the client about buffer status 0.
+04-18 22:26:36.217  2056  7353 D SDM     : HWCSession::ProcessCWBStatus: CWB queue is empty. Display: 0
+04-18 22:26:36.218  3137 31301 E libsensor-parseRGB: CWB NotifyCWBBufferDone  error 0
+04-18 22:26:36.281  2056  2544 I SDM     : DisplayBase::CommitThread: Received idle timeout, panel: video, timeout: 80000 us
+04-18 22:26:36.297  2056  2544 D SDM     : HWDeviceDRM::SetupConcurrentWriteback: Tear down the Concurrent Writeback topology
+04-18 22:26:36.339  3291  8602 D AurogonImmobulusMode:  update wallpaper pacakge name status mLockWallPaperPackageName =  mLockWallPaperUid = -1 mDeskWallPaperPackageName = com.miui.miwallpaper mDeskWallPaperUid = 10182
+04-18 22:26:36.349  3291  8602 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+04-18 22:26:36.352  3291  8602 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+04-18 22:26:36.352  3291  8602 D InetDiagMessage: Destroyed live tcp sockets for uids={10312} in 7ms
+04-18 22:26:36.352  3291  8602 D ActionExecute: frozen uid = 10312 reason=check binder
+04-18 22:26:36.353  3291  8602 D ExternalInterface: setUidState, uid = 10312 allow = false
+04-18 22:26:36.353  3291  8602 D MiSensorServiceImpl: PowerKeeperSensor stop iUid:10312 but app has Controlled
+04-18 22:26:36.405  9255  9644 D JavaheapMonitor: Java heap used=34M max=256M, proc: com.android.phone
+04-18 22:26:36.405  9255  9644 V JavaheapMonitor: Check java heap usage finished! Next check delay: 300000
+04-18 22:26:36.947  3291  9848 I NetworkAccelerateSwitchService: EVENT_RSSI_POLL. mRssiPoll=true
+04-18 22:26:36.948  3291  9848 I NetworkAccelerateSwitchService: checkWifiRssiAndLinkSpeed rssi:58
+04-18 22:26:36.948  3291  9848 I NetworkAccelerateSwitchService: checkWifiRssiAndLinkSpeed mWifiFastFade:false mWifiFastFadeAdjustThreshold:false
+04-18 22:26:36.948  3291  9848 I NetworkAccelerateSwitchService: getAverageWifiRssi:58
+04-18 22:26:36.949  3291  9848 D NetworkAccelerateSwitchService: checkIntervalModeChange mMovementState:false mIntervalMode:0 mIsBadLinkLayerQoE:false mBadLinkLayerQoETimes = 0
+04-18 22:26:36.960  3291  3669 D JavaheapMonitor: Java heap used=153M max=512M, proc: system_server
+04-18 22:26:36.960  3291  3669 V JavaheapMonitor: Check java heap usage finished! Next check delay: 180000
+04-18 22:26:36.961 24821 26492 D JavaheapMonitor: Java heap used=10M max=256M, proc: com.miui.analytics
+04-18 22:26:36.961 24821 26492 V JavaheapMonitor: Check java heap usage finished! Next check delay: 300000
+04-18 22:26:36.991  8973  9017 D JavaheapMonitor: Java heap used=7M max=256M, proc: com.android.networkstack.process
+04-18 22:26:36.991  8973  9017 V JavaheapMonitor: Check java heap usage finished! Next check delay: 300000
+04-18 22:26:37.000 10892 11158 I dist:vtcamera:PhoneTemperatureReader: onEvent: null
+04-18 22:26:37.001  3291  3757 D AurogonBandwidthController: skinTemperature:32.087
+04-18 22:26:37.002  3291  3757 D AurogonBandwidthController: skinTemperature:32.087
+04-18 22:26:37.003 10892 12290 I dist:vtcamera:PhoneTemperatureReader: read-temp:32087
+04-18 22:26:37.004 10892 12290 D dist:vtcamera:PhoneTemperatureNotifier: tempV=32087, highTemperature state=false
+04-18 22:26:37.018  3291  8534 I MiuiNetworkPolicy: bandwidth: 0 KB/s, Max bandwidth: 1572 KB/s
+04-18 22:26:37.233  3291  9691 D SLM-SRV-SLAService: checktemp temperature = 32087 temperature_average = 32121 isPerformanceMode = false thermal_enable_slm = true
+04-18 22:26:37.347 13541 14578 W lyra-mdns-core: _deal_timeout query _lyra-mdns._udp.local[0C] timeout!
+04-18 22:26:37.523 13541 16424 D JavaheapMonitor: Java heap used=11M max=256M, proc: com.xiaomi.mi_connect_service
+04-18 22:26:37.523 13541 16424 V JavaheapMonitor: Check java heap usage finished! Next check delay: 300000
+04-18 22:26:38.006 13940 18868 D JavaheapMonitor: Java heap used=6M max=512M, proc: android.process.acore
+04-18 22:26:38.006 13940 18868 V JavaheapMonitor: Check java heap usage finished! Next check delay: 300000
+04-18 22:26:38.006  6140  8904 D JavaheapMonitor: Java heap used=23M max=256M, proc: com.android.settings
+04-18 22:26:38.006  6140  8904 V JavaheapMonitor: Check java heap usage finished! Next check delay: 300000
+04-18 22:26:38.009 17125 21573 D JavaheapMonitor: Java heap used=8M max=256M, proc: com.xiaomi.xmsf:persistent
+04-18 22:26:38.009 17125 21573 V JavaheapMonitor: Check java heap usage finished! Next check delay: 300000
+04-18 22:26:38.431  3291  8537 D MiuiWifiCommonBase: band: 1, compensate: 0
+04-18 22:26:38.757  3291  9905 W ActivityManagerServiceImpl: Sending non-protected broadcast com.modemenhance.ACTION_MODEMWIFI_RSSI_POLL from system 9255:com.android.phone/1001 pkg com.android.phone. Callers=
+04-18 22:26:38.763  9255 10367 E PhoneAdapter: get ntnphones failed, exception: java.lang.IllegalStateException: not support satellite!
+04-18 22:26:38.766  9294  9294 D ControlCenterHeaderExpandController: onExpansionChanged: progress =  0.0
+04-18 22:26:38.767  9255  9255 D SlaveWifiManager: getWifiSlaveConnectionInfo
+04-18 22:26:38.769  9294  9294 D ControlCenterHeaderExpandController: onExpansionChanged: progress =  0.0
+04-18 22:26:38.769  9294  9294 D ControlCenterHeaderExpandController: onExpansionChanged: progress =  0.0
+04-18 22:26:38.774  3291  8544 E AmlWifiScoreReportInjector: current network is in roaming environment
+04-18 22:26:38.795  2056  2704 I vendor.qti.hardware.display.composer-service: Sensor: notify citsensorservice to trigger cwb, misForced = 0
+04-18 22:26:38.795  3137  7335 I libsensor-parseRGB: request dump start for mRequestDisplayId 0
+04-18 22:26:38.796  3137  7335 D vendor.xiaomi.sensor.citsensorservice.aidl: handle id:21 wxh:1280x2772 uwxuh:1280x2772 size: 10645504 fd:13 fd_meta:14 flags:0x228 usage:0x33  format:0x3 layer_count: 1 reserved_size = 0 custom_content_md_reserved_size = 0
+04-18 22:26:38.796  2056  2974 D SDM     : HWCSession::PostBuffer: CWB config passed by cwb_client : tappoint 1  CWB_ROI : (567.000000 161.000000 748.000000 342.000000)
+04-18 22:26:38.798  2276  2684 E HwcComposer: getLuts failed Status(-129, EX_TRANSACTION_FAILED): 'UNKNOWN_TRANSACTION: '
+04-18 22:26:38.830  2056 24646 D SDM     : CompManager::NotifyCwbDone: display 0 notify cwb callback, status = 0
+04-18 22:26:38.831  2056  7353 D SDM     : HWCSession::NotifyCWBStatus: Notify the client about buffer status 0.
+04-18 22:26:38.831  2056  7353 D SDM     : HWCSession::ProcessCWBStatus: CWB queue is empty. Display: 0
+04-18 22:26:38.831  3137  3284 E libsensor-parseRGB: CWB NotifyCWBBufferDone  error 0
+04-18 22:26:38.893  2056  2544 I SDM     : DisplayBase::CommitThread: Received idle timeout, panel: video, timeout: 80000 us
+04-18 22:26:38.912  2056  2544 D SDM     : HWDeviceDRM::SetupConcurrentWriteback: Tear down the Concurrent Writeback topology
+04-18 22:26:38.914  2276  2276 I MI-SF   : surfaceflinger setAffinity mode=1
+04-18 22:26:38.915  2276  2276 E MI-SF   : surfaceflinger setAffinity success
+04-18 22:26:38.915  2276  2276 I MI-SF   : surfaceflinger setreAffinity reTid=2396
+04-18 22:26:38.915  2276  2276 E MI-SF   : surfaceflinger setAffinity success
+04-18 22:26:39.043  3291  7042 W ActivityManagerServiceImpl: Sending non-protected broadcast miui.intent.action.CYCLE_CHECK from system uid 1000 pkg android. Callers=com.android.server.am.BroadcastController.checkBroadcastFromSystem:2218 com.android.server.am.BroadcastController.broadcastIntentLockedTraced:1703 com.android.server.am.BroadcastController.broadcastIntentLocked:857 com.android.server.am.BroadcastController.broadcastIntentInPackage:824 com.android.server.am.ActivityManagerService$LocalService.broadcastIntentInPackage:18839 
+04-18 22:26:39.044  3291  7042 D AlarmManager: mBroadcastRefCount -> 1
+04-18 22:26:39.059  3291  8534 I MiuiNetworkPolicy: updateUidState uid = 10166, uidState = 15
+04-18 22:26:39.059  3291  8534 I MiuiNetworkPolicy: updateUidState uid = 10088, uidState = 15
+04-18 22:26:39.060  3291  3291 E AlarmManager: not align this alarm: Alarm{50bb1cf type 2 origWhen 35243785 whenElapsed 35243785 android}, reason=0
+04-18 22:26:39.062  2100  2100 I vendor.xiaomi.hardware.micharge-service: ReadFilePathValue path = /sys/class/power_supply/battery/temp value = 317
+04-18 22:26:39.063  3291  3496 E IMiCharge: MiCharge method 9 val = 317
+04-18 22:26:39.065  2100  2100 I vendor.xiaomi.hardware.micharge-service: ReadFilePathValue path = /sys/class/power_supply/battery/charge_control_limit value = 0
+04-18 22:26:39.065  3291  3496 E IMiCharge: MiCharge method 10 val = 0
+04-18 22:26:39.065  3291  3291 D AlarmManager: mBroadcastRefCount -> 0
+04-18 22:26:39.065  3291  3291 D AlarmManager: mPendingIntent -> PendingIntent{14a225e: PendingIntentRecord{5bd763f android broadcastIntent}}
+04-18 22:26:39.097  3291  9905 D FileUtils: Rounded bytes from 11909140480 to 16000000000
+04-18 22:26:39.099 27661 29421 D MemorySizeMonitor: Current memory: 157608KB, ratio: 1%, total: 11630020KB
+04-18 22:26:39.099 27661 29421 W MemorySizeMonitor: Memory threshold exceeded continuously! duration=584886ms
+04-18 22:26:39.099 27661 29421 D MemorySizeMonitor: Skip report due to report interval (15000ms < 60000ms)
+04-18 22:26:39.185  3291  8602 D AurogonImmobulusMode:  update wallpaper pacakge name status mLockWallPaperPackageName =  mLockWallPaperUid = -1 mDeskWallPaperPackageName = com.miui.miwallpaper mDeskWallPaperUid = 10182
+04-18 22:26:39.186  3291  8602 D PolicyMaker: fg uid=10311
+04-18 22:26:39.186  3291  8602 D PolicyMaker: HasForegroundService pkgName=com.cctv.yangshipin.app.androidp uid:10311
+04-18 22:26:39.186  3291  8602 D PolicyMaker: uid =10311 pkg=com.cctv.yangshipin.app.androidp reason=fgservice
+04-18 22:26:39.271 13149 16483 D JavaheapMonitor: Java heap used=8M max=256M, proc: com.lbe.security.miui
+04-18 22:26:39.272 13149 16483 V JavaheapMonitor: Check java heap usage finished! Next check delay: 300000
+04-18 22:26:39.595  2068 10819 E ANDR-PERF-MPCTL: ANDR-PERF-MPCTL: exception_recovery_poll_fun() 1497: exception_recovery_poll_fun
+04-18 22:26:39.608  3291  8602 D AurogonImmobulusMode:  update wallpaper pacakge name status mLockWallPaperPackageName =  mLockWallPaperUid = -1 mDeskWallPaperPackageName = com.miui.miwallpaper mDeskWallPaperUid = 10182
+04-18 22:26:39.613  3291  8602 D GreezeManager: uid = 10290 adj
+04-18 22:26:39.668 20405 21759 D JavaheapMonitor: Java heap used=3M max=512M, proc: com.miui.core
+04-18 22:26:39.669 20405 21759 V JavaheapMonitor: Check java heap usage finished! Next check delay: 300000
+04-18 22:26:39.696 25142 27407 D JavaheapMonitor: Java heap used=9M max=512M, proc: com.xiaomi.market
+04-18 22:26:39.696 25142 27407 V JavaheapMonitor: Check java heap usage finished! Next check delay: 300000
+04-18 22:26:39.953  3291  9848 I NetworkAccelerateSwitchService: EVENT_RSSI_POLL. mRssiPoll=true
+04-18 22:26:39.953  3291  9848 I NetworkAccelerateSwitchService: checkWifiRssiAndLinkSpeed rssi:58
+04-18 22:26:39.954  3291  9848 I NetworkAccelerateSwitchService: checkWifiRssiAndLinkSpeed mWifiFastFade:false mWifiFastFadeAdjustThreshold:false
+04-18 22:26:39.954  3291  9848 I NetworkAccelerateSwitchService: getAverageWifiRssi:58
+04-18 22:26:39.954  3291  9848 D NetworkAccelerateSwitchService: checkIntervalModeChange mMovementState:false mIntervalMode:0 mIsBadLinkLayerQoE:false mBadLinkLayerQoETimes = 0
+04-18 22:26:40.005 12845 18916 D JavaheapMonitor: Java heap used=10M max=256M, proc: com.xiaomi.metoknlp
+04-18 22:26:40.005 12845 18916 V JavaheapMonitor: Check java heap usage finished! Next check delay: 300000
+04-18 22:26:40.019  3291  8534 I MiuiNetworkPolicy: bandwidth: 1 KB/s, Max bandwidth: 1572 KB/s
+04-18 22:26:40.422 10521 10575 D QLM-Service: check_headroom_zone: Timer EVT, Temp: 35628
+04-18 22:26:41.222 15465 15756 D JavaheapMonitor: Java heap used=4M max=256M, proc: com.milink.service
+04-18 22:26:41.222 15465 15756 V JavaheapMonitor: Check java heap usage finished! Next check delay: 300000
+04-18 22:26:41.316  3291 10571 W FastPrintWriter: Write failure
+04-18 22:26:41.316  3291 10571 W FastPrintWriter: java.io.IOException: write failed: EPIPE (Broken pipe)
+04-18 22:26:41.316  3291 10571 W FastPrintWriter: 	at libcore.io.IoBridge.write(IoBridge.java:651)
+04-18 22:26:41.316  3291 10571 W FastPrintWriter: 	at java.io.FileOutputStream.write(FileOutputStream.java:436)
+04-18 22:26:41.316  3291 10571 W FastPrintWriter: 	at com.android.internal.util.FastPrintWriter.flushBytesLocked(FastPrintWriter.java:355)
+04-18 22:26:41.316  3291 10571 W FastPrintWriter: 	at com.android.internal.util.FastPrintWriter.flushLocked(FastPrintWriter.java:378)
+04-18 22:26:41.316  3291 10571 W FastPrintWriter: 	at com.android.internal.util.FastPrintWriter.flush(FastPrintWriter.java:413)
+04-18 22:26:41.316  3291 10571 W FastPrintWriter: 	at com.android.server.wm.ActivityTaskManagerService.dumpActivity(ActivityTaskManagerService.java:5232)
+04-18 22:26:41.316  3291 10571 W FastPrintWriter: 	at com.android.server.wm.ActivityTaskManagerService.dumpActivity(ActivityTaskManagerService.java:5190)
+04-18 22:26:41.316  3291 10571 W FastPrintWriter: 	at com.android.server.wm.ActivityTaskManagerService$LocalService.dumpActivity(ActivityTaskManagerService.java:7889)
+04-18 22:26:41.316  3291 10571 W FastPrintWriter: 	at com.android.server.am.ActivityManagerService.doDump(ActivityManagerService.java:12290)
+04-18 22:26:41.316  3291 10571 W FastPrintWriter: 	at com.android.server.am.ActivityManagerService.-$$Nest$mdoDump(Unknown Source:0)
+04-18 22:26:41.316  3291 10571 W FastPrintWriter: 	at com.android.server.am.ActivityManagerService$1.dump(ActivityManagerService.java:1015)
+04-18 22:26:41.316  3291 10571 W FastPrintWriter: 	at com.android.server.utils.PriorityDump.dump(PriorityDump.java:182)
+04-18 22:26:41.316  3291 10571 W FastPrintWriter: 	at com.android.server.am.ActivityManagerService.dump(ActivityManagerService.java:11660)
+04-18 22:26:41.316  3291 10571 W FastPrintWriter: 	at android.os.Binder.doDump(Binder.java:1079)
+04-18 22:26:41.316  3291 10571 W FastPrintWriter: 	at android.os.Binder.dump(Binder.java:1069)
+04-18 22:26:41.316  3291 10571 W FastPrintWriter: 	at android.os.Binder.onTransact(Binder.java:939)
+04-18 22:26:41.316  3291 10571 W FastPrintWriter: 	at android.app.IActivityManager$Stub.onTransact(IActivityManager.java:6262)
+04-18 22:26:41.316  3291 10571 W FastPrintWriter: 	at com.android.server.am.ActivityManagerService.onTransact(ActivityManagerService.java:3175)
+04-18 22:26:41.316  3291 10571 W FastPrintWriter: 	at android.os.Binder.execTransactInternal(Binder.java:1433)
+04-18 22:26:41.316  3291 10571 W FastPrintWriter: 	at android.os.Binder.execTransact(Binder.java:1372)
+04-18 22:26:41.316  3291 10571 W FastPrintWriter: Caused by: android.system.ErrnoException: write failed: EPIPE (Broken pipe)
+04-18 22:26:41.316  3291 10571 W FastPrintWriter: 	at libcore.io.Linux.writeBytes(Native Method)
+04-18 22:26:41.316  3291 10571 W FastPrintWriter: 	at libcore.io.Linux.write(Linux.java:336)
+04-18 22:26:41.316  3291 10571 W FastPrintWriter: 	at libcore.io.ForwardingOs.write(ForwardingOs.java:948)
+04-18 22:26:41.316  3291 10571 W FastPrintWriter: 	at libcore.io.BlockGuardOs.write(BlockGuardOs.java:448)
+04-18 22:26:41.316  3291 10571 W FastPrintWriter: 	at libcore.io.IoBridge.write(IoBridge.java:646)
+04-18 22:26:41.316  3291 10571 W FastPrintWriter: 	... 19 more
+04-18 22:26:41.358  3291  8602 D AurogonImmobulusMode:  update wallpaper pacakge name status mLockWallPaperPackageName =  mLockWallPaperUid = -1 mDeskWallPaperPackageName = com.miui.miwallpaper mDeskWallPaperUid = 10182
+04-18 22:26:41.367  3291  8602 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+04-18 22:26:41.371  3291  8602 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+04-18 22:26:41.371  3291  8602 D InetDiagMessage: Destroyed live tcp sockets for uids={10312} in 8ms
+04-18 22:26:41.371  3291  8602 D ActionExecute: frozen uid = 10312 reason=check binder
+04-18 22:26:41.375  3291  8602 D ExternalInterface: setUidState, uid = 10312 allow = false
+04-18 22:26:41.375  3291  8602 D MiSensorServiceImpl: PowerKeeperSensor stop iUid:10312 but app has Controlled
+04-18 22:26:41.417 29864 29864 I adbd    : in ShellService: dumpsys activity services
+04-18 22:26:41.457  1995  1995 W dumpsys : Thread Pool max thread count is 0. Cannot cache binder as linkToDeath cannot be implemented. serviceName: activity
+04-18 22:26:41.455  3291  8537 D MiuiWifiCommonBase: band: 1, compensate: 0
+04-18 22:26:41.461  3291  9905 D CompatChangeReporter: Compat change id reported: 311208629; UID 10126; state: ENABLED
+04-18 22:26:41.461  3291  9905 D CompatChangeReporter: Compat change id reported: 311208749; UID 10126; state: ENABLED
+04-18 22:26:41.466  3291  9905 D CompatChangeReporter: Compat change id reported: 313677553; UID 10146; state: ENABLED
+04-18 22:26:41.466  3291  9905 D CompatChangeReporter: Compat change id reported: 311208629; UID 10146; state: ENABLED
+04-18 22:26:41.466  3291  9905 D CompatChangeReporter: Compat change id reported: 311208749; UID 10146; state: ENABLED
+04-18 22:26:41.467  3291  9905 D CompatChangeReporter: Compat change id reported: 313677553; UID 10182; state: ENABLED
+04-18 22:26:41.468  3291  9905 D CompatChangeReporter: Compat change id reported: 311208629; UID 10182; state: ENABLED
+04-18 22:26:41.468  3291  9905 D CompatChangeReporter: Compat change id reported: 311208749; UID 10182; state: ENABLED
+04-18 22:26:41.468  3291  9905 D CompatChangeReporter: Compat change id reported: 313677553; UID 10213; state: ENABLED
+04-18 22:26:41.469  3291  9905 D CompatChangeReporter: Compat change id reported: 311208629; UID 10213; state: ENABLED
+04-18 22:26:41.469  3291  9905 D CompatChangeReporter: Compat change id reported: 311208749; UID 10213; state: ENABLED
+04-18 22:26:41.469  3291  9905 D CompatChangeReporter: Compat change id reported: 313677553; UID 10155; state: ENABLED
+04-18 22:26:41.469  3291  9905 D CompatChangeReporter: Compat change id reported: 311208629; UID 10155; state: ENABLED
+04-18 22:26:41.470  3291  9905 D CompatChangeReporter: Compat change id reported: 311208749; UID 10155; state: ENABLED
+04-18 22:26:41.471  3291  9905 D CompatChangeReporter: Compat change id reported: 313677553; UID 10133; state: ENABLED
+04-18 22:26:41.471  3291  9905 D CompatChangeReporter: Compat change id reported: 311208749; UID 10133; state: ENABLED
+04-18 22:26:41.472  3291  9905 D CompatChangeReporter: Compat change id reported: 311208749; UID 10175; state: ENABLED
+04-18 22:26:41.474  3291  9905 D CompatChangeReporter: Compat change id reported: 313677553; UID 10211; state: ENABLED
+04-18 22:26:41.474  3291  9905 D CompatChangeReporter: Compat change id reported: 311208749; UID 10211; state: ENABLED
+04-18 22:26:41.474  3291  9905 D CompatChangeReporter: Compat change id reported: 313677553; UID 10140; state: ENABLED
+04-18 22:26:41.475  3291  9905 D CompatChangeReporter: Compat change id reported: 311208629; UID 10140; state: ENABLED
+04-18 22:26:41.475  3291  9905 D CompatChangeReporter: Compat change id reported: 311208749; UID 10140; state: ENABLED
+04-18 22:26:41.475  3291  9905 D CompatChangeReporter: Compat change id reported: 313677553; UID 10143; state: ENABLED
+04-18 22:26:41.476  3291  9905 D CompatChangeReporter: Compat change id reported: 311208749; UID 10143; state: ENABLED
+04-18 22:26:41.481  3291  9905 D CompatChangeReporter: Compat change id reported: 313677553; UID 10244; state: ENABLED
+04-18 22:26:41.481  3291  9905 D CompatChangeReporter: Compat change id reported: 311208749; UID 10244; state: ENABLED
+04-18 22:26:41.483  3291  9905 D CompatChangeReporter: Compat change id reported: 313677553; UID 10257; state: ENABLED
+04-18 22:26:41.484  3291  9905 D CompatChangeReporter: Compat change id reported: 311208749; UID 10257; state: ENABLED
+04-18 22:26:41.485  3291  9905 D CompatChangeReporter: Compat change id reported: 313677553; UID 10166; state: ENABLED
+04-18 22:26:41.485  3291  9905 D CompatChangeReporter: Compat change id reported: 311208629; UID 10166; state: ENABLED
+04-18 22:26:41.486  3291  9905 D CompatChangeReporter: Compat change id reported: 311208749; UID 10166; state: ENABLED
+04-18 22:26:41.494  3291  9905 D CompatChangeReporter: Compat change id reported: 313677553; UID 10293; state: ENABLED
+04-18 22:26:41.494  3291  9905 D CompatChangeReporter: Compat change id reported: 311208629; UID 10293; state: ENABLED
+04-18 22:26:41.494  3291  9905 D CompatChangeReporter: Compat change id reported: 311208749; UID 10293; state: ENABLED
+04-18 22:26:41.496  3291  9905 D CompatChangeReporter: Compat change id reported: 311208749; UID 10164; state: ENABLED
+04-18 22:26:41.497  3291  9905 D CompatChangeReporter: Compat change id reported: 313677553; UID 10255; state: ENABLED
+04-18 22:26:41.497  3291  9905 D CompatChangeReporter: Compat change id reported: 311208749; UID 10255; state: ENABLED
+04-18 22:26:41.503  3291  9905 D CompatChangeReporter: Compat change id reported: 313677553; UID 10292; state: ENABLED
+04-18 22:26:41.503  3291  9905 D CompatChangeReporter: Compat change id reported: 311208629; UID 10292; state: ENABLED
+04-18 22:26:41.504  3291  9905 D CompatChangeReporter: Compat change id reported: 311208749; UID 10292; state: ENABLED
+04-18 22:26:41.504  3291  9905 D CompatChangeReporter: Compat change id reported: 313677553; UID 10130; state: ENABLED
+04-18 22:26:41.504  3291  9905 D CompatChangeReporter: Compat change id reported: 311208749; UID 10130; state: ENABLED
+04-18 22:26:41.508  3291  9905 D CompatChangeReporter: Compat change id reported: 313677553; UID 10177; state: ENABLED
+04-18 22:26:41.508  3291  9905 D CompatChangeReporter: Compat change id reported: 311208749; UID 10177; state: ENABLED
+04-18 22:26:41.740 26121 21277 D JavaheapMonitor: Java heap used=15M max=256M, proc: com.android.mms
+04-18 22:26:41.740 26121 21277 V JavaheapMonitor: Check java heap usage finished! Next check delay: 300000
+04-18 22:26:41.783  9255 10367 E PhoneAdapter: get ntnphones failed, exception: java.lang.IllegalStateException: not support satellite!
+04-18 22:26:41.788  3291  8544 E AmlWifiScoreReportInjector: current network is in roaming environment
+04-18 22:26:41.816  3291  9905 W ActivityManagerServiceImpl: Sending non-protected broadcast com.modemenhance.ACTION_MODEMWIFI_RSSI_POLL from system 9255:com.android.phone/1001 pkg com.android.phone. Callers=
+04-18 22:26:41.824  9255  9255 D SlaveWifiManager: getWifiSlaveConnectionInfo
+04-18 22:26:42.181 29864 29864 I adbd    : in ShellService: export ANDROID_LOG_TAGS=''; exec logcat '-d' '-b' 'crash'
+04-18 22:26:42.316 29864 29864 I adbd    : in ShellService: export ANDROID_LOG_TAGS=''; exec logcat '-d' '-b' 'main' '-b' 'system'

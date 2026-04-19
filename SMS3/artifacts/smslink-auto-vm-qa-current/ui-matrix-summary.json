@@ -1,0 +1,48 @@
+[
+  {
+    "slot": 0,
+    "x": 90,
+    "texts": "已配对设备 (1) | sdk_gphone64_x86_64 | 连接状态: | 未连接 | 设备管理 | 二维码 | 设备 | 通知 | 短信 | 文件 | 通话 | 设置",
+    "desc": "移除设备 | 搜索设备"
+  },
+  {
+    "slot": 1,
+    "x": 270,
+    "texts": "No notifications | Start listening to receive notifications | Start Listening | Notifications | 黑白名单 | 设备 | 通知 | 短信 | 文件 | 通话 | 设置",
+    "desc": "Refresh | Clear All | Settings"
+  },
+  {
+    "slot": 2,
+    "x": 450,
+    "texts": "No messages | Your messages will appear here | 短信 | Messages | 列表 | 设备 | 通知 | 短信 | 文件 | 通话 | 设置",
+    "desc": "Sync | New Message"
+  },
+  {
+    "slot": 3,
+    "x": 630,
+    "texts": "Transfer History | sample-transfer.txt | 1 B • 2026-04-16 07:55 | Completed | sample-transfer.txt | 23 B • 2026-04-16 07:38 | Completed | sample-transfer.txt | 23 B • 2026-04-16 07:36 | Completed | sample-transfer.txt | 23 B • 2026-04-16 05:23 | Completed | sample-transfer.txt | 23 B • 2026-04-15 12:41 | Failed | sample-transfer.txt | 23 B • 2026-04-15 12:29 | Failed | 文件传输 | File Transfer | 刷新 | 设备 | 通知 | 短信 | 文件 | 通话 | 设置",
+    "desc": "Send File"
+  },
+  {
+    "slot": 4,
+    "x": 810,
+    "texts": "暂无通话记录 | 点击右上角刷新按钮同步通话记录 | 通话记录 | 设备 | 通知 | 短信 | 文件 | 通话 | 设置",
+    "desc": "设置默认电话应用 | 同步通话记录"
+  },
+  {
+    "slot": 5,
+    "x": 990,
+    "texts": "权限与安全 | 权限中心 | 管理应用权限 | 连接 | 连接策略 | 配置设备连接方式 | 同步 | 通知同步策略 | 配置通知同步规则 | 显示 | 主题 | 浅色模式 | 语言 | 中文 | 高级 | 诊断日志 | 查看应用日志 | 关于 | 设置 | 设备 | 通知 | 短信 | 文件 | 通话 | 设置",
+    "desc": ""
+  },
+  {
+    "slot": "permission_center",
+    "texts": "SMS-link 依赖通知、短信、通话、蓝牙和文件权限。点击条目可跳转到系统设置。 | 通知访问 | 用于镜像和同步系统通知 | 未授权 | 短信权限 | 用于读取、发送和接收短信 | 已授权 | 通话权限 | 用于读取通话状态和通话记录 | 已授权 | 蓝牙权限 | 用于发现、配对和连接设备 | 已授权 | 位置权限 | Android BLE 扫描依赖位置权限 | 已授权 | 文件访问 | 用于文件传输和分享 | 未授权 | 权限中心",
+    "desc": ""
+  },
+  {
+    "slot": "diagnostic",
+    "texts": "INFO | 08:20:53 | 应用启动 | DEBUG | 08:20:52 | 蓝牙服务初始化 | INFO | 08:20:51 | 权限检查完成 | 诊断日志 | Diagnostic Logs",
+    "desc": ""
+  }
+]

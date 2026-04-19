@@ -1,0 +1,7 @@
+interface:
+  display_name: "SMS-link Orchestrator"
+  short_description: "Supervise Android emulator QA rounds, assign work to execution, triage, and fix agents, and keep platform blockers separate from app defects."
+  default_prompt: "Use $smslink-orchestrator to manage SMS-link multi-emulator QA. Read the requirements, build the feature matrix, keep discovery-log device identity authoritative, reject stale relay peers and cached IDs, assign 1-level then 2-level rounds, require evidence from the executor, send failures to triage, and only send confirmed product defects to the fixer."
+
+policy:
+  allow_implicit_invocation: true

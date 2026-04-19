@@ -1,6 +1,7 @@
 package com.smslink.file.data
 
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.smslink.core.model.TransferDirection
 import com.smslink.core.model.TransferState
@@ -9,7 +10,14 @@ import com.smslink.core.model.TransferState
  * 文件传输实体
  * 用于持久化文件传输记录
  */
-@Entity(tableName = "file_transfers")
+@Entity(
+    tableName = "file_transfers",
+    indices = [
+        Index(value = ["state"]),
+        Index(value = ["deviceId"]),
+        Index(value = ["timestamp"])
+    ]
+)
 data class FileTransferEntity(
     @PrimaryKey
     val id: String,

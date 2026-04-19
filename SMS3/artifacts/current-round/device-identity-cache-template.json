@@ -1,0 +1,9 @@
+# Device Identity Cache
+# Purpose: Cache device identity within a round to avoid repeated verification
+# Expected: Save 5-10 seconds per scenario × 10 scenarios = 50-100 seconds per round
+
+{
+  "roundId": "",
+  "cacheTime": "",
+  "devices": {}
+}

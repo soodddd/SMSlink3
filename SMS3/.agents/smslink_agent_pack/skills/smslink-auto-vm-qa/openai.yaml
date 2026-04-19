@@ -1,0 +1,7 @@
+interface:
+  display_name: "SMS-link Auto VM QA"
+  short_description: "Single-entry SMS-link emulator QA skill for matrix building, preflight, blocker triage, and product-fix control."
+  default_prompt: "Use $smslink-auto-vm-qa to run the full SMS-link Android emulator workflow from requirements to evidence to triage to fix, with one refresh cycle max for stale identity mismatches, exact device identity checks, 1-level on two healthy emulators first, and 2-level only after 1-level passes. First eliminate emulator/device availability issues, preflight script timeouts, proxy/NAT file-transfer failures, TLS private-key provider incompatibility, packaging-resource merge conflicts, Windows UTF-8 decode issues, UI coordinate drift, and shell-service launch denials before spending time on product fixes."
+
+policy:
+  allow_implicit_invocation: true

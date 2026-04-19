@@ -12,7 +12,10 @@ import com.smslink.core.model.MessageType
  * 用于将复杂类型转换为 Room 可存储的基本类型
  */
 class Converters {
-    private val gson = Gson()
+    companion object {
+        @JvmStatic
+        val gson = Gson()
+    }
 
     @TypeConverter
     fun fromDeviceType(value: DeviceType): String {

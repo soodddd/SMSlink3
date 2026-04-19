@@ -1,9 +1,12 @@
 package com.smslink.sms
 
+import android.Manifest
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.provider.Telephony
+import androidx.core.content.ContextCompat
 import com.smslink.core.log.ILogger
 import com.smslink.core.model.Message
 import com.smslink.core.model.MessageType
@@ -33,9 +36,16 @@ class SmsReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         logger.d(TAG, "SMS broadcast received: ${intent.action}")
 
+        // 检查权限
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_SMS)
+            != PackageManager.PERMISSION_GRANTED) {
+            logger.w(TAG, "READ_SMS permission not granted")
+            return
+        }
+
         when (intent.action) {
             Telephony.Sms.Intents.SMS_RECEIVED_ACTION -> {
-                handleSmsReceived(intent)
+                handleSmsReceived(context, intent)
             }
             Telephony.Sms.Intents.SMS_DELIVER_ACTION -> {
                 handleSmsDelivered(intent)
@@ -46,7 +56,7 @@ class SmsReceiver : BroadcastReceiver() {
     /**
      * 处理接收到的短信
      */
-    private fun handleSmsReceived(intent: Intent) {
+    private fun handleSmsReceived(context: Context, intent: Intent) {
         val messages = Telephony.Sms.Intents.getMessagesFromIntent(intent)
         if (messages.isNullOrEmpty()) {
             logger.w(TAG, "No messages in SMS_RECEIVED intent")
@@ -66,7 +76,7 @@ class SmsReceiver : BroadcastReceiver() {
         // 创建消息对象
         val message = Message(
             id = UUID.randomUUID().toString(),
-            threadId = getThreadId(sender),
+            threadId = getThreadId(context, sender),
             address = sender,
             body = body,
             timestamp = timestamp,
@@ -99,10 +109,31 @@ class SmsReceiver : BroadcastReceiver() {
 
     /**
      * 获取会话ID
+     * 使用系统 ContentProvider 查询真实的 threadId
      */
-    private fun getThreadId(address: String): String {
-        // 简化实现：使用地址的哈希值
-        return address.hashCode().toString()
+    private fun getThreadId(context: Context, address: String): String {
+        return try {
+            val uri = android.net.Uri.parse("content://sms/")
+            val projection = arrayOf("thread_id")
+            val selection = "address = ?"
+            val selectionArgs = arrayOf(address)
+
+            context.contentResolver.query(uri, projection, selection, selectionArgs, null)?.use { cursor ->
+                if (cursor.moveToFirst()) {
+                    val threadIdIndex = cursor.getColumnIndex("thread_id")
+                    if (threadIdIndex >= 0) {
+                        return cursor.getString(threadIdIndex)
+                    }
+                }
+            }
+
+            // 如果查询失败，使用地址作为 threadId
+            address
+        } catch (e: Exception) {
+            logger.e(TAG, "Failed to get thread ID", e)
+            // 降级方案：使用地址本身
+            address
+        }
     }
 
     companion object {

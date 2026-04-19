@@ -1,0 +1,7 @@
+{
+  "notification_listener_started": true,
+  "notification_service_created": true,
+  "call_guidance_visible": false,
+  "no_fatal": true,
+  "no_anr": true
+}

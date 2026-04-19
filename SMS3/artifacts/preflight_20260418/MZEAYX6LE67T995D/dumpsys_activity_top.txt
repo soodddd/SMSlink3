@@ -1,0 +1,444 @@
+﻿---- TIME 2026/4/18 22:26:27 ----
+TASK 1000:com.android.settings id=7556 userId=0 displayId=0(type=INTERNAL)
+  ACTIVITY com.android.settings/.Settings$DevelopmentSettingsDashboardActivity 2c52855 pid=7863 userId=0 uid=1000 displayId=0(type=INTERNAL)
+    Local Activity d6e2a15 State:
+      mResumed=false mStopped=true mFinished=false
+      mIsInMultiWindowMode=false mIsInPictureInPictureMode=false
+      mChangingConfigurations=false
+      mCurrentConfig={1.0 ??mcc??mnc [zh_CN] ldltr sw360dp w360dp h804dp 480dpi nrml long widecg port night finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 1080, 2412) mAppBounds=Rect(0, 0 - 1080, 2412) mMaxBounds=Rect(0, 0 - 1080, 2412) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=standard mAlwaysOnTop=undefined mRotation=ROTATION_0} s.1 fontWeightAdjustment=0mThemeChanged= 0, mThemeChangedFlags= 0, mFlipFont= 0, mScenario= 0, mAccessibleChanged= -1, mUxIconConfig= 1163078655912968480, mMaterialColor= 0, mUserId= 0, mFontUserId= 0, mFontVariationSettings= 21f4, mFoldingAngle = -1.0, mIconPackName= , mDarkModeBackgroundMaxL= 8.0, mDarkModeDialogBgMaxL= 27.0, mDarkModeForegroundMinL= 100.0, mOplusConfigType= 1, mOplusChangedConfigs= 0, OpSans= -1, mBurmeseFontFlag= 2, mFlag= 0, mFlexibleActivitySuitable= -1, mPuttDisplayFlag= -1}
+      mLoadersStarted=true
+      Active Fragments in db39b74:
+        #0: ReportFragment{e8eb89d #0 androidx.lifecycle.LifecycleDispatcher.report_fragment_tag}
+          mFragmentId=#0 mContainerId=#0 mTag=androidx.lifecycle.LifecycleDispatcher.report_fragment_tag
+          mState=3 mIndex=0 mWho=android:fragment:0 mBackStackNesting=0
+          mAdded=true mRemoving=false mFromLayout=false mInLayout=false
+          mHidden=false mDetached=false mMenuVisible=true mHasMenu=false
+          mRetainInstance=false mRetaining=false mUserVisibleHint=true
+          mFragmentManager=FragmentManager{db39b74 in HostCallbacks{572a112}}
+          mHost=android.app.Activity$HostCallbacks@572a112
+          Child FragmentManager{4ce40e3 in ReportFragment{e8eb89d}}:
+            FragmentManager misc state:
+              mHost=android.app.Activity$HostCallbacks@572a112
+              mContainer=android.app.Fragment$1@628fae0
+              mParent=ReportFragment{e8eb89d #0 androidx.lifecycle.LifecycleDispatcher.report_fragment_tag}
+              mCurState=3 mStateSaved=true mDestroyed=false
+      Added Fragments:
+        #0: ReportFragment{e8eb89d #0 androidx.lifecycle.LifecycleDispatcher.report_fragment_tag}
+      FragmentManager misc state:
+        mHost=android.app.Activity$HostCallbacks@572a112
+        mContainer=android.app.Activity$HostCallbacks@572a112
+        mCurState=3 mStateSaved=true mDestroyed=false
+    ViewRoot:
+      mAdded=true
+      mRemoved=false
+      mStopped=true
+      mPausedForTransition=false
+      mConsumeBatchedInputScheduled=false
+      mConsumeBatchedInputImmediatelyScheduled=false
+      mPendingInputEventCount=0
+      mProcessInputEventsScheduled=false
+      mTraversalScheduled=false
+      mReportNextDraw=false
+      mLastPerformTraversalsFailedReason=view_not_visible
+      mLastDisplaySource=From Constructor 0 state 2 caller android.view.ViewRootImpl.<init>:1290 android.view.WindowManagerGlobal.addView:444 android.view.WindowManagerImpl.addView:158 android.app.ActivityThread.handleResumeActivity:5817 android.app.servertransaction.ResumeActivityItem.execute:64 android.app.servertransaction.ActivityTransactionItem.execute:60 android.app.servertransaction.TransactionExecutor.executeLifecycleItem:230 android.app.servertransaction.TransactionExecutor.executeTransactionItems:112 android.app.servertransaction.TransactionExecutor.execute:86 android.app.ActivityThread$H.handleMessage:2902 android.os.Handler.dispatchMessage:107 android.os.Looper.loopOnce:282 android.os.Looper.loop:387 android.app.ActivityThread.main:9500 java.lang.reflect.Method.invoke:-2 com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run:600 com.android.internal.os.ZygoteInit.main:1005 <bottom of call stack> <bottom of call stack> <bottom of call stack> <bottom of call stack> <bottom of call stack> <bottom of call stack> <bottom of call stack> <bottom of call stack> <bottom of call stack> <bottom of call stack> <bottom of call stack> <bottom of call stack> <bottom of call stack> 
+      mLastDisplayStateSource=State 2 caller android.view.WindowManagerGlobal.addView:463 android.view.WindowManagerImpl.addView:158 android.app.ActivityThread.handleResumeActivity:5817 android.app.servertransaction.ResumeActivityItem.execute:64 android.app.servertransaction.ActivityTransactionItem.execute:60 android.app.servertransaction.TransactionExecutor.executeLifecycleItem:230 android.app.servertransaction.TransactionExecutor.executeTransactionItems:112 android.app.servertransaction.TransactionExecutor.execute:86 android.app.ActivityThread$H.handleMessage:2902 android.os.Handler.dispatchMessage:107 android.os.Looper.loopOnce:282 android.os.Looper.loop:387 android.app.ActivityThread.main:9500 java.lang.reflect.Method.invoke:-2 com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run:600 com.android.internal.os.ZygoteInit.main:1005 <bottom of call stack> <bottom of call stack> <bottom of call stack> <bottom of call stack> <bottom of call stack> <bottom of call stack> <bottom of call stack> <bottom of call stack> <bottom of call stack> <bottom of call stack> <bottom of call stack> <bottom of call stack> <bottom of call stack> <bottom of call stack> 
+      mLastDisplayListenerState=registerListeners , time 1776520896266 caller android.view.ViewRootImpl.setView:1828 android.view.WindowManagerGlobal.addView:463 android.view.WindowManagerImpl.addView:158 android.app.ActivityThread.handleResumeActivity:5817 android.app.servertransaction.ResumeActivityItem.execute:64 android.app.servertransaction.ActivityTransactionItem.execute:60 android.app.servertransaction.TransactionExecutor.executeLifecycleItem:230 android.app.servertransaction.TransactionExecutor.executeTransactionItems:112 android.app.servertransaction.TransactionExecutor.execute:86 android.app.ActivityThread$H.handleMessage:2902 android.os.Handler.dispatchMessage:107 android.os.Looper.loopOnce:282 android.os.Looper.loop:387 android.app.ActivityThread.main:9500 java.lang.reflect.Method.invoke:-2 com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run:600 com.android.internal.os.ZygoteInit.main:1005 <bottom of call stack> <bottom of call stack> <bottom of call stack> <bottom of call stack> <bottom of call stack> <bottom of call stack> <bottom of call stack> <bottom of call stack> <bottom of call stack> <bottom of call stack> <bottom of call stack> <bottom of call stack> <bottom of call stack> 
+      mLastScheduleTraversalsInfo=mLastScheduleTraversalTime=0,CurrentTime=3032866227
+      mLastReportedMergedConfiguration={mGlobalConfig={1.0 ??mcc??mnc [zh_CN] ldltr sw360dp w360dp h804dp 480dpi nrml long widecg port night finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 1080, 2412) mAppBounds=Rect(0, 0 - 1080, 2412) mMaxBounds=Rect(0, 0 - 1080, 2412) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} s.85025 fontWeightAdjustment=0mThemeChanged= 0, mThemeChangedFlags= 0, mFlipFont= 0, mScenario= 0, mAccessibleChanged= -1, mUxIconConfig= 1163078655912968480, mMaterialColor= 0, mUserId= 0, mFontUserId= 0, mFontVariationSettings= 21f4, mFoldingAngle = -1.0, mIconPackName= , mDarkModeBackgroundMaxL= 8.0, mDarkModeDialogBgMaxL= 27.0, mDarkModeForegroundMinL= 100.0, mOplusConfigType= 1, mOplusChangedConfigs= 0, OpSans= -1, mBurmeseFontFlag= 2, mFlag= 0, mFlexibleActivitySuitable= -1, mPuttDisplayFlag= -1} mOverrideConfig={1.0 ??mcc??mnc [zh_CN] ldltr sw360dp w360dp h804dp 480dpi nrml long widecg port night finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 1080, 2412) mAppBounds=Rect(0, 0 - 1080, 2412) mMaxBounds=Rect(0, 0 - 1080, 2412) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=standard mAlwaysOnTop=undefined mRotation=ROTATION_0} s.1 fontWeightAdjustment=0mThemeChanged= 0, mThemeChangedFlags= 0, mFlipFont= 0, mScenario= 0, mAccessibleChanged= -1, mUxIconConfig= 1163078655912968480, mMaterialColor= 0, mUserId= 0, mFontUserId= 0, mFontVariationSettings= 21f4, mFoldingAngle = -1.0, mIconPackName= , mDarkModeBackgroundMaxL= 8.0, mDarkModeDialogBgMaxL= 27.0, mDarkModeForegroundMinL= 100.0, mOplusConfigType= 1, mOplusChangedConfigs= 0, OpSans= -1, mBurmeseFontFlag= 2, mFlag= 0, mFlexibleActivitySuitable= -1, mPuttDisplayFlag= -1}}
+      mLastConfigurationFromResources={1.0 ??mcc??mnc [zh_CN] ldltr sw360dp w360dp h804dp 480dpi nrml long widecg port night finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 1080, 2412) mAppBounds=Rect(0, 0 - 1080, 2412) mMaxBounds=Rect(0, 0 - 1080, 2412) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=standard mAlwaysOnTop=undefined mRotation=ROTATION_0} s.1 fontWeightAdjustment=0mThemeChanged= 0, mThemeChangedFlags= 0, mFlipFont= 0, mScenario= 0, mAccessibleChanged= -1, mUxIconConfig= 1163078655912968480, mMaterialColor= 0, mUserId= 0, mFontUserId= 0, mFontVariationSettings= 21f4, mFoldingAngle = -1.0, mIconPackName= , mDarkModeBackgroundMaxL= 8.0, mDarkModeDialogBgMaxL= 27.0, mDarkModeForegroundMinL= 100.0, mOplusConfigType= 1, mOplusChangedConfigs= 0, OpSans= -1, mBurmeseFontFlag= 2, mFlag= 0, mFlexibleActivitySuitable= -1, mPuttDisplayFlag= -1}
+      ViewRootImplExtImpl
+        mCancelDrawCount:0
+        mWaitingLastSyncDraw:false
+      mLastReportedActivityWindowInfo=ActivityWindowInfo{isEmbedded=false, taskBounds=Rect(0, 0 - 1080, 2412), taskFragmentBounds=Rect(0, 0 - 1080, 2412)}
+      mIsAmbientMode=false
+      mUnbufferedInputSource=0
+      mAttachInfo=       AttachInfo:
+        mHasWindowFocus=false
+        mWindowVisibility=8
+        mInTouchMode=true
+        mUnbufferedDispatchRequested=false
+      android.view.ViewRootImpl$NativePreImeInputStage: mQueueLength=0
+      android.view.ViewRootImpl$ImeInputStage: mQueueLength=0
+      android.view.ViewRootImpl$NativePostImeInputStage: mQueueLength=0
+      android.view.ViewRootImpl$WindowInputEventReceiver
+       mInputChannel: 37f3476 com.android.settings/com.android.settings.Settings$DevelopmentSettingsDashboardActivity (client)
+       mSeqMap: {}
+       mReceiverPtr:
+        mInputConsumer:
+          mResampleTouch = true
+          mChannel = 37f3476 com.android.settings/com.android.settings.Settings$DevelopmentSettingsDashboardActivity (client)
+          mMsgDeferred: false
+          Batches:
+              <empty>
+          mSeqChains:
+              <empty>
+          mConsumeTimes:
+              <empty>
+          
+        mBatchedInputEventPending: false
+        mOutboundQueue:
+          <empty>
+        
+    Choreographer:
+      mFrameScheduled=false
+      mLastFrameTime=1228107363 (129922 ms ago)
+    InsetsController:
+        InsetsState
+          mDisplayFrame=Rect(0, 0 - 1080, 2412)
+          mDisplayCutout=DisplayCutout{insets=Rect(0, 96 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(482, 0 - 598, 96), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=1080 displayHeight=2412 physicalDisplayWidth=1080 physicalDisplayHeight=2412 density={3.0} cutoutSpec={M -58,0 L -58,96 L 58,96 L 58,0 Z} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}} sideOverrides={}}
+          mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=0, center=Point(0, 0)}, RoundedCorner{position=TopRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomLeft, radius=0, center=Point(0, 0)}]}
+          mRoundedCornerFrame=Rect(0, 0 - 1080, 2412)
+          mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(852, 0 - 1092, 96) rotation=0}
+          mDisplayShape=DisplayShape{ spec=1406003047 displayWidth=1080 displayHeight=2412 physicalPixelDisplaySizeRatio=1.0 rotation=0 offsetX=0 offsetY=0 scale=1.0}
+            InsetsSource id=3 type=ime frame=[0,0][0,0] visibleFrame=[0,2280][1080,2412] visible=false flags= sideHint=NONE boundingRects=null
+            InsetsSource id=27 type=displayCutout frame=[0,0][1080,96] visible=true flags= sideHint=TOP boundingRects=null
+            InsetsSource id=1f7c0001 type=navigationBars frame=[0,2364][1080,2412] visible=true flags=SUPPRESS_SCRIM sideHint=BOTTOM boundingRects=null
+            InsetsSource id=1f7c0004 type=systemGestures frame=[0,0][90,2412] visible=true flags= sideHint=LEFT boundingRects=null
+            InsetsSource id=1f7c0005 type=mandatorySystemGestures frame=[0,2316][1080,2412] visible=true flags= sideHint=BOTTOM boundingRects=null
+            InsetsSource id=1f7c0006 type=tappableElement frame=[0,0][0,0] visible=true flags= sideHint=NONE boundingRects=null
+            InsetsSource id=1f7c0024 type=systemGestures frame=[990,0][1080,2412] visible=true flags= sideHint=RIGHT boundingRects=null
+            InsetsSource id=360d0000 type=statusBars frame=[0,0][1080,96] visible=true flags= sideHint=TOP boundingRects=null
+            InsetsSource id=360d0005 type=mandatorySystemGestures frame=[0,0][1080,132] visible=true flags= sideHint=TOP boundingRects=null
+            InsetsSource id=360d0006 type=tappableElement frame=[0,0][1080,96] visible=true flags= sideHint=TOP boundingRects=null
+        mIsPredictiveBackImeHideAnimInProgress=false
+    WindowOnBackDispatcher:
+        Top Callback: android.view.ViewRootImpl$$ExternalSyntheticLambda11@27a0d5f
+        Callbacks: 
+          Callback: android.view.ViewRootImpl$$ExternalSyntheticLambda11@27a0d5f Priority=0
+    ImeBackAnimationController:
+        mLastProgress=0.0
+        mTriggerBack=false
+        mIsPreCommitAnimationInProgress=false
+        mStartRootScrollY=0
+        isBackAnimationAllowed=true
+        isAdjustPan=true
+        isHideAnimationInProgress=false
+    View Hierarchy:
+      com.android.internal.policy.DecorView{955cb95 I.E...... R.....ID 0,0-1080,2412 alpha=1.0 viewInfo = }[Settings$DevelopmentSettingsDashboardActivity]
+        android.widget.LinearLayout{71072d6 V.E...... .......D 0,0-1080,2412 alpha=1.0 viewInfo = }
+          android.view.ViewStub{5234199 G.E...... ......I. 0,0-0,0 #10201cb android:id/action_mode_bar_stub alpha=1.0 viewInfo = }
+          android.widget.FrameLayout{566f1 V.E...... .......D 0,0-1080,2412 alpha=1.0 viewInfo = }
+            androidx.appcompat.widget.FitWindowsLinearLayout{6417e98 V.E...... .......D 0,0-1080,2412 #7f0a0052 app:id/action_bar_root alpha=1.0 viewInfo = }
+              androidx.appcompat.widget.ViewStubCompat{355bc5e G.E...... ......I. 0,0-0,0 #7f0a006a app:id/action_mode_bar_stub alpha=1.0 viewInfo = }
+              androidx.appcompat.widget.ContentFrameLayout{f5c207b V.E...... .......D 0,0-1080,2412 #1020002 android:id/content alpha=1.0 viewInfo = }
+                androidx.coordinatorlayout.widget.CoordinatorLayout{84600a V.E...... .......D 0,0-1080,2412 #7f0a02e6 app:id/content_parent alpha=1.0 viewInfo = }
+                  com.coui.appcompat.toolbar.COUIToolbar{484d3ac G.ED..... ......ID 0,0-0,0 #7f0a004f app:id/action_bar alpha=1.0 viewInfo = }
+                  android.widget.FrameLayout{d686b68 V.E...... .......D 0,252-1080,2412 #7f0a02e4 app:id/content_frame alpha=1.0 viewInfo = }
+                    android.widget.LinearLayout{c78812d V.E...... .......D 0,0-1080,2160 alpha=1.0 viewInfo = }
+                      com.android.settings.widget.SettingsMainSwitchBar{99a083f GFE...C.. ......I. 0,0-0,0 #7f0a0c6f app:id/switch_bar alpha=1.0 viewInfo = }
+                        android.widget.LinearLayout{4d2e50c V.E...... ......I. 0,0-0,0 alpha=1.0 viewInfo = }
+                          android.widget.LinearLayout{2dd5e55 V.E...... ......I. 0,0-0,0 #7f0a0534 app:id/frame alpha=1.0 viewInfo = }
+                            com.coui.appcompat.textview.COUITextView{5bd406a V.ED..... ......ID 0,0-0,0 #7f0a0c72 app:id/switch_text alpha=1.0 viewInfo = }
+                            com.google.android.material.materialswitch.MaterialSwitch{730e95b V.ED..... ......ID 0,0-0,0 #1020040 android:id/switch_widget alpha=1.0 viewInfo = }
+                      android.widget.FrameLayout{338a4f5 V.E...... .......D 0,0-1080,2160 #7f0a077f app:id/main_content alpha=1.0 viewInfo = }
+                        android.widget.LinearLayout{61bec44 V.E..V... .......D 0,0-1080,2160 #7f0a02dc app:id/container_material alpha=1.0 viewInfo = }
+                          android.widget.FrameLayout{e4f45f8 G.E..V... ......I. 0,0-0,0 #7f0a094c app:id/pinned_header alpha=1.0 viewInfo = }
+                          com.coui.appcompat.grid.COUIPercentWidthFrameLayout{c824957 V.E..V... .......D 0,0-1080,2160 #102003f android:id/list_container alpha=1.0 viewInfo = }
+                            android.widget.LinearLayout{4e28ad1 G.E..V... ......I. 0,0-0,0 #7f0a0759 app:id/loading_container alpha=1.0 viewInfo = }
+                              android.widget.ProgressBar{966f936 V.ED.V... ......I. 0,0-0,0 alpha=1.0 viewInfo = }
+                              com.coui.appcompat.textview.COUITextView{68ac037 V.ED.V... ......I. 0,0-0,0 alpha=1.0 viewInfo = }
+                            androidx.recyclerview.widget.COUIRecyclerView{1d942e1 VFED..... .F....ID 0,0-1080,2160 #7f0a0a56 app:id/recycler_view aid=1073741830 alpha=1.0 viewInfo = }
+                              com.coui.appcompat.preference.COUICustomListSelectedLinearLayout{7c5bfbb VFE..VC.. ......ID 0,-5-1080,173 #0 alpha=1.0 viewInfo = }
+                                android.widget.FrameLayout{12ec9a4 G.E..V... ......I. 0,0-0,0 #7f0a0646 app:id/img_layout alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.imageview.COUIRoundImageView{b34030d G.ED.V... ......I. 0,0-0,0 #1020006 android:id/icon alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.reddot.COUIHintRedDot{72172c2 G.ED.V... ......I. 0,0-0,0 #7f0a064e app:id/img_red_dot alpha=1.0 viewInfo = }
+                                com.coui.appcompat.preference.COUICustomLinearLayoutForPreference{cf10b16 V.E..V... ........ 96,0-900,178 #7f0a035b app:id/customLinearLayoutForList alpha=1.0 viewInfo = }
+                                  android.widget.RelativeLayout{3a43831 V.E..V... ........ 0,56-312,121 #7f0a07bc app:id/messageLayout alpha=1.0 viewInfo = }
+                                    com.coui.appcompat.textview.COUITextView{53fccd8 V.ED.V... ........ 0,0-312,65 #1020016 android:id/title alpha=1.0 viewInfo = }
+                                    com.coui.appcompat.textview.COUITextView{e4128d3 G.ED.V... ......ID 0,0-0,0 #1020010 android:id/summary alpha=1.0 viewInfo = }
+                                  android.widget.LinearLayout{81d3aba V.E..V... ......ID 360,89-360,89 alpha=1.0 viewInfo = }
+                                    com.coui.appcompat.reddot.COUIHintRedDot{260dc10 G.ED.V... ......I. 0,0-0,0 #7f0a06bb app:id/jump_icon_red_dot alpha=1.0 viewInfo = }
+                                    com.coui.appcompat.reddot.COUIHintRedDot{aaac309 G.ED.V... ......I. 0,0-0,0 #7f0a0107 app:id/assignment_red_dot alpha=1.0 viewInfo = }
+                                    com.coui.appcompat.imageview.COUIRoundImageView{417f90e G.ED.V... ......I. 0,0-0,0 #7f0a0106 app:id/assignment_icon alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.textview.COUITextView{d069c97 V.ED.V... ........ 372,30-804,148 #7f0a0105 app:id/assignment alpha=1.0 viewInfo = }
+                                android.widget.LinearLayout{d6ac2a2 V.E..V... .......D 900,53-984,125 #1020018 android:id/widget_frame alpha=1.0 viewInfo = }
+                                  android.widget.LinearLayout{b53266d V.E..V... .......D 0,0-84,72 alpha=1.0 viewInfo = }
+                                    androidx.appcompat.widget.AppCompatImageView{350de84 V.ED.V... ......ID 48,0-84,72 #7f0a02a6 app:id/color_preference_widget_jump alpha=1.0 viewInfo = }
+                              com.coui.appcompat.preference.COUICustomListSelectedLinearLayout{b1784dd VFE..VC.. ......ID 0,173-1080,361 #0 alpha=1.0 viewInfo = }
+                                android.widget.FrameLayout{aeb7f2f G.E..V... ......I. 0,0-0,0 #7f0a0646 app:id/img_layout alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.imageview.COUIRoundImageView{45fa93c G.ED.V... ......I. 0,0-0,0 #1020006 android:id/icon alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.reddot.COUIHintRedDot{2b386c5 G.ED.V... ......I. 0,0-0,0 #7f0a064e app:id/img_red_dot alpha=1.0 viewInfo = }
+                                android.widget.RelativeLayout{4488723 V.E..V... ........ 96,0-822,188 alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.textview.COUITextView{36d1852 V.ED.V... ........ 0,30-726,95 #1020016 android:id/title alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.textview.COUITextView{4206420 V.ED.V... ........ 0,101-726,158 #1020010 android:id/summary alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.textview.COUITextView{ade981a G.ED.V... ......I. 0,0-0,0 #7f0a0105 app:id/assignment alpha=1.0 viewInfo = }
+                                com.coui.appcompat.reddot.COUIHintRedDot{13adf4b G.ED.V... ......I. 0,0-0,0 #7f0a06bb app:id/jump_icon_red_dot alpha=1.0 viewInfo = }
+                                android.widget.LinearLayout{da0679e V.E..V... .......D 822,58-984,130 #1020018 android:id/widget_frame alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.couiswitch.COUISwitch{10c91d9 V.ED..... ......ID 48,0-162,72 #1020040 android:id/switch_widget aid=1073741829 alpha=1.0 viewInfo = }
+                              com.coui.appcompat.preference.COUICustomListSelectedLinearLayout{e65b79b VFE..VC.. ......ID 0,361-1080,511 #0 alpha=1.0 viewInfo = }
+                                android.widget.FrameLayout{51c1d28 G.E..V... ......I. 0,0-0,0 #7f0a0646 app:id/img_layout alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.imageview.COUIRoundImageView{2caca41 G.ED.V... ......I. 0,0-0,0 #1020006 android:id/icon alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.reddot.COUIHintRedDot{93e1be6 G.ED.V... ......I. 0,0-0,0 #7f0a064e app:id/img_red_dot alpha=1.0 viewInfo = }
+                                com.coui.appcompat.preference.COUICustomLinearLayoutForPreference{e73cc76 V.E..V... ........ 96,9-936,134 #7f0a035b app:id/customLinearLayoutForList alpha=1.0 viewInfo = }
+                                  android.widget.RelativeLayout{21da311 V.E..V... ........ 0,30-480,95 #7f0a07bc app:id/messageLayout alpha=1.0 viewInfo = }
+                                    com.coui.appcompat.textview.COUITextView{c229738 V.ED.V... ........ 0,0-480,65 #1020016 android:id/title alpha=1.0 viewInfo = }
+                                    com.coui.appcompat.textview.COUITextView{56abf00 G.ED.V... ......I. 0,71-420,128 #1020010 android:id/summary alpha=1.0 viewInfo = }
+                                  android.widget.LinearLayout{232dd6b V.E..V... ......ID 840,62-840,62 alpha=1.0 viewInfo = }
+                                    com.coui.appcompat.reddot.COUIHintRedDot{5d62527 G.ED.V... ......I. 0,0-0,0 #7f0a06bb app:id/jump_icon_red_dot alpha=1.0 viewInfo = }
+                                    com.coui.appcompat.reddot.COUIHintRedDot{ea9e3d4 G.ED.V... ......I. 0,0-0,0 #7f0a0107 app:id/assignment_red_dot alpha=1.0 viewInfo = }
+                                    com.coui.appcompat.imageview.COUIRoundImageView{bb8c97d G.ED.V... ......I. 0,0-0,0 #7f0a0106 app:id/assignment_icon alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.textview.COUITextView{8de3277 G.ED.V... ......I. 840,62-840,62 #7f0a0105 app:id/assignment alpha=1.0 viewInfo = }
+                                android.widget.LinearLayout{d483a02 V.E..V... .......D 936,0-984,144 #1020018 android:id/widget_frame alpha=1.0 viewInfo = }
+                                  android.widget.LinearLayout{ea85f4d V.E..V... .......D 0,0-48,144 alpha=1.0 viewInfo = }
+                                    android.widget.LinearLayout{ae110c8 V.E..V... ......ID 0,72-0,72 alpha=1.0 viewInfo = }
+                                      com.coui.appcompat.textview.COUITextView{ec01072 G.ED.V... ......I. 0,0-0,0 #7f0a0335 app:id/coui_statusText1 alpha=1.0 viewInfo = }
+                                    androidx.appcompat.widget.AppCompatImageView{905eee4 V.ED.V... ......ID 12,36-48,108 #7f0a0331 app:id/coui_preference_widget_jump alpha=1.0 viewInfo = }
+                              com.coui.appcompat.preference.COUICustomLinearLayoutForPreference{8a8a349 V.E..V... ......ID 0,559-1080,656 #0 alpha=1.0 viewInfo = }
+                                com.coui.appcompat.textview.COUITextView{503f44e V.ED.V... ........ 96,24-168,73 #1020016 android:id/title alpha=1.0 viewInfo = }
+                                android.widget.FrameLayout{7a14561 V.E..V... ......ID 264,48-264,48 alpha=1.0 viewInfo = }
+                                  androidx.appcompat.widget.AppCompatImageView{6f5ecc3 G.ED.V... ......I. 0,0-0,0 #7f0a0620 app:id/icon_with_title alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.reddot.COUIHintRedDot{6ab6940 G.ED.V... ......I. 0,0-0,0 #7f0a0a59 app:id/reddot_with_title alpha=1.0 viewInfo = }
+                                android.widget.LinearLayout{972f96f G.E..V... ......I. 1080,48-1080,48 #1020018 android:id/widget_frame alpha=1.0 viewInfo = }
+                              com.coui.appcompat.preference.COUICustomListSelectedLinearLayout{8490841 VFE..VC.. ......ID 0,656-1080,911 #0 alpha=1.0 viewInfo = }
+                                android.widget.FrameLayout{88d8079 G.E..V... ......I. 0,0-0,0 #7f0a0646 app:id/img_layout alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.imageview.COUIRoundImageView{7fac1be G.ED.V... ......I. 0,0-0,0 #1020006 android:id/icon alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.reddot.COUIHintRedDot{3c0921f G.ED.V... ......I. 0,0-0,0 #7f0a064e app:id/img_red_dot alpha=1.0 viewInfo = }
+                                android.widget.RelativeLayout{3e99327 V.E..V... ........ 96,6-822,255 alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.textview.COUITextView{ae281e6 V.ED.V... ........ 0,30-726,95 #1020016 android:id/title alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.textview.COUITextView{c73b9d4 V.ED.V... ........ 0,101-726,219 #1020010 android:id/summary alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.textview.COUITextView{87dd96c G.ED.V... ......I. 0,0-0,0 #7f0a0105 app:id/assignment alpha=1.0 viewInfo = }
+                                com.coui.appcompat.reddot.COUIHintRedDot{b5cab35 G.ED.V... ......I. 0,0-0,0 #7f0a06bb app:id/jump_icon_red_dot alpha=1.0 viewInfo = }
+                                android.widget.LinearLayout{d44d672 V.E..V... .......D 822,94-984,166 #1020018 android:id/widget_frame alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.couiswitch.COUISwitch{ddce77d V.ED..... ......ID 48,0-162,72 #1020040 android:id/switch_widget alpha=1.0 viewInfo = }
+                              com.coui.appcompat.preference.COUICustomListSelectedLinearLayout{21bc022 VFE..VC.. ......ID 0,911-1080,1220 #0 alpha=1.0 viewInfo = }
+                                android.widget.FrameLayout{29d3bca G.E..V... ......I. 0,0-0,0 #7f0a0646 app:id/img_layout alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.imageview.COUIRoundImageView{d66313b G.ED.V... ......I. 0,0-0,0 #1020006 android:id/icon alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.reddot.COUIHintRedDot{6252058 G.ED.V... ......I. 0,0-0,0 #7f0a064e app:id/img_red_dot alpha=1.0 viewInfo = }
+                                android.widget.RelativeLayout{c565870 V.E..V... ........ 96,0-822,309 alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.textview.COUITextView{6a75ab3 V.ED.V... ........ 0,30-726,95 #1020016 android:id/title alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.textview.COUITextView{655f7e9 V.ED.V... ........ 0,101-726,279 #1020010 android:id/summary alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.textview.COUITextView{9b9c5b1 G.ED.V... ......I. 0,0-0,0 #7f0a0105 app:id/assignment alpha=1.0 viewInfo = }
+                                com.coui.appcompat.reddot.COUIHintRedDot{63b4a96 G.ED.V... ......I. 0,0-0,0 #7f0a06bb app:id/jump_icon_red_dot alpha=1.0 viewInfo = }
+                                android.widget.LinearLayout{7b2ef0f V.E..V... .......D 822,118-984,190 #1020018 android:id/widget_frame alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.couiswitch.COUISwitch{b59bc6e V.ED..... ......ID 48,0-162,72 #1020040 android:id/switch_widget alpha=1.0 viewInfo = }
+                              com.coui.appcompat.preference.COUICustomListSelectedLinearLayout{ab3b9ff VFE..VC.. ......ID 0,1220-1080,1364 #0 alpha=1.0 viewInfo = }
+                                android.widget.FrameLayout{dfca617 G.E..V... ......I. 0,0-0,0 #7f0a0646 app:id/img_layout alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.imageview.COUIRoundImageView{bf7ea04 G.ED.V... ......I. 0,0-0,0 #1020006 android:id/icon alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.reddot.COUIHintRedDot{4f40bed G.ED.V... ......I. 0,0-0,0 #7f0a064e app:id/img_red_dot alpha=1.0 viewInfo = }
+                                android.widget.RelativeLayout{6d4c615 V.E..V... ........ 96,9-822,134 alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.textview.COUITextView{b6c13cc V.ED.V... ........ 0,30-726,95 #1020016 android:id/title alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.textview.COUITextView{dd97a22 G.ED.V... ......ID 0,0-0,0 #1020010 android:id/summary alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.textview.COUITextView{11b8cb3 G.ED.V... ......I. 0,0-0,0 #7f0a0105 app:id/assignment alpha=1.0 viewInfo = }
+                                com.coui.appcompat.reddot.COUIHintRedDot{30ba270 G.ED.V... ......I. 0,0-0,0 #7f0a06bb app:id/jump_icon_red_dot alpha=1.0 viewInfo = }
+                                android.widget.LinearLayout{393f71b V.E..V... .......D 822,36-984,108 #1020018 android:id/widget_frame alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.couiswitch.COUISwitch{630ed2a V.ED..... ......ID 48,0-162,72 #1020040 android:id/switch_widget alpha=1.0 viewInfo = }
+                              com.coui.appcompat.cardlist.COUICardListSelectedItemLayout{bb99ec9 VFE..VC.. ......ID 0,1364-1080,1508 #0 alpha=1.0 viewInfo = }
+                                com.coui.appcompat.imageview.COUIRoundImageView{a1279e9 G.ED.V... ......I. 0,0-0,0 #1020006 android:id/icon alpha=1.0 viewInfo = }
+                                android.widget.RelativeLayout{9b520ef V.E..V... ........ 96,9-936,134 alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.textview.COUITextView{4e009ce V.ED.V... ........ 0,30-840,95 #1020016 android:id/title alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.textview.COUITextView{e39166e G.ED.V... ......ID 0,0-0,0 #1020010 android:id/summary alpha=1.0 viewInfo = }
+                                android.widget.LinearLayout{cf6f4da V.E..V... .......D 936,0-984,144 #1020018 android:id/widget_frame alpha=1.0 viewInfo = }
+                                  android.widget.LinearLayout{a345e85 V.E..V... .......D 0,0-48,144 alpha=1.0 viewInfo = }
+                                    android.widget.LinearLayout{27c017f V.E..V... ......ID 0,72-0,72 alpha=1.0 viewInfo = }
+                                      com.coui.appcompat.textview.COUITextView{a38410f G.ED.V... ......I. 0,0-0,0 #7f0a0335 app:id/coui_statusText1 alpha=1.0 viewInfo = }
+                                    androidx.appcompat.widget.AppCompatImageView{a0207fc V.ED.V... ......ID 12,36-48,108 #7f0a0331 app:id/coui_preference_widget_jump alpha=1.0 viewInfo = }
+                              com.coui.appcompat.preference.COUICardListWithDividerItemLayout{5baafd7 VFE..VC.. ......ID 0,1508-1080,1696 #0 alpha=1.0 viewInfo = }
+                                android.widget.LinearLayout{95a90c4 VFE..VC.. ......ID 48,0-819,188 #7f0a0783 app:id/main_layout alpha=1.0 viewInfo = }
+                                  android.widget.FrameLayout{e60759c G.E..V... ......I. 0,0-0,0 #7f0a0646 app:id/img_layout alpha=1.0 viewInfo = }
+                                    com.coui.appcompat.imageview.COUIRoundImageView{58fcba5 G.ED.V... ......I. 0,0-0,0 #1020006 android:id/icon alpha=1.0 viewInfo = }
+                                    com.coui.appcompat.reddot.COUIHintRedDot{4e42b7a G.ED.V... ......I. 0,0-0,0 #7f0a064e app:id/img_red_dot alpha=1.0 viewInfo = }
+                                  android.widget.RelativeLayout{91f5ee2 V.E..V... ........ 48,0-723,188 alpha=1.0 viewInfo = }
+                                    com.coui.appcompat.textview.COUITextView{f438bad V.ED.V... ........ 0,30-675,95 #1020016 android:id/title alpha=1.0 viewInfo = }
+                                    com.coui.appcompat.textview.COUITextView{6107273 V.ED.V... ........ 0,101-675,158 #1020010 android:id/summary alpha=1.0 viewInfo = }
+                                    com.coui.appcompat.textview.COUITextView{4c1df2b G.ED.V... ......I. 0,0-0,0 #7f0a0105 app:id/assignment alpha=1.0 viewInfo = }
+                                android.widget.LinearLayout{fd1f530 VFE..VC.. .......D 819,0-1080,188 #7f0a0c71 app:id/switch_layout alpha=1.0 viewInfo = }
+                                  android.view.View{83a35a9 V.ED.V... ......ID 0,61-3,127 alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.couiswitch.COUISwitch{6d8872e VFED..C.. ......ID 51,58-165,130 #1020040 android:id/switch_widget aid=1073741834 alpha=1.0 viewInfo = }
+                              com.coui.appcompat.preference.COUICustomListSelectedLinearLayout{12e97d3 VFE..VC.. ......ID 0,1696-1080,2065 #0 alpha=1.0 viewInfo = }
+                                android.widget.FrameLayout{ecd4f88 G.E..V... ......I. 0,0-0,0 #7f0a0646 app:id/img_layout alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.imageview.COUIRoundImageView{6d67d21 G.ED.V... ......I. 0,0-0,0 #1020006 android:id/icon alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.reddot.COUIHintRedDot{bf98546 G.ED.V... ......I. 0,0-0,0 #7f0a064e app:id/img_red_dot alpha=1.0 viewInfo = }
+                                android.widget.RelativeLayout{d34a09 V.E..V... ........ 96,0-822,369 alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.textview.COUITextView{34b1f10 V.ED.V... ........ 0,30-726,95 #1020016 android:id/title alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.textview.COUITextView{4e9e83a V.ED.V... ........ 0,101-726,339 #1020010 android:id/summary alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.textview.COUITextView{9fd4307 G.ED.V... ......I. 0,0-0,0 #7f0a0105 app:id/assignment alpha=1.0 viewInfo = }
+                                com.coui.appcompat.reddot.COUIHintRedDot{9abdc34 G.ED.V... ......I. 0,0-0,0 #7f0a06bb app:id/jump_icon_red_dot alpha=1.0 viewInfo = }
+                                android.widget.LinearLayout{c0de2f V.E..V... .......D 822,148-984,220 #1020018 android:id/widget_frame alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.couiswitch.COUISwitch{67b740e V.ED..... ......ID 48,0-162,72 #1020040 android:id/switch_widget aid=1073741825 alpha=1.0 viewInfo = }
+                              com.coui.appcompat.preference.COUICustomListSelectedLinearLayout{cf564fc VFE..VC.. ......ID 0,2065-1080,2209 #0 alpha=1.0 viewInfo = }
+                                android.widget.FrameLayout{f7cca5d G.E..V... ......I. 0,0-0,0 #7f0a0646 app:id/img_layout alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.imageview.COUIRoundImageView{eb8afd2 G.ED.V... ......I. 0,0-0,0 #1020006 android:id/icon alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.reddot.COUIHintRedDot{8a108a3 G.ED.V... ......I. 0,0-0,0 #7f0a064e app:id/img_red_dot alpha=1.0 viewInfo = }
+                                android.widget.RelativeLayout{2ba19da V.E..V... ........ 96,9-822,134 alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.textview.COUITextView{28f785 V.ED.V... ........ 0,30-726,95 #1020016 android:id/title alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.textview.COUITextView{e4487a0 G.ED.V... ......ID 0,0-0,0 #1020010 android:id/summary alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.textview.COUITextView{a40af59 G.ED.V... ......I. 0,0-0,0 #7f0a0105 app:id/assignment alpha=1.0 viewInfo = }
+                                com.coui.appcompat.reddot.COUIHintRedDot{acdf71e G.ED.V... ......I. 0,0-0,0 #7f0a06bb app:id/jump_icon_red_dot alpha=1.0 viewInfo = }
+                                android.widget.LinearLayout{5b1d4e8 V.E..V... .......D 822,36-984,108 #1020018 android:id/widget_frame alpha=1.0 viewInfo = }
+                                  com.coui.appcompat.couiswitch.COUISwitch{5b99e0b V.ED..... ......ID 48,0-162,72 #1020040 android:id/switch_widget aid=1073741826 alpha=1.0 viewInfo = }
+                          com.coui.appcompat.textview.COUITextView{a318bff G.ED.V... ......I. 0,0-0,0 #1020004 android:id/empty alpha=1.0 viewInfo = }
+                          android.widget.FrameLayout{5fa7dcc G.E..V... ......I. 0,0-0,0 #7f0a0c86 app:id/tab_container alpha=1.0 viewInfo = }
+                            com.coui.appcompat.viewpager.COUIViewPager2{5c3e815 V.E..V... ......I. 0,0-0,0 #7f0a0dfd app:id/view_pager alpha=1.0 viewInfo = }
+                              com.coui.appcompat.viewpager.COUIViewPager2$RecyclerViewImpl{a5e672a VFED.V... ......I. 0,0-0,0 #1 alpha=1.0 viewInfo = }
+                            com.coui.appcompat.tablayout.COUITabLayout{21ce91b VFED.V... ......ID 0,0-0,0 #7f0a0c89 app:id/tabs alpha=1.0 viewInfo = }
+                              com.coui.appcompat.tablayout.COUISlidingTabStrip{b37aab8 V.ED.V... ......I. 0,0-0,0 alpha=1.0 viewInfo = }
+                      android.widget.RelativeLayout{f07f091 G.E...... ......I. 0,0-0,0 #7f0a0203 app:id/button_bar alpha=1.0 viewInfo = }
+                        androidx.appcompat.widget.AppCompatButton{2d3cbf6 VFED..C.. ......I. 0,0-0,0 #7f0a0127 app:id/back_button alpha=1.0 viewInfo = }
+                        android.widget.LinearLayout{296fbf7 V.E...... ......I. 0,0-0,0 alpha=1.0 viewInfo = }
+                          androidx.appcompat.widget.AppCompatButton{318ba64 GFED..C.. ......I. 0,0-0,0 #7f0a0b89 app:id/skip_button alpha=1.0 viewInfo = }
+                          androidx.appcompat.widget.AppCompatButton{7aa04cd VFED..C.. ......I. 0,0-0,0 #7f0a089b app:id/next_button alpha=1.0 viewInfo = }
+                  com.oplus.settings.widget.DividerAppBarLayout{9f9b81 V.E...... ......ID 0,96-1080,253 #7f0a0013 app:id/abl alpha=1.0 viewInfo = }
+                    com.coui.appcompat.toolbar.COUIToolbar{8ce367c V.ED..... ......ID 0,0-1080,156 #7f0a0d00 app:id/toolbar alpha=1.0 viewInfo = }
+                      android.widget.TextView{c1cb426 V.ED..... ........ 168,40-1032,113 alpha=1.0 viewInfo = }
+                      android.widget.ImageButton{2807867 VFED..C.. ......ID 12,0-156,156 #7f0a033f app:id/coui_toolbar_back_view alpha=1.0 viewInfo = }
+                      com.coui.appcompat.toolbar.COUIActionMenuView{53b1c5f V.E..V... ........ 1032,78-1032,78 #7f0a0340 app:id/coui_toolbar_more_view alpha=1.0 viewInfo = }
+                    android.view.View{44f2b05 V.ED.V... ......ID 0,156-1080,157 #7f0a03f6 app:id/divider_line alpha=1.0 viewInfo = }
+    Looper (main, tid 2) {468b182}
+      (Total messages: 0, polling=false, quitting=false)
+    ResourcesManager:
+      total apks: 5
+      resources: 5
+      resource impls: 2
+      
+      1 token android.os.BinderProxy@4b4f507
+      com.android.settings/.Settings$DevelopmentSettingsDashboardActivity
+      overrideDisplayId 0
+      overrideConfig mcc460-mnc7-zh-rCN-ldltr-sw360dp-w360dp-h804dp-normal-long-notround-widecg-lowdr-port-night-xxhdpi-finger-keysexposed-nokeys-navhidden-nonav-v35
+      1.1 
+      overrideDisplayId null
+      overrideConfig v35
+      android.content.res.Resources@e1ea634
+      android.content.res.ResourcesImpl@3356093
+      {1.0 ??mcc??mnc [zh_CN] ldltr sw360dp w360dp h804dp 480dpi nrml long widecg port night finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 1080, 2412) mAppBounds=Rect(0, 0 - 1080, 2412) mMaxBounds=Rect(0, 0 - 1080, 2412) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=standard mAlwaysOnTop=undefined mRotation=ROTATION_0} s.1 fontWeightAdjustment=0mThemeChanged= 0, mThemeChangedFlags= 0, mFlipFont= 0, mScenario= 0, mAccessibleChanged= -1, mUxIconConfig= 1163078655912968480, mMaterialColor= 0, mUserId= 0, mFontUserId= 0, mFontVariationSettings= 21f4, mFoldingAngle = -1.0, mIconPackName= , mDarkModeBackgroundMaxL= 8.0, mDarkModeDialogBgMaxL= 27.0, mDarkModeForegroundMinL= 100.0, mOplusConfigType= 1, mOplusChangedConfigs= 0, OpSans= -1, mBurmeseFontFlag= 2, mFlag= 0, mFlexibleActivitySuitable= -1, mPuttDisplayFlag= -1}
+      2 token android.os.BinderProxy@af3310a
+      overrideDisplayId 0
+      overrideConfig mcc460-mnc7-zh-rCN-ldltr-sw360dp-w360dp-h804dp-normal-long-notround-widecg-lowdr-port-night-xxhdpi-finger-keysexposed-nokeys-navhidden-nonav-v35
+      2.1 
+      overrideDisplayId null
+      overrideConfig v35
+      android.content.res.Resources@a391d7b
+      android.content.res.ResourcesImpl@3356093
+      {1.0 ??mcc??mnc [zh_CN] ldltr sw360dp w360dp h804dp 480dpi nrml long widecg port night finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 1080, 2412) mAppBounds=Rect(0, 0 - 1080, 2412) mMaxBounds=Rect(0, 0 - 1080, 2412) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=standard mAlwaysOnTop=undefined mRotation=ROTATION_0} s.1 fontWeightAdjustment=0mThemeChanged= 0, mThemeChangedFlags= 0, mFlipFont= 0, mScenario= 0, mAccessibleChanged= -1, mUxIconConfig= 1163078655912968480, mMaterialColor= 0, mUserId= 0, mFontUserId= 0, mFontVariationSettings= 21f4, mFoldingAngle = -1.0, mIconPackName= , mDarkModeBackgroundMaxL= 8.0, mDarkModeDialogBgMaxL= 27.0, mDarkModeForegroundMinL= 100.0, mOplusConfigType= 1, mOplusChangedConfigs= 0, OpSans= -1, mBurmeseFontFlag= 2, mFlag= 0, mFlexibleActivitySuitable= -1, mPuttDisplayFlag= -1}
+      
+      mResourceReferences:
+      
+      android.content.res.Resources@7014894 --> android.content.res.ResourcesImpl@5d918d0
+      android.content.res.Resources@a61af54 --> android.content.res.ResourcesImpl@5d918d0
+      android.content.res.Resources@52daf0d --> android.content.res.ResourcesImpl@5d918d0
+      mResourceImpls:
+      
+      ResourcesKey{ mHash=8e8aa150 mResDir=/system_ext/priv-app/Settings/Settings.apk mSplitDirs=[] mOverlayDirs=[/product/overlay/NavigationBarModeGestural/NavigationBarModeGesturalOverlay.apk,/data/resource-cache/com.android.systemui-neutral-aJEL.frro,/data/resource-cache/com.android.systemui-accent-sDRp.frro,/data/resource-cache/com.android.systemui-dynamic-cBaY.frro] mLibDirs=[/system/framework/org.apache.http.legacy.jar,/system/system_ext/framework/vendor.oplus.hardware.charger-V1-java.jar,/system_ext/framework/nfcvendorlib.jar,/system_ext/framework/androidx.window.extensions.jar,/system_ext/framework/androidx.window.sidecar.jar] mDisplayId=-1 mOverrideConfig=v35 mCompatInfo={480dpi always-compat} mLoaders=[]}
+      android.content.res.ResourcesImpl@5d918d0
+      {1.0 ??mcc??mnc [zh_CN] ldltr sw360dp w360dp h804dp 480dpi nrml long widecg port night finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 1080, 2412) mAppBounds=Rect(0, 0 - 1080, 2412) mMaxBounds=Rect(0, 0 - 1080, 2412) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} s.85025 fontWeightAdjustment=0mThemeChanged= 0, mThemeChangedFlags= 0, mFlipFont= 0, mScenario= 0, mAccessibleChanged= -1, mUxIconConfig= 1163078655912968480, mMaterialColor= 0, mUserId= 0, mFontUserId= 0, mFontVariationSettings= 21f4, mFoldingAngle = -1.0, mIconPackName= , mDarkModeBackgroundMaxL= 8.0, mDarkModeDialogBgMaxL= 27.0, mDarkModeForegroundMinL= 100.0, mOplusConfigType= 1, mOplusChangedConfigs= 0, OpSans= -1, mBurmeseFontFlag= 2, mFlag= 0, mFlexibleActivitySuitable= -1, mPuttDisplayFlag= -1}
+      DisplayMetrics{density=3.0, width=1080, height=2412, scaledDensity=3.0, xdpi=391.885, ydpi=395.256}
+      
+      ResourcesKey{ mHash=3e2c9dbe mResDir=/system_ext/priv-app/Settings/Settings.apk mSplitDirs=[] mOverlayDirs=[/product/overlay/NavigationBarModeGestural/NavigationBarModeGesturalOverlay.apk,/data/resource-cache/com.android.systemui-neutral-aJEL.frro,/data/resource-cache/com.android.systemui-accent-sDRp.frro,/data/resource-cache/com.android.systemui-dynamic-cBaY.frro] mLibDirs=[/system/framework/org.apache.http.legacy.jar,/system/system_ext/framework/vendor.oplus.hardware.charger-V1-java.jar,/system_ext/framework/nfcvendorlib.jar,/system_ext/framework/androidx.window.extensions.jar,/system_ext/framework/androidx.window.sidecar.jar] mDisplayId=0 mOverrideConfig=mcc460-mnc7-zh-rCN-ldltr-sw360dp-w360dp-h804dp-normal-long-notround-widecg-lowdr-port-night-xxhdpi-finger-keysexposed-nokeys-navhidden-nonav-v35 mCompatInfo={480dpi always-compat} mLoaders=[]}
+      android.content.res.ResourcesImpl@3356093
+      {1.0 ??mcc??mnc [zh_CN] ldltr sw360dp w360dp h804dp 480dpi nrml long widecg port night finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 1080, 2412) mAppBounds=Rect(0, 0 - 1080, 2412) mMaxBounds=Rect(0, 0 - 1080, 2412) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=standard mAlwaysOnTop=undefined mRotation=ROTATION_0} s.1 fontWeightAdjustment=0mThemeChanged= 0, mThemeChangedFlags= 0, mFlipFont= 0, mScenario= 0, mAccessibleChanged= -1, mUxIconConfig= 1163078655912968480, mMaterialColor= 0, mUserId= 0, mFontUserId= 0, mFontVariationSettings= 21f4, mFoldingAngle = -1.0, mIconPackName= , mDarkModeBackgroundMaxL= 8.0, mDarkModeDialogBgMaxL= 27.0, mDarkModeForegroundMinL= 100.0, mOplusConfigType= 1, mOplusChangedConfigs= 0, OpSans= -1, mBurmeseFontFlag= 2, mFlag= 0, mFlexibleActivitySuitable= -1, mPuttDisplayFlag= -1}
+      DisplayMetrics{density=3.0, width=1080, height=2412, scaledDensity=3.0, xdpi=391.885, ydpi=395.256}
+    1 dumpables:
+    #0: AutofillManager
+        AutofillManager:
+          sessionId: 2147483647
+          state: UNKNOWN
+          context: com.android.settings.Settings$DevelopmentSettingsDashboardActivity@d6e2a15
+          service client: null
+          client: android.view.autofill.AutofillClientController@3df20c9 (android.os.BinderProxy@4b4f507)
+          enabled: false
+          enabledAugmentedOnly: false
+          hasService: true
+          hasCallback: false
+          onInvisibleCalled false
+          last autofilled data: null
+          id of last fill UI shown: null
+          tracked views: null
+          fillable ids: null
+          entered ids: null
+          save trigger id: null
+          save on finish(): false
+          fill dialog enabled: false
+          fill dialog enabled hints: [password, passwordAuto, creditCardNumber, creditCardSecurityCode, creditCardExpirationDate]
+          compat mode enabled: false
+          debug: false verbose: false
+        Autofill Compat Mode: false
+    ViewExtraInfo:
+    Local FragmentActivity d6e2a15 State:
+      mCreated=true mResumed=false mStopped=true    Active Fragments:
+    OplusDevelopmentSettingsDashboardFragment{c4aa22c} (081f55d3-dbf2-4916-acd7-eaa51e9ba6d9 id=0x7f0a077f)
+        mFragmentId=#7f0a077f mContainerId=#7f0a077f mTag=null
+        mState=4 mWho=081f55d3-dbf2-4916-acd7-eaa51e9ba6d9 mBackStackNesting=0
+        mAdded=true mRemoving=false mFromLayout=false mInLayout=false
+        mHidden=false mDetached=false mMenuVisible=true mHasMenu=true
+        mRetainInstance=false mUserVisibleHint=true
+        mFragmentManager=FragmentManager{1fef1fc in HostCallbacks{c300085}}}
+        mHost=androidx.fragment.app.FragmentActivity$HostCallbacks@c300085
+        mArguments=Bundle[{intent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10008000 xflg=0x1 cmp=com.android.settings/.Settings$DevelopmentSettingsDashboardActivity mCallingUid=1000 mRealCallingUid=10203 }}]
+        mSavedViewState={1=androidx.recyclerview.widget.RecyclerView$SavedState@c76eeda, 16908292=android.view.AbsSavedState$1@2064f0b, 16908351=android.view.AbsSavedState$1@2064f0b, 2131362524=android.view.AbsSavedState$1@2064f0b, 2131363673=android.view.AbsSavedState$1@2064f0b, 2131364172=android.view.AbsSavedState$1@2064f0b, 2131364438=androidx.recyclerview.widget.RecyclerView$SavedState@64731e8, 2131364998=android.view.AbsSavedState$1@2064f0b, 2131365001=HorizontalScrollView.SavedState{ef52001 scrollPosition=0}, 2131365373=com.coui.appcompat.viewpager.COUIViewPager2$SavedState@fe51ea6}
+        mPopDirection=false
+        mContainer=android.widget.FrameLayout{338a4f5 V.E...... .......D 0,0-1080,2160 #7f0a077f app:id/main_content alpha=1.0 viewInfo = }
+        mView=android.widget.LinearLayout{61bec44 V.E..V... .......D 0,0-1080,2160 #7f0a02dc app:id/container_material alpha=1.0 viewInfo = }
+        Child FragmentManager{e48d0e7 in OplusDevelopmentSettingsDashboardFragment{c4aa22c}}}:
+          Back Stack Index: 0
+          FragmentManager misc state:
+            mHost=androidx.fragment.app.FragmentActivity$HostCallbacks@c300085
+            mContainer=androidx.fragment.app.Fragment$5@e518494
+            mParent=OplusDevelopmentSettingsDashboardFragment{c4aa22c} (081f55d3-dbf2-4916-acd7-eaa51e9ba6d9 id=0x7f0a077f)
+            mCurState=4 mStateSaved=true mStopped=true mDestroyed=false
+    Added Fragments:
+      #0: OplusDevelopmentSettingsDashboardFragment{c4aa22c} (081f55d3-dbf2-4916-acd7-eaa51e9ba6d9 id=0x7f0a077f)
+    Fragments Created Menus:
+      #0: OplusDevelopmentSettingsDashboardFragment{c4aa22c} (081f55d3-dbf2-4916-acd7-eaa51e9ba6d9 id=0x7f0a077f)
+    Back Stack Index: 0
+    FragmentManager misc state:
+      mHost=androidx.fragment.app.FragmentActivity$HostCallbacks@c300085
+      mContainer=androidx.fragment.app.FragmentActivity$HostCallbacks@c300085
+      mCurState=4 mStateSaved=true mStopped=true mDestroyed=false
+    r =ActivityClientRecord{paused=true, stopped=true, hideForNow=false, startsNotResumed=false, isForward=true, pendingConfigChanges=0, preserveWindow=false, Activity{resumed=false, stopped=true, finished=false, destroyed=false, startedActivity=false, changingConfigurations=false}}
+    r.overrideConfig={1.0 ??mcc??mnc [zh_CN] ldltr sw360dp w360dp h804dp 480dpi nrml long widecg port night finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 1080, 2412) mAppBounds=Rect(0, 0 - 1080, 2412) mMaxBounds=Rect(0, 0 - 1080, 2412) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=standard mAlwaysOnTop=undefined mRotation=ROTATION_0} s.1 fontWeightAdjustment=0mThemeChanged= 0, mThemeChangedFlags= 0, mFlipFont= 0, mScenario= 0, mAccessibleChanged= -1, mUxIconConfig= 1163078655912968480, mMaterialColor= 0, mUserId= 0, mFontUserId= 0, mFontVariationSettings= 21f4, mFoldingAngle = -1.0, mIconPackName= , mDarkModeBackgroundMaxL= 8.0, mDarkModeDialogBgMaxL= 27.0, mDarkModeForegroundMinL= 100.0, mOplusConfigType= 1, mOplusChangedConfigs= 0, OpSans= -1, mBurmeseFontFlag= 2, mFlag= 0, mFlexibleActivitySuitable= -1, mPuttDisplayFlag= -1}
+
+TASK null id=5 userId=0 displayId=0(type=INTERNAL)
+  ACTIVITY com.android.launcher/.Launcher 2855d3b pid=28969 userId=0 uid=10198 displayId=0(type=INTERNAL)
+    ================================CUSTOM================================
+    Launcher Status:
+    	Launcher requested orientation: 5
+    	Launcher Version: 15.4.28_d904073_251110_OPPO_domestic_release
+    	Current state: Normal
+    	Current page count: 5
+    	Activity configuration: {fontScale=1.0 sw360dp w360dp h804dp 480dpi orien=1 winConfig={ mBounds=Rect(0, 0 - 1080, 2412) mAppBounds=Rect(0, 0 - 1080, 2412) mMaxBounds=Rect(0, 0 - 1080, 2412) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=home mAlwaysOnTop=undefined mRotation=ROTATION_0}}
+    	Application configuration: {fontScale=1.0 sw360dp w360dp h804dp 480dpi orien=1 winConfig={ mBounds=Rect(0, 0 - 1080, 2412) mAppBounds=Rect(0, 0 - 1080, 2412) mMaxBounds=Rect(0, 0 - 1080, 2412) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0}}
+    	SplitScreenMode: false
+    	SplitScreenMinimize: false
+    	SplitScreenExitingMinimized: false
+    LauncherConfiguration:
+    	configuration = {1.0 ??mcc??mnc [zh_CN] ldltr sw360dp w360dp h804dp 480dpi nrml long widecg port night finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 1080, 2412) mAppBounds=Rect(0, 0 - 1080, 2412) mMaxBounds=Rect(0, 0 - 1080, 2412) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=home mAlwaysOnTop=undefined mRotation=ROTATION_0} s.902 fontWeightAdjustment=0mThemeChanged= 0, mThemeChangedFlags= 0, mFlipFont= 0, mScenario= 0, mAccessibleChanged= -1, mUxIconConfig= 1163078655912968480, mMaterialColor= 0, mUserId= 0, mFontUserId= 0, mFontVariationSettings= 21f4, mFoldingAngle = -1.0, mIconPackName= , mDarkModeBackgroundMaxL= 8.0, mDarkModeDialogBgMaxL= 27.0, mDarkModeForegroundMinL= 100.0, mOplusConfigType= 1, mOplusChangedConfigs= 0, OpSans= -1, mBurmeseFontFlag= 2, mFlag= 0, mFlexibleActivitySuitable= -1, mPuttDisplayFlag= -1}
+    View Display Info:
+    	LauncherRootView Alpha=1.0; visibility = 0
+    	DragLayer Alpha=1.0; visibility = 0
+    	Workspace Alpha=1.0; visibility = 0
+    	CellLayout:23 Alpha=1.0; visibility = 0
+    	Hotseat Alpha=1.0; visibility = 0
+    LauncherAnimationLevelInfo:
+    	AnimationLevelInfo = Device Animation Level is old Level: High, and GaussianLevel is High
+    Launcher ScreenInfo:
+    	navHeightInGesture: 48
+    	navHeightInVirtualKey: 132
+    	sRealStatusBarHeight: 96
+    Launcher WallpaperInfo:
+    	isLiveWallpaper: true
+    	isAllwaysLiveWallpaper: false
+    	isInteractionWallpaper: false
+    	isStatusBarWpBright: false
+    	isNavigationBarBright: false
+    	isChildrenModeWpBright: false
+    	isWorkspaceWpBright: false
+    	isExtremeDarkWallpaper: false
+    	isWorkspaceEditModeBright: false
+    	isPageIndicatorBright: false
+    	WorkspaceWallpaperBrightValue: 64
+    	statusBarBrightValue: 69
+    	statusBarBrightResult: NOT_CHANGED
+    DisplayController.Info:
+    	id=local:4627039422300187648
+    	rotation=0
+    	fontScale=1.0
+    	densityDpi=480
+    	navigationMode=NO_BUTTON
+    	currentSize=Point(1080, 2412)
+    	cutout=Rect(0, 0 - 0, 0)
+    	metrics=DisplayMetrics{density=3.0, width=1080, height=2412, scaledDensity=3.0, xdpi=391.885, ydpi=395.256}
+    	supportedBounds={WindowBounds{bounds=Rect(0, 0 - 1080, 2412), insets=Rect(0, 96 - 0, 0), availableSize=Point(1080, 2316), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1080, 2412), insets=Rect(0, 96 - 0, 0), availableSize=Point(1080, 2316), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 2412, 1080), insets=Rect(0, 96 - 0, 0), availableSize=Point(2412, 984), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 2412, 1080), insets=Rect(0, 96 - 0, 0), availableSize=Point(2412, 984), rotationHint=3}}
+    Handler (android.os.Handler) {decc208} @ 1228237397
+      Looper (launcher-loader, tid 76) {b1d3da1}
+        (Total messages: 0, polling=true, quitting=false)
+    r =ActivityClientRecord{paused=false, stopped=false, hideForNow=false, startsNotResumed=false, isForward=false, pendingConfigChanges=0, preserveWindow=false, Activity{resumed=true, stopped=false, finished=false, destroyed=false, startedActivity=false, changingConfigurations=false}}
+    r.overrideConfig={1.0 ??mcc??mnc [zh_CN] ldltr sw360dp w360dp h804dp 480dpi nrml long widecg port night finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 1080, 2412) mAppBounds=Rect(0, 0 - 1080, 2412) mMaxBounds=Rect(0, 0 - 1080, 2412) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=home mAlwaysOnTop=undefined mRotation=ROTATION_0} s.902 fontWeightAdjustment=0mThemeChanged= 0, mThemeChangedFlags= 0, mFlipFont= 0, mScenario= 0, mAccessibleChanged= -1, mUxIconConfig= 1163078655912968480, mMaterialColor= 0, mUserId= 0, mFontUserId= 0, mFontVariationSettings= 21f4, mFoldingAngle = -1.0, mIconPackName= , mDarkModeBackgroundMaxL= 8.0, mDarkModeDialogBgMaxL= 27.0, mDarkModeForegroundMinL= 100.0, mOplusConfigType= 1, mOplusChangedConfigs= 0, OpSans= -1, mBurmeseFontFlag= 2, mFlag= 0, mFlexibleActivitySuitable= -1, mPuttDisplayFlag= -1}

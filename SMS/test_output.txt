@@ -1,0 +1,53 @@
+Configuration on demand is an incubating feature.
+> Task :network:protocol:checkKotlinGradlePluginConfigurationErrors
+> Task :network:transport:checkKotlinGradlePluginConfigurationErrors
+> Task :network:protocol:preBuild UP-TO-DATE
+> Task :network:protocol:preDebugBuild UP-TO-DATE
+> Task :network:transport:preBuild UP-TO-DATE
+> Task :network:transport:preDebugBuild UP-TO-DATE
+> Task :network:protocol:generateDebugResValues UP-TO-DATE
+> Task :network:transport:generateDebugResValues UP-TO-DATE
+> Task :network:protocol:generateDebugResources UP-TO-DATE
+> Task :network:transport:generateDebugResources UP-TO-DATE
+> Task :network:protocol:packageDebugResources UP-TO-DATE
+> Task :network:transport:packageDebugResources UP-TO-DATE
+> Task :network:protocol:parseDebugLocalResources UP-TO-DATE
+> Task :network:transport:parseDebugLocalResources UP-TO-DATE
+> Task :network:protocol:generateDebugRFile UP-TO-DATE
+> Task :network:transport:generateDebugRFile UP-TO-DATE
+> Task :network:transport:javaPreCompileDebug UP-TO-DATE
+> Task :network:transport:preDebugUnitTestBuild UP-TO-DATE
+> Task :network:protocol:compileDebugKotlin UP-TO-DATE
+> Task :network:protocol:javaPreCompileDebug UP-TO-DATE
+> Task :network:protocol:compileDebugJavaWithJavac NO-SOURCE
+> Task :network:protocol:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :network:protocol:processDebugJavaRes UP-TO-DATE
+> Task :network:transport:generateDebugUnitTestStubRFile UP-TO-DATE
+> Task :network:protocol:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :network:transport:javaPreCompileDebugUnitTest UP-TO-DATE
+> Task :network:transport:compileDebugKotlin UP-TO-DATE
+> Task :network:transport:compileDebugJavaWithJavac NO-SOURCE
+> Task :network:transport:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :network:transport:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :network:transport:compileDebugUnitTestKotlin UP-TO-DATE
+> Task :network:transport:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :network:transport:processDebugJavaRes UP-TO-DATE
+> Task :network:transport:processDebugUnitTestJavaRes UP-TO-DATE
+
+> Task :network:transport:testDebugUnitTest
+
+com.smslink.network.transport.ConnectionDiagnosticTest > connection can be created from socket FAILED
+    java.net.BindException at ConnectionDiagnosticTest.kt:61
+
+Daemon is stopping immediately stop command received
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Gradle build daemon has been stopped: stop command received
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.

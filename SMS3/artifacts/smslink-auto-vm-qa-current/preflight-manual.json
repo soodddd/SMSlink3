@@ -1,0 +1,34 @@
+[
+  {
+    "serial": "emulator-5554",
+    "state": "device",
+    "boot": "1",
+    "pm_ready": true,
+    "install": "Performing Streamed Install\nSuccess\n",
+    "resolve": "priority=0 preferredOrder=0 match=0x108000 specificIndex=-1 isDefault=false\ncom.smslink/.MainActivity",
+    "launch": "Starting: Intent { cmp=com.smslink/.MainActivity }\nStatus: ok\nLaunchState: COLD\nActivity: com.smslink/.MainActivity\nTotalTime: 5364\nWaitTime: 5430\nComplete\n",
+    "pid": "15224",
+    "focus_lines": [
+      "WINDOW MANAGER LAST ANR (dumpsys window lastanr)",
+      "<no ANR has occurred since boot>",
+      "mCurrentFocus=Window{3468ae6 u0 com.smslink/com.smslink.MainActivity}",
+      "mFocusedApp=ActivityRecord{9f795cb u0 com.smslink/.MainActivity t32}"
+    ]
+  },
+  {
+    "serial": "emulator-5556",
+    "state": "device",
+    "boot": "1",
+    "pm_ready": true,
+    "install": "Performing Streamed Install\nSuccess\n",
+    "resolve": "priority=0 preferredOrder=0 match=0x108000 specificIndex=-1 isDefault=false\ncom.smslink/.MainActivity",
+    "launch": "Starting: Intent { cmp=com.smslink/.MainActivity }\nStatus: ok\nLaunchState: COLD\nActivity: com.smslink/.MainActivity\nTotalTime: 5385\nWaitTime: 5401\nComplete\n",
+    "pid": "16827",
+    "focus_lines": [
+      "WINDOW MANAGER LAST ANR (dumpsys window lastanr)",
+      "<no ANR has occurred since boot>",
+      "mCurrentFocus=Window{5a37f7b u0 com.smslink/com.smslink.MainActivity}",
+      "mFocusedApp=ActivityRecord{33f0d06 u0 com.smslink/.MainActivity t29}"
+    ]
+  }
+]

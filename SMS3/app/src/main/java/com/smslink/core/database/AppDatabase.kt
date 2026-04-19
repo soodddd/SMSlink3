@@ -26,7 +26,7 @@ import com.smslink.file.data.FileTransferEntity
         FileTransferEntity::class,
         CallLog::class
     ],
-    version = 3,
+    version = 5,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -57,6 +57,6 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun callLogDao(): CallLogDao
 
     companion object {
-        const val DATABASE_NAME = "smslink_database"
+        const val DATABASE_NAME = "smslink_database_v5"
     }
 }

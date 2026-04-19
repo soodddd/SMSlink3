@@ -1,0 +1,42 @@
+﻿--------- beginning of crash
+04-18 02:50:12.972  3936  4042 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 4042 (bt_stack_manage), pid 3936 (droid.bluetooth)
+04-18 02:50:29.456  4085  4085 F DEBUG   : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+04-18 02:50:29.457  4085  4085 F DEBUG   : Build fingerprint: 'google/sdk_gphone64_x86_64/emu64xa:14/UE1A.230829.050/12077443:userdebug/dev-keys'
+04-18 02:50:29.458  4085  4085 F DEBUG   : Revision: '0'
+04-18 02:50:29.459  4085  4085 F DEBUG   : ABI: 'x86_64'
+04-18 02:50:29.460  4085  4085 F DEBUG   : Timestamp: 2026-04-18 02:50:14.667122700+0000
+04-18 02:50:29.463  4085  4085 F DEBUG   : Process uptime: 0s
+04-18 02:50:29.468  4085  4085 F DEBUG   : Cmdline: com.google.android.bluetooth
+04-18 02:50:29.468  4085  4085 F DEBUG   : pid: 3936, tid: 4042, name: bt_stack_manage  >>> com.google.android.bluetooth <<<
+04-18 02:50:29.470  4085  4085 F DEBUG   : uid: 1002
+04-18 02:50:29.471  4085  4085 F DEBUG   : signal 6 (SIGABRT), code -1 (SI_QUEUE), fault addr --------
+04-18 02:50:29.471  4085  4085 F DEBUG   : Abort message: 'assertion 'init_status == std::future_status::ready' failed - Can't start stack, last instance: starting Controller'
+04-18 02:50:29.472  4085  4085 F DEBUG   :     rax 0000000000000000  rbx 0000792ee4e72eb8  rcx 00007931fc479610  rdx 0000000000000006
+04-18 02:50:29.474  4085  4085 F DEBUG   :     r8  0000000000000001  r9  0000000000000001  r10 0000792ee4e72ec0  r11 0000000000000203
+04-18 02:50:29.476  4085  4085 F DEBUG   :     r12 0000792f82eabc50  r13 0000792f82eadd50  r14 0000000000000f60  r15 0000000000000fca
+04-18 02:50:29.479  4085  4085 F DEBUG   :     rdi 0000000000000f60  rsi 0000000000000fca
+04-18 02:50:29.481  4085  4085 F DEBUG   :     rbp 0000000000000001  rsp 0000792ee4e72eb0  rip 00007931fc479610
+04-18 02:50:29.482  4085  4085 F DEBUG   : 22 total frames
+04-18 02:50:29.483  4085  4085 F DEBUG   : backtrace:
+04-18 02:50:29.484  4085  4085 F DEBUG   :       #00 pc 0000000000061610  /apex/com.android.runtime/lib64/bionic/libc.so (abort+192) (BuildId: fa337969c798946280caa45e2d71a2e7)
+04-18 02:50:29.485  4085  4085 F DEBUG   :       #01 pc 00000000007fa5c3  /apex/com.android.art/lib64/libart.so (art::Runtime::Abort(char const*)+115) (BuildId: b6dc79e02101ea00827a35a55ab6597a)
+04-18 02:50:29.486  4085  4085 F DEBUG   :       #02 pc 0000000000037abd  /apex/com.google.mainline.primary.libs@340724000/lib64/libbase.so/a5cce001552a532d111a59af51bbb6cc5e93475522f033f9807fa5f8ad346840deb8c6475491b3425ed7ef34094fb412761afd70b2205820f67d8a4c71c39832/libbase.so (android::base::SetAborter(std::__1::function<void (char const*)>&&)::$_0::__invoke(char const*)+61) (BuildId: d848a07685150bc1df3af6b95e4bc316)
+04-18 02:50:29.487  4085  4085 F DEBUG   :       #03 pc 0000000000007fb2  /system/lib64/liblog.so (__android_log_assert+306) (BuildId: f2d120f04fa3ea2f6d481054934da0a6)
+04-18 02:50:29.487  4085  4085 F DEBUG   :       #04 pc 0000000000c505f4  /apex/com.android.btservices/lib64/libbluetooth_jni.so (bluetooth::StackManager::StartUp(bluetooth::ModuleList*, bluetooth::os::Thread*)+740) (BuildId: 07f121772f0589874ca9fdd71c8d3406)
+04-18 02:50:29.488  4085  4085 F DEBUG   :       #05 pc 0000000000482bb6  /apex/com.android.btservices/lib64/libbluetooth_jni.so (bluetooth::shim::Stack::Start(bluetooth::ModuleList*)+214) (BuildId: 07f121772f0589874ca9fdd71c8d3406)
+04-18 02:50:29.489  4085  4085 F DEBUG   :       #06 pc 00000000004828f2  /apex/com.android.btservices/lib64/libbluetooth_jni.so (bluetooth::shim::Stack::StartEverything()+1650) (BuildId: 07f121772f0589874ca9fdd71c8d3406)
+04-18 02:50:29.489  4085  4085 F DEBUG   :       #07 pc 000000000048cc4d  /apex/com.android.btservices/lib64/libbluetooth_jni.so (ShimModuleStartUp()+13) (BuildId: 07f121772f0589874ca9fdd71c8d3406)
+04-18 02:50:29.490  4085  4085 F DEBUG   :       #08 pc 00000000006afa5b  /apex/com.android.btservices/lib64/libbluetooth_jni.so (module_start_up(module_t const*)+203) (BuildId: 07f121772f0589874ca9fdd71c8d3406)
+04-18 02:50:29.491  4085  4085 F DEBUG   :       #09 pc 00000000006ae7a2  /apex/com.android.btservices/lib64/libbluetooth_jni.so (init_stack_internal(bluetooth::core::CoreInterface*)+82) (BuildId: 07f121772f0589874ca9fdd71c8d3406)
+04-18 02:50:29.491  4085  4085 F DEBUG   :       #10 pc 00000000006ae688  /apex/com.android.btservices/lib64/libbluetooth_jni.so (event_init_stack(std::__1::promise<void>, bluetooth::core::CoreInterface*)+120) (BuildId: 07f121772f0589874ca9fdd71c8d3406)
+04-18 02:50:29.492  4085  4085 F DEBUG   :       #11 pc 00000000006ae702  /apex/com.android.btservices/lib64/libbluetooth_jni.so (base::internal::Invoker<base::internal::BindState<void (*)(std::__1::promise<void>, bluetooth::core::CoreInterface*), std::__1::promise<void>, base::internal::UnretainedWrapper<bluetooth::core::CoreInterface> >, void ()>::RunOnce(base::internal::BindStateBase*)+50) (BuildId: 07f121772f0589874ca9fdd71c8d3406)
+04-18 02:50:29.496  4085  4085 F DEBUG   :       #12 pc 0000000000cb9e8e  /apex/com.android.btservices/lib64/libbluetooth_jni.so (base::debug::TaskAnnotator::RunTask(char const*, base::PendingTask*)+206) (BuildId: 07f121772f0589874ca9fdd71c8d3406)
+04-18 02:50:29.497  4085  4085 F DEBUG   :       #13 pc 0000000000cb8fb9  /apex/com.android.btservices/lib64/libbluetooth_jni.so (base::MessageLoop::RunTask(base::PendingTask*)+201) (BuildId: 07f121772f0589874ca9fdd71c8d3406)
+04-18 02:50:29.498  4085  4085 F DEBUG   :       #14 pc 0000000000cb955a  /apex/com.android.btservices/lib64/libbluetooth_jni.so (base::MessageLoop::DoWork()+586) (BuildId: 07f121772f0589874ca9fdd71c8d3406)
+04-18 02:50:29.499  4085  4085 F DEBUG   :       #15 pc 0000000000cbc1dc  /apex/com.android.btservices/lib64/libbluetooth_jni.so (base::MessagePumpDefault::Run(base::MessagePump::Delegate*)+76) (BuildId: 07f121772f0589874ca9fdd71c8d3406)
+04-18 02:50:29.500  4085  4085 F DEBUG   :       #16 pc 0000000000ce3300  /apex/com.android.btservices/lib64/libbluetooth_jni.so (base::RunLoop::Run()+48) (BuildId: 07f121772f0589874ca9fdd71c8d3406)
+04-18 02:50:29.500  4085  4085 F DEBUG   :       #17 pc 0000000000700fc2  /apex/com.android.btservices/lib64/libbluetooth_jni.so (bluetooth::common::MessageLoopThread::Run(std::__1::promise<void>)+306) (BuildId: 07f121772f0589874ca9fdd71c8d3406)
+04-18 02:50:29.501  4085  4085 F DEBUG   :       #18 pc 0000000000700b2b  /apex/com.android.btservices/lib64/libbluetooth_jni.so (bluetooth::common::MessageLoopThread::RunThread(bluetooth::common::MessageLoopThread*, std::__1::promise<void>)+43) (BuildId: 07f121772f0589874ca9fdd71c8d3406)
+04-18 02:50:29.503  4085  4085 F DEBUG   :       #19 pc 0000000000701533  /apex/com.android.btservices/lib64/libbluetooth_jni.so (void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct> >, void (*)(bluetooth::common::MessageLoopThread*, std::__1::promise<void>), bluetooth::common::MessageLoopThread*, std::__1::promise<void> > >(void*)+83) (BuildId: 07f121772f0589874ca9fdd71c8d3406)
+04-18 02:50:29.504  4085  4085 F DEBUG   :       #20 pc 00000000000cd06a  /apex/com.android.runtime/lib64/bionic/libc.so (__pthread_start(void*)+58) (BuildId: fa337969c798946280caa45e2d71a2e7)
+04-18 02:50:29.510  4085  4085 F DEBUG   :       #21 pc 0000000000062d88  /apex/com.android.runtime/lib64/bionic/libc.so (__start_thread+56) (BuildId: fa337969c798946280caa45e2d71a2e7)

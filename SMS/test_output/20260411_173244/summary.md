@@ -1,0 +1,440 @@
+
+## Environment
+- Workspace root: C:\Users\forek\Desktop\ccwork\SMS
+- Run root: C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244
+- Android SDK root: C:\Users\forek\AppData\Local\Android\Sdk
+- Step timeout seconds: 300
+- Build task mode: app-only
+- Unit tests enabled: False
+- SDK component present: platforms;android-35
+- SDK component present: build-tools;35.0.0
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe devices -l
+- Primary device: 400E7800HQ00000
+- Secondary device: MZEAYX6LE67T995D
+
+## Device preparation
+- Preparing device 400E7800HQ00000
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 wait-for-device
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell am clear-debug-app
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell settings put global wait_for_debugger 0
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 install -r -g C:\Users\forek\Desktop\ccwork\SMS\app\build\outputs\apk\debug\app-debug.apk
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell pm clear com.smslink
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell pm grant com.smslink android.permission.ACCESS_FINE_LOCATION
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell pm grant com.smslink android.permission.ACCESS_COARSE_LOCATION
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell pm grant com.smslink android.permission.CHANGE_WIFI_STATE
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell pm grant com.smslink android.permission.ACCESS_WIFI_STATE
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell pm grant com.smslink android.permission.READ_PHONE_STATE
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell pm grant com.smslink android.permission.CALL_PHONE
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell pm grant com.smslink android.permission.READ_CALL_LOG
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell pm grant com.smslink android.permission.RECORD_AUDIO
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell pm grant com.smslink android.permission.CAMERA
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell pm grant com.smslink android.permission.POST_NOTIFICATIONS
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell pm grant com.smslink android.permission.READ_MEDIA_IMAGES
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell pm grant com.smslink android.permission.READ_MEDIA_VIDEO
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell pm grant com.smslink android.permission.READ_MEDIA_AUDIO
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell pm grant com.smslink android.permission.NEARBY_WIFI_DEVICES
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell settings put secure enabled_notification_listeners com.smslink/com.smslink.feature.notification.SmsLinkNotificationListenerService
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell settings put global stay_on_while_plugged_in 7
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell getprop ro.product.model
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell wm size
+- 400E7800HQ00000 model: PA2473
+- 400E7800HQ00000 wm size: Physical size: 2064x3096
+- Preparing device MZEAYX6LE67T995D
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D wait-for-device
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell am clear-debug-app
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell settings put global wait_for_debugger 0
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D install -r -g C:\Users\forek\Desktop\ccwork\SMS\app\build\outputs\apk\debug\app-debug.apk
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell pm clear com.smslink
+- WARN: MZEAYX6LE67T995D pm clear failed, falling back to uninstall + fresh install.
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D uninstall com.smslink
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D install -r -g C:\Users\forek\Desktop\ccwork\SMS\app\build\outputs\apk\debug\app-debug.apk
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell pm grant com.smslink android.permission.ACCESS_FINE_LOCATION
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell pm grant com.smslink android.permission.ACCESS_COARSE_LOCATION
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell pm grant com.smslink android.permission.CHANGE_WIFI_STATE
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell pm grant com.smslink android.permission.ACCESS_WIFI_STATE
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell pm grant com.smslink android.permission.READ_PHONE_STATE
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell pm grant com.smslink android.permission.CALL_PHONE
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell pm grant com.smslink android.permission.READ_CALL_LOG
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell pm grant com.smslink android.permission.RECORD_AUDIO
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell pm grant com.smslink android.permission.CAMERA
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell pm grant com.smslink android.permission.POST_NOTIFICATIONS
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell pm grant com.smslink android.permission.READ_MEDIA_IMAGES
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell pm grant com.smslink android.permission.READ_MEDIA_VIDEO
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell pm grant com.smslink android.permission.READ_MEDIA_AUDIO
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell pm grant com.smslink android.permission.NEARBY_WIFI_DEVICES
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell settings put secure enabled_notification_listeners com.smslink/com.smslink.feature.notification.SmsLinkNotificationListenerService
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell settings put global stay_on_while_plugged_in 7
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell getprop ro.product.model
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell wm size
+- MZEAYX6LE67T995D model: PGKM10
+- MZEAYX6LE67T995D wm size: Physical size: 1080x2412
+
+## App launch and onboarding
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell am start -W -n com.smslink/.MainActivity
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell pidof com.smslink
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell am start -W -n com.smslink/.MainActivity
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell pidof com.smslink
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\400E7800HQ00000-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell input tap 1548 1328
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\400E7800HQ00000-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell input tap 1548 1030
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\400E7800HQ00000-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell input tap 1548 383
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\400E7800HQ00000-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell input tap 1548 383
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\400E7800HQ00000-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell input tap 1548 383
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\400E7800HQ00000-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell input tap 1548 383
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\400E7800HQ00000-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell input tap 1548 383
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\400E7800HQ00000-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell input tap 1548 383
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\400E7800HQ00000-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell input tap 1548 383
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\400E7800HQ00000-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell input tap 1548 383
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\400E7800HQ00000-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell input tap 1548 383
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\400E7800HQ00000-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell input tap 1548 383
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\400E7800HQ00000-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell input tap 1548 383
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\400E7800HQ00000-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell input tap 1548 383
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\400E7800HQ00000-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell input tap 1548 383
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\400E7800HQ00000-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell input tap 1548 383
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\400E7800HQ00000-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell input tap 1548 383
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\400E7800HQ00000-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell input tap 1548 383
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\400E7800HQ00000-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell input tap 1548 383
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\400E7800HQ00000-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell input tap 1548 383
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\400E7800HQ00000-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell input tap 1548 383
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\400E7800HQ00000-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell input tap 1548 383
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\400E7800HQ00000-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell input tap 1548 383
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\400E7800HQ00000-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 1598
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 1569
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 540 426
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/onboarding-state.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/onboarding-state.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-onboarding-state.xml
+
+## Pairing flow
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell uiautomator dump /sdcard/pairing-before-generate.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 pull /sdcard/pairing-before-generate.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\400E7800HQ00000-pairing-before-generate.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell input tap 1548 1167
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 shell uiautomator dump /sdcard/pairing-code.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s 400E7800HQ00000 pull /sdcard/pairing-code.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\400E7800HQ00000-pairing-code.xml
+- Pairing code on 400E7800HQ00000: 991144
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-enter-code.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-enter-code.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-enter-code.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell input tap 405 1271
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell uiautomator dump /sdcard/pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog.xml C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia\MZEAYX6LE67T995D-pairing-code-dialog.xml
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell screencap -p /sdcard/pairing-code-dialog-timeout.png
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog-timeout.png C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\screenshots\MZEAYX6LE67T995D-pairing-code-dialog-timeout.png
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D shell screenrecord --time-limit 30 /sdcard/pairing-code-dialog-timeout.mp4
+- >> C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog-timeout.mp4 C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\videos\MZEAYX6LE67T995D-pairing-code-dialog-timeout.mp4
+- FAIL: Command failed with exit code 1: C:\Users\forek\AppData\Local\Android\Sdk\platform-tools\adb.exe -s MZEAYX6LE67T995D pull /sdcard/pairing-code-dialog-timeout.mp4 C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\videos\MZEAYX6LE67T995D-pairing-code-dialog-timeout.mp4
+
+Artifacts:
+- Logs: C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\logs
+- Screenshots: C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\screenshots
+- Videos: C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\videos
+- UI dumps: C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\uia
+- Build logs: C:\Users\forek\Desktop\ccwork\SMS\test_output\20260411_173244\build

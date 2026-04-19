@@ -1,0 +1,482 @@
+﻿--------- beginning of system
+04-18 02:18:44.573   563   588 W ProcessStats: Tracking association SourceState{7c6b178 system/1000 BFgs #5273} whose proc state 4 is better than process ProcessState{ae1bbbf com.google.android.gms.persistent/10128 pkg=com.google.android.gms} proc state 9 (32 skipped)
+--------- beginning of main
+04-18 02:18:44.591  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:18:45.292  3940  4114 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:18:45.306  3940  4114 D DeviceDiscovery: Relay identity posted
+04-18 02:18:46.376  3940  4114 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:18:46.389  3940  4114 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:18:46.445   563   704 E WifiScoringParams: Invalid frequency(-1), using 5G as default rssi array
+04-18 02:18:46.453  3940  4137 D EGL_emulation: app_time_stats: avg=1981.63ms min=1981.63ms max=1981.63ms count=1
+04-18 02:18:47.598  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:18:48.065  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:18:48.318  3940  4114 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:18:48.318   933  6441 D TrafficStats: tagSocket(94) with statsTag=0xffffff81, statsUid=-1
+04-18 02:18:48.322   933  6442 D TrafficStats: tagSocket(99) with statsTag=0xffffff81, statsUid=-1
+04-18 02:18:48.327   933  6441 D TrafficStats: tagSocket(100) with statsTag=0xffffff81, statsUid=-1
+04-18 02:18:48.334   933  6442 D TrafficStats: tagSocket(99) with statsTag=0xffffff81, statsUid=-1
+04-18 02:18:48.337  3940  4114 D DeviceDiscovery: Relay identity posted
+04-18 02:18:48.345   357  6443 I resolv  : ResNSendHandler::run: 0 / {101 983141 101 983141 1073 1}
+04-18 02:18:48.345   357  6444 I resolv  : ResNSendHandler::run: 0 / {101 983141 101 983141 1073 1}
+04-18 02:18:48.350   357  6444 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71b859875820
+04-18 02:18:48.351   357  6445 I resolv  : ResNSendHandler::run: 0 / {101 983141 101 983141 1073 1}
+04-18 02:18:48.356   357  6445 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71b85986f700
+04-18 02:18:48.357   933   933 D TrafficStats: tagSocket(99) with statsTag=0xffffffff, statsUid=-1
+04-18 02:18:48.359   357  6443 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71b9a986bbd0
+04-18 02:18:48.365   357  6446 I resolv  : ResNSendHandler::run: 0 / {101 983141 101 983141 1073 1}
+04-18 02:18:48.366   357  6446 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71b8198772c0
+04-18 02:18:48.369   933   933 D TrafficStats: tagSocket(99) with statsTag=0xffffffff, statsUid=-1
+04-18 02:18:48.372   933   933 D TrafficStats: tagSocket(94) with statsTag=0xffffffff, statsUid=-1
+04-18 02:18:48.372   933  6442 D NetworkMonitor/101: PROBE_DNS connectivitycheck.gstatic.com 51ms OK 120.253.244.226,2409:871e:2700:1010::1002
+04-18 02:18:48.374   933   933 D TrafficStats: tagSocket(94) with statsTag=0xffffffff, statsUid=-1
+04-18 02:18:48.379   357  6447 I resolv  : GetAddrInfoHandler::run: {101 983141 101 983141 1073 1}
+04-18 02:18:48.380   933  6441 D NetworkMonitor/101: PROBE_DNS www.google.com 63ms OK 174.132.167.252,2001::1
+04-18 02:18:48.382   357  6448 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+04-18 02:18:48.383   357  6449 I resolv  : res_nmkquery: (QUERY, IN, A)
+04-18 02:18:48.383   357  6448 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71b859875820
+04-18 02:18:48.384   357  6449 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71b85986f700
+04-18 02:18:48.384   357  6448 I resolv  : doQuery: rcode=0, ancount=1, return value=333
+04-18 02:18:48.386   357  6449 I resolv  : doQuery: rcode=0, ancount=1, return value=321
+04-18 02:18:48.390   357  6450 I resolv  : GetAddrInfoHandler::run: {101 983141 101 983141 1073 1}
+04-18 02:18:48.391   933  6442 D TrafficStats: tagSocket(94) with statsTag=0xffffff81, statsUid=-1
+04-18 02:18:48.395   357  6452 I resolv  : res_nmkquery: (QUERY, IN, A)
+04-18 02:18:48.395   357  6451 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+04-18 02:18:48.397   357  6451 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71b9a986bbd0
+04-18 02:18:48.398   357  6451 I resolv  : doQuery: rcode=0, ancount=1, return value=60
+04-18 02:18:48.398   357  6452 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71b8198772c0
+04-18 02:18:48.399   357  6452 I resolv  : doQuery: rcode=0, ancount=1, return value=48
+04-18 02:18:48.402   933  6441 D TrafficStats: tagSocket(99) with statsTag=0xffffff81, statsUid=-1
+04-18 02:18:48.406  3940  4114 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:18:48.422  3940  4114 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:18:48.483  3940  4137 D EGL_emulation: app_time_stats: avg=2028.53ms min=2028.53ms max=2028.53ms count=1
+04-18 02:18:48.529   933  6442 D NetworkMonitor/101: PROBE_HTTP http://connectivitycheck.gstatic.com/generate_204 time=151ms ret=204 request={Connection=[close], User-Agent=[Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.32 Safari/537.36]} headers={null=[HTTP/1.1 204 No Content], Connection=[close], Content-Length=[0], Cross-Origin-Resource-Policy=[cross-origin], Date=[Sat, 18 Apr 2026 02:18:47 GMT], X-Android-Received-Millis=[1776478728527], X-Android-Response-Source=[NETWORK 204], X-Android-Selected-Protocol=[http/1.1], X-Android-Sent-Millis=[1776478728461]}
+04-18 02:18:48.605  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:18:49.615  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:18:50.243   563  1163 D WifiNl80211Manager: Scan result ready event
+04-18 02:18:50.244   563  1163 D WifiNative: Scan result ready event
+04-18 02:18:50.438  3940  4114 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:18:50.451  3940  4114 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:18:50.506  3940  4137 D EGL_emulation: app_time_stats: avg=2022.76ms min=2022.76ms max=2022.76ms count=1
+04-18 02:18:50.631  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:18:50.797  2738  4293 I NearbyDiscovery: FastPair: isDestroyable: Scanner is alive. [CONTEXT service_id=265 ]
+04-18 02:18:50.798  2738  4293 I NearbyDiscovery: DiscoveryService: Skip stopSelf(), fast pair controller is not destroyable. [CONTEXT service_id=265 ]
+04-18 02:18:51.319   357  6453 I resolv  : GetAddrInfoHandler::run: {101 983141 101 983141 1073 1}
+04-18 02:18:51.322   357  6454 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+04-18 02:18:51.322   357  6455 I resolv  : res_nmkquery: (QUERY, IN, A)
+04-18 02:18:51.323   357  6455 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71b8198772c0
+04-18 02:18:51.323   357  6455 I resolv  : doQuery: rcode=0, ancount=1, return value=48
+04-18 02:18:51.324   357  6454 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71b9a986bbd0
+04-18 02:18:51.324   357  6454 I resolv  : doQuery: rcode=0, ancount=1, return value=60
+04-18 02:18:51.332   933  6440 D TrafficStats: tagSocket(94) with statsTag=0xffffff81, statsUid=-1
+04-18 02:18:51.349  3940  4114 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:18:51.366  3940  4114 D DeviceDiscovery: Relay identity posted
+04-18 02:18:52.464  3940  4114 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:18:52.473  1782  6063 D TrafficStats: tagSocket(142) with statsTag=0x20000408, statsUid=-1
+04-18 02:18:52.483  3940  4114 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:18:52.538  3940  4137 D EGL_emulation: app_time_stats: avg=2030.54ms min=2030.54ms max=2030.54ms count=1
+04-18 02:18:54.376  3940  4114 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:18:54.398  3940  4114 D DeviceDiscovery: Relay identity posted
+04-18 02:18:54.503  3940  4114 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:18:54.525  3940  4114 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:18:54.562   563   655 D ActivityManager: freezing 2016 com.google.process.gservices
+04-18 02:18:54.566   563   655 D ActivityManager: freezing 1471 android.process.acore
+04-18 02:18:54.623  3940  4137 D EGL_emulation: app_time_stats: avg=2084.57ms min=2084.57ms max=2084.57ms count=1
+04-18 02:18:55.650  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:18:56.543  3940  4114 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:18:56.561  3940  4114 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:18:56.632  3940  4137 D EGL_emulation: app_time_stats: avg=2006.27ms min=2006.27ms max=2006.27ms count=1
+04-18 02:18:56.664  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:18:57.407  3940  4114 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:18:57.422  3940  4114 D DeviceDiscovery: Relay identity posted
+04-18 02:18:57.630  1782  4694 D TrafficStats: tagSocket(147) with statsTag=0x20003000, statsUid=-1
+04-18 02:18:57.915   563  1163 D OomAdjuster: Not killing cached processes
+04-18 02:18:57.919   563  1163 W ProcessStats: Tracking association SourceState{53980c7 com.google.android.gms.unstable/10128 Service #5274} whose proc state 8 is better than process ProcessState{ae1bbbf com.google.android.gms.persistent/10128 pkg=com.google.android.gms} proc state 9 (9 skipped)
+04-18 02:18:58.089  2768  2991 D EGL_emulation: app_time_stats: avg=57968.71ms min=57968.71ms max=57968.71ms count=1
+04-18 02:18:58.093  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:18:58.415   933  6441 D TrafficStats: tagSocket(99) with statsTag=0xffffff81, statsUid=-1
+04-18 02:18:58.575  3940  4114 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:18:58.593  3940  4114 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:18:58.652  3940  4137 D EGL_emulation: app_time_stats: avg=2017.64ms min=2017.64ms max=2017.64ms count=1
+04-18 02:19:00.070  2228  2470 I AiAiEcho: Predicting[0]: 
+04-18 02:19:00.071  2228  2470 I AiAiEcho: EchoTargets: 
+04-18 02:19:00.071  2228  2470 I AiAiEcho: Filtered by AiAi flag check: 
+04-18 02:19:00.072  2228  2470 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata: 
+04-18 02:19:00.074  2768  2991 D EGL_emulation: app_time_stats: avg=1983.21ms min=1983.21ms max=1983.21ms count=1
+04-18 02:19:00.079  2228  2470 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0 (types=[])
+04-18 02:19:00.081  2768  2768 W PageIndicator: Total number of pages invalid: 0. Assuming 1 page.
+04-18 02:19:00.432  3940  4114 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:00.448  3940  4114 D DeviceDiscovery: Relay identity posted
+04-18 02:19:00.602   563  2159 D ActivityManager: sync unfroze 2016 com.google.process.gservices for 7
+04-18 02:19:00.610  3940  4114 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:00.632  3940  4114 W DeviceDiscovery: Failed to fetch relay peers: unexpected end of stream
+04-18 02:19:00.668  4509  6388 D CompatibilityChangeReporter: Compat change id reported: 160794467; UID 10128; state: ENABLED
+04-18 02:19:00.804  2738  6458 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.tapandpay.gcmtask.TapAndPayGcmTaskService started execution. cause:7 exec_start_elapsed_seconds: 629 [CONTEXT service_id=218 ]
+04-18 02:19:00.809  2738  6457 V NFC     : this device does not have NFC support
+04-18 02:19:00.810  2738  6457 W TapAndPay: NfcAdapter is null while obtaining CardEmulation instance. [CONTEXT service_id=79 ]
+04-18 02:19:00.810  2738  6457 W TapAndPay: java.lang.NullPointerException: NfcAdapter is null
+04-18 02:19:00.810  2738  6457 W TapAndPay: 	at android.nfc.cardemulation.CardEmulation.getInstance(CardEmulation.java:152)
+04-18 02:19:00.810  2738  6457 W TapAndPay: 	at cdoy.<init>(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+04-18 02:19:00.810  2738  6457 W TapAndPay: 	at com.google.android.gms.tapandpay.hce.task.TapAndPayAidRegistrationTaskOperation.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):5)
+04-18 02:19:00.810  2738  6457 W TapAndPay: 	at com.google.android.gms.tapandpay.gcmtask.TapAndPayGcmTaskChimeraService.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+04-18 02:19:00.810  2738  6457 W TapAndPay: 	at avzs.call(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+04-18 02:19:00.810  2738  6457 W TapAndPay: 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+04-18 02:19:00.810  2738  6457 W TapAndPay: 	at aced.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+04-18 02:19:00.810  2738  6457 W TapAndPay: 	at aced.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+04-18 02:19:00.810  2738  6457 W TapAndPay: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+04-18 02:19:00.810  2738  6457 W TapAndPay: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+04-18 02:19:00.810  2738  6457 W TapAndPay: 	at acjn.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+04-18 02:19:00.810  2738  6457 W TapAndPay: 	at java.lang.Thread.run(Thread.java:1012)
+04-18 02:19:00.832  2738  6457 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.tapandpay.gcmtask.TapAndPayGcmTaskService finished executing. cause:7 result: 3 elapsed_millis: 63 uptime_millis: 63 exec_start_elapsed_seconds: 629 [CONTEXT service_id=218 ]
+04-18 02:19:00.959  2738  6458 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.droidguard.DroidGuardGcmTaskService started execution. cause:5 exec_start_elapsed_seconds: 629 [CONTEXT service_id=218 ]
+04-18 02:19:01.008  2738  6457 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.droidguard.DroidGuardGcmTaskService finished executing. cause:5 result: 1 elapsed_millis: 83 uptime_millis: 83 exec_start_elapsed_seconds: 629 [CONTEXT service_id=218 ]
+04-18 02:19:01.064   357  6460 I resolv  : GetAddrInfoHandler::run: {101 786533 101 983141 10128 0}
+04-18 02:19:01.069   357  6461 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+04-18 02:19:01.070   357  6462 I resolv  : res_nmkquery: (QUERY, IN, A)
+04-18 02:19:01.070   357  6461 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71b8598747f0
+04-18 02:19:01.070   357  6461 I resolv  : doQuery: rcode=0, ancount=4, return value=406
+04-18 02:19:01.072   357  6462 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71b859874ee0
+04-18 02:19:01.072   357  6462 I resolv  : doQuery: rcode=0, ancount=4, return value=358
+04-18 02:19:01.078  4509  6383 D TrafficStats: tagSocket(106) with statsTag=0x1803, statsUid=10128
+04-18 02:19:01.349   933  6440 D TrafficStats: tagSocket(94) with statsTag=0xffffff81, statsUid=-1
+04-18 02:19:01.386  4509  6383 D TrafficStats: tagSocket(113) with statsTag=0x1803, statsUid=10128
+04-18 02:19:01.696  4509  6383 D TrafficStats: tagSocket(114) with statsTag=0x1803, statsUid=10128
+04-18 02:19:01.710  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:01.977  1782  3727 E WakeLock: DG:service ** IS FORCE-RELEASED ON TIMEOUT **
+04-18 02:19:02.640  3940  4114 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:02.656  3940  4114 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:19:02.702  3940  4137 D EGL_emulation: app_time_stats: avg=4049.02ms min=4049.02ms max=4049.02ms count=1
+04-18 02:19:02.712  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:03.384  2738  6420 W HeterodyneSyncer: Sync failed [CONTEXT service_id=51 ]
+04-18 02:19:03.384  2738  6420 W HeterodyneSyncer: bwdx: 29504: Network error
+04-18 02:19:03.384  2738  6420 W HeterodyneSyncer: 	at bwhy.D(:com.google.android.gms@231818047@23.18.18 (190800-535401451):210)
+04-18 02:19:03.384  2738  6420 W HeterodyneSyncer: 	at bwhy.p(:com.google.android.gms@231818047@23.18.18 (190800-535401451):61)
+04-18 02:19:03.384  2738  6420 W HeterodyneSyncer: 	at bwhy.w(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+04-18 02:19:03.384  2738  6420 W HeterodyneSyncer: 	at bwhy.o(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+04-18 02:19:03.384  2738  6420 W HeterodyneSyncer: 	at com.google.android.gms.phenotype.sync.HeterodyneSyncTaskChimeraService.d(:com.google.android.gms@231818047@23.18.18 (190800-535401451):29)
+04-18 02:19:03.384  2738  6420 W HeterodyneSyncer: 	at com.google.android.gms.phenotype.sync.HeterodyneSyncTaskChimeraService.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):10)
+04-18 02:19:03.384  2738  6420 W HeterodyneSyncer: 	at avzs.call(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+04-18 02:19:03.384  2738  6420 W HeterodyneSyncer: 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+04-18 02:19:03.384  2738  6420 W HeterodyneSyncer: 	at aced.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+04-18 02:19:03.384  2738  6420 W HeterodyneSyncer: 	at aced.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+04-18 02:19:03.384  2738  6420 W HeterodyneSyncer: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+04-18 02:19:03.384  2738  6420 W HeterodyneSyncer: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+04-18 02:19:03.384  2738  6420 W HeterodyneSyncer: 	at acjn.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+04-18 02:19:03.384  2738  6420 W HeterodyneSyncer: 	at java.lang.Thread.run(Thread.java:1012)
+04-18 02:19:03.384  2738  6420 W HeterodyneSyncer: Caused by: java.io.IOException: request timeout
+04-18 02:19:03.384  2738  6420 W HeterodyneSyncer: 	at bwia.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):41)
+04-18 02:19:03.384  2738  6420 W HeterodyneSyncer: 	at bwhy.D(:com.google.android.gms@231818047@23.18.18 (190800-535401451):166)
+04-18 02:19:03.384  2738  6420 W HeterodyneSyncer: 	... 13 more
+04-18 02:19:03.384  2738  6420 W HeterodyneSyncer: Caused by: java.util.concurrent.TimeoutException: Waited 60000 milliseconds (plus 1 milliseconds, 584700 nanoseconds delay) for blo@6abe216[status=PENDING, info=[tag=[avwn@9162797]]]
+04-18 02:19:03.384  2738  6420 W HeterodyneSyncer: 	at blk.get(:com.google.android.gms@231818047@23.18.18 (190800-535401451):30)
+04-18 02:19:03.384  2738  6420 W HeterodyneSyncer: 	at blp.get(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+04-18 02:19:03.384  2738  6420 W HeterodyneSyncer: 	at bwia.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):31)
+04-18 02:19:03.384  2738  6420 W HeterodyneSyncer: 	... 14 more
+04-18 02:19:03.456  3940  4114 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:03.471  3940  4114 D DeviceDiscovery: Relay identity posted
+04-18 02:19:04.280  2738  6420 E HeterodyneSyncTaskChime: Sync task failure [CONTEXT service_id=51 ]
+04-18 02:19:04.280  2738  6420 E HeterodyneSyncTaskChime: bwdx: 29504: Network error
+04-18 02:19:04.280  2738  6420 E HeterodyneSyncTaskChime: 	at bwhy.D(:com.google.android.gms@231818047@23.18.18 (190800-535401451):210)
+04-18 02:19:04.280  2738  6420 E HeterodyneSyncTaskChime: 	at bwhy.p(:com.google.android.gms@231818047@23.18.18 (190800-535401451):61)
+04-18 02:19:04.280  2738  6420 E HeterodyneSyncTaskChime: 	at bwhy.w(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+04-18 02:19:04.280  2738  6420 E HeterodyneSyncTaskChime: 	at bwhy.o(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+04-18 02:19:04.280  2738  6420 E HeterodyneSyncTaskChime: 	at com.google.android.gms.phenotype.sync.HeterodyneSyncTaskChimeraService.d(:com.google.android.gms@231818047@23.18.18 (190800-535401451):29)
+04-18 02:19:04.280  2738  6420 E HeterodyneSyncTaskChime: 	at com.google.android.gms.phenotype.sync.HeterodyneSyncTaskChimeraService.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):10)
+04-18 02:19:04.280  2738  6420 E HeterodyneSyncTaskChime: 	at avzs.call(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+04-18 02:19:04.280  2738  6420 E HeterodyneSyncTaskChime: 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+04-18 02:19:04.280  2738  6420 E HeterodyneSyncTaskChime: 	at aced.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+04-18 02:19:04.280  2738  6420 E HeterodyneSyncTaskChime: 	at aced.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+04-18 02:19:04.280  2738  6420 E HeterodyneSyncTaskChime: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+04-18 02:19:04.280  2738  6420 E HeterodyneSyncTaskChime: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+04-18 02:19:04.280  2738  6420 E HeterodyneSyncTaskChime: 	at acjn.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+04-18 02:19:04.280  2738  6420 E HeterodyneSyncTaskChime: 	at java.lang.Thread.run(Thread.java:1012)
+04-18 02:19:04.280  2738  6420 E HeterodyneSyncTaskChime: Caused by: java.io.IOException: request timeout
+04-18 02:19:04.280  2738  6420 E HeterodyneSyncTaskChime: 	at bwia.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):41)
+04-18 02:19:04.280  2738  6420 E HeterodyneSyncTaskChime: 	at bwhy.D(:com.google.android.gms@231818047@23.18.18 (190800-535401451):166)
+04-18 02:19:04.280  2738  6420 E HeterodyneSyncTaskChime: 	... 13 more
+04-18 02:19:04.280  2738  6420 E HeterodyneSyncTaskChime: Caused by: java.util.concurrent.TimeoutException: Waited 60000 milliseconds (plus 1 milliseconds, 584700 nanoseconds delay) for blo@6abe216[status=PENDING, info=[tag=[avwn@9162797]]]
+04-18 02:19:04.280  2738  6420 E HeterodyneSyncTaskChime: 	at blk.get(:com.google.android.gms@231818047@23.18.18 (190800-535401451):30)
+04-18 02:19:04.280  2738  6420 E HeterodyneSyncTaskChime: 	at blp.get(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+04-18 02:19:04.280  2738  6420 E HeterodyneSyncTaskChime: 	at bwia.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):31)
+04-18 02:19:04.280  2738  6420 E HeterodyneSyncTaskChime: 	... 14 more
+04-18 02:19:04.292   563  2159 D OomAdjuster: Not killing cached processes
+04-18 02:19:04.430  2738  6458 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.phenotype.service.sync.PhenotypeConfigurator finished executing. cause:5 result: 2 elapsed_millis: 65904 uptime_millis: 65904 exec_start_elapsed_seconds: 566 [CONTEXT service_id=218 ]
+04-18 02:19:04.671  3940  4114 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:04.685  3940  4114 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:19:04.748  3940  4137 D EGL_emulation: app_time_stats: avg=2045.50ms min=2045.50ms max=2045.50ms count=1
+04-18 02:19:05.735  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:06.483  3940  4114 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:06.498  3940  4114 D DeviceDiscovery: Relay identity posted
+04-18 02:19:06.702  3940  4114 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:06.719  3940  4114 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:19:06.742  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:06.783  3940  4137 D EGL_emulation: app_time_stats: avg=2032.93ms min=2032.93ms max=2032.93ms count=1
+04-18 02:19:07.575  2738  4357 D TrafficStats: tagSocket(285) with statsTag=0x1203, statsUid=10128
+04-18 02:19:07.583  2738  4357 D TrafficStats: tagSocket(286) with statsTag=0x1203, statsUid=10128
+04-18 02:19:07.748  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:08.060  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:08.430   933  6441 D NetworkMonitor/101: PROBE_HTTPS https://www.google.com/generate_204 Probe failed with exception java.net.SocketTimeoutException: failed to connect to www.google.com/2001::1 (port 443) from /fec0::5054:ff:fe12:3456 (port 52914) after 10000ms
+04-18 02:19:08.732  3940  4114 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:08.755  3940  4114 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:19:08.765  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:08.838  3940  4137 D EGL_emulation: app_time_stats: avg=2054.25ms min=2054.25ms max=2054.25ms count=1
+04-18 02:19:09.516  3940  4114 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:09.536  3940  4114 D DeviceDiscovery: Relay identity posted
+04-18 02:19:09.624  4509  6383 D TrafficStats: tagSocket(106) with statsTag=0x1803, statsUid=10128
+04-18 02:19:09.632  4509  6383 D TrafficStats: tagSocket(107) with statsTag=0x1803, statsUid=10128
+04-18 02:19:09.637  4509  6383 D TrafficStats: tagSocket(108) with statsTag=0x1803, statsUid=10128
+04-18 02:19:09.644  4509  6383 D TrafficStats: tagSocket(109) with statsTag=0x1803, statsUid=10128
+04-18 02:19:09.650  4509  6383 D TrafficStats: tagSocket(110) with statsTag=0x1803, statsUid=10128
+04-18 02:19:09.655  4509  6383 D TrafficStats: tagSocket(111) with statsTag=0x1803, statsUid=10128
+04-18 02:19:10.775  3940  4114 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:10.792  3940  4114 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:19:10.867  3940  4137 D EGL_emulation: app_time_stats: avg=2028.07ms min=2028.07ms max=2028.07ms count=1
+04-18 02:19:11.364   933  6440 D NetworkMonitor/101: PROBE_FALLBACK http://www.google.com/gen_204 Probe failed with exception java.net.SocketTimeoutException: failed to connect to www.google.com/2001::1 (port 80) from /fec0::5054:ff:fe12:3456 (port 48134) after 10000ms
+04-18 02:19:11.367   933  6440 D NetworkMonitor/101: isCaptivePortal: isSuccessful()=false isPortal()=false RedirectUrl=null isPartialConnectivity()=true Time=23053ms
+04-18 02:19:11.371   563   711 D ConnectivityService: [101 CELLULAR] validation failed
+04-18 02:19:12.551  3940  4119 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:12.575  3940  4119 W DeviceDiscovery: Failed to post relay identity: unexpected end of stream
+04-18 02:19:12.803  3940  4119 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:12.819  3940  4119 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:19:12.876  3940  4137 D EGL_emulation: app_time_stats: avg=2007.79ms min=2007.79ms max=2007.79ms count=1
+04-18 02:19:12.957   563  1644 D OomAdjuster: Not killing cached processes
+04-18 02:19:12.960   563  1644 W ProcessStats: Tracking association SourceState{9a2cf97 com.google.android.gms.unstable/10128 Service #5298} whose proc state 8 is better than process ProcessState{ae1bbbf com.google.android.gms.persistent/10128 pkg=com.google.android.gms} proc state 9 (160 skipped)
+04-18 02:19:14.807  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:14.835  3940  4119 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:14.850  3940  4119 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:19:14.907  3940  4137 D EGL_emulation: app_time_stats: avg=2028.91ms min=2028.91ms max=2028.91ms count=1
+04-18 02:19:15.587  3940  4119 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:15.602  3940  4119 W DeviceDiscovery: Failed to post relay identity: unexpected end of stream
+04-18 02:19:15.820  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:15.990   563   597 I ActivityManager: Waited long enough for: ServiceRecord{aed234a u0 com.google.android.gms/.droidguard.DroidGuardService}
+04-18 02:19:16.826  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:16.858  3940  4119 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:16.871  3940  4119 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:19:16.919  3940  4137 D EGL_emulation: app_time_stats: avg=2010.50ms min=2010.50ms max=2010.50ms count=1
+04-18 02:19:17.830  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:18.063  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:18.615  3940  4119 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:18.631  3940  4119 D DeviceDiscovery: Relay identity posted
+04-18 02:19:18.883  3940  4119 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:18.896  3940  4119 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:19:18.948  3940  4137 D EGL_emulation: app_time_stats: avg=2028.48ms min=2028.48ms max=2028.48ms count=1
+04-18 02:19:19.384   563  2159 D OomAdjuster: Not killing cached processes
+04-18 02:19:20.853  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:20.909  3940  4119 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:20.924  3940  4119 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:19:20.970  3940  4137 D EGL_emulation: app_time_stats: avg=2019.67ms min=2019.67ms max=2019.67ms count=1
+04-18 02:19:21.641  3940  4114 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:21.654  3940  4114 D DeviceDiscovery: Relay identity posted
+04-18 02:19:21.861  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:22.523  1782  6063 D TrafficStats: tagSocket(142) with statsTag=0x20000408, statsUid=-1
+04-18 02:19:22.861  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:22.940  3940  4114 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:22.962  3940  4114 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:19:23.027  3940  4137 D EGL_emulation: app_time_stats: avg=2056.03ms min=2056.03ms max=2056.03ms count=1
+04-18 02:19:23.124  3940  4115 D TrafficStats: tagSocket(114) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:23.133  3940  4115 I ConnectionManager: Accepted TCP connection from tcp-127.0.0.1:58685
+04-18 02:19:23.864  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:24.063  3940  4114 D AcceptedTcpConnection: Received 83 bytes from inbound peer: tcp-127.0.0.1:58685
+04-18 02:19:24.066  3940  6256 D ConnectionManager: Received 83 bytes from device: tcp-127.0.0.1:58685
+04-18 02:19:24.119  3940  4119 I FileTransfer: File request received: phase1-sample-transfer.txt, waiting for user confirmation
+04-18 02:19:24.664  3940  4119 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:24.683  3940  4119 D DeviceDiscovery: Relay identity posted
+04-18 02:19:24.972  3940  4119 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:24.987  3940  4119 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:19:25.035  3940  4137 D EGL_emulation: app_time_stats: avg=2008.28ms min=2008.28ms max=2008.28ms count=1
+04-18 02:19:25.067  3940  4114 D AcceptedTcpConnection: Received 83 bytes from inbound peer: tcp-127.0.0.1:58685
+04-18 02:19:25.074  3940  4114 D AcceptedTcpConnection: Received 83 bytes from inbound peer: tcp-127.0.0.1:58685
+04-18 02:19:25.075  3940  4119 D ConnectionManager: Received 83 bytes from device: tcp-127.0.0.1:58685
+04-18 02:19:25.077  3940  4119 D ConnectionManager: Received 83 bytes from device: tcp-127.0.0.1:58685
+04-18 02:19:25.105  3940  6463 I FileTransfer: Receiving file: phase1-sample-transfer.txt
+04-18 02:19:25.108  3940  4114 D AcceptedTcpConnection: Received 37 bytes from inbound peer: tcp-127.0.0.1:58685
+04-18 02:19:25.115  3940  6463 D ConnectionManager: Received 37 bytes from device: tcp-127.0.0.1:58685
+04-18 02:19:25.154  3940  6467 I FileTransfer: File received successfully: phase1-sample-transfer.txt
+04-18 02:19:26.885  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:27.000  3940  6467 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:27.022  3940  6467 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:19:27.075  3940  4137 D EGL_emulation: app_time_stats: avg=2039.40ms min=2039.40ms max=2039.40ms count=1
+04-18 02:19:27.695  3940  6467 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:27.710  3940  6467 D DeviceDiscovery: Relay identity posted
+04-18 02:19:27.891  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:28.058  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:28.903  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:29.041  3940  6467 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:29.060  3940  6467 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:19:29.131  3940  4137 D EGL_emulation: app_time_stats: avg=2054.78ms min=2054.78ms max=2054.78ms count=1
+04-18 02:19:29.913  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:30.719  3940  6467 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:30.734  3940  6467 D DeviceDiscovery: Relay identity posted
+04-18 02:19:31.075  3940  6467 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:31.091  3940  6467 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:19:31.157  3940  4137 D EGL_emulation: app_time_stats: avg=2024.97ms min=2024.97ms max=2024.97ms count=1
+04-18 02:19:32.937  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:33.105  3940  6467 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:33.124  3940  6467 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:19:33.188  3940  4137 D EGL_emulation: app_time_stats: avg=2028.47ms min=2028.47ms max=2028.47ms count=1
+04-18 02:19:33.744  3940  6467 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:33.764  3940  6467 D DeviceDiscovery: Relay identity posted
+04-18 02:19:33.947  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:34.955  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:35.154  3940  6467 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:35.195  3940  6467 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:19:35.276  3940  4137 D EGL_emulation: app_time_stats: avg=2086.90ms min=2086.90ms max=2086.90ms count=1
+04-18 02:19:35.963  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:36.775  3940  6467 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:36.800  3940  6467 W DeviceDiscovery: Failed to post relay identity: unexpected end of stream
+04-18 02:19:37.224  3940  6467 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:37.240  3940  6467 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:19:37.286  3940  4137 D EGL_emulation: app_time_stats: avg=2006.18ms min=2006.18ms max=2006.18ms count=1
+04-18 02:19:38.068  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:38.086  2768  2991 D EGL_emulation: app_time_stats: avg=38006.48ms min=38006.48ms max=38006.48ms count=1
+04-18 02:19:38.971  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:39.257  3940  6467 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:39.275  3940  6467 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:19:39.336  3940  4137 D EGL_emulation: app_time_stats: avg=2048.81ms min=2048.81ms max=2048.81ms count=1
+04-18 02:19:39.817  3940  6467 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:39.838  3940  6467 D DeviceDiscovery: Relay identity posted
+04-18 02:19:39.982  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:40.991  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:41.285  3940  6467 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:41.300  3940  6467 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:19:41.351  3940  4137 D EGL_emulation: app_time_stats: avg=2014.76ms min=2014.76ms max=2014.76ms count=1
+04-18 02:19:41.995  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:42.848  3940  6467 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:42.873  3940  6467 W DeviceDiscovery: Failed to post relay identity: unexpected end of stream
+04-18 02:19:43.315  3940  6467 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:43.329  3940  6467 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:19:43.398  3940  4137 D EGL_emulation: app_time_stats: avg=2045.45ms min=2045.45ms max=2045.45ms count=1
+04-18 02:19:45.019  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:45.343  3940  6467 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:45.357  3940  6467 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:19:45.415  3940  4137 D EGL_emulation: app_time_stats: avg=2012.46ms min=2012.46ms max=2012.46ms count=1
+04-18 02:19:45.887  3940  6467 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:45.903  3940  6467 D DeviceDiscovery: Relay identity posted
+04-18 02:19:46.017  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:47.023  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:47.374  3940  6415 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:47.390  3940  6415 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:19:47.462  3940  4137 D EGL_emulation: app_time_stats: avg=2046.60ms min=2046.60ms max=2046.60ms count=1
+04-18 02:19:47.926  1782  3727 E WakeLock: Checkin Service ** IS FORCE-RELEASED ON TIMEOUT **
+04-18 02:19:48.026  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:48.061  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:48.912  3940  6415 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:48.924  3940  6415 D DeviceDiscovery: Relay identity posted
+04-18 02:19:49.405  3940  6415 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:49.419  3940  6415 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:19:49.467  3940  4137 D EGL_emulation: app_time_stats: avg=2005.07ms min=2005.07ms max=2005.07ms count=1
+04-18 02:19:51.042  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:51.433  3940  6415 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:51.446  3940  6415 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:19:51.499  3940  4137 D EGL_emulation: app_time_stats: avg=2031.58ms min=2031.58ms max=2031.58ms count=1
+04-18 02:19:51.934  3940  6415 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:51.948  3940  6415 D DeviceDiscovery: Relay identity posted
+04-18 02:19:52.052  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:52.600  1782  6063 W Checkin : [CheckinRequestProcessor] Default Task : Checkin failed: https://android.googleapis.com/checkin (fragment #0) failed to connect to android.googleapis.com/2001:4860:4802:34::223 (port 443) from /fec0::5054:ff:fe12:3456 (port 38130) after 30000ms
+04-18 02:19:52.600  1782  6063 W Checkin : java.net.SocketTimeoutException: failed to connect to android.googleapis.com/2001:4860:4802:34::223 (port 443) from /fec0::5054:ff:fe12:3456 (port 38130) after 30000ms
+04-18 02:19:52.600  1782  6063 W Checkin : 	at libcore.io.IoBridge.connectErrno(IoBridge.java:235)
+04-18 02:19:52.600  1782  6063 W Checkin : 	at libcore.io.IoBridge.connect(IoBridge.java:179)
+04-18 02:19:52.600  1782  6063 W Checkin : 	at java.net.PlainSocketImpl.socketConnect(PlainSocketImpl.java:142)
+04-18 02:19:52.600  1782  6063 W Checkin : 	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:390)
+04-18 02:19:52.600  1782  6063 W Checkin : 	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:230)
+04-18 02:19:52.600  1782  6063 W Checkin : 	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:212)
+04-18 02:19:52.600  1782  6063 W Checkin : 	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:436)
+04-18 02:19:52.600  1782  6063 W Checkin : 	at java.net.Socket.connect(Socket.java:646)
+04-18 02:19:52.600  1782  6063 W Checkin : 	at com.android.okhttp.internal.Platform.connectSocket(Platform.java:182)
+04-18 02:19:52.600  1782  6063 W Checkin : 	at com.android.okhttp.internal.io.RealConnection.connectSocket(RealConnection.java:145)
+04-18 02:19:52.600  1782  6063 W Checkin : 	at com.android.okhttp.internal.io.RealConnection.connect(RealConnection.java:116)
+04-18 02:19:52.600  1782  6063 W Checkin : 	at com.android.okhttp.internal.http.StreamAllocation.findConnection(StreamAllocation.java:186)
+04-18 02:19:52.600  1782  6063 W Checkin : 	at com.android.okhttp.internal.http.StreamAllocation.findHealthyConnection(StreamAllocation.java:128)
+04-18 02:19:52.600  1782  6063 W Checkin : 	at com.android.okhttp.internal.http.StreamAllocation.newStream(StreamAllocation.java:97)
+04-18 02:19:52.600  1782  6063 W Checkin : 	at com.android.okhttp.internal.http.HttpEngine.connect(HttpEngine.java:289)
+04-18 02:19:52.600  1782  6063 W Checkin : 	at com.android.okhttp.internal.http.HttpEngine.sendRequest(HttpEngine.java:232)
+04-18 02:19:52.600  1782  6063 W Checkin : 	at com.android.okhttp.internal.huc.HttpURLConnectionImpl.execute(HttpURLConnectionImpl.java:465)
+04-18 02:19:52.600  1782  6063 W Checkin : 	at com.android.okhttp.internal.huc.HttpURLConnectionImpl.connect(HttpURLConnectionImpl.java:131)
+04-18 02:19:52.600  1782  6063 W Checkin : 	at com.android.okhttp.internal.huc.HttpURLConnectionImpl.getOutputStream(HttpURLConnectionImpl.java:262)
+04-18 02:19:52.600  1782  6063 W Checkin : 	at com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getOutputStream(DelegatingHttpsURLConnection.java:219)
+04-18 02:19:52.600  1782  6063 W Checkin : 	at com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getOutputStream(HttpsURLConnectionImpl.java:30)
+04-18 02:19:52.600  1782  6063 W Checkin : 	at yup.e(:com.google.android.gms@231818047@23.18.18 (190800-535401451):13)
+04-18 02:19:52.600  1782  6063 W Checkin : 	at yup.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):43)
+04-18 02:19:52.600  1782  6063 W Checkin : 	at ywx.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):67)
+04-18 02:19:52.600  1782  6063 W Checkin : 	at com.google.android.gms.checkin.CheckinIntentOperation.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+04-18 02:19:52.600  1782  6063 W Checkin : 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+04-18 02:19:52.600  1782  6063 W Checkin : 	at zhv.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+04-18 02:19:52.600  1782  6063 W Checkin : 	at hjm.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+04-18 02:19:52.600  1782  6063 W Checkin : 	at hjl.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):11)
+04-18 02:19:52.600  1782  6063 W Checkin : 	at dfhf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+04-18 02:19:52.600  1782  6063 W Checkin : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+04-18 02:19:52.600  1782  6063 W Checkin : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+04-18 02:19:52.600  1782  6063 W Checkin : 	at java.lang.Thread.run(Thread.java:1012)
+04-18 02:19:52.636   563  1644 D CompatibilityChangeReporter: Compat change id reported: 229362273; UID 10128; state: ENABLED
+04-18 02:19:52.638   563  1644 D CompatibilityChangeReporter: Compat change id reported: 229362273; UID 10128; state: DISABLED
+04-18 02:19:52.645   563   597 D OomAdjuster: Not killing cached processes
+04-18 02:19:52.649   563   597 W ProcessStats: Tracking association SourceState{7c6b178 system/1000 BFgs #5303} whose proc state 4 is better than process ProcessState{ae1bbbf com.google.android.gms.persistent/10128 pkg=com.google.android.gms} proc state 9 (40 skipped)
+04-18 02:19:52.662  2738  6458 I AlarmManager: setExactAndAllowWhileIdle [name: GCM_CONN_ALARM type: 2 triggerAtMillis: 693770]
+04-18 02:19:52.719  1782  6063 I Checkin : [CheckinOperation] Checkin Operation finished with result: FAILURE finish time: 681012.
+04-18 02:19:52.724  1782  6473 I AccountSeedingPrefetchI: AccountSeedingPrefetchInit intent operation started. [CONTEXT service_id=42 ]
+04-18 02:19:52.799  1782  6063 I Checkin : [ScheduledCheckinGmsTaskService] scheduleCheckinTask
+04-18 02:19:52.836  1782  6063 I Checkin : [ExecutionManager] Checkin scheduled at 7637221.
+04-18 02:19:53.067  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:53.465  3940  6415 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:53.483  3940  6415 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:19:53.541  3940  4137 D EGL_emulation: app_time_stats: avg=2040.26ms min=2040.26ms max=2040.26ms count=1
+04-18 02:19:53.741  3940  4114 D AcceptedTcpConnection: Received 9 bytes from inbound peer: tcp-127.0.0.1:58685
+04-18 02:19:53.744  3940  6415 D ConnectionManager: Received 9 bytes from device: tcp-127.0.0.1:58685
+04-18 02:19:54.080  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:54.959  3940  6415 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:54.979  3940  6415 D DeviceDiscovery: Relay identity posted
+04-18 02:19:55.497  3940  6415 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:55.514  3940  6415 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:19:55.580  3940  4137 D EGL_emulation: app_time_stats: avg=2038.43ms min=2038.43ms max=2038.43ms count=1
+04-18 02:19:57.090  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:57.532  3940  6415 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:57.551  3940  6415 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:19:57.610  3940  4137 D EGL_emulation: app_time_stats: avg=2027.37ms min=2027.37ms max=2027.37ms count=1
+04-18 02:19:57.735  1782  4694 D TrafficStats: tagSocket(147) with statsTag=0x20003000, statsUid=-1
+04-18 02:19:57.992  3940  6415 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:58.010  3940  6415 D DeviceDiscovery: Relay identity posted
+04-18 02:19:58.064  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:58.103  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:59.099  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:19:59.567  3940  6415 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:19:59.581  3940  6415 D DeviceDiscovery: Handling discovered device: id=15381955823c15c0, name=sdk_gphone64_x86_64, ip=10.0.2.2
+04-18 02:19:59.642  3940  4137 D EGL_emulation: app_time_stats: avg=2031.02ms min=2031.02ms max=2031.02ms count=1
+04-18 02:19:59.782   563  2159 D OomAdjuster: Not killing cached processes
+04-18 02:20:00.077  2228  2470 I AiAiEcho: Predicting[0]: 
+04-18 02:20:00.078  2228  2470 I AiAiEcho: EchoTargets: 
+04-18 02:20:00.078  2228  2470 I AiAiEcho: Filtered by AiAi flag check: 
+04-18 02:20:00.080  2228  2470 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata: 
+04-18 02:20:00.083  2228  2470 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0 (types=[])
+04-18 02:20:00.088  2768  2768 W PageIndicator: Total number of pages invalid: 0. Assuming 1 page.
+04-18 02:20:00.095  2768  2991 D EGL_emulation: app_time_stats: avg=22007.76ms min=22007.76ms max=22007.76ms count=1
+04-18 02:20:00.124  2768  2778 I ndroid.systemui: Background young concurrent copying GC freed 26469(1639KB) AllocSpace objects, 49(980KB) LOS objects, 12% free, 17MB/19MB, paused 8.131ms,191us total 71.923ms
+04-18 02:20:00.128  2768  2768 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+04-18 02:20:01.023  3940  6415 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+04-18 02:20:01.040  3940  6415 D DeviceDiscovery: Relay identity posted
+04-18 02:20:01.060  4509  6459 E DG      : FSC error [CONTEXT service_id=25 ]
+04-18 02:20:01.060  4509  6459 E DG      : java.io.IOException: Couldn't fetch response.
+04-18 02:20:01.060  4509  6459 E DG      : 	at afzy.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):20)
+04-18 02:20:01.060  4509  6459 E DG      : 	at afxq.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):5)
+04-18 02:20:01.060  4509  6459 E DG      : 	at afxq.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+04-18 02:20:01.060  4509  6459 E DG      : 	at afxx.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):49)
+04-18 02:20:01.060  4509  6459 E DG      : 	at com.google.android.gms.droidguard.DroidGuardChimeraService.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+04-18 02:20:01.060  4509  6459 E DG      : 	at com.google.android.gms.framework.tracing.wrapper.TracingIntentService.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+04-18 02:20:01.060  4509  6459 E DG      : 	at hdv.handleMessage(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+04-18 02:20:01.060  4509  6459 E DG      : 	at android.os.Handler.dispatchMessage(Handler.java:106)
+04-18 02:20:01.060  4509  6459 E DG      : 	at android.os.Looper.loopOnce(Looper.java:205)
+04-18 02:20:01.060  4509  6459 E DG      : 	at android.os.Looper.loop(Looper.java:294)
+04-18 02:20:01.060  4509  6459 E DG      : 	at android.os.HandlerThread.run(HandlerThread.java:67)
+04-18 02:20:01.060  4509  6459 E DG      : Caused by: java.util.concurrent.TimeoutException: Waited 60000 milliseconds (plus 2 milliseconds, 780200 nanoseconds delay) for blo@a96f6e0[status=PENDING, info=[tag=[avwn@2bf8d99]]]
+04-18 02:20:01.060  4509  6459 E DG      : 	at blk.get(:com.google.android.gms@231818047@23.18.18 (190800-535401451):30)
+04-18 02:20:01.060  4509  6459 E DG      : 	at blp.get(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+04-18 02:20:01.060  4509  6459 E DG      : 	at afzy.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):18)
+04-18 02:20:01.060  4509  6459 E DG      : 	... 10 more
+04-18 02:20:01.126   357  6505 I resolv  : GetAddrInfoHandler::run: {101 786533 101 983141 10128 0}
+04-18 02:20:01.128   357  6506 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+04-18 02:20:01.129   357  6506 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71b8598747f0
+04-18 02:20:01.130   357  6506 I resolv  : doQuery: rcode=0, ancount=4, return value=406
+04-18 02:20:01.131   357  6507 I resolv  : res_nmkquery: (QUERY, IN, A)
+04-18 02:20:01.133   357  6507 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71b859874ee0
+04-18 02:20:01.133   357  6507 I resolv  : doQuery: rcode=0, ancount=4, return value=358
+04-18 02:20:01.136  4509  6459 D TrafficStats: tagSocket(112) with statsTag=0x20001803, statsUid=-1
+04-18 02:20:01.137   357   403 E BpfHandler: Unsupported protocol: 1
+04-18 02:20:01.139  4509  6459 I TrafficStats: tagSocketFd(112, 536877059, -1) failed with errno-93

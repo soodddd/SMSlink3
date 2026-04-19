@@ -1,0 +1,8 @@
+interface:
+  display_name: "Android Real-Device QA"
+  short_description: "Generic Android physical-device QA skill for build, install, debug, patch, rebuild, and rerun loops driven by requirements or technical docs."
+  default_prompt: "Use $android-real-device-qa to read the provided requirements or technical document, build the real-device scenario matrix, confirm attached Android devices, build and install the app, run preflight, execute tests, classify failures, patch only confirmed product defects, rebuild, reinstall, rerun exact failed cases, and continue until the app is stable or only non-product blockers remain."
+
+policy:
+  allow_implicit_invocation: true
+

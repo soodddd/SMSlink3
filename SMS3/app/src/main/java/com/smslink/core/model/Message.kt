@@ -1,12 +1,21 @@
 package com.smslink.core.model
 
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
 /**
  * 短信消息实体
  */
-@Entity(tableName = "messages")
+@Entity(
+    tableName = "messages",
+    indices = [
+        Index(value = ["threadId"]),
+        Index(value = ["address"]),
+        Index(value = ["timestamp"]),
+        Index(value = ["read"])
+    ]
+)
 data class Message(
     @PrimaryKey val id: String,
     val threadId: String,

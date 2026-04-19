@@ -1,0 +1,12 @@
+﻿TASK 10315:com.tencent.mm id=3846 userId=0 displayId=0(type=INTERNAL)
+  ACTIVITY com.tencent.mm/.ui.LauncherUI d25a662 pid=31703 userId=0 uid=10315 displayId=0(type=INTERNAL)
+    Failure while dumping the activity: java.io.IOException: Timeout
+
+TASK 10312:com.sankuai.moviepro id=3851 userId=0 displayId=0(type=INTERNAL)
+  ACTIVITY com.sankuai.moviepro/.mvp.views.welcome.WelcomeActivity 42b054f pid=25503 userId=0 uid=10312 displayId=0(type=INTERNAL)
+
+*** SERVICE 'activity' DUMP TIMEOUT (10000ms) EXPIRED ***
+
+
+*** SERVICE 'activity' DUMP TIMEOUT (10000ms) EXPIRED ***
+

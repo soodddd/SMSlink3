@@ -1,0 +1,4 @@
+﻿List of devices attached
+MZEAYX6LE67T995D       device product:PGKM10 model:PGKM10 device:OP5565 transport_id:1
+a3015821               device product:flourite model:2510ERA8BC device:flourite transport_id:2
+

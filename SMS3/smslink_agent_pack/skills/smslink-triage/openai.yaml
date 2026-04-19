@@ -1,0 +1,7 @@
+interface:
+  display_name: "SMS-link Triage"
+  short_description: "Classify emulator QA failures into platform blockers, product defects, and emulator-only limits using logs and state evidence."
+  default_prompt: "Use $smslink-triage to classify Android emulator QA failures for SMS-link. Read logs, dumpsys state, build output, screenshots, and discovery identity evidence. Separate platform blockers, stale-data contamination, reconnect-state ambiguity, and app defects, then recommend whether the fixer should patch code or stop."
+
+policy:
+  allow_implicit_invocation: true

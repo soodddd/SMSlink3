@@ -18,6 +18,7 @@ import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.IOException
 import java.util.UUID
+import java.util.concurrent.ConcurrentHashMap
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -33,7 +34,7 @@ class FileTransferManagerImpl @Inject constructor(
 ) : IFileTransferManager {
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
-    private val activeTransfers = mutableMapOf<String, Job>()
+    private val activeTransfers = ConcurrentHashMap<String, Job>()
 
     init {
         scope.launch {
@@ -63,6 +64,10 @@ class FileTransferManagerImpl @Inject constructor(
         // 重试配置
         private const val MAX_RETRY_COUNT = 3
         private const val RETRY_DELAY_MS = 2000L
+
+        // 安全限制
+        private const val MAX_FILENAME_LENGTH = 255
+        private const val MAX_FILE_SIZE = 4L * 1024 * 1024 * 1024 // 4GB
     }
 
     /**
@@ -466,6 +471,12 @@ class FileTransferManagerImpl @Inject constructor(
      * 处理文件请求（接收确认）
      */
     private suspend fun handleFileRequest(deviceId: String, data: ByteArray) {
+        // 边界检查
+        if (data.size < 47) { // 最小: 1(protocol) + 36(transferId) + 1(nameLen) + 1(minName) + 8(size) + 1(mimeLen)
+            logger.e("FileTransfer", "Invalid file request packet size: ${data.size}")
+            return
+        }
+
         // 解析: [protocol][transferId][fileNameLength][fileName][fileSize][mimeTypeLength][mimeType]
         var offset = 1
 
@@ -473,24 +484,67 @@ class FileTransferManagerImpl @Inject constructor(
         val transferId = String(transferIdBytes)
         offset += 36
 
-        val fileNameLength = data[offset].toInt()
+        val fileNameLength = data[offset].toInt() and 0xFF // 无符号
         offset += 1
+
+        // 验证文件名长度
+        if (fileNameLength <= 0 || fileNameLength > MAX_FILENAME_LENGTH) {
+            logger.e("FileTransfer", "Invalid filename length: $fileNameLength")
+            return
+        }
+
+        if (offset + fileNameLength > data.size) {
+            logger.e("FileTransfer", "Filename exceeds packet size")
+            return
+        }
 
         val fileName = String(data.copyOfRange(offset, offset + fileNameLength))
         offset += fileNameLength
 
-        val fileSize = data.copyOfRange(offset, offset + 8).toLong()
+        // 验证文件名安全性
+        val sanitizedFileName = sanitizeFileName(fileName)
+        if (sanitizedFileName.isBlank()) {
+            logger.e("FileTransfer", "Invalid filename after sanitization")
+            return
+        }
+
+        if (offset + 8 > data.size) {
+            logger.e("FileTransfer", "File size field missing")
+            return
+        }
+
+        val fileSize = data.copyOfRange(offset, offset + 8).toLongSafe()
         offset += 8
 
-        val mimeTypeLength = data[offset].toInt()
+        // 验证文件大小
+        if (fileSize <= 0 || fileSize > MAX_FILE_SIZE) {
+            logger.e("FileTransfer", "Invalid file size: $fileSize")
+            return
+        }
+
+        if (offset >= data.size) {
+            logger.e("FileTransfer", "MIME type length missing")
+            return
+        }
+
+        val mimeTypeLength = data[offset].toInt() and 0xFF
         offset += 1
 
-        val mimeType = String(data.copyOfRange(offset, offset + mimeTypeLength))
+        if (mimeTypeLength > 100 || offset + mimeTypeLength > data.size) {
+            logger.e("FileTransfer", "Invalid MIME type length: $mimeTypeLength")
+            return
+        }
+
+        val mimeType = if (mimeTypeLength > 0) {
+            String(data.copyOfRange(offset, offset + mimeTypeLength))
+        } else {
+            "application/octet-stream"
+        }
 
         // 创建待确认的传输记录
         val transfer = FileTransfer(
             id = transferId,
-            fileName = fileName,
+            fileName = sanitizedFileName,
             fileSize = fileSize,
             mimeType = mimeType,
             deviceId = deviceId,
@@ -502,13 +556,27 @@ class FileTransferManagerImpl @Inject constructor(
 
         val downloadDir = File(context.getExternalFilesDir(null), "downloads")
         downloadDir.mkdirs()
-        val filePath = File(downloadDir, fileName).absolutePath
+        val filePath = File(downloadDir, sanitizedFileName).absolutePath
 
         fileRepository.saveTransfer(transfer, filePath, 0L)
 
-        logger.i("FileTransfer", "File request received: $fileName, waiting for user confirmation")
+        logger.i("FileTransfer", "File request received: $sanitizedFileName, waiting for user confirmation")
 
         // 等待前端调用 receiveFile() 显式确认后再继续
+    }
+
+    /**
+     * 清理文件名，防止路径遍历攻击
+     */
+    private fun sanitizeFileName(fileName: String): String {
+        // 移除路径分隔符和特殊字符
+        return fileName
+            .replace("/", "_")
+            .replace("\\", "_")
+            .replace("..", "_")
+            .replace("\u0000", "")
+            .trim()
+            .take(MAX_FILENAME_LENGTH)
     }
 
     /**
@@ -543,8 +611,13 @@ class FileTransferManagerImpl @Inject constructor(
      * 处理断点续传请求
      */
     private suspend fun handleFileResume(deviceId: String, data: ByteArray) {
+        if (data.size < 45) {
+            logger.e("FileTransfer", "Invalid resume packet size")
+            return
+        }
+
         val transferId = String(data.copyOfRange(1, 37))
-        val position = data.copyOfRange(37, 45).toLong()
+        val position = data.copyOfRange(37, 45).toLongSafe()
 
         logger.i("FileTransfer", "Resume request for $transferId at position $position")
 
@@ -557,8 +630,13 @@ class FileTransferManagerImpl @Inject constructor(
      * 处理断点续传确认
      */
     private suspend fun handleFileResumeAck(data: ByteArray) {
+        if (data.size < 45) {
+            logger.e("FileTransfer", "Invalid resume ack packet size")
+            return
+        }
+
         val transferId = String(data.copyOfRange(1, 37))
-        val position = data.copyOfRange(37, 45).toLong()
+        val position = data.copyOfRange(37, 45).toLongSafe()
 
         logger.i("FileTransfer", "Resume acknowledged for $transferId at position $position")
     }
@@ -567,6 +645,12 @@ class FileTransferManagerImpl @Inject constructor(
      * 处理文件元数据
      */
     private suspend fun handleFileMetadata(deviceId: String, data: ByteArray) {
+        // 边界检查
+        if (data.size < 47) {
+            logger.e("FileTransfer", "Invalid metadata packet size: ${data.size}")
+            return
+        }
+
         // 解析元数据: [protocol][transferId][fileNameLength][fileName][fileSize][mimeTypeLength][mimeType]
         var offset = 1
 
@@ -574,24 +658,55 @@ class FileTransferManagerImpl @Inject constructor(
         val transferId = String(transferIdBytes)
         offset += 36
 
-        val fileNameLength = data[offset].toInt()
+        val fileNameLength = data[offset].toInt() and 0xFF
         offset += 1
+
+        if (fileNameLength <= 0 || fileNameLength > MAX_FILENAME_LENGTH || offset + fileNameLength > data.size) {
+            logger.e("FileTransfer", "Invalid filename in metadata")
+            return
+        }
 
         val fileName = String(data.copyOfRange(offset, offset + fileNameLength))
         offset += fileNameLength
 
-        val fileSize = data.copyOfRange(offset, offset + 8).toLong()
+        if (offset + 8 > data.size) {
+            logger.e("FileTransfer", "File size missing in metadata")
+            return
+        }
+
+        val fileSize = data.copyOfRange(offset, offset + 8).toLongSafe()
         offset += 8
 
-        val mimeTypeLength = data[offset].toInt()
+        if (fileSize <= 0 || fileSize > MAX_FILE_SIZE) {
+            logger.e("FileTransfer", "Invalid file size in metadata: $fileSize")
+            return
+        }
+
+        if (offset >= data.size) {
+            logger.e("FileTransfer", "MIME type length missing")
+            return
+        }
+
+        val mimeTypeLength = data[offset].toInt() and 0xFF
         offset += 1
 
-        val mimeType = String(data.copyOfRange(offset, offset + mimeTypeLength))
+        if (mimeTypeLength > 100 || offset + mimeTypeLength > data.size) {
+            logger.e("FileTransfer", "Invalid MIME type in metadata")
+            return
+        }
+
+        val mimeType = if (mimeTypeLength > 0) {
+            String(data.copyOfRange(offset, offset + mimeTypeLength))
+        } else {
+            "application/octet-stream"
+        }
+
+        val sanitizedFileName = sanitizeFileName(fileName)
 
         // 创建接收传输记录
         val transfer = FileTransfer(
             id = transferId,
-            fileName = fileName,
+            fileName = sanitizedFileName,
             fileSize = fileSize,
             mimeType = mimeType,
             deviceId = deviceId,
@@ -604,11 +719,11 @@ class FileTransferManagerImpl @Inject constructor(
         // 准备保存路径
         val downloadDir = File(context.getExternalFilesDir(null), "downloads")
         downloadDir.mkdirs()
-        val filePath = File(downloadDir, fileName).absolutePath
+        val filePath = File(downloadDir, sanitizedFileName).absolutePath
 
         fileRepository.saveTransfer(transfer, filePath, 0L)
 
-        logger.i("FileTransfer", "Receiving file: $fileName")
+        logger.i("FileTransfer", "Receiving file: $sanitizedFileName")
     }
 
     /**
@@ -792,11 +907,15 @@ class FileTransferManagerImpl @Inject constructor(
     }
 
     /**
-     * ByteArray 转 Long
+     * ByteArray 转 Long (安全版本)
      */
-    private fun ByteArray.toLong(): Long {
+    private fun ByteArray.toLongSafe(): Long {
+        if (this.size != 8) {
+            logger.w("FileTransfer", "ByteArray size is ${this.size}, expected 8")
+            return 0L
+        }
         var result = 0L
-        for (i in indices) {
+        for (i in 0..7) {
             result = result or ((this[i].toLong() and 0xFF) shl (8 * i))
         }
         return result

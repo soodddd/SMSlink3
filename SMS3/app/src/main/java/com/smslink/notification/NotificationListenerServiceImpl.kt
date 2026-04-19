@@ -170,29 +170,29 @@ class NotificationFilter(private val preferences: SharedPreferences) {
     }
 
     fun addToWhitelist(packageName: String) {
-        val whitelist = preferences.getStringSet(PREF_WHITELIST, emptySet())?.toMutableSet()
-            ?: mutableSetOf()
+        val currentSet = preferences.getStringSet(PREF_WHITELIST, emptySet()) ?: emptySet()
+        val whitelist = currentSet.toMutableSet()
         whitelist.add(packageName)
         preferences.edit().putStringSet(PREF_WHITELIST, whitelist).apply()
     }
 
     fun removeFromWhitelist(packageName: String) {
-        val whitelist = preferences.getStringSet(PREF_WHITELIST, emptySet())?.toMutableSet()
-            ?: mutableSetOf()
+        val currentSet = preferences.getStringSet(PREF_WHITELIST, emptySet()) ?: emptySet()
+        val whitelist = currentSet.toMutableSet()
         whitelist.remove(packageName)
         preferences.edit().putStringSet(PREF_WHITELIST, whitelist).apply()
     }
 
     fun addToBlacklist(packageName: String) {
-        val blacklist = preferences.getStringSet(PREF_BLACKLIST, emptySet())?.toMutableSet()
-            ?: mutableSetOf()
+        val currentSet = preferences.getStringSet(PREF_BLACKLIST, emptySet()) ?: emptySet()
+        val blacklist = currentSet.toMutableSet()
         blacklist.add(packageName)
         preferences.edit().putStringSet(PREF_BLACKLIST, blacklist).apply()
     }
 
     fun removeFromBlacklist(packageName: String) {
-        val blacklist = preferences.getStringSet(PREF_BLACKLIST, emptySet())?.toMutableSet()
-            ?: mutableSetOf()
+        val currentSet = preferences.getStringSet(PREF_BLACKLIST, emptySet()) ?: emptySet()
+        val blacklist = currentSet.toMutableSet()
         blacklist.remove(packageName)
         preferences.edit().putStringSet(PREF_BLACKLIST, blacklist).apply()
     }

@@ -399,7 +399,16 @@ class DeviceDiscoveryImpl @Inject constructor(
                 socket?.receive(packet)
 
                 val message = String(packet.data, 0, packet.length)
-                val identityPacket = gson.fromJson(message, IdentityPacket::class.java)
+                val identityPacket = try {
+                    gson.fromJson(message, IdentityPacket::class.java)
+                } catch (parseError: Exception) {
+                    logger.w(
+                        TAG,
+                        "Ignoring malformed discovery packet from ${packet.address?.hostAddress}: " +
+                            "${parseError::class.simpleName}: ${parseError.message}"
+                    )
+                    null
+                } ?: continue
 
                 // 蹇界暐鏈澶囩殑骞挎挱
                 if (identityPacket.deviceId != getLocalDeviceId()) {
@@ -407,7 +416,7 @@ class DeviceDiscoveryImpl @Inject constructor(
                 }
             } catch (e: Exception) {
                 if (scope.isActive) {
-                    logger.w(TAG, "Error receiving packet")
+                    logger.w(TAG, "Error receiving packet: ${e::class.simpleName}: ${e.message}")
                 }
             }
         }

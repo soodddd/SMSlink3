@@ -1,0 +1,7 @@
+interface:
+  display_name: "SMS-link Fixer"
+  short_description: "Patch Android app defects only when logs and runtime evidence implicate the app, then rebuild and return a concise patch note."
+  default_prompt: "Use $smslink-fixer to repair confirmed SMS-link app defects. Read the failing evidence, make the smallest safe patch, run focused compile verification, rebuild with assembleDebug, and report what changed. Refuse to patch when the issue is a platform blocker, stale-data contamination, or reconnect-state ambiguity."
+
+policy:
+  allow_implicit_invocation: true

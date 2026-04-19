@@ -21,7 +21,7 @@ class SmsLinkApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        connectionManager.receiveData()
-        fileTransferManager.getActiveTransfers()
+        // 初始化连接管理器和文件传输管理器
+        // 注意：这里只是确保依赖注入完成，实际的启动逻辑在各自的服务中
     }
 }

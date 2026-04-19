@@ -26,7 +26,7 @@ class BleGattClient @Inject constructor(
         private const val TAG = "BleGattClient"
     }
 
-    private val scope = CoroutineScope(Dispatchers.Main + SupervisorJob())
+    private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
     private var bluetoothGatt: BluetoothGatt? = null
     private var connectionTimeoutJob: Job? = null
 
@@ -100,8 +100,12 @@ class BleGattClient @Inject constructor(
         connectionTimeoutJob?.cancel()
 
         try {
-            bluetoothGatt?.disconnect()
-            bluetoothGatt?.close()
+            bluetoothGatt?.let { gatt ->
+                gatt.disconnect()
+                // 等待断开完成后再关闭
+                Thread.sleep(300)
+                gatt.close()
+            }
             bluetoothGatt = null
         } catch (e: Exception) {
             logger.e(TAG, "Error during disconnect", e)
@@ -109,6 +113,7 @@ class BleGattClient @Inject constructor(
 
         _connectionState.value = ConnectionState.Disconnected
         _deviceInfo.value = null
+        pendingOperations.clear()
     }
 
     /**

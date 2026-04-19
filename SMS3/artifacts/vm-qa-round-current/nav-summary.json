@@ -1,0 +1,50 @@
+[
+  {
+    "slot": 0,
+    "x": 67,
+    "text": "已配对设备 (1) | sdk_gphone64_x86_64 | 连接状态: | 未连接 | 设备管理 | 二维码 | 设备 | 通知 | 短信 | 文件 | 通话 | 设置",
+    "desc": "移除设备 | 搜索设备"
+  },
+  {
+    "slot": 1,
+    "x": 202,
+    "text": "No notifications | Start listening to receive notifications | Start Listening | Notifications | 黑白名单 | 设备 | 通知 | 短信 | 文件 | 通话 | 设置",
+    "desc": "Refresh | Clear All | Settings"
+  },
+  {
+    "slot": 2,
+    "x": 337,
+    "text": "No notifications | Start listening to receive notifications | Start Listening | Notifications | 黑白名单 | 设备 | 通知 | 短信 | 文件 | 通话 | 设置",
+    "desc": "Refresh | Clear All | Settings"
+  },
+  {
+    "slot": 3,
+    "x": 472,
+    "text": "No messages | Your messages will appear here | 短信 | Messages | 列表 | 设备 | 通知 | 短信 | 文件 | 通话 | 设置",
+    "desc": "Sync | New Message"
+  },
+  {
+    "slot": 4,
+    "x": 607,
+    "text": "Transfer History | sample-transfer.txt | 23 B • 2026-04-16 07:38 | Completed | sample-transfer.txt | 23 B • 2026-04-16 07:36 | Completed | sample-transfer.txt | 23 B • 2026-04-16 05:23 | Completed | sample-transfer.txt | 23 B • 2026-04-15 12:41 | Failed | sample-transfer.txt | 23 B • 2026-04-15 12:29 | Failed | 文件传输 | File Transfer | 刷新 | 设备 | 通知 | 短信 | 文件 | 通话 | 设置",
+    "desc": "Send File"
+  },
+  {
+    "slot": 5,
+    "x": 742,
+    "text": "暂无通话记录 | 点击右上角刷新按钮同步通话记录 | 通话记录 | 设备 | 通知 | 短信 | 文件 | 通话 | 设置",
+    "desc": "设置默认电话应用 | 同步通话记录"
+  },
+  {
+    "slot": 6,
+    "x": 877,
+    "text": "暂无通话记录 | 点击右上角刷新按钮同步通话记录 | 通话记录 | 设备 | 通知 | 短信 | 文件 | 通话 | 设置",
+    "desc": "设置默认电话应用 | 同步通话记录"
+  },
+  {
+    "slot": 7,
+    "x": 1012,
+    "text": "权限与安全 | 权限中心 | 管理应用权限 | 连接 | 连接策略 | 配置设备连接方式 | 同步 | 通知同步策略 | 配置通知同步规则 | 显示 | 主题 | 浅色模式 | 语言 | 中文 | 高级 | 诊断日志 | 查看应用日志 | 关于 | 设置 | 设备 | 通知 | 短信 | 文件 | 通话 | 设置",
+    "desc": ""
+  }
+]

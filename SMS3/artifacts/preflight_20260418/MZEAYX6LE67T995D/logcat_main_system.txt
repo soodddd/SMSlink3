@@ -1,0 +1,161 @@
+﻿--------- beginning of main
+04-18 22:26:23.594  1066  1130 I sensors-hal-OriginChannel: wise light debug, data[1].type is 65627,data[1].sensor is 91:[396.000000,,180.000000,,24.000000,0.000000,3032862454546596]
+04-18 22:26:23.816  1066  1130 I sensors-hal-OriginChannel: wise light debug, data[2].type is 65627,data[2].sensor is 91:[399.000000,,120.000000,,25.000000,0.000000,3032862674578366]
+04-18 22:26:24.014  1066  1130 I sensors-hal-OriginChannel: wise light debug, data[1].type is 65627,data[1].sensor is 91:[397.000000,,200.000000,,25.000000,0.000000,3032862874564750]
+04-18 22:26:24.049  3280  3631 D UlPriorityPolicyForeground: match: config has not com.oplus.appdetail
+04-18 22:26:24.153  1132  1195 D BatteryChargeControl: bcc get no support from charging protocol
+04-18 22:26:24.161  3280  3631 D CommonApp-620-10100: transport layer data is invalid
+04-18 22:26:24.216  1066  1130 I sensors-hal-OriginChannel: wise light debug, data[1].type is 65627,data[1].sensor is 91:[399.000000,,160.000000,,25.000000,0.000000,3032863074576202]
+04-18 22:26:24.344  1561  1881 D ULogGuard: Monitoring: 16 threads, 0 requests, 0 time-bombs; 43 guards. ResetFlags = 0x7
+04-18 22:26:24.414  1066  1130 I sensors-hal-OriginChannel: wise light debug, data[1].type is 65627,data[1].sensor is 91:[399.000000,,200.000000,,25.000000,0.000000,3032863274588076]
+04-18 22:26:24.602  5125  2012 D gaia-GaiaConnectChecker: start connect check++
+04-18 22:26:24.614  1066  1130 I sensors-hal-OriginChannel: wise light debug, data[1].type is 65627,data[1].sensor is 91:[395.000000,,200.000000,,25.000000,0.000000,3032863474566279]
+04-18 22:26:24.812  5125  4586 D gaia-GaiaConnectChecker: start connect check++
+04-18 22:26:24.814  1066  1130 I sensors-hal-OriginChannel: wise light debug, data[1].type is 65627,data[1].sensor is 91:[399.000000,,160.000000,,25.000000,0.000000,3032863674580668]
+04-18 22:26:25.014  1066  1130 I sensors-hal-OriginChannel: wise light debug, data[1].type is 65627,data[1].sensor is 91:[396.000000,,180.000000,,24.000000,0.000000,3032863874564730]
+04-18 22:26:25.154  1132  1195 D BatteryChargeControl: bcc get no support from charging protocol
+04-18 22:26:25.179  1132  1132 D vendor.oplus.hardware.charger-V6-service: get_ui_charge_icon_type 0 0 0 0 0
+04-18 22:26:25.180  1132  1132 D vendor.oplus.hardware.charger-V6-service: oplus_chg_get_cpa_power 2500 charge_online 1 retention_topic 0
+04-18 22:26:25.185  3280  3631 D CommonApp-620-10100: transport layer data is invalid
+04-18 22:26:25.189  1132  1132 D vendor.oplus.hardware.charger-V6-service: get_ui_charge_icon_type 0 0 0 0 0
+04-18 22:26:25.190  1132  1132 D vendor.oplus.hardware.charger-V6-service: oplus_chg_get_cpa_power 2500 charge_online 1 retention_topic 0
+04-18 22:26:25.200 17815 17815 I WifiHAL : wifi_get_link_stats: result=0
+04-18 22:26:25.213  3280  3280 D CSM-manager: wifi event:9
+04-18 22:26:25.213  3294  3294 D VendorWifiService: onEvent event:9,action:1
+04-18 22:26:25.214  1066  1130 I sensors-hal-OriginChannel: wise light debug, data[1].type is 65627,data[1].sensor is 91:[398.000000,,140.000000,,25.000000,0.000000,3032864074574225]
+04-18 22:26:25.435  1066  1130 I sensors-hal-OriginChannel: wise light debug, data[1].type is 65627,data[1].sensor is 91:[398.000000,,180.000000,,24.000000,0.000000,3032864294542322]
+04-18 22:26:25.676  1066  1130 I sensors-hal-OriginChannel: wise light debug, data[0].type is 65627,data[0].sensor is 91:[395.000000,,180.000000,,25.000000,0.000000,3032864534569962]
+04-18 22:26:25.710  1132  1184 D vendor.oplus.hardware.charger-V6-service: ret_value:182, read content:,344,344,4356,4354,-139,500,1100,98,98,1,4,450000,5025,98,1,0,1,1,0,0,4395,0,11,0,11,0,0,0,329,0,1,1,0,0,0,0,0,2,0,1,0,100,0,0,0,0,0,0,0,0x0a,0x2d,0x16,0x6d,0x36,0x16,0x3b,0x00,0xea
+04-18 22:26:25.711  1132  1184 D vendor.oplus.hardware.charger-V6-service: gmtime: 2026-04-18-22-26-25
+04-18 22:26:25.711  1132  1184 D vendor.oplus.hardware.charger-V6-service: usb_online:1, ac_online:0, wireless_online:-2147483648
+04-18 22:26:25.876  1066  1130 I sensors-hal-OriginChannel: wise light debug, data[0].type is 65627,data[0].sensor is 91:[400.000000,,200.000000,,25.000000,0.000000,3032864734550952]
+04-18 22:26:25.905  1959  3403 I OplusHansManager : uid=10329, pkg=com.tencent.mm F enter(), M stay=5
+04-18 22:26:25.905  8296 24628 D IHansComunication: HANS sendMessageToKernel: threadId = 507133267056, netLinkSetup = 1, type = PKG, targetUid = 10329, pkgCmd = ADD_ONE_UID
+04-18 22:26:25.913  1959  3403 I OplusHansManager : freeze uid: 10329 com.tencent.mm pids: [7652, 29218] scene: LcdOn
+04-18 22:26:25.914  8296 24628 D IHansComunication: HANS sendMessageToKernel: threadId = 507133267056, netLinkSetup = 1, type = PKG, targetUid = 10329, pkgCmd = ADD_ONE_UID
+04-18 22:26:25.914  1959  3464 I OplusHansManager : p_BC uid=10329 pkg=com.tencent.mm
+--------- beginning of system
+04-18 22:26:25.914  1959  3727 D OplusProxyWakeLock: add uid: 10329 wakelock: lock:150492784 PARTIAL_WAKE_LOCK                 'Micro' (uid=10329 pid=29218)to FroceReleaseWakeLock list
+04-18 22:26:25.914  1959  3464 I OplusCameraManagerGlobal: reportAppFreeze E
+04-18 22:26:25.915  1959  3464 I OplusBinderProxy: proxyBinder uid: 10329 pkg: com.tencent.mm proxy: true calling: OFreezer
+04-18 22:26:25.923  1959  3444 I OplusHansManager : unfreeze uid: 10329 com.tencent.mm pids: [7652, 29218] reason: Packet scene: LcdOn
+04-18 22:26:25.923  1959  3489 I OPM     : handlePackageUnfreeze 10329, pkg: com.tencent.mm, reason: Packet
+04-18 22:26:25.924  1959  3403 I OplusHansManager : uid=10329, pkg=com.tencent.mm F exit(), F stay=0, reason=Packet
+04-18 22:26:25.924  1959  3464 I OplusHansManager : up_BC uid=10329 pkg=com.tencent.mm
+04-18 22:26:25.924  1959  3464 I OplusCameraManagerGlobal: reportAppFreeze E
+04-18 22:26:25.925  1959  3464 I OplusBinderProxy: proxyBinder uid: 10329 pkg: com.tencent.mm proxy: false calling: OFreezer
+04-18 22:26:25.925  1959  3727 D OplusProxyWakeLock: restore uid :10329  pid : 0 wakelock: lock:150492784 PARTIAL_WAKE_LOCK                 'Micro' (uid=10329 pid=29218)
+04-18 22:26:26.075  1066  1130 I sensors-hal-OriginChannel: wise light debug, data[0].type is 65627,data[0].sensor is 91:[396.000000,,180.000000,,25.000000,0.000000,3032864934561120]
+04-18 22:26:26.155  1132  1195 D BatteryChargeControl: bcc get no support from charging protocol
+04-18 22:26:26.211  3280  3631 D CommonApp-620-10100: transport layer data is invalid
+04-18 22:26:26.251  3228  3228 D OplusTelephonyController: onSignalStrengthChanged: SignalStrength=SignalStrength:{mCdma=CellSignalStrengthCdma: cdmaDbm=2147483647 cdmaEcio=2147483647 evdoDbm=2147483647 evdoEcio=2147483647 evdoSnr=2147483647 level=0,mGsm=CellSignalStrengthGsm: rssi=2147483647 ber=2147483647 mTa=2147483647 mLevel=0,mWcdma=CellSignalStrengthWcdma: ss=2147483647 ber=2147483647 rscp=2147483647 ecno=2147483647 level=0,mTdscdma=CellSignalStrengthTdscdma: rssi=2147483647 ber=2147483647 rscp=2147483647 level=0,mLte=CellSignalStrengthLte: rssi=2147483647 rsrp=2147483647 rsrq=2147483647 rssnr=2147483647 cqiTableIndex=2147483647 cqi=2147483647 ta=2147483647 level=0 parametersUseForLevel=0,mNr=CellSignalStrengthNr:{ csiRsrp = 2147483647 csiRsrq = 2147483647 csiCqiTableIndex = 2147483647 csiCqiReport = [] ssRsrp = -101 ssRsrq = -3 ssSinr = 15 level = 1 parametersUseForLevel = 0 timingAdvance = 2147483647 },primary=CellSignalStrengthNr}
+04-18 22:26:26.256  3294  3294 D SubsysEventListenerManager-SubsysTelephonyCallback[0]: onSignalStrengthsChanged
+04-18 22:26:26.259  2731  2946 I SystemUi--Statusbar: MobileConnectionRepositoryImpl-->subId:1 isSoftSimCard:false slotId:0
+04-18 22:26:26.274  1066  1130 I sensors-hal-OriginChannel: wise light debug, data[0].type is 65627,data[0].sensor is 91:[399.000000,,180.000000,,25.000000,0.000000,3032865134570958]
+04-18 22:26:26.476  1066  1130 I sensors-hal-OriginChannel: wise light debug, data[0].type is 65627,data[0].sensor is 91:[400.000000,,200.000000,,25.000000,0.000000,3032865334650880]
+04-18 22:26:26.676  1066  1130 I sensors-hal-OriginChannel: wise light debug, data[0].type is 65627,data[0].sensor is 91:[399.000000,,160.000000,,25.000000,0.000000,3032865534512722]
+04-18 22:26:26.678  1228  3679 D SurfaceFlinger: captureDisplay from pid 1228 uid -1 display 4627039422300187648
+04-18 22:26:26.781  2731  2867 I SystemUi--Statusbar: OplusNetworkSpeedControllExImpl-->updateNetworkSpeed: isConnected:true,isSwitchOn:true
+04-18 22:26:26.787  2731  2867 I SystemUi--Statusbar: OplusNetworkSpeedControllExImpl-->getTotalByte: totalRxBytes:114600284911,totalTxBytes:11932075736,loopbackTxBytes:3525492627,loopbackRxBytes:3525405744 ,totalBytes:119481462276
+04-18 22:26:26.804  2731  2731 I SystemUi--Keyguard: KeyguardUtils-->density is 0 sInitialDisplayDensity:480
+04-18 22:26:26.814  1228  1228 I BufferQueueProducer: [StatusBar#93](this:0xb400007846d959e0,id:-1,api:0,p:-1,c:1228) queueBuffer: fps=0.25 dur=4008.43 max=4008.43 min=4008.43
+04-18 22:26:26.815  1228  1228 E HWC2    : Invalid CT ID. displayId: 0
+04-18 22:26:26.840  1228  3679 D SurfaceFlinger: captureDisplay from pid 1228 uid -1 display 4627039422300187648
+04-18 22:26:26.874  1066  1130 I sensors-hal-OriginChannel: wise light debug, data[0].type is 65627,data[0].sensor is 91:[399.000000,,200.000000,,24.000000,0.000000,3032865734610303]
+04-18 22:26:26.916  8296 24628 D IHansComunication: HANS sendMessageToKernel: threadId = 507133267056, netLinkSetup = 1, type = FROZEN_TRANS, targetUid = 10329, pkgCmd = PKG_CMD_MAX
+04-18 22:26:27.074  1066  1130 I sensors-hal-OriginChannel: wise light debug, data[1].type is 65627,data[1].sensor is 91:[396.000000,,80.000000,,25.000000,0.000000,3032865934563924]
+04-18 22:26:27.156  1132  1195 D BatteryChargeControl: bcc get no support from charging protocol
+04-18 22:26:27.224 17815 17815 I WifiHAL : wifi_get_link_stats: result=0
+04-18 22:26:27.233  3280  3631 D CommonApp-620-10100: transport layer data is invalid
+04-18 22:26:27.237  1959  2579 D OplusWifiPower_TriggerCenter: mComponentCallback: wifistat
+04-18 22:26:27.238  3280  3280 D CSM-manager: wifi event:9
+04-18 22:26:27.239  3294  3294 D VendorWifiService: onEvent event:9,action:1
+04-18 22:26:27.294  1066  1130 I sensors-hal-OriginChannel: wise light debug, data[0].type is 65627,data[0].sensor is 91:[396.000000,,200.000000,,25.000000,0.000000,3032866154534933]
+04-18 22:26:27.346  1561  1881 D ULogGuard: Monitoring: 16 threads, 0 requests, 0 time-bombs; 43 guards. ResetFlags = 0x7
+04-18 22:26:27.365  7863  7863 D ViewRootImplExtImpl: markOnDumpStart, intervalTime from last scheduleTraversals is 3032866225
+04-18 22:26:27.408  7863  7863 D ViewExtraInfo: ViewExtraInfoHelper : android.view.debug.OplusViewExtraInfoHelper@67463ce
+04-18 22:26:27.409  7863  7863 D ViewExtraInfo: ViewExtraInfoHelper : android.view.debug.OplusViewExtraInfoHelper@54b72ef
+04-18 22:26:27.507 28969 28989 D ViewRootImplExtImpl: markOnDumpStart, intervalTime from last scheduleTraversals is 3032866368
+04-18 22:26:27.514  1066  1130 I sensors-hal-OriginChannel: wise light debug, data[1].type is 65627,data[1].sensor is 91:[398.000000,,180.000000,,24.000000,0.000000,3032866374565683]
+04-18 22:26:27.577 28969 28989 D ViewExtraInfo: ViewExtraInfoHelper : android.view.debug.OplusViewExtraInfoHelper@ccb4347
+04-18 22:26:27.577 28969 28989 D ViewExtraInfo: ViewExtraInfoHelper : android.view.debug.OplusViewExtraInfoHelper@f57774
+04-18 22:26:27.601  1959  3289 D ShortcutService: Getting shortcuts for launcher= com.android.launcheruser=0 pkg=null
+04-18 22:26:27.602  1959  3289 D ShortcutService: Adjust clone flag for: com.android.launcher
+04-18 22:26:27.612  1959  3289 D CompatChangeReporter: Compat change id reported: 313677553; UID 10238; state: ENABLED
+04-18 22:26:27.613  1959  3289 D CompatChangeReporter: Compat change id reported: 311208749; UID 10238; state: ENABLED
+04-18 22:26:27.614  1959  3289 D CompatChangeReporter: Compat change id reported: 313677553; UID 1000; state: ENABLED
+04-18 22:26:27.616  1959  3289 D CompatChangeReporter: Compat change id reported: 311208749; UID 1000; state: ENABLED
+04-18 22:26:27.619  1959  3289 D CompatChangeReporter: Compat change id reported: 313677553; UID 10183; state: ENABLED
+04-18 22:26:27.620  1959  3289 D CompatChangeReporter: Compat change id reported: 311208629; UID 10183; state: ENABLED
+04-18 22:26:27.620  1959  3289 D CompatChangeReporter: Compat change id reported: 311208749; UID 10183; state: ENABLED
+04-18 22:26:27.621  1959  3289 D CompatChangeReporter: Compat change id reported: 313677553; UID 1001; state: ENABLED
+04-18 22:26:27.621  1959  3289 D CompatChangeReporter: Compat change id reported: 311208749; UID 1001; state: ENABLED
+04-18 22:26:27.621  1959  3289 D CompatChangeReporter: Compat change id reported: 313677553; UID 10089; state: ENABLED
+04-18 22:26:27.622  1959  3289 D CompatChangeReporter: Compat change id reported: 311208749; UID 10089; state: ENABLED
+04-18 22:26:27.622  1959  3289 D CompatChangeReporter: Compat change id reported: 313677553; UID 10203; state: ENABLED
+04-18 22:26:27.622  1959  3289 D CompatChangeReporter: Compat change id reported: 311208749; UID 10203; state: ENABLED
+04-18 22:26:27.624  1959  3289 D CompatChangeReporter: Compat change id reported: 313677553; UID 10087; state: ENABLED
+04-18 22:26:27.624  1959  3289 D CompatChangeReporter: Compat change id reported: 311208629; UID 10087; state: ENABLED
+04-18 22:26:27.625  1959  3289 D CompatChangeReporter: Compat change id reported: 311208749; UID 10087; state: ENABLED
+04-18 22:26:27.625  1959  3289 D CompatChangeReporter: Compat change id reported: 313677553; UID 10229; state: ENABLED
+04-18 22:26:27.625  1959  3289 D CompatChangeReporter: Compat change id reported: 311208749; UID 10229; state: ENABLED
+04-18 22:26:27.626  1959  3289 D CompatChangeReporter: Compat change id reported: 313677553; UID 10274; state: ENABLED
+04-18 22:26:27.626  1959  3289 D CompatChangeReporter: Compat change id reported: 311208749; UID 10274; state: ENABLED
+04-18 22:26:27.626  1959  3289 D CompatChangeReporter: Compat change id reported: 313677553; UID 10198; state: ENABLED
+04-18 22:26:27.626  1959  3289 D CompatChangeReporter: Compat change id reported: 311208629; UID 10198; state: ENABLED
+04-18 22:26:27.626  1959  3289 D CompatChangeReporter: Compat change id reported: 311208749; UID 10198; state: ENABLED
+04-18 22:26:27.628  1959  3289 D CompatChangeReporter: Compat change id reported: 313677553; UID 10228; state: ENABLED
+04-18 22:26:27.628  1959  3289 D CompatChangeReporter: Compat change id reported: 311208749; UID 10228; state: ENABLED
+04-18 22:26:27.629  1959  3289 D CompatChangeReporter: Compat change id reported: 313677553; UID 10195; state: ENABLED
+04-18 22:26:27.630  1959  3289 D CompatChangeReporter: Compat change id reported: 311208749; UID 10195; state: ENABLED
+04-18 22:26:27.631  1959  3289 D CompatChangeReporter: Compat change id reported: 313677553; UID 10051; state: ENABLED
+04-18 22:26:27.631  1959  3289 D CompatChangeReporter: Compat change id reported: 311208749; UID 10051; state: ENABLED
+04-18 22:26:27.632  1959  3289 D CompatChangeReporter: Compat change id reported: 313677553; UID 1073; state: ENABLED
+04-18 22:26:27.632  1959  3289 D CompatChangeReporter: Compat change id reported: 311208749; UID 1073; state: ENABLED
+04-18 22:26:27.633  1959  3289 D CompatChangeReporter: Compat change id reported: 313677553; UID 10166; state: ENABLED
+04-18 22:26:27.633  1959  3289 D CompatChangeReporter: Compat change id reported: 311208629; UID 10166; state: ENABLED
+04-18 22:26:27.633  1959  3289 D CompatChangeReporter: Compat change id reported: 311208749; UID 10166; state: ENABLED
+04-18 22:26:27.635  1959  3289 D CompatChangeReporter: Compat change id reported: 313677553; UID 10173; state: ENABLED
+04-18 22:26:27.635  1959  3289 D CompatChangeReporter: Compat change id reported: 311208629; UID 10173; state: ENABLED
+04-18 22:26:27.635  1959  3289 D CompatChangeReporter: Compat change id reported: 311208749; UID 10173; state: ENABLED
+04-18 22:26:27.635  1959  3289 D CompatChangeReporter: Compat change id reported: 313677553; UID 10262; state: ENABLED
+04-18 22:26:27.635  1959  3289 D CompatChangeReporter: Compat change id reported: 311208749; UID 10262; state: ENABLED
+04-18 22:26:27.636  1959  3289 D CompatChangeReporter: Compat change id reported: 313677553; UID 10323; state: ENABLED
+04-18 22:26:27.637  1959  3289 D CompatChangeReporter: Compat change id reported: 311208749; UID 10323; state: ENABLED
+04-18 22:26:27.637  1959  3289 D CompatChangeReporter: Compat change id reported: 313677553; UID 10159; state: ENABLED
+04-18 22:26:27.637  1959  3289 D CompatChangeReporter: Compat change id reported: 311208749; UID 10159; state: ENABLED
+04-18 22:26:27.640  1959  3289 D CompatChangeReporter: Compat change id reported: 313677553; UID 10119; state: ENABLED
+04-18 22:26:27.640  1959  3289 D CompatChangeReporter: Compat change id reported: 311208629; UID 10119; state: ENABLED
+04-18 22:26:27.640  1959  3289 D CompatChangeReporter: Compat change id reported: 311208749; UID 10119; state: ENABLED
+04-18 22:26:27.641  1959  3289 D CompatChangeReporter: Compat change id reported: 313677553; UID 10144; state: ENABLED
+04-18 22:26:27.641  1959  3289 D CompatChangeReporter: Compat change id reported: 311208629; UID 10144; state: ENABLED
+04-18 22:26:27.641  1959  3289 D CompatChangeReporter: Compat change id reported: 311208749; UID 10144; state: ENABLED
+04-18 22:26:27.642  1959  3289 D CompatChangeReporter: Compat change id reported: 313677553; UID 10111; state: ENABLED
+04-18 22:26:27.642  1959  3289 D CompatChangeReporter: Compat change id reported: 311208629; UID 10111; state: ENABLED
+04-18 22:26:27.642  1959  3289 D CompatChangeReporter: Compat change id reported: 311208749; UID 10111; state: ENABLED
+04-18 22:26:27.642  1959  3289 D CompatChangeReporter: Compat change id reported: 313677553; UID 10137; state: ENABLED
+04-18 22:26:27.643  1959  3289 D CompatChangeReporter: Compat change id reported: 311208749; UID 10137; state: ENABLED
+04-18 22:26:27.643  1959  3289 D CompatChangeReporter: Compat change id reported: 313677553; UID 10106; state: ENABLED
+04-18 22:26:27.643  1959  3289 D CompatChangeReporter: Compat change id reported: 311208749; UID 10106; state: ENABLED
+04-18 22:26:27.644  1959  3289 D CompatChangeReporter: Compat change id reported: 313677553; UID 10114; state: ENABLED
+04-18 22:26:27.644  1959  3289 D CompatChangeReporter: Compat change id reported: 311208629; UID 10114; state: ENABLED
+04-18 22:26:27.644  1959  3289 D CompatChangeReporter: Compat change id reported: 311208749; UID 10114; state: ENABLED
+04-18 22:26:27.645  1959  3289 D CompatChangeReporter: Compat change id reported: 313677553; UID 10231; state: ENABLED
+04-18 22:26:27.645  1959  3289 D CompatChangeReporter: Compat change id reported: 311208749; UID 10231; state: ENABLED
+04-18 22:26:27.714  1066  1130 I sensors-hal-OriginChannel: wise light debug, data[1].type is 65627,data[1].sensor is 91:[399.000000,,180.000000,,25.000000,0.000000,3032866574572496]
+04-18 22:26:27.733  1132  1132 D vendor.oplus.hardware.charger-V6-service: get_ui_charge_icon_type 0 0 0 0 0
+04-18 22:26:27.734  1132  1132 D vendor.oplus.hardware.charger-V6-service: oplus_chg_get_cpa_power 2500 charge_online 1 retention_topic 0
+04-18 22:26:27.757 28969 30534 I SystemUiProxy: SystemUiProxy#getRecentTasks isInGoRecentsAnim: false
+04-18 22:26:27.761  1959  3484 D ActivityTaskManager: Skipping, invisible task: Task{4c56604 #5 type=home I=com.android.launcher/.Launcher}
+04-18 22:26:27.761  1959  3484 D OplusSplitScreenManagerService: com.android.settings unSupportsSplitScreen by blockList or ForbidActivityList
+04-18 22:26:27.762  1959  3484 D OplusSplitScreenManagerService: com.android.settings unSupportsSplitScreen by blockList or ForbidActivityList
+04-18 22:26:27.762  1959  3484 D ActivityTaskManager: Skipping, invisible task by policy range: Task{9f9d0b #7557 type=standard A=10203:com.android.systemui},position:2
+04-18 22:26:27.762  1959  3484 D ActivityTaskManager: pre-Filtered:com.android.settings # 
+04-18 22:26:27.762  1959  3484 D ActivityTaskManager: after skip size 1
+04-18 22:26:27.914  1066  1130 I sensors-hal-OriginChannel: wise light debug, data[1].type is 65627,data[1].sensor is 91:[398.000000,,100.000000,,25.000000,0.000000,3032866774590323]
+04-18 22:26:28.114  1066  1130 I sensors-hal-OriginChannel: wise light debug, data[1].type is 65627,data[1].sensor is 91:[399.000000,,160.000000,,25.000000,0.000000,3032866974570365]
+04-18 22:26:28.157  1132  1195 D BatteryChargeControl: bcc get no support from charging protocol
+04-18 22:26:28.259  3280  3631 D CommonApp-620-10100: transport layer data is invalid
+04-18 22:26:28.314  1066  1130 I sensors-hal-OriginChannel: wise light debug, data[0].type is 65627,data[0].sensor is 91:[398.000000,,180.000000,,25.000000,0.000000,3032867174583198]
+04-18 22:26:28.487 29218 12020 I mars::stn: [longlink_connect_monitor.cc:530, OnHeartbeatAlarmSet]:longlink_progress on_heartbeat_set, time: 3032867348, time interval:210000
+04-18 22:26:28.514  1066  1130 I sensors-hal-OriginChannel: wise light debug, data[1].type is 65627,data[1].sensor is 91:[393.000000,,180.000000,,24.000000,0.000000,3032867374566086]

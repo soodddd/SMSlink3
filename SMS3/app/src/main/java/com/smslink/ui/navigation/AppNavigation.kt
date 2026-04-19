@@ -57,7 +57,7 @@ fun AppNavigation(
         }
 
         composable(Screen.Files.route) {
-            FileTransferScreen(deviceId = selectedDeviceId ?: "当前连接设备")
+            FileTransferScreen(deviceId = selectedDeviceId ?: "")
         }
 
         composable(Screen.Calls.route) {

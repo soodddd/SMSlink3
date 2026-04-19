@@ -1,0 +1,242 @@
+﻿Activity Resolver Table:
+  Full MIME Types:
+      */*:
+        90065e0 com.smslink/.file.ui.ShareActivity filter f75d099
+          Action: "android.intent.action.SEND"
+          Category: "android.intent.category.DEFAULT"
+          StaticType: "*"
+          mPriority=0, mOrder=0, mHasStaticPartialTypes=true, mHasDynamicPartialTypes=false
+        90065e0 com.smslink/.file.ui.ShareActivity filter a0e9f5e
+          Action: "android.intent.action.SEND_MULTIPLE"
+          Category: "android.intent.category.DEFAULT"
+          StaticType: "*"
+          mPriority=0, mOrder=0, mHasStaticPartialTypes=true, mHasDynamicPartialTypes=false
+
+  Wild MIME Types:
+      *:
+        90065e0 com.smslink/.file.ui.ShareActivity filter f75d099
+          Action: "android.intent.action.SEND"
+          Category: "android.intent.category.DEFAULT"
+          StaticType: "*"
+          mPriority=0, mOrder=0, mHasStaticPartialTypes=true, mHasDynamicPartialTypes=false
+        90065e0 com.smslink/.file.ui.ShareActivity filter a0e9f5e
+          Action: "android.intent.action.SEND_MULTIPLE"
+          Category: "android.intent.category.DEFAULT"
+          StaticType: "*"
+          mPriority=0, mOrder=0, mHasStaticPartialTypes=true, mHasDynamicPartialTypes=false
+
+  Non-Data Actions:
+      android.intent.action.MAIN:
+        3535412 com.smslink/.MainActivity filter 60477e3
+          Action: "android.intent.action.MAIN"
+          Category: "android.intent.category.LAUNCHER"
+
+  MIME Typed Actions:
+      android.intent.action.SEND:
+        90065e0 com.smslink/.file.ui.ShareActivity filter f75d099
+          Action: "android.intent.action.SEND"
+          Category: "android.intent.category.DEFAULT"
+          StaticType: "*"
+          mPriority=0, mOrder=0, mHasStaticPartialTypes=true, mHasDynamicPartialTypes=false
+      android.intent.action.SEND_MULTIPLE:
+        90065e0 com.smslink/.file.ui.ShareActivity filter a0e9f5e
+          Action: "android.intent.action.SEND_MULTIPLE"
+          Category: "android.intent.category.DEFAULT"
+          StaticType: "*"
+          mPriority=0, mOrder=0, mHasStaticPartialTypes=true, mHasDynamicPartialTypes=false
+
+Receiver Resolver Table:
+  Non-Data Actions:
+      androidx.profileinstaller.action.SAVE_PROFILE:
+        149dd55 com.smslink/androidx.profileinstaller.ProfileInstallReceiver filter 14910f8
+          Action: "androidx.profileinstaller.action.SAVE_PROFILE"
+      android.provider.Telephony.SMS_DELIVER:
+        d7caf3f com.smslink/.sms.SmsReceiver filter 536000c
+          Action: "android.provider.Telephony.SMS_DELIVER"
+          Action: "android.provider.Telephony.SMS_RECEIVED"
+          mPriority=999, mOrder=0, mHasStaticPartialTypes=false, mHasDynamicPartialTypes=false
+      androidx.profileinstaller.action.INSTALL_PROFILE:
+        149dd55 com.smslink/androidx.profileinstaller.ProfileInstallReceiver filter 2a1536a
+          Action: "androidx.profileinstaller.action.INSTALL_PROFILE"
+      androidx.profileinstaller.action.SKIP_FILE:
+        149dd55 com.smslink/androidx.profileinstaller.ProfileInstallReceiver filter 417005b
+          Action: "androidx.profileinstaller.action.SKIP_FILE"
+      androidx.profileinstaller.action.BENCHMARK_OPERATION:
+        149dd55 com.smslink/androidx.profileinstaller.ProfileInstallReceiver filter 717f9d1
+          Action: "androidx.profileinstaller.action.BENCHMARK_OPERATION"
+      android.provider.Telephony.SMS_RECEIVED:
+        d7caf3f com.smslink/.sms.SmsReceiver filter 536000c
+          Action: "android.provider.Telephony.SMS_DELIVER"
+          Action: "android.provider.Telephony.SMS_RECEIVED"
+          mPriority=999, mOrder=0, mHasStaticPartialTypes=false, mHasDynamicPartialTypes=false
+
+Service Resolver Table:
+  Non-Data Actions:
+      android.telecom.InCallService:
+        17a44a4 com.smslink/.call.SmsLinkInCallService filter cd1620d permission android.permission.BIND_INCALL_SERVICE
+          Action: "android.telecom.InCallService"
+      android.service.notification.NotificationListenerService:
+        bf93c36 com.smslink/.notification.NotificationListenerServiceImpl filter 13b4737 permission android.permission.BIND_NOTIFICATION_LISTENER_SERVICE
+          Action: "android.service.notification.NotificationListenerService"
+
+Domain verification status:
+
+Permissions:
+  Permission [com.smslink.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION] (5cde98f):
+    sourcePackage=com.smslink
+    uid=10192 gids=[] type=0 prot=signature
+    perm=PermissionInfo{970341c com.smslink.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION}
+    flags=0x0
+
+Registered ContentProviders:
+  com.smslink/androidx.startup.InitializationProvider:
+    Provider{e4ee825 com.smslink/androidx.startup.InitializationProvider}
+
+ContentProvider Authorities:
+  [com.smslink.androidx-startup]:
+    Provider{e4ee825 com.smslink/androidx.startup.InitializationProvider}
+      applicationInfo=ApplicationInfo{3f24dfa com.smslink}
+
+Key Set Manager:
+  [com.smslink]
+      Signing KeySets: 56
+
+Packages:
+  Package [com.smslink] (c623906):
+    appId=10192
+    pkg=Package{b498fab com.smslink}
+    codePath=/data/app/~~0nhC5MNr1h3uxAHdjWHTDw==/com.smslink-Uw-KvHPuEEEkAMC3BnSOhA==
+    resourcePath=/data/app/~~0nhC5MNr1h3uxAHdjWHTDw==/com.smslink-Uw-KvHPuEEEkAMC3BnSOhA==
+    legacyNativeLibraryDir=/data/app/~~0nhC5MNr1h3uxAHdjWHTDw==/com.smslink-Uw-KvHPuEEEkAMC3BnSOhA==/lib
+    extractNativeLibs=false
+    primaryCpuAbi=null
+    secondaryCpuAbi=null
+    cpuAbiOverride=null
+    versionCode=1 minSdk=33 targetSdk=34
+    minExtensionVersions=[]
+    versionName=1.0.0
+    usesNonSdkApi=false
+    splits=[base]
+    apkSigningVersion=2
+    flags=[ DEBUGGABLE HAS_CODE ALLOW_CLEAR_USER_DATA ALLOW_BACKUP ]
+    privateFlags=[ PRIVATE_FLAG_ACTIVITIES_RESIZE_MODE_RESIZEABLE_VIA_SDK_VERSION ALLOW_AUDIO_PLAYBACK_CAPTURE PARTIALLY_DIRECT_BOOT_AWARE PRIVATE_FLAG_ALLOW_NATIVE_HEAP_POINTER_TAGGING ]
+    forceQueryable=false
+    dataDir=/data/user/0/com.smslink
+    supportsScreens=[small, medium, large, xlarge, resizeable, anyDensity]
+    timeStamp=2026-04-18 02:10:24
+    lastUpdateTime=2026-04-18 02:10:41
+    installerPackageName=null
+    installerPackageUid=-1
+    initiatingPackageName=com.android.shell
+    originatingPackageName=null
+    packageSource=1
+    appMetadataFilePath=null
+    signatures=PackageSignatures{15a7608 version:2, signatures:[2ac5c277], past signatures:[]}
+    installPermissionsFixed=true
+    pkgFlags=[ DEBUGGABLE HAS_CODE ALLOW_CLEAR_USER_DATA ALLOW_BACKUP ]
+    privatePkgFlags=[ PRIVATE_FLAG_ACTIVITIES_RESIZE_MODE_RESIZEABLE_VIA_SDK_VERSION ALLOW_AUDIO_PLAYBACK_CAPTURE PARTIALLY_DIRECT_BOOT_AWARE PRIVATE_FLAG_ALLOW_NATIVE_HEAP_POINTER_TAGGING ]
+    apexModuleName=null
+    declared permissions:
+      com.smslink.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION: prot=signature
+    requested permissions:
+      android.permission.BLUETOOTH
+      android.permission.BLUETOOTH_ADMIN
+      android.permission.BLUETOOTH_SCAN
+      android.permission.BLUETOOTH_CONNECT
+      android.permission.BLUETOOTH_ADVERTISE
+      android.permission.ACCESS_FINE_LOCATION
+      android.permission.ACCESS_COARSE_LOCATION
+      android.permission.INTERNET
+      android.permission.ACCESS_NETWORK_STATE
+      android.permission.ACCESS_WIFI_STATE
+      android.permission.CHANGE_WIFI_STATE
+      android.permission.READ_SMS
+      android.permission.SEND_SMS
+      android.permission.RECEIVE_SMS
+      android.permission.READ_PHONE_STATE
+      android.permission.CALL_PHONE
+      android.permission.ANSWER_PHONE_CALLS
+      android.permission.READ_CALL_LOG
+      android.permission.MANAGE_OWN_CALLS
+      android.permission.FOREGROUND_SERVICE
+      android.permission.POST_NOTIFICATIONS
+      android.permission.BIND_NOTIFICATION_LISTENER_SERVICE
+      android.permission.READ_EXTERNAL_STORAGE
+      android.permission.WRITE_EXTERNAL_STORAGE
+      android.permission.MANAGE_EXTERNAL_STORAGE
+      com.smslink.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+    install permissions:
+      android.permission.MANAGE_EXTERNAL_STORAGE: granted=false
+      android.permission.FOREGROUND_SERVICE: granted=true
+      android.permission.BLUETOOTH: granted=true
+      android.permission.INTERNET: granted=true
+      android.permission.BLUETOOTH_ADMIN: granted=true
+      android.permission.BIND_NOTIFICATION_LISTENER_SERVICE: granted=false
+      android.permission.CHANGE_WIFI_STATE: granted=true
+      android.permission.ACCESS_NETWORK_STATE: granted=true
+      com.smslink.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION: granted=true
+      android.permission.MANAGE_OWN_CALLS: granted=true
+      android.permission.ACCESS_WIFI_STATE: granted=true
+    User 0: ceDataInode=335874 installed=true hidden=false suspended=false distractionFlags=0 stopped=false notLaunched=false enabled=0 instant=false virtual=false
+      installReason=0
+      firstInstallTime=2026-04-15 12:03:52
+      uninstallReason=0
+      overlay paths:
+        /product/overlay/NavigationBarModeGestural/NavigationBarModeGesturalOverlay.apk
+        /data/resource-cache/com.android.systemui-neutral-bScW.frro
+        /data/resource-cache/com.android.systemui-accent-cvzH.frro
+        /data/resource-cache/com.android.systemui-dynamic-lwkg.frro
+      legacy overlay paths:
+        /product/overlay/NavigationBarModeGestural/NavigationBarModeGesturalOverlay.apk
+      gids=[3002, 3003, 3001]
+      runtime permissions:
+        android.permission.READ_SMS: granted=false, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED|RESTRICTION_INSTALLER_EXEMPT]
+        android.permission.POST_NOTIFICATIONS: granted=false, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED]
+        android.permission.READ_CALL_LOG: granted=false, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED|RESTRICTION_INSTALLER_EXEMPT]
+        android.permission.ACCESS_FINE_LOCATION: granted=false, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED]
+        android.permission.ANSWER_PHONE_CALLS: granted=false, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED]
+        android.permission.RECEIVE_SMS: granted=false, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED|RESTRICTION_INSTALLER_EXEMPT]
+        android.permission.BLUETOOTH_CONNECT: granted=false, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED]
+        android.permission.READ_EXTERNAL_STORAGE: granted=false, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED|RESTRICTION_INSTALLER_EXEMPT]
+        android.permission.ACCESS_COARSE_LOCATION: granted=false, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED]
+        android.permission.READ_PHONE_STATE: granted=false, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED]
+        android.permission.SEND_SMS: granted=false, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED|RESTRICTION_INSTALLER_EXEMPT]
+        android.permission.CALL_PHONE: granted=false, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED]
+        android.permission.BLUETOOTH_ADVERTISE: granted=false, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED]
+        android.permission.WRITE_EXTERNAL_STORAGE: granted=false, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED|RESTRICTION_INSTALLER_EXEMPT]
+        android.permission.BLUETOOTH_SCAN: granted=false, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED]
+
+Queries:
+  system apps queryable: false
+  queries via forceQueryable:
+  queries via package name:
+  queries via component:
+    com.google.android.settings.intelligence:
+      com.smslink
+    com.google.android.youtube:
+      com.smslink
+    com.google.android.apps.photos:
+      com.smslink
+    com.google.android.apps.maps:
+      com.smslink
+    com.google.android.apps.youtube.music:
+      com.smslink
+  queryable via interaction:
+    User 0:
+      [com.android.dynsystem,com.android.emulator.multidisplay,com.android.providers.settings,android,com.android.localtransport,com.android.keychain,com.android.wallpaperbackup,com.android.location.fused,com.android.settings,com.android.inputdevices,com.android.server.telecom]:
+        com.smslink
+      [com.google.android.gsf,com.google.android.gms]:
+        com.smslink
+      com.google.android.inputmethod.latin:
+        com.smslink
+  queryable via uses-library:
+
+Dexopt state:
+  [com.smslink]
+    path: /data/app/~~0nhC5MNr1h3uxAHdjWHTDw==/com.smslink-Uw-KvHPuEEEkAMC3BnSOhA==/base.apk
+      x86_64: [status=run-from-apk] [reason=unknown] [primary-abi]
+        [location is error]
+
+Compiler stats:
+  [com.smslink]
+    (No recorded stats)

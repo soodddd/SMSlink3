@@ -44,7 +44,8 @@ fun FileTransferScreen(
     val resolvedTargetDeviceId =
         connectedDevices.firstOrNull()?.id?.takeIf { it.isNotBlank() }
             ?: pairedDevices.firstOrNull()?.id?.takeIf { it.isNotBlank() }
-            ?: deviceId
+            ?: deviceId.takeIf { it.isNotBlank() }
+            ?: ""
     val filePickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.OpenDocument()
     ) { uri ->
