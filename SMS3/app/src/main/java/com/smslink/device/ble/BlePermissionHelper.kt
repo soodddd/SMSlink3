@@ -22,7 +22,8 @@ class BlePermissionHelper @Inject constructor(
      * 检查是否具有所有必需的 BLE 权限
      */
     fun hasAllBlePermissions(): Boolean {
-        return hasBluetoothPermissions() && hasLocationPermissions()
+        return hasBluetoothPermissions() &&
+            (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S || hasLocationPermissions())
     }
 
     /**
@@ -46,10 +47,9 @@ class BlePermissionHelper @Inject constructor(
      */
     fun hasLocationPermissions(): Boolean {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            // Android 12+ 如果声明 neverForLocation 可以不需要位置权限
-            // 但为了兼容性，仍然检查
-            hasPermission(Manifest.permission.ACCESS_FINE_LOCATION) ||
-            hasPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+            // The scanner declares neverForLocation; Android 12+ does not
+            // require location permission for this app's BLE discovery.
+            true
         } else {
             // Android 11 及以下必须有位置权限
             hasPermission(Manifest.permission.ACCESS_FINE_LOCATION) ||
@@ -102,8 +102,11 @@ class BlePermissionHelper @Inject constructor(
             }
         }
 
-        // 位置权限
-        if (!hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
+        // Android 12+ uses BLUETOOTH_SCAN with neverForLocation. Only legacy
+        // platforms need location for BLE scanning.
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S &&
+            !hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+        ) {
             permissions.add(Manifest.permission.ACCESS_FINE_LOCATION)
         }
 
@@ -128,7 +131,7 @@ class BlePermissionHelper @Inject constructor(
             bluetoothSupported = isBluetoothSupported(),
             bluetoothPermissions = hasBluetoothPermissions(),
             locationPermissions = hasLocationPermissions(),
-            locationEnabled = isLocationEnabled(),
+            locationEnabled = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S || isLocationEnabled(),
             allPermissionsGranted = hasAllBlePermissions()
         )
     }

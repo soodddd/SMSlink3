@@ -63,6 +63,7 @@ class NotificationSyncTest {
         context = mockk(relaxed = true)
         repository = mockk(relaxed = true)
         messageTransport = mockk(relaxed = true)
+        coEvery { messageTransport.awaitDelivery(any(), any()) } returns true
         deviceManager = mockk(relaxed = true)
         preferences = mockk(relaxed = true)
         logger = mockk(relaxed = true)
@@ -155,7 +156,7 @@ class NotificationSyncTest {
 
         val message = NetworkMessage(
             messageType = MessageType.NOTIFICATION,
-            messageId = "msg_1",
+            messageId = "00000000-0000-0000-0000-000000000001",
             sourceDevice = "remote_device",
             targetDevice = testDevice.id,
             timestamp = System.currentTimeMillis(),

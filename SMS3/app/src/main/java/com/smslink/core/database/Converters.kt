@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken
 import com.smslink.core.model.DeviceRole
 import com.smslink.core.model.DeviceType
 import com.smslink.core.model.MessageType
+import com.smslink.core.model.SmsDeliveryStatus
 
 /**
  * Room 类型转换器
@@ -46,6 +47,12 @@ class Converters {
     fun toMessageType(value: String): MessageType {
         return MessageType.valueOf(value)
     }
+
+    @TypeConverter
+    fun fromSmsDeliveryStatus(value: SmsDeliveryStatus): String = value.name
+
+    @TypeConverter
+    fun toSmsDeliveryStatus(value: String): SmsDeliveryStatus = SmsDeliveryStatus.valueOf(value)
 
     @TypeConverter
     fun fromStringList(value: List<String>): String {

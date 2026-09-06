@@ -49,6 +49,7 @@ class FileTransferManagerTest {
     fun `test link selection for large file prefers WiFi`() = runTest {
         // Given
         val largeFile = mockk<File> {
+            every { isFile } returns true
             every { exists() } returns true
             every { canRead() } returns true
             every { name } returns "large_file.mp4"
@@ -90,6 +91,7 @@ class FileTransferManagerTest {
     fun `test link selection for small file accepts Bluetooth`() = runTest {
         // Given
         val smallFile = mockk<File> {
+            every { isFile } returns true
             every { exists() } returns true
             every { canRead() } returns true
             every { name } returns "small_file.txt"
@@ -131,6 +133,7 @@ class FileTransferManagerTest {
     fun `test resume transfer from checkpoint`() = runTest {
         // Given
         val file = mockk<File> {
+            every { isFile } returns true
             every { exists() } returns true
             every { canRead() } returns true
             every { name } returns "resume_file.pdf"
@@ -169,6 +172,7 @@ class FileTransferManagerTest {
     fun `test retry on transfer failure`() = runTest {
         // Given
         val file = mockk<File> {
+            every { isFile } returns true
             every { exists() } returns true
             every { canRead() } returns true
             every { name } returns "retry_file.jpg"
@@ -247,6 +251,7 @@ class FileTransferManagerTest {
     fun `test file not found throws exception`() = runTest {
         // Given
         val nonExistentFile = mockk<File> {
+            every { isFile } returns false
             every { exists() } returns false
             every { canRead() } returns false
         }

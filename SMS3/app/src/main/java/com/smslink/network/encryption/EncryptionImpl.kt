@@ -17,6 +17,7 @@ import java.security.KeyPair
 import java.net.Socket
 import java.security.KeyPairGenerator
 import java.security.KeyStore
+import java.security.MessageDigest
 import java.security.Principal
 import java.security.PrivateKey
 import java.security.SecureRandom
@@ -89,16 +90,13 @@ class EncryptionImpl @Inject constructor(
             val deviceCert = getDeviceCertificate(deviceId)
             val keyManagers = createKeyManagers()
 
-            if (deviceCert != null) {
-                // 使用设备证书创建信任管理器
-                val trustManager = createTrustManager(deviceCert)
-                sslContext.init(keyManagers, arrayOf(trustManager), SecureRandom())
-            } else {
-                // 如果没有证书，使用宽松的信任管理器（仅用于开发）
-                logger.w(TAG, "No certificate found for device: $deviceId, using permissive trust manager")
-                val trustManager = createPermissiveTrustManager()
-                sslContext.init(keyManagers, arrayOf(trustManager), SecureRandom())
-            }
+            // Every outbound connection must have a certificate pinned during
+            // pairing. Server sockets do not request client authentication, so
+            // the rejecting manager is intentionally sufficient for the local
+            // listener context as well.
+            val trustManager = deviceCert?.let(::createTrustManager)
+                ?: createRejectingTrustManager(deviceId)
+            sslContext.init(keyManagers, arrayOf(trustManager), SecureRandom())
 
             return sslContext
 
@@ -109,7 +107,7 @@ class EncryptionImpl @Inject constructor(
     }
 
     override fun getDeviceCertificate(deviceId: String): X509Certificate? {
-        val certFile = File(certificateDir, "$deviceId.crt")
+        val certFile = certificateFile(deviceId)
 
         if (!certFile.exists()) {
             logger.d(TAG, "Certificate not found for device: $deviceId")
@@ -130,7 +128,9 @@ class EncryptionImpl @Inject constructor(
     override suspend fun saveDeviceCertificate(deviceId: String, certificate: X509Certificate) = withContext(Dispatchers.IO) {
         logger.i(TAG, "Saving certificate for device: $deviceId")
 
-        val certFile = File(certificateDir, "$deviceId.crt")
+        require(deviceId.isNotBlank()) { "deviceId must not be blank" }
+        require(verifyCertificate(certificate)) { "Certificate is not a valid self-signed X.509 certificate" }
+        val certFile = certificateFile(deviceId)
 
         try {
             FileOutputStream(certFile).use { fos ->
@@ -148,7 +148,7 @@ class EncryptionImpl @Inject constructor(
     override suspend fun removeDeviceCertificate(deviceId: String) = withContext(Dispatchers.IO) {
         logger.i(TAG, "Removing certificate for device: $deviceId")
 
-        val certFile = File(certificateDir, "$deviceId.crt")
+        val certFile = certificateFile(deviceId)
 
         if (certFile.exists()) {
             certFile.delete()
@@ -176,6 +176,16 @@ class EncryptionImpl @Inject constructor(
     override fun generateSelfSignedCertificate(): X509Certificate {
         ensureLocalCertificate()
         return keyStore.getCertificate(LOCAL_KEY_ALIAS) as X509Certificate
+    }
+
+    /** Keep peer identifiers out of filesystem paths, even if a malformed peer is received. */
+    private fun certificateFile(deviceId: String): File {
+        val digest = MessageDigest.getInstance("SHA-256")
+            .digest(deviceId.toByteArray(Charsets.UTF_8))
+        val filename = digest.joinToString(separator = "") { byte ->
+            "%02x".format(byte.toInt() and 0xFF)
+        } + ".crt"
+        return File(certificateDir, filename)
     }
 
     private fun ensureLocalCertificate() {
@@ -294,7 +304,7 @@ class EncryptionImpl @Inject constructor(
     private fun createTrustManager(certificate: X509Certificate): TrustManager {
         return object : X509TrustManager {
             override fun checkClientTrusted(chain: Array<out X509Certificate>?, authType: String?) {
-                // 客户端模式不需要验证客户端证书
+                throw CertificateException("Client certificate authentication is not enabled")
             }
 
             override fun checkServerTrusted(chain: Array<out X509Certificate>?, authType: String?) {
@@ -305,14 +315,17 @@ class EncryptionImpl @Inject constructor(
                 // 验证服务器证书
                 val serverCert = chain[0]
 
-                // 检查证书是否匹配
-                if (!serverCert.equals(certificate)) {
+                // Pin the complete DER certificate, not only its subject. This
+                // prevents a different self-signed certificate from replacing
+                // the certificate accepted during pairing.
+                if (!serverCert.encoded.contentEquals(certificate.encoded)) {
                     logger.w(TAG, "Server certificate does not match stored certificate")
                     throw CertificateException("Certificate mismatch")
                 }
 
                 // 验证证书有效性
                 serverCert.checkValidity()
+                serverCert.verify(serverCert.publicKey)
             }
 
             override fun getAcceptedIssuers(): Array<X509Certificate> {
@@ -321,21 +334,19 @@ class EncryptionImpl @Inject constructor(
         }
     }
 
-    /**
-     * 创建宽松的信任管理器（仅用于开发）
-     */
-    private fun createPermissiveTrustManager(): TrustManager {
+    /** Rejects a connection when pairing has not supplied a peer certificate. */
+    private fun createRejectingTrustManager(deviceId: String): TrustManager {
         return object : X509TrustManager {
             override fun checkClientTrusted(chain: Array<out X509Certificate>?, authType: String?) {
-                // 接受所有客户端证书
+                throw CertificateException("No pinned certificate for device: $deviceId")
             }
 
             override fun checkServerTrusted(chain: Array<out X509Certificate>?, authType: String?) {
-                // 接受所有服务器证书
+                throw CertificateException("No pinned certificate for device: $deviceId")
             }
 
             override fun getAcceptedIssuers(): Array<X509Certificate> {
-                return arrayOf()
+                return emptyArray()
             }
         }
     }

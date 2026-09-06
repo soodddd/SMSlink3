@@ -8,6 +8,7 @@ import com.smslink.core.model.AppNotification
 import com.smslink.core.model.Device
 import com.smslink.core.permission.IPermissionManager
 import com.smslink.device.IDeviceManager
+import com.smslink.device.observeLiveConnections
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Job
@@ -71,6 +72,10 @@ class NotificationViewModel @Inject constructor(
                 return@launch
             }
 
+            // Rebind after a process restart or after the user has just
+            // enabled listener access in system settings.
+            notificationManager.startListening()
+            _isListening.value = true
             loadNotifications()
         }
     }
@@ -127,7 +132,7 @@ class NotificationViewModel @Inject constructor(
      */
     private fun observeConnectedDevices() {
         viewModelScope.launch {
-            deviceManager.getConnectedDevices()
+            deviceManager.observeLiveConnections()
                 .map { devices -> devices.distinctBy { it.id to it.role } }
                 .distinctUntilChangedBy { devices ->
                     devices.map { device -> device.id to device.role }
@@ -149,7 +154,10 @@ class NotificationViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 notificationManager.startListening()
-                _isListening.value = true
+                _isListening.value = notificationManager.hasNotificationListenerPermission()
+                if (!_isListening.value) {
+                    _uiState.value = NotificationUiState.PermissionRequired
+                }
                 logger.i(TAG, "Started listening for notifications")
             } catch (e: Exception) {
                 logger.e(TAG, "Failed to start listening", e)
@@ -287,7 +295,15 @@ class NotificationViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 NotificationSyncService.start(context)
-                _isListening.value = true
+                // The foreground service is only a lifecycle host; the
+                // actual source is NotificationListenerService. Reflect the
+                // real special-access state instead of claiming success when
+                // access is still disabled.
+                notificationManager.startListening()
+                _isListening.value = notificationManager.hasNotificationListenerPermission()
+                if (!_isListening.value) {
+                    _uiState.value = NotificationUiState.PermissionRequired
+                }
                 logger.i(TAG, "Sync service started")
             } catch (e: Exception) {
                 logger.e(TAG, "Failed to start sync service", e)
@@ -302,6 +318,7 @@ class NotificationViewModel @Inject constructor(
     fun stopSyncService() {
         viewModelScope.launch {
             try {
+                notificationManager.stopListening()
                 NotificationSyncService.stop(context)
                 _isListening.value = false
                 logger.i(TAG, "Sync service stopped")
@@ -336,13 +353,9 @@ class NotificationViewModel @Inject constructor(
      * 检查是否有通知访问权限
      */
     private fun hasNotificationPermission(): Boolean {
-        // 通知监听权限需要在系统设置中手动授予
-        // 这里只是检查基本的通知权限
-        return if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-            permissionManager.hasPermission(android.Manifest.permission.POST_NOTIFICATIONS)
-        } else {
-            true
-        }
+        // Notification listener access is a special access granted in system
+        // settings; POST_NOTIFICATIONS alone is not sufficient.
+        return notificationManager.hasNotificationListenerPermission()
     }
 
     companion object {

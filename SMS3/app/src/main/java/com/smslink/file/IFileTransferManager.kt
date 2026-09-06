@@ -42,4 +42,10 @@ interface IFileTransferManager {
      * @return 活动传输列表流
      */
     fun getActiveTransfers(): Flow<List<FileTransfer>>
+
+    /** Retry an upload using the source file saved in the transfer record. */
+    fun retryTransfer(transferId: String): Flow<FileTransfer> =
+        kotlinx.coroutines.flow.flow {
+            throw UnsupportedOperationException("Retry is not supported by this transfer manager")
+        }
 }

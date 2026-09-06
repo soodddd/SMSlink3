@@ -9,7 +9,10 @@ import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
+import android.os.Build
 import android.net.wifi.WifiManager
+import android.content.pm.PackageManager
+import androidx.core.content.ContextCompat
 import com.smslink.core.log.ILogger
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.channels.awaitClose
@@ -109,7 +112,15 @@ class NetworkMonitor @Inject constructor(
      * 检查蓝牙是否可用
      */
     fun isBluetoothAvailable(): Boolean {
-        return bluetoothAdapter?.isEnabled == true
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S &&
+            ContextCompat.checkSelfPermission(
+                context,
+                android.Manifest.permission.BLUETOOTH_CONNECT
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return false
+        }
+        return runCatching { bluetoothAdapter?.isEnabled == true }.getOrDefault(false)
     }
 
     /**

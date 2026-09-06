@@ -1,12 +1,16 @@
 ﻿package com.smslink.file.ui
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.smslink.core.log.ILogger
 import com.smslink.core.model.FileTransfer
 import com.smslink.core.permission.IPermissionManager
 import com.smslink.file.IFileTransferManager
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.io.File
@@ -28,6 +32,15 @@ class FileTransferViewModel @Inject constructor(
     private val _events = MutableSharedFlow<FileTransferEvent>()
     val events: SharedFlow<FileTransferEvent> = _events.asSharedFlow()
 
+    // The manager owns actual file IO. Completed flows run immediately, while
+    // suspended work is dispatched to IO; this also keeps JVM tests independent
+    // of Android's Main looper.
+    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+
+    private fun launchWork(block: suspend CoroutineScope.() -> Unit) {
+        scope.launch(start = CoroutineStart.UNDISPATCHED, block = block)
+    }
+
     init {
         loadActiveTransfers()
         loadTransferHistory()
@@ -37,7 +50,7 @@ class FileTransferViewModel @Inject constructor(
      * 加载活动传输
      */
     private fun loadActiveTransfers() {
-        viewModelScope.launch {
+        launchWork {
             fileTransferManager.getActiveTransfers()
                 .catch { e ->
                     logger.e("FileTransferVM", "Load active transfers failed: ${e.message}")
@@ -52,7 +65,7 @@ class FileTransferViewModel @Inject constructor(
      * 加载传输历史
      */
     fun loadTransferHistory() {
-        viewModelScope.launch {
+        launchWork {
             try {
                 val history = fileTransferManager.getTransferHistory(50)
                 _uiState.update { it.copy(transferHistory = history) }
@@ -66,26 +79,25 @@ class FileTransferViewModel @Inject constructor(
      * 发送文件
      */
     fun sendFile(file: File, targetDeviceId: String) {
-        viewModelScope.launch {
+        launchWork {
             if (targetDeviceId.isBlank()) {
                 _events.emit(FileTransferEvent.Error("No target device selected"))
-                return@launch
+                return@launchWork
             }
             try {
                 _uiState.update { it.copy(isLoading = true) }
+                _events.emit(FileTransferEvent.SendStarted)
 
                 fileTransferManager.sendFile(file, targetDeviceId)
-                    .catch { e ->
-                        logger.e("FileTransferVM", "Send file failed: ${e.message}")
-                        _events.emit(FileTransferEvent.Error(e.message ?: "Send failed"))
-                    }
                     .collect { transfer ->
                         logger.i("FileTransferVM", "Transfer progress: ${transfer.progress}")
                     }
-
-                _events.emit(FileTransferEvent.SendStarted)
+            } catch (e: Exception) {
+                logger.e("FileTransferVM", "Send file failed: ${e.message}")
+                _events.emit(FileTransferEvent.Error(e.message ?: "Send failed"))
             } finally {
                 _uiState.update { it.copy(isLoading = false) }
+                loadTransferHistory()
             }
         }
     }
@@ -94,18 +106,9 @@ class FileTransferViewModel @Inject constructor(
      * 接收文件
      */
     fun receiveFile(transferId: String) {
-        viewModelScope.launch {
-            if (!checkStoragePermission()) {
-                _events.emit(FileTransferEvent.PermissionRequired)
-                return@launch
-            }
-
+        launchWork {
             try {
                 fileTransferManager.receiveFile(transferId)
-                    .catch { e ->
-                        logger.e("FileTransferVM", "Receive file failed: ${e.message}")
-                        _events.emit(FileTransferEvent.Error(e.message ?: "Receive failed"))
-                    }
                     .collect { transfer ->
                         logger.i("FileTransferVM", "Receive progress: ${transfer.progress}")
                     }
@@ -120,7 +123,7 @@ class FileTransferViewModel @Inject constructor(
      * 取消传输
      */
     fun cancelTransfer(transferId: String) {
-        viewModelScope.launch {
+        launchWork {
             try {
                 fileTransferManager.cancelTransfer(transferId)
                 _events.emit(FileTransferEvent.TransferCancelled)
@@ -135,14 +138,20 @@ class FileTransferViewModel @Inject constructor(
      * 重试传输
      */
     fun retryTransfer(transferId: String) {
-        viewModelScope.launch {
+        launchWork {
             try {
-                // TODO: 瀹炵幇閲嶈瘯閫昏緫
+                _uiState.update { it.copy(isLoading = true) }
                 logger.i("FileTransferVM", "Retry transfer: $transferId")
                 _events.emit(FileTransferEvent.SendStarted)
+                fileTransferManager.retryTransfer(transferId).collect { transfer ->
+                    logger.i("FileTransferVM", "Retry progress: ${transfer.progress}")
+                }
             } catch (e: Exception) {
                 logger.e("FileTransferVM", "Retry transfer failed: ${e.message}")
                 _events.emit(FileTransferEvent.Error(e.message ?: "Retry failed"))
+            } finally {
+                _uiState.update { it.copy(isLoading = false) }
+                loadTransferHistory()
             }
         }
     }
@@ -158,7 +167,7 @@ class FileTransferViewModel @Inject constructor(
      * 拒绝文件传输
      */
     fun rejectFileTransfer(transferId: String) {
-        viewModelScope.launch {
+        launchWork {
             try {
                 fileTransferManager.cancelTransfer(transferId)
                 logger.i("FileTransferVM", "File transfer rejected: $transferId")
@@ -172,7 +181,7 @@ class FileTransferViewModel @Inject constructor(
      * 选择文件
      */
     fun selectFile() {
-        viewModelScope.launch {
+        launchWork {
             _events.emit(FileTransferEvent.ShowFilePicker)
         }
     }
@@ -195,51 +204,25 @@ class FileTransferViewModel @Inject constructor(
      * 检查存储权限
      */
     private fun checkStoragePermission(): Boolean {
-        return if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-            permissionManager.hasPermissions(
-                listOf(
-                    android.Manifest.permission.READ_MEDIA_IMAGES,
-                    android.Manifest.permission.READ_MEDIA_VIDEO,
-                    android.Manifest.permission.READ_MEDIA_AUDIO
-                )
-            )
-        } else {
-            permissionManager.hasPermissions(
-                listOf(
-                    android.Manifest.permission.READ_EXTERNAL_STORAGE,
-                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE
-                )
-            )
-        }
+        // Files are written to the app-specific external files directory, so
+        // Android 13+ does not require a broad storage permission.
+        return true
     }
 
     /**
      * 请求存储权限
      */
     fun requestStoragePermission() {
-        viewModelScope.launch {
-            val permissions = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-                listOf(
-                    android.Manifest.permission.READ_MEDIA_IMAGES,
-                    android.Manifest.permission.READ_MEDIA_VIDEO,
-                    android.Manifest.permission.READ_MEDIA_AUDIO
-                )
-            } else {
-                listOf(
-                    android.Manifest.permission.READ_EXTERNAL_STORAGE,
-                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE
-                )
-            }
-
-            permissionManager.requestPermissions(permissions).collect { results ->
-                val allGranted = results.values.all { it.granted }
-                if (allGranted) {
-                    _events.emit(FileTransferEvent.PermissionGranted)
-                } else {
-                    _events.emit(FileTransferEvent.PermissionDenied)
-                }
-            }
+        launchWork {
+            // SAF/content-URI access is granted by the picker/share contract;
+            // there is no dangerous storage permission to request.
+            _events.emit(FileTransferEvent.PermissionGranted)
         }
+    }
+
+    override fun onCleared() {
+        scope.cancel()
+        super.onCleared()
     }
 }
 

@@ -6,6 +6,8 @@ import com.smslink.core.model.Device
 import com.smslink.core.model.DeviceRole
 import com.smslink.core.model.DeviceType
 import com.smslink.core.model.PairResult
+import com.smslink.network.IConnectionManager
+import com.smslink.security.DeviceIdentityStore
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -13,6 +15,7 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -27,18 +30,41 @@ class DeviceManagerImpl @Inject constructor(
     private val deviceDiscovery: DeviceDiscoveryImpl,
     private val devicePairing: DevicePairingImpl,
     private val deviceRepository: DeviceRepository,
-    private val logger: ILogger
+    private val logger: ILogger,
+    private val identityStore: DeviceIdentityStore,
+    private val connectionManager: dagger.Lazy<IConnectionManager>
 ) : IDeviceManager {
+
+    /** Compatibility constructor retained for existing JVM tests and callers. */
+    constructor(
+        context: Context,
+        deviceDiscovery: DeviceDiscoveryImpl,
+        devicePairing: DevicePairingImpl,
+        deviceRepository: DeviceRepository,
+        logger: ILogger
+    ) : this(
+        context,
+        deviceDiscovery,
+        devicePairing,
+        deviceRepository,
+        logger,
+        DeviceIdentityStore.forTests(context),
+        FixedLazy(NoopConnectionManager)
+    )
 
     companion object {
         private const val TAG = "DeviceManager"
+        private const val DEVICE_PREFERENCES = "smslink_device"
+        private const val LOCAL_ROLE_KEY = "local_role"
     }
 
     private val localDeviceState = MutableStateFlow<Device?>(null)
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+    private val preferences = context.getSharedPreferences(DEVICE_PREFERENCES, Context.MODE_PRIVATE)
 
     init {
-        // 鍒濆鍖栨湰鍦拌澶囦俊鎭?        localDevice = createLocalDevice()
+        // Initialize the cached local identity once. The identity key is
+        // persisted by DeviceIdentityStore and the role is persisted here.
         localDeviceState.value = createLocalDevice()
     }
 
@@ -67,7 +93,7 @@ class DeviceManagerImpl @Inject constructor(
      */
     override fun pairDevice(deviceId: String, qrCode: String): Flow<PairResult> {
         logger.i(TAG, "Pairing device: $deviceId")
-logger.d(
+        logger.d(
             TAG,
             "Pairing lookup snapshot: requestedId=$deviceId, knownIds=${deviceDiscovery.discoveredDevices.value.joinToString { it.device.id }}"
         )
@@ -82,7 +108,8 @@ logger.d(
             }
         }
 
-        return devicePairing.pairDevice(discoveredDevice, null, qrCode)
+        return devicePairing.pairDevice(discoveredDevice, deviceDiscovery.discoveredDevices.value
+            .find { it.device.id == deviceId }, qrCode)
     }
 
     /**
@@ -90,6 +117,10 @@ logger.d(
      */
     override fun getConnectedDevices(): Flow<List<Device>> {
         return deviceRepository.getConnectedDevices()
+    }
+
+    override fun getLiveConnectedDevices(): Flow<List<Device>> {
+        return deviceRepository.getActuallyConnectedDevices()
     }
 
     /**
@@ -102,6 +133,7 @@ logger.d(
         val currentLocalDevice = localDeviceState.value
         if (currentLocalDevice?.id == deviceId) {
             localDeviceState.value = currentLocalDevice.copy(role = role)
+            preferences.edit().putString(LOCAL_ROLE_KEY, role.name).apply()
             enforceExclusiveRole(deviceId, role)
         } else {
             reconcileLocalRole(role)
@@ -115,6 +147,28 @@ logger.d(
      */
     override suspend fun removeDevice(deviceId: String) {
         logger.i(TAG, "Removing device: $deviceId")
+        if (deviceId.isBlank() || deviceId == getLocalDevice().id) {
+            logger.w(TAG, "Refusing to remove invalid or local device id: $deviceId")
+            return
+        }
+
+        // Stop reconnects and close the live link before deleting the row.
+        // Cleanup is best-effort so a stale database row cannot keep secrets
+        // around merely because a socket was already broken.
+        try {
+            connectionManager.get().disconnect(deviceId)
+        } catch (e: kotlinx.coroutines.CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            logger.w(TAG, "Failed to disconnect removed device: $deviceId: ${e.message}")
+        }
+        try {
+            devicePairing.removeDeviceSecrets(deviceId)
+        } catch (e: kotlinx.coroutines.CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            logger.w(TAG, "Failed to remove secrets for device: $deviceId: ${e.message}")
+        }
         deviceRepository.deleteDevice(deviceId)
     }
 
@@ -131,10 +185,7 @@ logger.d(
      * 鍒涘缓鏈湴璁惧淇℃伅
      */
     private fun createLocalDevice(): Device {
-        val deviceId = android.provider.Settings.Secure.getString(
-            context.contentResolver,
-            android.provider.Settings.Secure.ANDROID_ID
-        )
+        val deviceId = identityStore.deviceId()
 
         val deviceName = android.os.Build.MODEL ?: "Unknown Device"
 
@@ -145,12 +196,16 @@ logger.d(
             else -> DeviceType.PHONE
         }
 
+        val role = preferences.getString(LOCAL_ROLE_KEY, DeviceRole.MAIN.name)
+            ?.let { value -> runCatching { DeviceRole.valueOf(value) }.getOrNull() }
+            ?: DeviceRole.MAIN
+
         return Device(
             id = deviceId,
             name = deviceName,
             type = deviceType,
-            role = DeviceRole.MAIN,
-            publicKey = null,
+            role = role,
+            publicKey = identityStore.publicKeyBase64(),
             lastSeen = System.currentTimeMillis(),
             isPaired = true
         ).also {
@@ -166,6 +221,7 @@ logger.d(
         if (role == DeviceRole.MAIN || role == DeviceRole.CELLULAR_SOURCE) {
             if (currentLocalDevice.role == role) {
                 localDeviceState.value = currentLocalDevice.copy(role = DeviceRole.SECONDARY)
+                preferences.edit().putString(LOCAL_ROLE_KEY, DeviceRole.SECONDARY.name).apply()
             }
         }
     }
@@ -187,6 +243,7 @@ logger.d(
 
         if (currentLocalDevice.role != DeviceRole.SECONDARY) {
             localDeviceState.value = currentLocalDevice.copy(role = DeviceRole.SECONDARY)
+            preferences.edit().putString(LOCAL_ROLE_KEY, DeviceRole.SECONDARY.name).apply()
         }
     }
 
@@ -281,6 +338,27 @@ logger.d(
         deviceDiscovery.cleanup()
         scope.cancel()
     }
+}
+
+private object NoopConnectionManager : IConnectionManager {
+    override fun connect(
+        deviceId: String,
+        type: com.smslink.core.model.ConnectionType
+    ): Flow<com.smslink.core.model.Connection> = emptyFlow()
+
+    override suspend fun disconnect(deviceId: String) = Unit
+
+    override fun getConnectionState(deviceId: String): Flow<com.smslink.core.model.Connection> = emptyFlow()
+
+    override fun getActiveConnections(): Flow<List<com.smslink.core.model.Connection>> = emptyFlow()
+
+    override suspend fun sendData(deviceId: String, data: ByteArray): Boolean = false
+
+    override fun receiveData(): Flow<Pair<String, ByteArray>> = emptyFlow()
+}
+
+private class FixedLazy<T>(private val value: T) : dagger.Lazy<T> {
+    override fun get(): T = value
 }
 
 

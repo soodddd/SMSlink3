@@ -42,9 +42,9 @@ fun FileTransferScreen(
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
     val resolvedTargetDeviceId =
-        connectedDevices.firstOrNull()?.id?.takeIf { it.isNotBlank() }
+        deviceId.takeIf { it.isNotBlank() }
+            ?: connectedDevices.firstOrNull()?.id?.takeIf { it.isNotBlank() }
             ?: pairedDevices.firstOrNull()?.id?.takeIf { it.isNotBlank() }
-            ?: deviceId.takeIf { it.isNotBlank() }
             ?: ""
     val filePickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.OpenDocument()
@@ -173,7 +173,12 @@ fun FileTransferScreen(
                 items(uiState.transferHistory) { transfer ->
                     TransferHistoryItem(
                         transfer = transfer,
-                        onClick = { viewModel.showTransferDetails(transfer) }
+                        onClick = { viewModel.showTransferDetails(transfer) },
+                        onRetry = if (transfer.state == TransferState.FAILED) {
+                            { viewModel.retryTransfer(transfer.id) }
+                        } else {
+                            null
+                        }
                     )
                 }
             }
@@ -189,9 +194,16 @@ fun FileTransferScreen(
 
         // 接收确认对话框
         pendingReceiveTransfer?.let { transfer ->
+            val incomingDeviceName = remember(transfer.deviceId, pairedDevices, connectedDevices) {
+                (pairedDevices + connectedDevices)
+                    .firstOrNull { it.id == transfer.deviceId }
+                    ?.name
+                    ?.ifBlank { transfer.deviceId }
+                    ?: transfer.deviceId
+            }
             FileReceiveConfirmDialog(
                 transfer = transfer,
-                deviceName = deviceId,
+                deviceName = incomingDeviceName,
                 onAccept = {
                     viewModel.acceptFileTransfer(transfer.id)
                     pendingReceiveTransfer = null
@@ -283,7 +295,8 @@ fun ActiveTransferItem(
 @Composable
 fun TransferHistoryItem(
     transfer: FileTransfer,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    onRetry: (() -> Unit)? = null
 ) {
     Card(
         onClick = onClick,
@@ -327,6 +340,13 @@ fun TransferHistoryItem(
             }
 
             Spacer(modifier = Modifier.width(16.dp))
+
+            if (transfer.state == TransferState.FAILED && onRetry != null) {
+                IconButton(onClick = onRetry) {
+                    Icon(Icons.Default.Refresh, contentDescription = "Retry")
+                }
+                Spacer(modifier = Modifier.width(4.dp))
+            }
 
             TransferStateChip(state = transfer.state)
         }
@@ -435,8 +455,8 @@ private fun formatTimestamp(timestamp: Long): String {
 
 private fun copyUriToCacheFile(context: Context, uri: Uri): java.io.File? {
     return try {
-        val fileName = getDisplayName(context, uri)
-        val tempFile = java.io.File(context.cacheDir, fileName)
+        val fileName = sanitizeDisplayName(getDisplayName(context, uri))
+        val tempFile = java.io.File(context.cacheDir, "picker-${UUID.randomUUID()}-$fileName")
 
         context.contentResolver.openInputStream(uri)?.use { input ->
             tempFile.outputStream().use { output ->
@@ -464,3 +484,12 @@ private fun getDisplayName(context: Context, uri: Uri): String {
 
     return fileName
 }
+
+private fun sanitizeDisplayName(value: String): String = value
+    .replace('/', '_')
+    .replace('\\', '_')
+    .replace("..", "_")
+    .replace('\u0000'.toString(), "")
+    .trim()
+    .take(255)
+    .ifBlank { "selected_file" }

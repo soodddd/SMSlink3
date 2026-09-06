@@ -9,16 +9,15 @@ import android.os.PowerManager
 import android.provider.Settings
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.fragment.app.FragmentActivity
+import androidx.activity.ComponentActivity
 import com.smslink.core.log.ILogger
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.withContext
+import kotlinx.coroutines.withTimeoutOrNull
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -39,27 +38,24 @@ class EnhancedPermissionManager @Inject constructor(
 
     companion object {
         private const val TAG = "EnhancedPermissionManager"
+        private const val PERMISSION_RESULT_TIMEOUT_MS = 120_000L
     }
-
-    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
-
-    // 权限结果流
-    private val _permissionResults = MutableSharedFlow<PermissionResult>(replay = 0, extraBufferCapacity = 10)
-    private val _multiPermissionResults = MutableSharedFlow<Map<String, PermissionResult>>(replay = 0, extraBufferCapacity = 10)
 
     // Activity Result Launchers（需要从Activity设置）
     private var singlePermissionLauncher: ActivityResultLauncher<String>? = null
     private var multiPermissionLauncher: ActivityResultLauncher<Array<String>>? = null
 
-    // 当前请求的权限（用于回调）
+    // 每次请求只允许一个待处理结果，避免不同业务的权限回调串线。
     private var currentRequestedPermission: String? = null
     private var currentRequestedPermissions: List<String>? = null
+    private var pendingSingleResult: CompletableDeferred<PermissionResult>? = null
+    private var pendingMultipleResult: CompletableDeferred<Map<String, PermissionResult>>? = null
 
     /**
      * 在Activity中设置权限启动器
      * 必须在Activity的onCreate中调用
      */
-    fun setupPermissionLaunchers(activity: FragmentActivity) {
+    fun setupPermissionLaunchers(activity: ComponentActivity) {
         logger.d(TAG, "Setting up permission launchers")
 
         // 单个权限请求
@@ -74,9 +70,7 @@ class EnhancedPermissionManager @Inject constructor(
             )
 
             logger.d(TAG, "Permission result: $permission = $granted")
-            scope.launch {
-                _permissionResults.emit(result)
-            }
+            pendingSingleResult?.complete(result)
             currentRequestedPermission = null
         }
 
@@ -94,9 +88,7 @@ class EnhancedPermissionManager @Inject constructor(
             }
 
             logger.d(TAG, "Multiple permissions result: ${results.size} permissions")
-            scope.launch {
-                _multiPermissionResults.emit(resultMap)
-            }
+            pendingMultipleResult?.complete(resultMap)
             currentRequestedPermissions = null
         }
     }
@@ -115,59 +107,84 @@ class EnhancedPermissionManager @Inject constructor(
     }
 
     override fun requestPermission(permission: String): Flow<PermissionResult> {
-        logger.i(TAG, "Requesting permission: $permission")
-
-        // 如果已经授予，直接返回
-        if (hasPermission(permission)) {
-            return kotlinx.coroutines.flow.flow {
+        return flow {
+            logger.i(TAG, "Requesting permission: $permission")
+            if (hasPermission(permission)) {
                 emit(PermissionResult(permission, true, false))
+                return@flow
             }
-        }
 
-        // 检查launcher是否已设置
-        if (singlePermissionLauncher == null) {
-            logger.e(TAG, "Permission launcher not set up. Call setupPermissionLaunchers() first.")
-            return kotlinx.coroutines.flow.flow {
+            val launcher = singlePermissionLauncher
+            if (launcher == null) {
+                logger.e(TAG, "Permission launcher not set up. Call setupPermissionLaunchers() first.")
                 emit(PermissionResult(permission, false, false))
+                return@flow
+            }
+
+            if (pendingSingleResult != null || pendingMultipleResult != null) {
+                emit(PermissionResult(permission, false, false))
+                return@flow
+            }
+
+            val deferred = CompletableDeferred<PermissionResult>()
+            pendingSingleResult = deferred
+            currentRequestedPermission = permission
+            try {
+                withContext(Dispatchers.Main.immediate) { launcher.launch(permission) }
+                emit(
+                    withTimeoutOrNull(PERMISSION_RESULT_TIMEOUT_MS) { deferred.await() }
+                        ?: PermissionResult(permission, false, false)
+                )
+            } finally {
+                if (pendingSingleResult === deferred) pendingSingleResult = null
+                currentRequestedPermission = null
             }
         }
-
-        // 启动权限请求
-        currentRequestedPermission = permission
-        singlePermissionLauncher?.launch(permission)
-
-        return _permissionResults.asSharedFlow()
     }
 
     override fun requestPermissions(permissions: List<String>): Flow<Map<String, PermissionResult>> {
-        logger.i(TAG, "Requesting ${permissions.size} permissions")
+        return flow {
+            logger.i(TAG, "Requesting ${permissions.size} permissions")
+            if (permissions.isEmpty()) {
+                emit(emptyMap())
+                return@flow
+            }
 
-        // 检查哪些权限已授予
-        val grantedPermissions = permissions.filter { hasPermission(it) }
-        val deniedPermissions = permissions.filter { !hasPermission(it) }
+            val deniedPermissions = permissions.filterNot(::hasPermission)
+            if (deniedPermissions.isEmpty()) {
+                emit(permissions.associateWith { PermissionResult(it, true, false) })
+                return@flow
+            }
 
-        // 如果全部已授予，直接返回
-        if (deniedPermissions.isEmpty()) {
-            return kotlinx.coroutines.flow.flow {
-                val results = permissions.associateWith { PermissionResult(it, true, false) }
-                emit(results)
+            val launcher = multiPermissionLauncher
+            if (launcher == null) {
+                logger.e(TAG, "Permission launcher not set up. Call setupPermissionLaunchers() first.")
+                emit(permissions.associateWith { PermissionResult(it, false, false) })
+                return@flow
+            }
+
+            if (pendingSingleResult != null || pendingMultipleResult != null) {
+                emit(permissions.associateWith { PermissionResult(it, false, false) })
+                return@flow
+            }
+
+            val deferred = CompletableDeferred<Map<String, PermissionResult>>()
+            pendingMultipleResult = deferred
+            currentRequestedPermissions = permissions
+            try {
+                withContext(Dispatchers.Main.immediate) { launcher.launch(deniedPermissions.toTypedArray()) }
+                val result = withTimeoutOrNull(PERMISSION_RESULT_TIMEOUT_MS) { deferred.await() }
+                    ?: deniedPermissions.associateWith { PermissionResult(it, false, false) }
+                emit(
+                    permissions.associateWith { permission ->
+                        result[permission] ?: PermissionResult(permission, hasPermission(permission), false)
+                    }
+                )
+            } finally {
+                if (pendingMultipleResult === deferred) pendingMultipleResult = null
+                currentRequestedPermissions = null
             }
         }
-
-        // 检查launcher是否已设置
-        if (multiPermissionLauncher == null) {
-            logger.e(TAG, "Permission launcher not set up. Call setupPermissionLaunchers() first.")
-            return kotlinx.coroutines.flow.flow {
-                val results = permissions.associateWith { PermissionResult(it, false, false) }
-                emit(results)
-            }
-        }
-
-        // 启动权限请求
-        currentRequestedPermissions = permissions
-        multiPermissionLauncher?.launch(permissions.toTypedArray())
-
-        return _multiPermissionResults.asSharedFlow()
     }
 
     override fun shouldShowRationale(permission: String): Boolean {
@@ -351,22 +368,9 @@ class EnhancedPermissionManager @Inject constructor(
                     android.Manifest.permission.RECEIVE_SMS
                 )
             ),
-            hasStoragePermissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                hasPermissions(
-                    listOf(
-                        android.Manifest.permission.READ_MEDIA_IMAGES,
-                        android.Manifest.permission.READ_MEDIA_VIDEO,
-                        android.Manifest.permission.READ_MEDIA_AUDIO
-                    )
-                )
-            } else {
-                hasPermissions(
-                    listOf(
-                        android.Manifest.permission.READ_EXTERNAL_STORAGE,
-                        android.Manifest.permission.WRITE_EXTERNAL_STORAGE
-                    )
-                )
-            },
+            // Files are selected through SAF or received through a content URI;
+            // the app deliberately does not request broad storage access.
+            hasStoragePermissions = true,
             hasBluetoothPermissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 hasPermissions(
                     listOf(
@@ -385,6 +389,7 @@ class EnhancedPermissionManager @Inject constructor(
             }
         )
     }
+
 }
 
 /**

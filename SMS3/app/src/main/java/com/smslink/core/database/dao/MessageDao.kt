@@ -8,6 +8,7 @@ import androidx.room.Query
 import androidx.room.Update
 import com.smslink.core.model.Message
 import com.smslink.core.model.MessageType
+import com.smslink.core.model.SmsDeliveryStatus
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -29,6 +30,9 @@ interface MessageDao {
 
     @Query("SELECT * FROM messages ORDER BY timestamp DESC LIMIT :limit")
     fun getAll(limit: Int): Flow<List<Message>>
+
+    @Query("SELECT * FROM messages ORDER BY timestamp DESC")
+    suspend fun getAllSnapshot(): List<Message>
 
     @Query("SELECT * FROM messages WHERE threadId = :threadId ORDER BY timestamp DESC")
     fun getByThreadId(threadId: String): Flow<List<Message>>
@@ -56,6 +60,9 @@ interface MessageDao {
 
     @Query("UPDATE messages SET read = 1 WHERE threadId = :threadId")
     suspend fun markThreadAsRead(threadId: String)
+
+    @Query("UPDATE messages SET deliveryStatus = :status, deliveryTimestamp = :timestamp WHERE id = :messageId")
+    suspend fun updateDeliveryStatus(messageId: String, status: SmsDeliveryStatus, timestamp: Long?)
 
     @Query("DELETE FROM messages WHERE id = :messageId")
     suspend fun deleteById(messageId: String)

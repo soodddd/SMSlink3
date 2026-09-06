@@ -44,12 +44,6 @@ fun CallHistoryScreen(
         viewModel.checkDefaultPhoneApp()
     }
 
-    DisposableEffect(Unit) {
-        onDispose {
-            viewModel.stopListening()
-        }
-    }
-
     // 处理默认电话应用请求
     LaunchedEffect(uiState.defaultPhoneAppIntent) {
         uiState.defaultPhoneAppIntent?.let { intent ->

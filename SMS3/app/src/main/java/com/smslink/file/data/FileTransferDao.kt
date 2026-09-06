@@ -19,6 +19,9 @@ interface FileTransferDao {
     @Query("SELECT * FROM file_transfers WHERE id = :transferId")
     suspend fun getById(transferId: String): FileTransferEntity?
 
+    @Query("SELECT * FROM file_transfers WHERE id = :transferId")
+    fun observeById(transferId: String): Flow<FileTransferEntity?>
+
     @Query("SELECT * FROM file_transfers ORDER BY timestamp DESC LIMIT :limit")
     suspend fun getAll(limit: Int): List<FileTransferEntity>
 

@@ -1,11 +1,15 @@
 package com.smslink.network.connection
 
+import android.Manifest
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.content.Context
+import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.wifi.WifiManager
+import android.os.Build
+import androidx.core.content.ContextCompat
 import com.smslink.core.log.ILogger
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
@@ -21,8 +25,16 @@ import javax.inject.Singleton
 @Singleton
 class LinkSelector @Inject constructor(
     @ApplicationContext private val context: Context,
-    private val logger: ILogger
+    private val logger: ILogger,
+    private val policyStore: ConnectionPolicyStore
 ) {
+    /** Compatibility constructor for JVM callers that do not use Hilt. */
+    constructor(context: Context, logger: ILogger) : this(
+        context,
+        logger,
+        ConnectionPolicyStore.forTests()
+    )
+
     private val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
     private val wifiManager = context.applicationContext.getSystemService(Context.WIFI_SERVICE) as? WifiManager
     private val bluetoothAdapter: BluetoothAdapter? = runCatching { BluetoothAdapter.getDefaultAdapter() }.getOrNull()
@@ -42,8 +54,9 @@ class LinkSelector @Inject constructor(
             }
         }
 
-        // 按优先级尝试每种链路
-        for (linkType in LinkType.getAllByPriority()) {
+        // Respect the user's preferred order, while retaining safe fallback
+        // links if the preferred endpoint is unavailable.
+        for (linkType in policyStore.get().orderedLinks()) {
             if (isLinkAvailable(linkType, targetIp, bluetoothAddress)) {
                 logger.i(TAG, "Selected link: ${linkType.description} for device: $deviceId")
                 return@withContext linkType
@@ -88,10 +101,11 @@ class LinkSelector @Inject constructor(
                 return@withContext false
             }
 
-            // 尝试 ping 目标设备
-            val reachable = isHostReachable(targetIp, PING_TIMEOUT)
-            logger.d(TAG, "WiFi LAN available: $reachable for IP: $targetIp")
-            return@withContext reachable
+            // ICMP is frequently blocked on phones and access points. Treat a
+            // valid same-subnet endpoint as usable here; the TCP connect plus
+            // signed application handshake is the authoritative test.
+            logger.d(TAG, "WiFi LAN endpoint accepted; TCP/auth will verify: $targetIp")
+            return@withContext true
 
         } catch (e: Exception) {
             logger.e(TAG, "Error checking WiFi LAN availability", e)
@@ -134,13 +148,23 @@ class LinkSelector @Inject constructor(
     private fun isBluetoothAvailable(bluetoothAddress: String?): Boolean {
         try {
             // 检查蓝牙适配器
-            if (bluetoothAdapter == null) {
+            val adapter = bluetoothAdapter ?: run {
                 logger.d(TAG, "Bluetooth adapter not available")
                 return false
             }
 
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S &&
+                ContextCompat.checkSelfPermission(
+                    context,
+                    Manifest.permission.BLUETOOTH_CONNECT
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                logger.d(TAG, "BLUETOOTH_CONNECT permission is not granted")
+                return false
+            }
+
             // 检查蓝牙是否开启
-            if (!bluetoothAdapter.isEnabled) {
+            if (!runCatching { adapter.isEnabled }.getOrDefault(false)) {
                 logger.d(TAG, "Bluetooth not enabled")
                 return false
             }
@@ -152,7 +176,7 @@ class LinkSelector @Inject constructor(
             }
 
             // 检查设备是否已配对
-            val pairedDevices: Set<BluetoothDevice>? = bluetoothAdapter.bondedDevices
+            val pairedDevices: Set<BluetoothDevice>? = adapter.bondedDevices
             val isPaired = pairedDevices?.any { it.address == bluetoothAddress } ?: false
 
             logger.d(TAG, "Bluetooth available: $isPaired for address: $bluetoothAddress")

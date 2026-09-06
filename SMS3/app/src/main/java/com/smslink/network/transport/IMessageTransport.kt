@@ -31,6 +31,15 @@ interface IMessageTransport {
     suspend fun sendAck(messageId: String, deviceId: String)
 
     /**
+     * Wait until the remote transport acknowledges a previously written
+     * message. A SendResult only means the frame was accepted locally.
+     *
+     * The default keeps source-compatible test/fake transports functional;
+     * MessageTransportImpl overrides it with the real ACK wait.
+     */
+    suspend fun awaitDelivery(messageId: String, timeoutMs: Long = 15_000L): Boolean = true
+
+    /**
      * 获取待发送消息队列大小
      */
     fun getPendingMessageCount(): Int

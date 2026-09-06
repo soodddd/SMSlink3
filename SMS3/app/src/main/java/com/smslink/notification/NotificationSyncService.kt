@@ -81,9 +81,6 @@ class NotificationSyncService : Service() {
         // 启动通知监听
         notificationManager.startListening()
 
-        // 监听新通知并自动同步
-        startNotificationSync()
-
         isRunning = true
         logger.i(TAG, "NotificationSyncService started successfully")
     }

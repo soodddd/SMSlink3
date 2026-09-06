@@ -22,27 +22,7 @@ object SmsModule {
 
     @Provides
     @Singleton
-    fun provideSmsManager(
-        @ApplicationContext context: Context,
-        messageDao: MessageDao,
-        messageTransport: IMessageTransport,
-        deviceManager: IDeviceManager,
-        logger: ILogger
-    ): ISmsManager {
-        return SmsManagerImpl(context, messageDao, messageTransport, deviceManager, logger)
-    }
-
-    @Provides
-    @Singleton
-    fun provideSmsManagerImpl(
-        @ApplicationContext context: Context,
-        messageDao: MessageDao,
-        messageTransport: IMessageTransport,
-        deviceManager: IDeviceManager,
-        logger: ILogger
-    ): SmsManagerImpl {
-        return SmsManagerImpl(context, messageDao, messageTransport, deviceManager, logger)
-    }
+    fun provideSmsManager(impl: SmsManagerImpl): ISmsManager = impl
 
     @Provides
     @Singleton
@@ -62,12 +42,4 @@ object SmsModule {
         return SmsContentObserver(context, smsManager, logger)
     }
 
-    @Provides
-    @Singleton
-    fun provideSmsPermissionHelper(
-        @ApplicationContext context: Context,
-        logger: ILogger
-    ): SmsPermissionHelper {
-        return SmsPermissionHelper(context, logger)
-    }
 }

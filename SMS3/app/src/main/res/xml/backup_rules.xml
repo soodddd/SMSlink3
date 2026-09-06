@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <!-- Identity, pairing capabilities, certificates and transport queues
+         contain device-bound secrets or private message content. -->
+    <exclude domain="file" path="smslink/certificates" />
+    <exclude domain="database" path="smslink_database_v5" />
+    <exclude domain="sharedpref" path="smslink_identity.xml" />
+    <exclude domain="sharedpref" path="smslink_pairing_tokens.xml" />
+    <exclude domain="sharedpref" path="smslink_transport.xml" />
+    <exclude domain="sharedpref" path="smslink_sms_parts.xml" />
+    <exclude domain="sharedpref" path="smslink_notification_sync_receipts.xml" />
+</full-backup-content>

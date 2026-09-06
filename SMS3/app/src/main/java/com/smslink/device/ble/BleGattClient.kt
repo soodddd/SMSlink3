@@ -9,6 +9,9 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
+import java.util.concurrent.ConcurrentHashMap
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -37,7 +40,10 @@ class BleGattClient @Inject constructor(
     val deviceInfo: StateFlow<BleDeviceInfo?> = _deviceInfo.asStateFlow()
 
     private var onPairingResponseReceived: ((BlePairingResponse) -> Unit)? = null
-    private val pendingOperations = mutableMapOf<String, CompletableDeferred<ByteArray?>>()
+    private val pendingOperations = ConcurrentHashMap<String, CompletableDeferred<ByteArray?>>()
+    private var notificationReady: CompletableDeferred<Boolean>? = null
+    private val incomingChunks = ConcurrentHashMap<Int, BleChunkCodec.DecodedChunk>()
+    private val gattOperationMutex = Mutex()
 
     /**
      * 连接到 BLE 设备
@@ -70,6 +76,10 @@ class BleGattClient @Inject constructor(
                 gattCallback,
                 BluetoothDevice.TRANSPORT_LE
             )
+            if (bluetoothGatt == null) {
+                _connectionState.value = ConnectionState.Error("GATT 连接不可用")
+                return
+            }
 
             // 设置连接超时
             connectionTimeoutJob = scope.launch {
@@ -83,9 +93,11 @@ class BleGattClient @Inject constructor(
 
         } catch (e: SecurityException) {
             logger.e(TAG, "Security exception during connection", e)
+            disconnect()
             _connectionState.value = ConnectionState.Error("权限错误")
         } catch (e: Exception) {
             logger.e(TAG, "Failed to connect", e)
+            disconnect()
             _connectionState.value = ConnectionState.Error("连接失败: ${e.message}")
         }
     }
@@ -99,21 +111,16 @@ class BleGattClient @Inject constructor(
 
         connectionTimeoutJob?.cancel()
 
-        try {
-            bluetoothGatt?.let { gatt ->
-                gatt.disconnect()
-                // 等待断开完成后再关闭
-                Thread.sleep(300)
-                gatt.close()
-            }
-            bluetoothGatt = null
-        } catch (e: Exception) {
-            logger.e(TAG, "Error during disconnect", e)
-        }
+        val gatt = bluetoothGatt
+        bluetoothGatt = null
+        runCatching { gatt?.disconnect() }
+            .onFailure { logger.e(TAG, "Error requesting GATT disconnect", it) }
+        runCatching { gatt?.close() }
+            .onFailure { logger.e(TAG, "Error closing GATT", it) }
 
         _connectionState.value = ConnectionState.Disconnected
         _deviceInfo.value = null
-        pendingOperations.clear()
+        failPendingOperations()
     }
 
     /**
@@ -121,45 +128,45 @@ class BleGattClient @Inject constructor(
      */
     @SuppressLint("MissingPermission")
     suspend fun readDeviceInfo(): BleDeviceInfo? = withContext(Dispatchers.IO) {
-        if (_connectionState.value !is ConnectionState.Connected) {
-            logger.w(TAG, "Not connected")
-            return@withContext null
-        }
+        gattOperationMutex.withLock {
+            if (_connectionState.value !is ConnectionState.Connected) {
+                logger.w(TAG, "Not connected")
+                return@withLock null
+            }
 
-        try {
             val service = bluetoothGatt?.getService(BleConstants.SMSLINK_SERVICE_UUID)
             val characteristic = service?.getCharacteristic(BleConstants.DEVICE_INFO_CHARACTERISTIC)
 
             if (characteristic == null) {
                 logger.w(TAG, "Device info characteristic not found")
-                return@withContext null
+                return@withLock null
             }
 
+            val gatt = bluetoothGatt ?: return@withLock null
+            val uuid = characteristic.uuid.toString()
             val deferred = CompletableDeferred<ByteArray?>()
-            pendingOperations[characteristic.uuid.toString()] = deferred
+            pendingOperations[uuid] = deferred
+            try {
+                if (!gatt.readCharacteristic(characteristic)) {
+                    logger.w(TAG, "Failed to read characteristic")
+                    return@withLock null
+                }
 
-            if (!bluetoothGatt!!.readCharacteristic(characteristic)) {
-                logger.w(TAG, "Failed to read characteristic")
-                pendingOperations.remove(characteristic.uuid.toString())
-                return@withContext null
-            }
+                val data = withTimeoutOrNull(5000L) {
+                    deferred.await()
+                } ?: return@withLock null
 
-            // 等待读取完成
-            val data = withTimeoutOrNull(5000L) {
-                deferred.await()
-            }
-
-            if (data != null) {
                 val info = BleDeviceInfo.fromBytes(data)
                 _deviceInfo.value = info
-                return@withContext info
+                info
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                logger.e(TAG, "Error reading device info", e)
+                null
+            } finally {
+                pendingOperations.remove(uuid, deferred)
             }
-
-            return@withContext null
-
-        } catch (e: Exception) {
-            logger.e(TAG, "Error reading device info", e)
-            return@withContext null
         }
     }
 
@@ -168,45 +175,80 @@ class BleGattClient @Inject constructor(
      */
     @SuppressLint("MissingPermission")
     suspend fun sendPairingRequest(request: BlePairingRequest): Boolean = withContext(Dispatchers.IO) {
-        if (_connectionState.value !is ConnectionState.Connected) {
-            logger.w(TAG, "Not connected")
-            return@withContext false
-        }
+        gattOperationMutex.withLock {
+            if (_connectionState.value !is ConnectionState.Connected) {
+                logger.w(TAG, "Not connected")
+                return@withLock false
+            }
 
-        try {
             val service = bluetoothGatt?.getService(BleConstants.SMSLINK_SERVICE_UUID)
             val characteristic = service?.getCharacteristic(BleConstants.PAIRING_CHARACTERISTIC)
 
             if (characteristic == null) {
                 logger.w(TAG, "Pairing characteristic not found")
-                return@withContext false
+                return@withLock false
             }
 
-            characteristic.value = request.toBytes()
-            characteristic.writeType = BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT
-
-            val deferred = CompletableDeferred<ByteArray?>()
-            pendingOperations[characteristic.uuid.toString()] = deferred
-
-            if (!bluetoothGatt!!.writeCharacteristic(characteristic)) {
-                logger.w(TAG, "Failed to write characteristic")
-                pendingOperations.remove(characteristic.uuid.toString())
-                return@withContext false
-            }
-
-            // 等待写入完成
-            val success = withTimeoutOrNull(5000L) {
-                deferred.await()
-                true
+            val notificationsEnabled = withTimeoutOrNull(5000L) {
+                notificationReady?.await() ?: false
             } ?: false
+            if (!notificationsEnabled) {
+                logger.w(TAG, "Pairing notifications are not enabled")
+                return@withLock false
+            }
+
+            val gatt = bluetoothGatt ?: return@withLock false
+            val uuid = characteristic.uuid.toString()
+            characteristic.writeType = BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT
+            var success = true
+            try {
+                for (chunk in BleChunkCodec.encode(request.toBytes())) {
+                    val deferred = CompletableDeferred<ByteArray?>()
+                    pendingOperations[uuid] = deferred
+                    characteristic.value = chunk
+                    val chunkSuccess = try {
+                        val started = gatt.writeCharacteristic(characteristic)
+                        if (!started) {
+                            false
+                        } else {
+                            withTimeoutOrNull(5000L) { deferred.await() != null } ?: false
+                        }
+                    } finally {
+                        pendingOperations.remove(uuid, deferred)
+                    }
+                    if (!chunkSuccess) {
+                        success = false
+                        break
+                    }
+                }
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                logger.e(TAG, "Error sending pairing request", e)
+                success = false
+            }
 
             logger.i(TAG, "Pairing request sent: $success")
-            return@withContext success
-
-        } catch (e: Exception) {
-            logger.e(TAG, "Error sending pairing request", e)
-            return@withContext false
+            success
         }
+    }
+
+    private fun failPendingOperations() {
+        pendingOperations.values.forEach { it.complete(null) }
+        pendingOperations.clear()
+        notificationReady?.complete(false)
+        notificationReady = null
+        incomingChunks.clear()
+    }
+
+    private fun isCurrentGatt(gatt: BluetoothGatt): Boolean = bluetoothGatt === gatt
+
+    @SuppressLint("MissingPermission")
+    private fun closeDisconnectedGatt(gatt: BluetoothGatt) {
+        if (isCurrentGatt(gatt)) {
+            bluetoothGatt = null
+        }
+        runCatching { gatt.close() }
     }
 
     /**
@@ -217,14 +259,39 @@ class BleGattClient @Inject constructor(
         override fun onConnectionStateChange(gatt: BluetoothGatt, status: Int, newState: Int) {
             when (newState) {
                 BluetoothProfile.STATE_CONNECTED -> {
+                    if (!isCurrentGatt(gatt)) {
+                        closeDisconnectedGatt(gatt)
+                        return
+                    }
+                    if (status != BluetoothGatt.GATT_SUCCESS) {
+                        logger.w(TAG, "GATT connection reported failure: $status")
+                        connectionTimeoutJob?.cancel()
+                        closeDisconnectedGatt(gatt)
+                        failPendingOperations()
+                        _connectionState.value = ConnectionState.Error("GATT 连接失败: $status")
+                        return
+                    }
                     logger.i(TAG, "Connected to GATT server")
-                    connectionTimeoutJob?.cancel()
 
                     // 发现服务
-                    gatt.discoverServices()
+                    if (!gatt.discoverServices()) {
+                        logger.w(TAG, "Failed to start service discovery")
+                        _connectionState.value = ConnectionState.Error("服务发现启动失败")
+                        disconnect()
+                    }
                 }
                 BluetoothProfile.STATE_DISCONNECTED -> {
+                    // A late callback from an old GATT instance must not
+                    // tear down the newly connected instance or fail its
+                    // pending operations.
+                    if (!isCurrentGatt(gatt)) {
+                        closeDisconnectedGatt(gatt)
+                        return
+                    }
                     logger.i(TAG, "Disconnected from GATT server")
+                    connectionTimeoutJob?.cancel()
+                    closeDisconnectedGatt(gatt)
+                    failPendingOperations()
                     _connectionState.value = ConnectionState.Disconnected
                     _deviceInfo.value = null
                 }
@@ -232,6 +299,7 @@ class BleGattClient @Inject constructor(
         }
 
         override fun onServicesDiscovered(gatt: BluetoothGatt, status: Int) {
+            if (!isCurrentGatt(gatt)) return
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 logger.i(TAG, "Services discovered")
 
@@ -239,7 +307,7 @@ class BleGattClient @Inject constructor(
                 val service = gatt.getService(BleConstants.SMSLINK_SERVICE_UUID)
                 if (service != null) {
                     logger.i(TAG, "SMS-link service found")
-                    _connectionState.value = ConnectionState.Connected
+                    enablePairingNotifications(gatt)
                 } else {
                     logger.w(TAG, "SMS-link service not found")
                     _connectionState.value = ConnectionState.Error("服务不可用")
@@ -257,6 +325,7 @@ class BleGattClient @Inject constructor(
             characteristic: BluetoothGattCharacteristic,
             status: Int
         ) {
+            if (!isCurrentGatt(gatt)) return
             val uuid = characteristic.uuid.toString()
             val deferred = pendingOperations.remove(uuid)
 
@@ -274,6 +343,7 @@ class BleGattClient @Inject constructor(
             characteristic: BluetoothGattCharacteristic,
             status: Int
         ) {
+            if (!isCurrentGatt(gatt)) return
             val uuid = characteristic.uuid.toString()
             val deferred = pendingOperations.remove(uuid)
 
@@ -290,16 +360,84 @@ class BleGattClient @Inject constructor(
             gatt: BluetoothGatt,
             characteristic: BluetoothGattCharacteristic
         ) {
+            if (!isCurrentGatt(gatt)) return
             logger.d(TAG, "Characteristic changed: ${characteristic.uuid}")
 
-            // 处理配对响应通知
             if (characteristic.uuid == BleConstants.PAIRING_CHARACTERISTIC) {
-                val response = BlePairingResponse.fromBytes(characteristic.value)
+                val raw = characteristic.value ?: return
+                val response = BlePairingResponse.fromBytes(raw) ?: run {
+                    val chunk = BleChunkCodec.decode(raw) ?: return
+                    incomingChunks[chunk.sequence] = chunk
+                    if (incomingChunks.size > 0xFFFF ||
+                        incomingChunks.values.sumOf { it.payload.size } > BleChunkCodec.MAX_ASSEMBLED_SIZE
+                    ) {
+                        incomingChunks.clear()
+                        return
+                    }
+                    val assembled = BleChunkCodec.assemble(incomingChunks.values.toList())
+                    if (assembled == null) return
+                    incomingChunks.clear()
+                    BlePairingResponse.fromBytes(assembled)
+                }
                 if (response != null) {
                     logger.i(TAG, "Received pairing response")
-                    onPairingResponseReceived?.invoke(response)
+                    try {
+                        onPairingResponseReceived?.invoke(response)
+                    } catch (e: Exception) {
+                        logger.e(TAG, "Pairing response callback failed", e)
+                    }
                 }
             }
+        }
+
+        override fun onDescriptorWrite(
+            gatt: BluetoothGatt,
+            descriptor: BluetoothGattDescriptor,
+            status: Int
+        ) {
+            if (!isCurrentGatt(gatt)) return
+            if (descriptor.uuid == BleConstants.CLIENT_CHARACTERISTIC_CONFIG_UUID) {
+                val success = status == BluetoothGatt.GATT_SUCCESS
+                connectionTimeoutJob?.cancel()
+                if (success) {
+                    logger.i(TAG, "Pairing notifications enabled")
+                    _connectionState.value = ConnectionState.Connected
+                } else {
+                    logger.w(TAG, "Failed to enable pairing notifications: $status")
+                    _connectionState.value = ConnectionState.Error("通知订阅失败")
+                }
+                notificationReady?.complete(success)
+            }
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun enablePairingNotifications(gatt: BluetoothGatt) {
+        val service = gatt.getService(BleConstants.SMSLINK_SERVICE_UUID)
+        val characteristic = service?.getCharacteristic(BleConstants.PAIRING_CHARACTERISTIC)
+        val descriptor = characteristic?.getDescriptor(BleConstants.CLIENT_CHARACTERISTIC_CONFIG_UUID)
+        if (characteristic == null || descriptor == null) {
+            _connectionState.value = ConnectionState.Error("配对通知不可用")
+            disconnect()
+            _connectionState.value = ConnectionState.Error("配对通知不可用")
+            return
+        }
+
+        notificationReady?.cancel()
+        notificationReady = CompletableDeferred()
+        if (!gatt.setCharacteristicNotification(characteristic, true)) {
+            notificationReady?.complete(false)
+            _connectionState.value = ConnectionState.Error("通知注册失败")
+            disconnect()
+            _connectionState.value = ConnectionState.Error("通知注册失败")
+            return
+        }
+        descriptor.value = BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE
+        if (!gatt.writeDescriptor(descriptor)) {
+            notificationReady?.complete(false)
+            _connectionState.value = ConnectionState.Error("通知订阅失败")
+            disconnect()
+            _connectionState.value = ConnectionState.Error("通知订阅失败")
         }
     }
 

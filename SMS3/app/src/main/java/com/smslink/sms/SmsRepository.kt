@@ -62,7 +62,22 @@ class SmsRepository @Inject constructor(
     fun getUnreadCount(): Flow<Int> = messageDao.getUnreadCount()
 
     fun getConversations(): Flow<List<Conversation>> {
-        throw NotImplementedError("Conversation list query not implemented yet")
+        return kotlinx.coroutines.flow.flow {
+            val conversations = messageDao.getAllSnapshot()
+                .groupBy { it.threadId.ifBlank { it.address } }
+                .map { (threadId, messages) ->
+                    val sorted = messages.sortedByDescending { it.timestamp }
+                    val last = sorted.first()
+                    Conversation(
+                        threadId = threadId,
+                        address = last.address,
+                        lastMessage = last,
+                        unreadCount = messages.count { !it.read }
+                    )
+                }
+                .sortedByDescending { it.lastMessage.timestamp }
+            emit(conversations)
+        }
     }
 }
 

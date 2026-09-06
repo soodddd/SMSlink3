@@ -1,7 +1,5 @@
 package com.smslink.di
 
-import com.smslink.device.pairing.ImprovedPairingManager
-import com.smslink.device.wifi.WifiNetworkDiscovery
 import com.smslink.notification.NotificationInteractionHandler
 import com.smslink.sync.CatchupSyncManager
 import dagger.Module

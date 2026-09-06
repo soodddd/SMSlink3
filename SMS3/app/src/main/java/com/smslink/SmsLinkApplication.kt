@@ -1,6 +1,7 @@
 package com.smslink
 
 import android.app.Application
+import com.smslink.call.ICallManager
 import com.smslink.file.IFileTransferManager
 import com.smslink.network.IConnectionManager
 import dagger.hilt.android.HiltAndroidApp
@@ -19,9 +20,14 @@ class SmsLinkApplication : Application() {
     @Inject
     lateinit var fileTransferManager: IFileTransferManager
 
+    @Inject
+    lateinit var callManager: ICallManager
+
     override fun onCreate() {
         super.onCreate()
-        // 初始化连接管理器和文件传输管理器
-        // 注意：这里只是确保依赖注入完成，实际的启动逻辑在各自的服务中
+        // Telecom/phone-state callbacks are process-lifetime integrations. Start
+        // them here so call mirroring does not depend on opening Call History.
+        runCatching { callManager.startListening() }
+            .onFailure { /* Devices without telephony are supported. */ }
     }
 }

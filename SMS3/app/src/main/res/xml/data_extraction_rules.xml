@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="file" path="smslink/certificates" />
+        <exclude domain="database" path="smslink_database_v5" />
+        <exclude domain="sharedpref" path="smslink_identity.xml" />
+        <exclude domain="sharedpref" path="smslink_pairing_tokens.xml" />
+        <exclude domain="sharedpref" path="smslink_transport.xml" />
+        <exclude domain="sharedpref" path="smslink_sms_parts.xml" />
+        <exclude domain="sharedpref" path="smslink_notification_sync_receipts.xml" />
+    </cloud-backup>
+    <device-transfer>
+        <exclude domain="file" path="smslink/certificates" />
+        <exclude domain="database" path="smslink_database_v5" />
+        <exclude domain="sharedpref" path="smslink_identity.xml" />
+        <exclude domain="sharedpref" path="smslink_pairing_tokens.xml" />
+        <exclude domain="sharedpref" path="smslink_transport.xml" />
+        <exclude domain="sharedpref" path="smslink_sms_parts.xml" />
+        <exclude domain="sharedpref" path="smslink_notification_sync_receipts.xml" />
+    </device-transfer>
+</data-extraction-rules>

@@ -7,409 +7,302 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.service.notification.StatusBarNotification
-import androidx.core.app.NotificationCompat
-import androidx.core.app.RemoteInput as AndroidXRemoteInput
 import com.google.gson.JsonObject
 import com.smslink.core.log.ILogger
-import com.smslink.core.model.AppNotification
+import com.smslink.device.IDeviceManager
 import com.smslink.network.model.MessageType
 import com.smslink.network.model.NetworkMessage
 import com.smslink.network.transport.IMessageTransport
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 import java.util.UUID
+import java.util.concurrent.ConcurrentHashMap
 import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * 通知交互处理器
- * 处理通知的回复、动作执行等交互功能
- *
- * 参考：
- * - Android RemoteInput API
- * - Notification.Action处理
- * - KDE Connect的通知交互实现
+ * Owns notification PendingIntent/RemoteInput contexts and the remote control
+ * protocol. The context is deliberately kept in memory: PendingIntents cannot
+ * be safely serialized or reconstructed on another device.
  */
 @Singleton
 class NotificationInteractionHandler @Inject constructor(
     @ApplicationContext private val context: Context,
     private val messageTransport: IMessageTransport,
+    private val deviceManager: IDeviceManager,
     private val logger: ILogger
 ) {
-    companion object {
-        private const val TAG = "NotificationInteraction"
-        private const val REMOTE_INPUT_KEY = "remote_input_reply"
-    }
-
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+    private val activeNotifications = ConcurrentHashMap<String, NotificationContext>()
 
-    // 缓存活动的通知，用于交互
-    private val activeNotifications = mutableMapOf<String, NotificationContext>()
-
-    /**
-     * 注册通知上下文
-     * 在通知被镜像时调用，保存必要的上下文信息
-     */
     fun registerNotification(
         notificationId: String,
         sbn: StatusBarNotification,
         sourceDeviceId: String
     ) {
-        try {
+        runCatching {
             val notification = sbn.notification
-            val actions = extractActions(notification)
-            val remoteInputs = extractRemoteInputs(notification)
-
-            val context = NotificationContext(
+            activeNotifications[notificationId] = NotificationContext(
                 notificationId = notificationId,
                 packageName = sbn.packageName,
                 tag = sbn.tag,
                 id = sbn.id,
-                actions = actions,
-                remoteInputs = remoteInputs,
+                key = sbn.key,
+                actions = extractActions(notification),
+                remoteInputs = extractRemoteInputs(notification),
                 sourceDeviceId = sourceDeviceId,
                 timestamp = System.currentTimeMillis()
             )
-
-            activeNotifications[notificationId] = context
-            logger.d(TAG, "Registered notification: $notificationId with ${actions.size} actions")
-
-        } catch (e: Exception) {
-            logger.e(TAG, "Failed to register notification", e)
-        }
+        }.onFailure { logger.e(TAG, "Failed to register notification", it) }
     }
 
-    /**
-     * 提取通知动作
-     */
-    private fun extractActions(notification: Notification): List<NotificationAction> {
-        val actions = mutableListOf<NotificationAction>()
-
-        try {
-            notification.actions?.forEachIndexed { index, action ->
-                if (action != null) {
-                    val hasRemoteInput = action.remoteInputs?.isNotEmpty() == true
-
-                    actions.add(
-                        NotificationAction(
-                            index = index,
-                            title = action.title?.toString() ?: "Action $index",
-                            actionIntent = action.actionIntent,
-                            hasRemoteInput = hasRemoteInput,
-                            remoteInputs = action.remoteInputs?.map { it.resultKey } ?: emptyList()
-                        )
-                    )
-                }
-            }
-        } catch (e: Exception) {
-            logger.e(TAG, "Failed to extract actions", e)
-        }
-
-        return actions
+    fun unregisterNotification(notificationId: String) {
+        activeNotifications.remove(notificationId)
     }
 
-    /**
-     * 提取RemoteInput
-     */
-    private fun extractRemoteInputs(notification: Notification): List<String> {
-        val remoteInputKeys = mutableListOf<String>()
+    fun hasActiveNotification(notificationId: String): Boolean =
+        activeNotifications.containsKey(notificationId)
 
-        try {
-            notification.actions?.forEach { action ->
-                action?.remoteInputs?.forEach { remoteInput ->
-                    remoteInputKeys.add(remoteInput.resultKey)
-                }
-            }
-        } catch (e: Exception) {
-            logger.e(TAG, "Failed to extract remote inputs", e)
-        }
+    fun getAvailableActions(notificationId: String): List<NotificationAction> =
+        activeNotifications[notificationId]?.actions ?: emptyList()
 
-        return remoteInputKeys
+    fun supportsReply(notificationId: String): Boolean =
+        activeNotifications[notificationId]?.actions?.any { it.hasRemoteInput } == true
+
+    /** Execute a local reply; returns false when the notification is gone. */
+    suspend fun replyLocally(notificationId: String, replyText: String): Boolean {
+        if (replyText.length > MAX_REPLY_LENGTH) return false
+        val notification = activeNotifications[notificationId] ?: return false
+        val action = notification.actions.firstOrNull { it.hasRemoteInput } ?: return false
+        val key = action.remoteInputs.firstOrNull() ?: REMOTE_INPUT_KEY
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT_WATCH) return false
+        val remoteInput = RemoteInput.Builder(key).setLabel("Reply").build()
+        val fillIn = Intent()
+        RemoteInput.addResultsToIntent(
+            arrayOf(remoteInput),
+            fillIn,
+            android.os.Bundle().apply { putCharSequence(key, replyText) }
+        )
+        return runCatching {
+            action.actionIntent?.send(context, 0, fillIn) ?: return false
+            true
+        }.onFailure { logger.e(TAG, "Failed to send notification reply", it) }.getOrDefault(false)
     }
 
-    /**
-     * 回复通知
-     * 使用RemoteInput发送回复文本
-     */
+    /** Local UI entry point: execute locally or forward to the source device. */
     fun replyToNotification(notificationId: String, replyText: String, targetDeviceId: String) {
         scope.launch {
-            try {
-                logger.i(TAG, "Replying to notification: $notificationId")
-
-                val notificationContext = activeNotifications[notificationId]
-                if (notificationContext == null) {
-                    logger.w(TAG, "Notification context not found: $notificationId")
-                    sendReplyRequest(notificationId, replyText, targetDeviceId)
-                    return@launch
-                }
-
-                // 查找支持RemoteInput的动作
-                val replyAction = notificationContext.actions.firstOrNull { it.hasRemoteInput }
-                if (replyAction == null) {
-                    logger.w(TAG, "No reply action found for notification: $notificationId")
-                    return@launch
-                }
-
-                // 构建RemoteInput结果
-                val remoteInputKey = replyAction.remoteInputs.firstOrNull() ?: REMOTE_INPUT_KEY
-                val intent = Intent().apply {
-                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                }
-
-                val remoteInput = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
-                    RemoteInput.Builder(remoteInputKey)
-                        .setLabel("Reply")
-                        .build()
-                } else {
-                    null
-                }
-
-                if (remoteInput != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
-                    RemoteInput.addResultsToIntent(
-                        arrayOf(remoteInput),
-                        intent,
-                        android.os.Bundle().apply {
-                            putCharSequence(remoteInputKey, replyText)
-                        }
-                    )
-
-                    // 发送PendingIntent
-                    try {
-                        replyAction.actionIntent?.send(context, 0, intent)
-                        logger.i(TAG, "Reply sent successfully")
-                    } catch (e: Exception) {
-                        logger.e(TAG, "Failed to send reply intent", e)
-                    }
-                }
-
-            } catch (e: Exception) {
-                logger.e(TAG, "Failed to reply to notification", e)
+            if (!replyLocally(notificationId, replyText)) {
+                sendReplyRequest(notificationId, replyText, targetDeviceId)
             }
         }
     }
 
-    /**
-     * 发送回复请求到源设备
-     * 当本地无法直接回复时使用
-     */
-    private suspend fun sendReplyRequest(notificationId: String, replyText: String, targetDeviceId: String) {
-        try {
-            val payload = JsonObject().apply {
-                addProperty("action", "reply")
-                addProperty("notificationId", notificationId)
-                addProperty("replyText", replyText)
-            }
-
-            val message = NetworkMessage(
-                messageType = MessageType.CONTROL,
-                messageId = UUID.randomUUID().toString(),
-                sourceDevice = "local", // 应该从DeviceManager获取
-                targetDevice = targetDeviceId,
-                timestamp = System.currentTimeMillis(),
-                payload = payload
-            )
-
-            messageTransport.sendMessage(targetDeviceId, message).collect { result ->
-                if (result.success) {
-                    logger.i(TAG, "Reply request sent successfully")
-                } else {
-                    logger.e(TAG, "Failed to send reply request: ${result.error}")
-                }
-            }
-        } catch (e: Exception) {
-            logger.e(TAG, "Failed to send reply request", e)
-        }
-    }
-
-    /**
-     * 执行通知动作
-     */
+    /** Local UI entry point: execute locally or forward to the source device. */
     fun executeAction(notificationId: String, actionIndex: Int, targetDeviceId: String) {
         scope.launch {
-            try {
-                logger.i(TAG, "Executing action $actionIndex for notification: $notificationId")
-
-                val notificationContext = activeNotifications[notificationId]
-                if (notificationContext == null) {
-                    logger.w(TAG, "Notification context not found: $notificationId")
-                    sendActionRequest(notificationId, actionIndex, targetDeviceId)
-                    return@launch
-                }
-
-                // 查找对应的动作
-                val action = notificationContext.actions.getOrNull(actionIndex)
-                if (action == null) {
-                    logger.w(TAG, "Action not found: $actionIndex")
-                    return@launch
-                }
-
-                // 执行动作
-                try {
-                    action.actionIntent?.send()
-                    logger.i(TAG, "Action executed successfully")
-                } catch (e: Exception) {
-                    logger.e(TAG, "Failed to execute action", e)
-                }
-
-            } catch (e: Exception) {
-                logger.e(TAG, "Failed to execute action", e)
+            if (!executeLocally(notificationId, actionIndex)) {
+                sendActionRequest(notificationId, actionIndex, targetDeviceId)
             }
         }
     }
 
-    /**
-     * 发送动作执行请求到源设备
-     */
-    private suspend fun sendActionRequest(notificationId: String, actionIndex: Int, targetDeviceId: String) {
-        try {
-            val payload = JsonObject().apply {
-                addProperty("action", "execute")
-                addProperty("notificationId", notificationId)
-                addProperty("actionIndex", actionIndex)
-            }
-
-            val message = NetworkMessage(
-                messageType = MessageType.CONTROL,
-                messageId = UUID.randomUUID().toString(),
-                sourceDevice = "local",
-                targetDevice = targetDeviceId,
-                timestamp = System.currentTimeMillis(),
-                payload = payload
-            )
-
-            messageTransport.sendMessage(targetDeviceId, message).collect { result ->
-                if (result.success) {
-                    logger.i(TAG, "Action request sent successfully")
-                } else {
-                    logger.e(TAG, "Failed to send action request: ${result.error}")
-                }
-            }
-        } catch (e: Exception) {
-            logger.e(TAG, "Failed to send action request", e)
-        }
-    }
-
-    /**
-     * 清除通知
-     */
+    /** Local UI entry point for dismissing a local or mirrored notification. */
     fun dismissNotification(notificationId: String, targetDeviceId: String) {
         scope.launch {
-            try {
-                logger.i(TAG, "Dismissing notification: $notificationId")
-
-                val notificationContext = activeNotifications[notificationId]
-                if (notificationContext != null) {
-                    // 本地清除
-                    val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE)
-                        as? android.app.NotificationManager
-
-                    if (notificationContext.tag != null) {
-                        notificationManager?.cancel(notificationContext.tag, notificationContext.id)
-                    } else {
-                        notificationManager?.cancel(notificationContext.id)
-                    }
-
-                    activeNotifications.remove(notificationId)
-                }
-
-                // 发送清除请求到源设备
+            val local = dismissLocally(notificationId)
+            if (!local && targetDeviceId.isNotBlank()) {
                 sendDismissRequest(notificationId, targetDeviceId)
-
-            } catch (e: Exception) {
-                logger.e(TAG, "Failed to dismiss notification", e)
             }
         }
     }
 
-    /**
-     * 发送清除请求到源设备
-     */
-    private suspend fun sendDismissRequest(notificationId: String, targetDeviceId: String) {
-        try {
-            val payload = JsonObject().apply {
-                addProperty("action", "dismiss")
-                addProperty("notificationId", notificationId)
-            }
-
-            val message = NetworkMessage(
-                messageType = MessageType.CONTROL,
-                messageId = UUID.randomUUID().toString(),
-                sourceDevice = "local",
-                targetDevice = targetDeviceId,
-                timestamp = System.currentTimeMillis(),
-                payload = payload
-            )
-
-            messageTransport.sendMessage(targetDeviceId, message).collect { result ->
-                if (result.success) {
-                    logger.i(TAG, "Dismiss request sent successfully")
-                } else {
-                    logger.e(TAG, "Failed to send dismiss request: ${result.error}")
-                }
-            }
-        } catch (e: Exception) {
-            logger.e(TAG, "Failed to send dismiss request", e)
-        }
+    suspend fun handleRemoteReply(
+        notificationId: String,
+        replyText: String,
+        requesterDeviceId: String
+    ) {
+        val success = notificationId.isNotBlank() && replyLocally(notificationId, replyText)
+        sendResult("reply", notificationId, requesterDeviceId, success)
     }
 
-    /**
-     * 清理过期的通知上下文
-     */
+    suspend fun handleRemoteAction(
+        notificationId: String,
+        actionIndex: Int,
+        requesterDeviceId: String
+    ) {
+        val success = notificationId.isNotBlank() && actionIndex >= 0 &&
+            executeLocally(notificationId, actionIndex)
+        sendResult("execute", notificationId, requesterDeviceId, success)
+    }
+
+    suspend fun handleRemoteDismiss(notificationId: String, requesterDeviceId: String) {
+        val success = notificationId.isNotBlank() && dismissLocally(notificationId)
+        sendResult("dismiss", notificationId, requesterDeviceId, success)
+    }
+
     fun cleanupExpiredContexts() {
-        val currentTime = System.currentTimeMillis()
-        val expiredContexts = activeNotifications.filter { (_, context) ->
-            currentTime - context.timestamp > 3600000 // 1小时
+        val cutoff = System.currentTimeMillis() - CONTEXT_TTL_MS
+        activeNotifications.entries.removeIf { it.value.timestamp < cutoff }
+    }
+
+    private fun extractActions(notification: Notification): List<NotificationAction> =
+        notification.actions.orEmpty().mapIndexedNotNull { index, action ->
+            action?.let {
+                NotificationAction(
+                    index = index,
+                    title = it.title?.toString().orEmpty().ifBlank { "Action $index" },
+                    actionIntent = it.actionIntent,
+                    hasRemoteInput = it.remoteInputs?.isNotEmpty() == true,
+                    remoteInputs = it.remoteInputs?.map(RemoteInput::getResultKey).orEmpty()
+                )
+            }
         }
 
-        expiredContexts.forEach { (id, _) ->
-            activeNotifications.remove(id)
+    private fun extractRemoteInputs(notification: Notification): List<String> =
+        notification.actions.orEmpty().flatMap { action ->
+            action?.remoteInputs?.map(RemoteInput::getResultKey).orEmpty()
         }
 
-        if (expiredContexts.isNotEmpty()) {
-            logger.d(TAG, "Cleaned up ${expiredContexts.size} expired notification contexts")
+    private suspend fun executeLocally(notificationId: String, actionIndex: Int): Boolean {
+        val action = activeNotifications[notificationId]?.actions
+            ?.firstOrNull { it.index == actionIndex } ?: return false
+        return runCatching {
+            action.actionIntent?.send() ?: return false
+            true
+        }.onFailure { logger.e(TAG, "Failed to execute notification action", it) }.getOrDefault(false)
+    }
+
+    internal fun dismissLocally(notificationId: String): Boolean {
+        val notification = activeNotifications[notificationId] ?: return false
+        val listener = NotificationListenerServiceImpl.getInstance()
+        if (listener == null) {
+            // NotificationManager.cancel() can only cancel notifications owned
+            // by this package. External notifications must be cancelled via
+            // NotificationListenerService.cancelNotification(key).
+            return false
+        }
+        val dismissed = runCatching {
+            listener.cancelNotification(notification.key)
+            true
+        }.onFailure {
+            logger.e(TAG, "Failed to cancel notification through listener", it)
+        }.getOrDefault(false)
+        if (dismissed) activeNotifications.remove(notificationId, notification)
+        return dismissed
+    }
+
+    private suspend fun sendReplyRequest(notificationId: String, text: String, targetDeviceId: String) {
+        sendControl(targetDeviceId) {
+            addProperty("action", "reply")
+            addProperty("notificationId", notificationId)
+            addProperty("replyText", text.take(MAX_REPLY_LENGTH))
         }
     }
 
-    /**
-     * 获取通知的可用动作
-     */
-    fun getAvailableActions(notificationId: String): List<NotificationAction> {
-        return activeNotifications[notificationId]?.actions ?: emptyList()
+    private suspend fun sendActionRequest(notificationId: String, index: Int, targetDeviceId: String) {
+        sendControl(targetDeviceId) {
+            addProperty("action", "execute")
+            addProperty("notificationId", notificationId)
+            addProperty("actionIndex", index)
+        }
     }
 
-    /**
-     * 检查通知是否支持回复
-     */
-    fun supportsReply(notificationId: String): Boolean {
-        val context = activeNotifications[notificationId] ?: return false
-        return context.actions.any { it.hasRemoteInput }
+    private suspend fun sendDismissRequest(notificationId: String, targetDeviceId: String) {
+        sendControl(targetDeviceId) {
+            addProperty("action", "dismiss")
+            addProperty("notificationId", notificationId)
+        }
+    }
+
+    private suspend fun sendResult(
+        action: String,
+        notificationId: String,
+        targetDeviceId: String,
+        success: Boolean
+    ) {
+        if (targetDeviceId.isBlank()) return
+        sendControl(targetDeviceId) {
+            addProperty("action", "result")
+            addProperty("requestAction", action)
+            addProperty("notificationId", notificationId)
+            addProperty("success", success)
+        }
+    }
+
+    private suspend fun sendControl(targetDeviceId: String, payloadBuilder: JsonObject.() -> Unit) {
+        if (targetDeviceId.isBlank()) return
+        val payload = JsonObject().apply(payloadBuilder)
+        val message = NetworkMessage(
+            messageType = MessageType.CONTROL,
+            messageId = UUID.randomUUID().toString(),
+            sourceDevice = deviceManager.getLocalDevice().id,
+            targetDevice = targetDeviceId,
+            timestamp = System.currentTimeMillis(),
+            payload = payload
+        )
+        try {
+            val result = messageTransport.sendMessage(targetDeviceId, message).firstOrNull()
+                ?: run {
+                    logger.e(TAG, "Notification control returned no send result")
+                    return
+                }
+            if (!result.success) {
+                logger.e(TAG, "Failed to send notification control: ${result.error}")
+                return
+            }
+            val acknowledged = try {
+                messageTransport.awaitDelivery(result.messageId)
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                logger.w(TAG, "Notification control delivery ACK unavailable: ${e.message}")
+                true
+            }
+            if (!acknowledged) {
+                logger.e(TAG, "Notification control was not acknowledged")
+            }
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            logger.e(TAG, "Failed to send notification control", e)
+        }
+    }
+
+    data class NotificationContext(
+        val notificationId: String,
+        val packageName: String,
+        val tag: String?,
+        val id: Int,
+        val key: String,
+        val actions: List<NotificationAction>,
+        val remoteInputs: List<String>,
+        val sourceDeviceId: String,
+        val timestamp: Long
+    )
+
+    data class NotificationAction(
+        val index: Int,
+        val title: String,
+        val actionIntent: PendingIntent?,
+        val hasRemoteInput: Boolean,
+        val remoteInputs: List<String>
+    )
+
+    companion object {
+        private const val TAG = "NotificationInteraction"
+        private const val REMOTE_INPUT_KEY = "remote_input_reply"
+        private const val MAX_REPLY_LENGTH = 4096
+        private const val CONTEXT_TTL_MS = 60 * 60 * 1000L
     }
 }
 
-/**
- * 通知上下文
- */
-data class NotificationContext(
-    val notificationId: String,
-    val packageName: String,
-    val tag: String?,
-    val id: Int,
-    val actions: List<NotificationAction>,
-    val remoteInputs: List<String>,
-    val sourceDeviceId: String,
-    val timestamp: Long
-)
-
-/**
- * 通知动作
- */
-data class NotificationAction(
-    val index: Int,
-    val title: String,
-    val actionIntent: PendingIntent?,
-    val hasRemoteInput: Boolean,
-    val remoteInputs: List<String>
-)
+// Kept as top-level aliases for source compatibility with the original API.
+typealias NotificationContext = NotificationInteractionHandler.NotificationContext
+typealias NotificationAction = NotificationInteractionHandler.NotificationAction

@@ -26,7 +26,7 @@ import com.smslink.file.data.FileTransferEntity
         FileTransferEntity::class,
         CallLog::class
     ],
-    version = 5,
+        version = 8,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -58,5 +58,28 @@ abstract class AppDatabase : RoomDatabase() {
 
     companion object {
         const val DATABASE_NAME = "smslink_database_v5"
+
+        val MIGRATION_5_6 = object : androidx.room.migration.Migration(5, 6) {
+            override fun migrate(db: androidx.sqlite.db.SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE devices ADD COLUMN ipAddress TEXT")
+                db.execSQL("ALTER TABLE devices ADD COLUMN port INTEGER NOT NULL DEFAULT 1716")
+                db.execSQL("ALTER TABLE devices ADD COLUMN bluetoothAddress TEXT")
+            }
+        }
+
+        val MIGRATION_6_7 = object : androidx.room.migration.Migration(6, 7) {
+            override fun migrate(db: androidx.sqlite.db.SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE messages ADD COLUMN deliveryStatus TEXT NOT NULL DEFAULT 'QUEUED'")
+                db.execSQL("ALTER TABLE messages ADD COLUMN deliveryTimestamp INTEGER")
+            }
+        }
+
+        val MIGRATION_7_8 = object : androidx.room.migration.Migration(7, 8) {
+            override fun migrate(db: androidx.sqlite.db.SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE file_transfers ADD COLUMN fileHash TEXT")
+                db.execSQL("ALTER TABLE file_transfers ADD COLUMN nextSequence INTEGER NOT NULL DEFAULT 0")
+                db.execSQL("ALTER TABLE file_transfers ADD COLUMN protocolVersion INTEGER NOT NULL DEFAULT 2")
+            }
+        }
     }
 }

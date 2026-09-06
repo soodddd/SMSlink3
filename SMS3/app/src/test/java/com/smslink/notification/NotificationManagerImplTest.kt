@@ -1,6 +1,7 @@
 package com.smslink.notification
 
 import android.content.Context
+import android.provider.Settings
 import com.smslink.core.log.ILogger
 import com.smslink.core.model.AppNotification
 import com.smslink.core.model.Device
@@ -44,6 +45,7 @@ class NotificationManagerImplTest {
         every {
             messageTransport.sendMessage(any(), any<NetworkMessage>())
         } returns flowOf(SendResult(success = true, messageId = "mid", error = null))
+        coEvery { messageTransport.awaitDelivery(any(), any()) } returns true
         coEvery { messageTransport.sendAck(any(), any()) } just Runs
         every { messageTransport.getPendingMessageCount() } returns 0
         coEvery { messageTransport.clearQueue() } just Runs
@@ -74,17 +76,17 @@ class NotificationManagerImplTest {
     }
 
     @Test
-    fun `startListening should start notification service`() {
+    fun `startListening should open notification listener settings when access is missing`() {
         // When
         notificationManager.startListening()
 
         // Then
-        verify { context.startService(any()) }
+        verify { context.startActivity(any()) }
         verify { logger.i(any(), any()) }
     }
 
     @Test
-    fun `stopListening should stop notification service`() {
+    fun `stopListening should not stop a notification listener as a normal service`() {
         // Given
         notificationManager.startListening()
 
@@ -92,7 +94,7 @@ class NotificationManagerImplTest {
         notificationManager.stopListening()
 
         // Then
-        verify { context.stopService(any()) }
+        verify(exactly = 0) { context.stopService(any()) }
     }
 
     @Test

@@ -35,5 +35,8 @@ data class FileTransferEntity(
     val resumeSupported: Boolean = true,
     val linkType: String? = null, // WIFI_LAN, WIFI_HOTSPOT, BLUETOOTH
     val retryCount: Int = 0,
-    val lastError: String? = null
+    val lastError: String? = null,
+    val fileHash: String? = null,
+    val nextSequence: Int = 0,
+    val protocolVersion: Int = 2
 )

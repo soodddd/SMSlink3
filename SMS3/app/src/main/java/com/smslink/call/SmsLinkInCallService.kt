@@ -6,13 +6,10 @@ import android.telecom.InCallService
 import androidx.annotation.RequiresApi
 import com.smslink.core.log.ILogger
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import java.util.concurrent.CopyOnWriteArrayList
 import javax.inject.Inject
 
 /**
@@ -30,10 +27,9 @@ class SmsLinkInCallService : InCallService() {
     @Inject
     lateinit var logger: ILogger
 
-    private val serviceScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
-
     private val _currentCall = MutableStateFlow<Call?>(null)
     val currentCall: StateFlow<Call?> = _currentCall.asStateFlow()
+    private val calls = CopyOnWriteArrayList<Call>()
 
     private val callCallback = object : Call.Callback() {
         override fun onStateChanged(call: Call, state: Int) {
@@ -53,23 +49,36 @@ class SmsLinkInCallService : InCallService() {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         logger.i(TAG, "InCallService destroyed")
-        serviceScope.cancel()
-        instance = null
+        // Telecom can destroy the service while calls are still in the local
+        // collection. Unregister every callback before dropping references so
+        // a late callback cannot update a dead service instance.
+        calls.forEach { call ->
+            runCatching { call.unregisterCallback(callCallback) }
+        }
+        calls.clear()
+        _currentCall.value = null
+        if (instance === this) {
+            instance = null
+        }
+        super.onDestroy()
     }
 
     override fun onCallAdded(call: Call) {
         logger.i(TAG, "Call added: ${call.details.handle}")
-        _currentCall.value = call
+        calls.remove(call)
+        calls.add(call)
+        updateCurrentCall()
         call.registerCallback(callCallback)
     }
 
     override fun onCallRemoved(call: Call) {
         logger.i(TAG, "Call removed: ${call.details.handle}")
-        call.unregisterCallback(callCallback)
-        if (_currentCall.value == call) {
-            _currentCall.value = null
+        try {
+            call.unregisterCallback(callCallback)
+        } finally {
+            calls.remove(call)
+            updateCurrentCall()
         }
     }
 
@@ -102,7 +111,9 @@ class SmsLinkInCallService : InCallService() {
     fun endCall(): Boolean {
         return try {
             val call = _currentCall.value
-            if (call != null) {
+            if (call != null && call.state != Call.STATE_DISCONNECTED &&
+                call.state != Call.STATE_DISCONNECTING
+            ) {
                 call.disconnect()
                 logger.i(TAG, "Call ended")
                 true
@@ -194,10 +205,31 @@ class SmsLinkInCallService : InCallService() {
         return _currentCall.value?.state
     }
 
+    /** Verify that the current telecom call still belongs to the number
+     * carried by a remote command. Blank handles are allowed by telecom. */
+    fun matchesCurrentCall(phoneNumber: String): Boolean {
+        if (calls.isEmpty()) return false
+        val expected = phoneNumber.filter(Char::isDigit)
+        if (expected.isEmpty()) {
+            return calls.any { call ->
+                call.state != Call.STATE_DISCONNECTED && call.state != Call.STATE_DISCONNECTING
+            }
+        }
+        return calls.any { call ->
+            val actual = call.details.handle?.schemeSpecificPart
+                ?.filter(Char::isDigit)
+                .orEmpty()
+            actual == expected &&
+                call.state != Call.STATE_DISCONNECTED &&
+                call.state != Call.STATE_DISCONNECTING
+        }
+    }
+
     /**
      * 处理通话状态变化
      */
     private fun handleCallStateChange(call: Call, state: Int) {
+        updateCurrentCall()
         when (state) {
             Call.STATE_RINGING -> {
                 logger.i(TAG, "Incoming call ringing")
@@ -213,6 +245,24 @@ class SmsLinkInCallService : InCallService() {
             }
             Call.STATE_DISCONNECTED -> {
                 logger.i(TAG, "Call disconnected")
+            }
+        }
+    }
+
+    private fun updateCurrentCall() {
+        _currentCall.value = calls
+            .filter { call ->
+                call.state != Call.STATE_DISCONNECTED &&
+                    call.state != Call.STATE_DISCONNECTING
+            }
+            .maxByOrNull { call ->
+            when (call.state) {
+                Call.STATE_RINGING -> 5
+                Call.STATE_ACTIVE -> 4
+                Call.STATE_DIALING,
+                Call.STATE_CONNECTING -> 3
+                Call.STATE_HOLDING -> 2
+                else -> 1
             }
         }
     }

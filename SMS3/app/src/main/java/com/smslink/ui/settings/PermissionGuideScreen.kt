@@ -29,6 +29,7 @@ import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -36,6 +37,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,6 +46,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
+import androidx.hilt.navigation.compose.hiltViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -50,7 +54,9 @@ fun PermissionGuideScreen(
     onNavigateBack: () -> Unit
 ) {
     val context = LocalContext.current
-    val permissionItems = remember(context) { buildPermissionItems(context) }
+    val viewModel: PermissionGuideViewModel = hiltViewModel()
+    val refresh by viewModel.refresh.collectAsState()
+    val permissionItems = remember(context, refresh) { buildPermissionItems(context) }
 
     Scaffold(
         topBar = {
@@ -88,11 +94,20 @@ fun PermissionGuideScreen(
                         )
                         Spacer(modifier = Modifier.width(12.dp))
                         Text(
-                            text = "SMS-link 依赖通知、短信、通话、蓝牙和文件权限。点击条目可跳转到系统设置。",
+                            text = "SMS-link 依赖通知访问、短信、通话和蓝牙权限。文件通过系统文件选择器授权，不读取整机存储。",
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onPrimaryContainer
                         )
                     }
+                }
+            }
+
+            item {
+                Button(
+                    modifier = Modifier.fillMaxWidth(),
+                    onClick = viewModel::requestRuntimePermissions
+                ) {
+                    Text("请求运行时权限")
                 }
             }
 
@@ -167,21 +182,9 @@ private fun buildPermissionItems(context: Context): List<PermissionItem> {
             settingsAction = appSettingsAction
         ),
         PermissionItem(
-            name = "位置权限",
-            description = "Android BLE 扫描依赖位置权限",
-            isGranted = hasAllPermissions(
-                context,
-                listOf(
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                )
-            ),
-            settingsAction = appSettingsAction
-        ),
-        PermissionItem(
             name = "文件访问",
-            description = "用于文件传输和分享",
-            isGranted = hasStoragePermission(context),
+            description = "通过系统文件选择器或分享授权，无需整机存储权限",
+            isGranted = true,
             settingsAction = appSettingsAction
         )
     )
@@ -259,25 +262,5 @@ private fun PermissionCard(permission: PermissionItem) {
 private fun hasAllPermissions(context: Context, permissions: List<String>): Boolean {
     return permissions.all { permission ->
         ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED
-    }
-}
-
-private fun hasStoragePermission(context: Context): Boolean {
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-        listOf(
-            Manifest.permission.READ_MEDIA_IMAGES,
-            Manifest.permission.READ_MEDIA_VIDEO,
-            Manifest.permission.READ_MEDIA_AUDIO
-        ).any { permission ->
-            ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED
-        }
-    } else {
-        hasAllPermissions(
-            context,
-            listOf(
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            )
-        )
     }
 }

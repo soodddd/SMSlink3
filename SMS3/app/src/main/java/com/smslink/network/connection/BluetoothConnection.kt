@@ -2,6 +2,7 @@ package com.smslink.network.connection
 
 import com.smslink.core.model.ConnectionType
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import java.io.Closeable
 
 /**
@@ -23,6 +24,8 @@ interface BluetoothConnection : Closeable {
      * 接收数据流
      */
     fun receiveFlow(): Flow<ByteArray>
+
+    suspend fun receiveOne(): ByteArray = receiveFlow().first()
 
     /**
      * 检查是否已连接

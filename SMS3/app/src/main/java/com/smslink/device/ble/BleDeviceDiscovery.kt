@@ -17,6 +17,7 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -36,7 +37,6 @@ class BleDeviceDiscovery @Inject constructor(
 
     private val bluetoothManager = context.getSystemService(Context.BLUETOOTH_SERVICE) as? BluetoothManager
     private val bluetoothAdapter: BluetoothAdapter? = bluetoothManager?.adapter
-    private val bluetoothLeScanner = bluetoothAdapter?.bluetoothLeScanner
 
     private val scope = CoroutineScope(Dispatchers.Unconfined + SupervisorJob())
     private var scanJob: Job? = null
@@ -81,6 +81,16 @@ class BleDeviceDiscovery @Inject constructor(
         _scanError.value = null
 
         try {
+            // Resolve the scanner at start time. Some devices expose it only
+            // after Bluetooth has been enabled, while this singleton may have
+            // been created earlier during application startup.
+            val scanner = bluetoothAdapter.bluetoothLeScanner
+            if (scanner == null) {
+                _scanError.value = "BLE 扫描器不可用"
+                _isScanning.value = false
+                return
+            }
+
             // 配置扫描过滤器 - 只扫描 SMS-link 服务
             val scanFilters = runCatching {
                 listOf(
@@ -109,7 +119,7 @@ class BleDeviceDiscovery @Inject constructor(
 
             // 开始扫描
             if (scanSettings != null) {
-                bluetoothLeScanner?.startScan(scanFilters, scanSettings, scanCallback)
+                scanner.startScan(scanFilters, scanSettings, scanCallback)
             } else {
                 logger.w(TAG, "Skipping hardware BLE scan in test environment")
             }
@@ -122,8 +132,12 @@ class BleDeviceDiscovery @Inject constructor(
                 delay(BleConstants.SCAN_PERIOD)
                 if (_isScanning.value) {
                     logger.d(TAG, "Restarting BLE scan")
-                    stopScan()
-                    delay(1000)
+                    // stopScan() cancels scanJob, which is this coroutine.
+                    // Stop only the hardware scan here so the restart is not
+                    // cancelled before startScan() gets a chance to run.
+                    stopHardwareScan()
+                    _isScanning.value = false
+                    scanJob = null
                     startScan()
                 }
             }
@@ -135,6 +149,11 @@ class BleDeviceDiscovery @Inject constructor(
         } catch (e: Exception) {
             logger.e(TAG, "Failed to start BLE scan", e)
             _scanError.value = "扫描失败: ${e.message}"
+            _isScanning.value = false
+            scanJob?.cancel()
+            timeoutJob?.cancel()
+            scanJob = null
+            timeoutJob = null
         }
     }
 
@@ -143,21 +162,28 @@ class BleDeviceDiscovery @Inject constructor(
      */
     @SuppressLint("MissingPermission")
     fun stopScan() {
-        if (!_isScanning.value) {
+        if (!_isScanning.value && scanJob == null && timeoutJob == null) {
             return
         }
 
         logger.i(TAG, "Stopping BLE scan")
 
-        try {
-            bluetoothLeScanner?.stopScan(scanCallback)
-        } catch (e: Exception) {
-            logger.e(TAG, "Error stopping scan", e)
-        }
+        stopHardwareScan()
 
         scanJob?.cancel()
         timeoutJob?.cancel()
         _isScanning.value = false
+        scanJob = null
+        timeoutJob = null
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun stopHardwareScan() {
+        try {
+            bluetoothManager?.adapter?.bluetoothLeScanner?.stopScan(scanCallback)
+        } catch (e: Exception) {
+            logger.e(TAG, "Error stopping scan", e)
+        }
     }
 
     /**
@@ -184,6 +210,10 @@ class BleDeviceDiscovery @Inject constructor(
             logger.e(TAG, "BLE scan failed: $errorMessage")
             _scanError.value = "扫描失败: $errorMessage"
             _isScanning.value = false
+            scanJob?.cancel()
+            timeoutJob?.cancel()
+            scanJob = null
+            timeoutJob = null
         }
     }
 
@@ -214,9 +244,6 @@ class BleDeviceDiscovery @Inject constructor(
             val bleDeviceInfo = serviceData?.let { BleDeviceInfo.fromBytes(it) }
 
             // 创建或更新发现的设备
-            val currentDevices = _discoveredDevices.value.toMutableList()
-            val existingIndex = currentDevices.indexOfFirst { it.address == deviceAddress }
-
             val discoveredDevice = BleDiscoveredDevice(
                 device = Device(
                     id = bleDeviceInfo?.deviceId ?: deviceAddress,
@@ -233,14 +260,17 @@ class BleDeviceDiscovery @Inject constructor(
                 bleDevice = device
             )
 
-            if (existingIndex >= 0) {
-                currentDevices[existingIndex] = discoveredDevice
-            } else {
-                currentDevices.add(discoveredDevice)
-                logger.i(TAG, "New BLE device discovered: ${discoveredDevice.device.name}")
+            _discoveredDevices.update { existingDevices ->
+                val currentDevices = existingDevices.toMutableList()
+                val existingIndex = currentDevices.indexOfFirst { it.address == deviceAddress }
+                if (existingIndex >= 0) {
+                    currentDevices[existingIndex] = discoveredDevice
+                } else {
+                    currentDevices.add(discoveredDevice)
+                    logger.i(TAG, "New BLE device discovered: ${discoveredDevice.device.name}")
+                }
+                currentDevices
             }
-
-            _discoveredDevices.value = currentDevices
 
         } catch (e: Exception) {
             logger.e(TAG, "Error handling scan result", e)
@@ -265,14 +295,16 @@ class BleDeviceDiscovery @Inject constructor(
      */
     private fun removeStaleDevices() {
         val currentTime = System.currentTimeMillis()
-        val activeDevices = _discoveredDevices.value.filter {
-            currentTime - it.lastSeen < BleConstants.DEVICE_TIMEOUT
-        }
+        _discoveredDevices.update { devices ->
+            val activeDevices = devices.filter {
+                currentTime - it.lastSeen < BleConstants.DEVICE_TIMEOUT
+            }
 
-        if (activeDevices.size != _discoveredDevices.value.size) {
-            val removed = _discoveredDevices.value.size - activeDevices.size
-            logger.d(TAG, "Removed $removed stale BLE devices")
-            _discoveredDevices.value = activeDevices
+            if (activeDevices.size != devices.size) {
+                val removed = devices.size - activeDevices.size
+                logger.d(TAG, "Removed $removed stale BLE devices")
+            }
+            activeDevices
         }
     }
 
@@ -286,8 +318,14 @@ class BleDeviceDiscovery @Inject constructor(
     /**
      * 检查蓝牙是否可用
      */
+    @SuppressLint("MissingPermission")
     fun isBluetoothAvailable(): Boolean {
-        return bluetoothAdapter != null && bluetoothAdapter.isEnabled
+        // Permission is checked by startScan()/DeviceDiscoveryImpl before a
+        // scan is started. Keep this method focused on adapter availability;
+        // callers also use it for UI state and should not see "disabled"
+        // merely because a runtime permission has not been granted yet.
+        return runCatching { bluetoothAdapter != null && bluetoothAdapter.isEnabled }
+            .getOrDefault(false)
     }
 
     /**

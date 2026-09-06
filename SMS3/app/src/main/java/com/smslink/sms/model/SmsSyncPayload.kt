@@ -2,6 +2,7 @@ package com.smslink.sms.model
 
 import com.google.gson.Gson
 import com.smslink.core.model.MessageType
+import com.smslink.core.model.SmsDeliveryStatus
 
 /**
  * 短信同步消息格式
@@ -14,6 +15,8 @@ data class SmsSyncPayload(
     val timestamp: Long,
     val type: MessageType,
     val read: Boolean,
+    val deliveryStatus: SmsDeliveryStatus = SmsDeliveryStatus.QUEUED,
+    val deliveryTimestamp: Long? = null,
     val simSlot: Int? = null,
     val action: SyncAction = SyncAction.NEW_MESSAGE
 ) {

@@ -37,9 +37,11 @@ class SmsReceiver : BroadcastReceiver() {
         logger.d(TAG, "SMS broadcast received: ${intent.action}")
 
         // 检查权限
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_SMS)
+        if ((intent.action == Telephony.Sms.Intents.SMS_RECEIVED_ACTION ||
+            intent.action == Telephony.Sms.Intents.SMS_DELIVER_ACTION) &&
+            ContextCompat.checkSelfPermission(context, Manifest.permission.RECEIVE_SMS)
             != PackageManager.PERMISSION_GRANTED) {
-            logger.w(TAG, "READ_SMS permission not granted")
+            logger.w(TAG, "RECEIVE_SMS permission not granted")
             return
         }
 
@@ -48,9 +50,40 @@ class SmsReceiver : BroadcastReceiver() {
                 handleSmsReceived(context, intent)
             }
             Telephony.Sms.Intents.SMS_DELIVER_ACTION -> {
-                handleSmsDelivered(intent)
+                // SMS_DELIVER is an inbound delivery broadcast for the
+                // default SMS app, not an outbound delivery receipt.
+                handleSmsReceived(context, intent)
+            }
+            SmsManagerImpl.ACTION_SMS_SENT -> {
+                if (isForThisApp(context, intent)) {
+                    updateDeliveryStatus(intent, if (resultCode == android.app.Activity.RESULT_OK)
+                        com.smslink.core.model.SmsDeliveryStatus.SENT
+                    else com.smslink.core.model.SmsDeliveryStatus.FAILED)
+                }
+            }
+            SmsManagerImpl.ACTION_SMS_DELIVERED -> {
+                if (isForThisApp(context, intent)) {
+                    updateDeliveryStatus(
+                        intent,
+                        if (resultCode == android.app.Activity.RESULT_OK) {
+                            com.smslink.core.model.SmsDeliveryStatus.DELIVERED
+                        } else {
+                            com.smslink.core.model.SmsDeliveryStatus.FAILED
+                        }
+                    )
+                }
             }
         }
+    }
+
+    private fun isForThisApp(context: Context, intent: Intent): Boolean {
+        // PendingIntent callbacks are explicit in SmsManagerImpl. Some vendor
+        // builds nevertheless omit ComponentName when delivering them; the
+        // receiver's BROADCAST_SMS protection and the private message-id
+        // extra are the authoritative boundary, so do not discard that valid
+        // callback solely because component is null.
+        return intent.component?.packageName == null ||
+            intent.component?.packageName == context.packageName
     }
 
     /**
@@ -63,9 +96,6 @@ class SmsReceiver : BroadcastReceiver() {
             return
         }
 
-        // 获取订阅ID（SIM卡槽）
-        val subId = intent.extras?.getInt("subscription", -1) ?: -1
-
         // 合并多段短信
         val sender = messages[0].originatingAddress ?: ""
         val body = messages.joinToString("") { it.messageBody ?: "" }
@@ -75,7 +105,12 @@ class SmsReceiver : BroadcastReceiver() {
 
         // 创建消息对象
         val message = Message(
-            id = UUID.randomUUID().toString(),
+            // SMS_RECEIVED and SMS_DELIVER can both be delivered on devices
+            // where the app is the default handler. A deterministic id makes
+            // the Room primary key deduplicate that pair of broadcasts.
+            id = UUID.nameUUIDFromBytes(
+                "$sender|$timestamp|$body".toByteArray(Charsets.UTF_8)
+            ).toString(),
             threadId = getThreadId(context, sender),
             address = sender,
             body = body,
@@ -99,12 +134,21 @@ class SmsReceiver : BroadcastReceiver() {
         }
     }
 
-    /**
-     * 处理短信发送状态
-     */
-    private fun handleSmsDelivered(intent: Intent) {
-        logger.d(TAG, "SMS delivered")
-        // TODO: 更新消息发送状态
+    private fun updateDeliveryStatus(
+        intent: Intent,
+        status: com.smslink.core.model.SmsDeliveryStatus
+    ) {
+        val messageId = intent.getStringExtra(SmsManagerImpl.EXTRA_MESSAGE_ID) ?: return
+        val partIndex = intent.getIntExtra(SmsManagerImpl.EXTRA_PART_INDEX, 0)
+        val partCount = intent.getIntExtra(SmsManagerImpl.EXTRA_PART_COUNT, 1)
+        val pendingResult = goAsync()
+        scope.launch {
+            try {
+                smsManager.updateDeliveryStatus(messageId, status, partIndex, partCount)
+            } finally {
+                pendingResult.finish()
+            }
+        }
     }
 
     /**

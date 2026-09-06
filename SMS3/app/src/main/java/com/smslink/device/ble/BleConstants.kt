@@ -19,6 +19,9 @@ object BleConstants {
     // 控制特征 UUID - 用于控制信令
     val CONTROL_CHARACTERISTIC: UUID = UUID.fromString("00001237-0000-1000-8000-00805f9b34fb")
 
+    val CLIENT_CHARACTERISTIC_CONFIG_UUID: UUID =
+        UUID.fromString("00002902-0000-1000-8000-00805f9b34fb")
+
     // BLE 扫描设置
     const val SCAN_PERIOD = 10000L // 扫描周期 10秒
     const val SCAN_INTERVAL = 5000L // 扫描间隔 5秒

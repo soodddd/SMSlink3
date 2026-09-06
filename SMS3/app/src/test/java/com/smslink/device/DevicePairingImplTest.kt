@@ -1,16 +1,21 @@
 package com.smslink.device
 
+import android.content.Context
 import com.smslink.core.database.dao.DeviceDao
 import com.smslink.core.log.ILogger
 import com.smslink.core.model.Device
 import com.smslink.core.model.DeviceType
 import com.smslink.core.model.DeviceRole
+import com.smslink.device.pairing.PairingTokenStore
+import com.smslink.network.encryption.EncryptionImpl
+import com.smslink.security.DeviceIdentityStore
 import io.mockk.*
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import java.io.File
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
@@ -24,6 +29,8 @@ class DevicePairingImplTest {
     private lateinit var deviceDao: DeviceDao
     private lateinit var logger: ILogger
     private lateinit var devicePairing: DevicePairingImpl
+    private lateinit var context: Context
+    private lateinit var filesDir: File
 
     private val testDevice = Device(
         id = "test-device-1",
@@ -39,7 +46,19 @@ class DevicePairingImplTest {
     fun setup() {
         deviceDao = mockk(relaxed = true)
         logger = mockk(relaxed = true)
-        devicePairing = DevicePairingImpl(deviceDao, logger)
+        context = mockk(relaxed = true)
+        filesDir = mockk(relaxed = true)
+        every { context.filesDir } returns filesDir
+        every { filesDir.absolutePath } returns "/tmp/smslink-pairing-test"
+        devicePairing = DevicePairingImpl(
+            deviceDao = deviceDao,
+            bleGattClient = null,
+            logger = logger,
+            identityStore = DeviceIdentityStore.forTests(),
+            tokenStore = PairingTokenStore.forTests(),
+            bleGattServer = null,
+            encryption = EncryptionImpl(context, logger)
+        )
     }
 
     @After

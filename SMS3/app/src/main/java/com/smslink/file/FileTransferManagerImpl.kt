@@ -1,934 +1,1034 @@
 package com.smslink.file
 
 import android.content.Context
+import android.os.Environment
 import com.smslink.core.log.ILogger
+import com.smslink.core.model.ConnectionState
 import com.smslink.core.model.ConnectionType
 import com.smslink.core.model.FileTransfer
-import com.smslink.core.model.ConnectionState
 import com.smslink.core.model.TransferDirection
 import com.smslink.core.model.TransferState
 import com.smslink.file.data.FileRepository
 import com.smslink.network.IConnectionManager
-import com.smslink.network.connection.LinkType
+import com.smslink.network.connection.ConnectionPolicyStore
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.transformWhile
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.selects.select
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
+import kotlinx.coroutines.withTimeoutOrNull
 import java.io.File
 import java.io.FileInputStream
-import java.io.FileOutputStream
-import java.io.IOException
+import java.io.RandomAccessFile
+import java.security.MessageDigest
 import java.util.UUID
 import java.util.concurrent.ConcurrentHashMap
 import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * 文件传输管理器实现
+ * File transfer state machine.
+ *
+ * A transfer is request -> explicit accept/reject -> numbered chunks -> hash
+ * verified completion. Every packet is acknowledged by the receiver, so a
+ * successful socket write is never mistaken for a successful file transfer.
  */
 @Singleton
 class FileTransferManagerImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val connectionManager: IConnectionManager,
     private val fileRepository: FileRepository,
-    private val logger: ILogger
+    private val logger: ILogger,
+    private val connectionPolicyStore: ConnectionPolicyStore
 ) : IFileTransferManager {
 
+    /** Compatibility constructor retained for the original JVM tests. */
+    constructor(
+        context: Context,
+        connectionManager: IConnectionManager,
+        fileRepository: FileRepository,
+        logger: ILogger
+    ) : this(
+        context,
+        connectionManager,
+        fileRepository,
+        logger,
+        ConnectionPolicyStore.forTests()
+    )
+
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
-    private val activeTransfers = ConcurrentHashMap<String, Job>()
+    private val activeJobs = ConcurrentHashMap<String, Job>()
+    private val acceptWaiters = ConcurrentHashMap<String, CompletableDeferred<Int>>()
+    private val completionWaiters = ConcurrentHashMap<String, CompletableDeferred<Boolean>>()
+    private val chunkAckWaiters = ConcurrentHashMap<String, CompletableDeferred<Unit>>()
+    private val incomingSessions = ConcurrentHashMap<String, IncomingSession>()
+    /** Preserve wire order: chunk 1 must never overtake chunk 0 after a launch. */
+    private val incomingPacketMutex = Mutex()
 
     init {
         scope.launch {
             connectionManager.receiveData().collect { (deviceId, data) ->
-                handleReceivedData(deviceId, data)
+                // Process the shared receive stream in collector order. A
+                // launch-per-packet fan-out lets chunk N+1 acquire the mutex
+                // before chunk N has even reached it, turning valid traffic
+                // into an apparent out-of-order transfer.
+                handleReceivedDataInternal(deviceId, data)
             }
         }
     }
 
-    companion object {
-        private const val CHUNK_SIZE = 8192 // 8KB chunks
-        private const val PROTOCOL_FILE_SEND = 0x01.toByte()
-        private const val PROTOCOL_FILE_CHUNK = 0x02.toByte()
-        private const val PROTOCOL_FILE_COMPLETE = 0x03.toByte()
-        private const val PROTOCOL_FILE_ERROR = 0x04.toByte()
-        private const val PROTOCOL_FILE_CANCEL = 0x05.toByte()
-        private const val PROTOCOL_FILE_RESUME = 0x06.toByte()
-        private const val PROTOCOL_FILE_RESUME_ACK = 0x07.toByte()
-        private const val PROTOCOL_FILE_REQUEST = 0x08.toByte()
-        private const val PROTOCOL_FILE_ACCEPT = 0x09.toByte()
-        private const val PROTOCOL_FILE_REJECT = 0x0A.toByte()
+    override fun sendFile(file: File, targetDeviceId: String): Flow<FileTransfer> =
+        sendFileFlow(file, targetDeviceId, null)
 
-        // 文件大小阈值
-        private const val LARGE_FILE_SIZE = 10 * 1024 * 1024L // 10MB
-        private const val MEDIUM_FILE_SIZE = 1 * 1024 * 1024L // 1MB
+    private fun sendFileFlow(
+        file: File,
+        targetDeviceId: String,
+        resumeTransfer: FileTransfer?
+    ): Flow<FileTransfer> = flow {
+        require(targetDeviceId.isNotBlank()) { "Target device is required" }
+        require(file.isFile && file.exists() && file.canRead()) { "File not found or not readable" }
+        require(file.length() <= FilePacketCodec.MAX_FILE_SIZE) { "File is too large" }
 
-        // 重试配置
-        private const val MAX_RETRY_COUNT = 3
-        private const val RETRY_DELAY_MS = 2000L
-
-        // 安全限制
-        private const val MAX_FILENAME_LENGTH = 255
-        private const val MAX_FILE_SIZE = 4L * 1024 * 1024 * 1024 // 4GB
-    }
-
-    /**
-     * 批量发送文件
-     */
-    suspend fun sendFiles(files: List<File>, targetDeviceId: String): Flow<List<FileTransfer>> = flow {
-        val transfers = mutableListOf<FileTransfer>()
-
-        for (file in files) {
-            sendFile(file, targetDeviceId).collect { transfer ->
-                val index = transfers.indexOfFirst { it.id == transfer.id }
-                if (index >= 0) {
-                    transfers[index] = transfer
-                } else {
-                    transfers.add(transfer)
-                }
-                emit(transfers.toList())
-            }
-        }
-    }.flowOn(Dispatchers.IO)
-
-    /**
-     * 发送文件
-     */
-    override fun sendFile(file: File, targetDeviceId: String): Flow<FileTransfer> = flow {
-        val transferId = UUID.randomUUID().toString()
-        if (!file.exists() || !file.canRead()) {
-            val safePath = runCatching { file.path }.getOrDefault("<unknown>")
-            logger.e("FileTransfer", "File not found or not readable: $safePath")
-            throw IllegalArgumentException("File not found or not readable")
+        val transferId = resumeTransfer?.id ?: UUID.randomUUID().toString()
+        val fileName = sanitizeFileName(resumeTransfer?.fileName ?: file.name)
+        require(fileName.isNotBlank()) { "Invalid file name" }
+        val fileSize = file.length()
+        val linkType = selectLinkType(targetDeviceId)
+        val mimeType = getMimeType(file)
+        val persistedBytes = resumeTransfer?.bytesTransferred?.coerceIn(0L, fileSize) ?: 0L
+        val pending = if (resumeTransfer == null) {
+            FileTransfer(
+                id = transferId,
+                fileName = fileName,
+                fileSize = fileSize,
+                mimeType = mimeType,
+                deviceId = targetDeviceId,
+                direction = TransferDirection.UPLOAD,
+                state = TransferState.PENDING,
+                progress = 0f,
+                timestamp = System.currentTimeMillis(),
+                bytesTransferred = 0L,
+                filePath = file.absolutePath,
+                // Hashing is deliberately deferred until after the first
+                // state is emitted. Picking a file should immediately create
+                // a visible pending record, while the potentially expensive
+                // read happens only when the caller keeps collecting.
+                fileHash = null
+            )
+        } else {
+            resumeTransfer.copy(
+                fileName = fileName,
+                fileSize = fileSize,
+                mimeType = mimeType,
+                deviceId = targetDeviceId,
+                direction = TransferDirection.UPLOAD,
+                state = TransferState.PENDING,
+                progress = if (fileSize == 0L) 0f else persistedBytes.toFloat() / fileSize,
+                bytesTransferred = persistedBytes,
+                filePath = file.absolutePath,
+                errorMessage = null,
+                lastError = null
+            )
         }
 
-        val fileName = resolveFileName(file)
-
-        // 选择最佳链路
-        val linkType = selectBestLink(file.length(), targetDeviceId)
-
-        val transfer = FileTransfer(
-            id = transferId,
-            fileName = fileName,
-            fileSize = file.length(),
-            mimeType = getMimeType(file),
-            deviceId = targetDeviceId,
-            direction = TransferDirection.UPLOAD,
-            state = TransferState.PENDING,
-            progress = 0f,
-            timestamp = System.currentTimeMillis()
+        if (resumeTransfer == null) {
+            fileRepository.saveTransferWithLink(pending, file.absolutePath, 0L, linkType)
+        } else {
+            fileRepository.updateTransfer(
+                transferId,
+                TransferState.PENDING,
+                pending.progress,
+                persistedBytes,
+                null
+            )
+            fileRepository.updateTransferRetry(transferId, resumeTransfer.retryCount, null)
+        }
+        // Read the persisted checkpoint after creating/reopening the record.
+        // For a new transfer it must be zero; for a retry this is the durable
+        // value and is preferred over a stale in-memory snapshot.
+        val repositoryCheckpoint = try {
+            fileRepository.getBytesTransferred(transferId)
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            persistedBytes
+        }
+        val checkpoint = if (resumeTransfer == null) {
+            0L
+        } else {
+            repositoryCheckpoint.coerceIn(0L, fileSize)
+        }
+        val pendingState = if (resumeTransfer == null) pending else pending.copy(
+            bytesTransferred = checkpoint,
+            progress = if (fileSize == 0L) 0f else checkpoint.toFloat() / fileSize
         )
+        emit(fileRepository.getTransferById(transferId) ?: pendingState)
 
-        // 保存初始记录
-        fileRepository.saveTransferWithLink(transfer, file.absolutePath, 0L, linkType)
-        emit(fileRepository.getTransferById(transferId) ?: transfer)
+        // A collector can intentionally take only the initial state. Do not
+        // create a waiter or start network work until that state was consumed.
+        val job = currentCoroutineContext()[Job]
+        if (job != null) activeJobs[transferId] = job
+        val acceptWaiter = CompletableDeferred<Int>()
+        val completeWaiter = CompletableDeferred<Boolean>()
+        acceptWaiters[transferId] = acceptWaiter
+        completionWaiters[transferId] = completeWaiter
 
-        // 启动传输任务
-        val job = scope.launch {
-            try {
-                sendFileInternal(transferId, file, targetDeviceId, linkType)
-            } catch (e: Exception) {
-                logger.e("FileTransfer", "Send file failed: ${e.message}")
-                fileRepository.updateTransfer(
-                    transferId,
-                    TransferState.FAILED,
-                    0f,
-                    0L,
-                    e.message
-                )
+        try {
+            val fileHash = sha256File(file)
+            if (file.length() != fileSize) {
+                throw IllegalStateException("File changed while preparing transfer")
             }
-        }
+            fileRepository.updateTransferSession(
+                transferId,
+                fileHash,
+                resumeTransfer?.nextSequence?.coerceAtLeast(0) ?: 0
+            )
 
-        activeTransfers[transferId] = job
+            ensureConnection(targetDeviceId)
+            val request = FilePacketCodec.request(
+                transferId = transferId,
+                fileName = fileName,
+                mimeType = pending.mimeType,
+                fileSize = fileSize,
+                fileHash = fileHash
+            )
+            sendPacketWithRetry(targetDeviceId, request)
 
-        // 监听传输进度
-        fileRepository.getActiveTransfers()
-            .map { transfers -> transfers.find { it.id == transferId } }
-            .filterNotNull()
-            .collect { emit(it) }
+            val startSignal = withTimeoutOrNull(CONFIRM_TIMEOUT_MS) {
+                select<StartSignal> {
+                    acceptWaiter.onAwait { sequence -> StartSignal.Accepted(sequence) }
+                    completeWaiter.onAwait { completed ->
+                        if (completed) StartSignal.AlreadyCompleted
+                        else throw IllegalStateException("File transfer was rejected")
+                    }
+                }
+            } ?: throw IllegalStateException("File transfer was rejected or timed out")
 
-    }.flowOn(Dispatchers.IO)
+            if (startSignal === StartSignal.AlreadyCompleted) {
+                fileRepository.updateTransfer(transferId, TransferState.COMPLETED, 1f, fileSize)
+                fileRepository.updateTransferSession(
+                    transferId,
+                    fileHash,
+                    ((fileSize + CHUNK_SIZE - 1L) / CHUNK_SIZE).toInt()
+                )
+                emitCurrent(transferId)?.let { emit(it) }
+                return@flow
+            }
 
-    /**
-     * 接收文件
-     */
-    override fun receiveFile(transferId: String): Flow<FileTransfer> = flow {
-        val transfer = fileRepository.getTransferById(transferId)
-        if (transfer == null) {
-            logger.e("FileTransfer", "Transfer not found: $transferId")
-            throw IllegalArgumentException("Transfer not found")
-        }
+            val startSequence = (startSignal as StartSignal.Accepted).sequence
+            if (startSequence < 0) throw IllegalStateException("Invalid transfer resume position")
 
-        if (transfer.direction == TransferDirection.DOWNLOAD && transfer.state == TransferState.PENDING) {
-            val acceptPacket = buildFileAcceptPacket(transferId)
-            connectionManager.sendData(transfer.deviceId, acceptPacket)
+            val startBytes = startSequence.toLong() * CHUNK_SIZE
+            if (startBytes > fileSize) throw IllegalStateException("Invalid transfer resume position")
             fileRepository.updateTransfer(
                 transferId,
                 TransferState.TRANSFERRING,
-                0f,
-                0L
+                if (fileSize == 0L) 0f else startBytes.toFloat() / fileSize,
+                startBytes
             )
-            logger.i("FileTransfer", "Incoming file accepted: $transferId")
-        }
+            emitCurrent(transferId)?.let { emit(it) }
 
-        emit(transfer)
+            FileInputStream(file).use { input ->
+                val buffer = ByteArray(CHUNK_SIZE)
+                skipFully(input, startBytes)
+                var sequence = startSequence
+                var bytesSent = startBytes
+                while (true) {
+                    ensureActive()
+                    val count = input.read(buffer)
+                    if (count < 0) break
+                    val chunk = buffer.copyOf(count)
+                    val packet = FilePacketCodec.chunk(transferId, sequence, fileSize, chunk)
+                    val ackKey = chunkAckKey(transferId, sequence)
+                    val ackWaiter = CompletableDeferred<Unit>()
+                    chunkAckWaiters[ackKey] = ackWaiter
+                    try {
+                        sendPacketWithRetry(targetDeviceId, packet)
+                        withTimeoutOrNull(CHUNK_ACK_TIMEOUT_MS) { ackWaiter.await() }
+                            ?: throw IllegalStateException("Chunk acknowledgement timed out")
+                    } finally {
+                        chunkAckWaiters.remove(ackKey)
+                    }
 
-        // 监听传输进度
-        fileRepository.getActiveTransfers()
-            .map { transfers -> transfers.find { it.id == transferId } }
-            .filterNotNull()
-            .collect { emit(it) }
-
-    }.flowOn(Dispatchers.IO)
-
-    /**
-     * 取消传输
-     */
-    override suspend fun cancelTransfer(transferId: String) {
-        withContext(Dispatchers.IO) {
-            val transfer = fileRepository.getTransferById(transferId)
-
-            if (transfer?.direction == TransferDirection.DOWNLOAD && transfer.state == TransferState.PENDING) {
-                val rejectPacket = buildFileRejectPacket(transferId)
-                connectionManager.sendData(transfer.deviceId, rejectPacket)
-                logger.i("FileTransfer", "Incoming file rejected: $transferId")
-            } else if (transfer != null) {
-                val cancelPacket = buildFileCancelPacket(transferId)
-                connectionManager.sendData(transfer.deviceId, cancelPacket)
-            }
-
-            activeTransfers[transferId]?.cancel()
-            activeTransfers.remove(transferId)
-
-            fileRepository.updateTransfer(
-                transferId,
-                TransferState.CANCELLED,
-                0f,
-                0L
-            )
-
-            logger.i("FileTransfer", "Transfer cancelled: $transferId")
-        }
-    }
-
-    /**
-     * 获取传输历史
-     */
-    override suspend fun getTransferHistory(limit: Int): List<FileTransfer> {
-        return withContext(Dispatchers.IO) {
-            fileRepository.getTransferHistory(limit)
-        }
-    }
-
-    /**
-     * 获取活动传输
-     */
-    override fun getActiveTransfers(): Flow<List<FileTransfer>> {
-        return fileRepository.getActiveTransfers()
-    }
-
-    /**
-     * 内部发送文件实现（支持断点续传和重试）
-     */
-    private suspend fun sendFileInternal(
-        transferId: String,
-        file: File,
-        deviceId: String,
-        linkType: String
-    ) {
-        withContext(Dispatchers.IO) {
-            val safeFileName = resolveFileName(file)
-            var retryCount = 0
-            var lastException: Exception? = null
-
-            while (retryCount <= MAX_RETRY_COUNT) {
-                try {
-                    ensureConnection(deviceId, linkType)
-
-                    // 更新状态为传输中
+                    bytesSent += count
+                    sequence++
                     fileRepository.updateTransfer(
                         transferId,
                         TransferState.TRANSFERRING,
-                        0f,
-                        0L
+                        if (fileSize == 0L) 0f else bytesSent.toFloat() / fileSize,
+                        bytesSent
                     )
-
-                    // 获取断点续传位置
-                    val startPosition = fileRepository.getBytesTransferred(transferId)
-
-                    // 发送文件请求（接收确认）
-                    if (startPosition == 0L) {
-                        val requestPacket = buildFileRequestPacket(transferId, file)
-                        connectionManager.sendData(deviceId, requestPacket)
-
-                        // 等待接收方确认（简化实现，实际应该等待响应）
-                        delay(1000)
-                    }
-
-                    // 如果是断点续传，发送续传请求
-                    if (startPosition > 0L) {
-                        val resumePacket = buildResumePacket(transferId, startPosition)
-                        connectionManager.sendData(deviceId, resumePacket)
-                        delay(500)
-                        logger.i("FileTransfer", "Resuming from position: $startPosition")
-                    } else {
-                        // 发送文件元数据
-                        val metadata = buildFileMetadata(transferId, file)
-                        connectionManager.sendData(deviceId, metadata)
-                    }
-
-                    FileInputStream(file).use { input ->
-                        input.skip(startPosition)
-
-                        val buffer = ByteArray(CHUNK_SIZE)
-                        var bytesTransferred = startPosition
-                        val totalSize = file.length()
-
-                        while (isActive) {
-                            val bytesRead = input.read(buffer)
-                            if (bytesRead == -1) break
-
-                            // 构建数据包
-                            val packet = buildChunkPacket(transferId, buffer, bytesRead)
-                            val success = connectionManager.sendData(deviceId, packet)
-
-                            if (!success) {
-                                throw IOException("Failed to send data chunk")
-                            }
-
-                            bytesTransferred += bytesRead
-                            val progress = bytesTransferred.toFloat() / totalSize
-
-                            // 更新进度
-                            fileRepository.updateTransfer(
-                                transferId,
-                                TransferState.TRANSFERRING,
-                                progress,
-                                bytesTransferred
-                            )
-
-                            delay(10) // 避免过快发送
-                        }
-
-                        // 发送完成信号
-                        val completePacket = buildCompletePacket(transferId)
-                        connectionManager.sendData(deviceId, completePacket)
-
-                        // 更新为完成状态
-                        fileRepository.updateTransfer(
-                            transferId,
-                            TransferState.COMPLETED,
-                            1f,
-                            totalSize
-                        )
-
-                        logger.i("FileTransfer", "File sent successfully: $safeFileName")
-                    }
-
-                    activeTransfers.remove(transferId)
-                    return@withContext // 成功，退出
-
-                } catch (e: Exception) {
-                    lastException = e
-                    retryCount++
-
-                    logger.e("FileTransfer", "Send failed (attempt $retryCount): ${e.message}")
-
-                    if (retryCount <= MAX_RETRY_COUNT) {
-                        // 保存错误信息和重试次数
-                        fileRepository.updateTransferRetry(transferId, retryCount, e.message)
-                        delay(RETRY_DELAY_MS)
-                    }
+                    fileRepository.updateTransferSession(transferId, fileHash, sequence)
+                    emitCurrent(transferId)?.let { emit(it) }
                 }
             }
 
-            // 所有重试都失败
+            val completePacket = FilePacketCodec.complete(transferId, fileSize, fileHash)
+            sendPacketWithRetry(targetDeviceId, completePacket)
+            val completed = withTimeoutOrNull(COMPLETE_ACK_TIMEOUT_MS) { completeWaiter.await() } == true
+            if (!completed) throw IllegalStateException("Completion acknowledgement timed out")
+
+            fileRepository.updateTransfer(transferId, TransferState.COMPLETED, 1f, fileSize)
+            fileRepository.updateTransferSession(
+                transferId,
+                fileHash,
+                ((fileSize + CHUNK_SIZE - 1L) / CHUNK_SIZE).toInt()
+            )
+            emitCurrent(transferId)?.let { emit(it) }
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            logger.e(TAG, "File send failed for $transferId", e)
+            val failureMessage = e.message ?: "File transfer failed"
+            val persisted = try {
+                fileRepository.getTransferById(transferId)
+            } catch (cancel: CancellationException) {
+                throw cancel
+            } catch (_: Exception) {
+                null
+            }
+            val failedBytes = persisted?.bytesTransferred
+                ?: resumeTransfer?.bytesTransferred?.coerceIn(0L, fileSize)
+                ?: 0L
+            val failedProgress = if (fileSize == 0L) 0f else failedBytes.toFloat() / fileSize
+            fileRepository.updateTransferRetry(
+                transferId,
+                (resumeTransfer?.retryCount ?: 0) + 1,
+                failureMessage
+            )
             fileRepository.updateTransfer(
                 transferId,
                 TransferState.FAILED,
-                0f,
-                0L,
-                "Failed after $MAX_RETRY_COUNT retries: ${lastException?.message}"
+                failedProgress,
+                failedBytes,
+                failureMessage
             )
-            activeTransfers.remove(transferId)
+            emitCurrent(transferId)?.let { emit(it) }
+        } finally {
+            activeJobs.remove(transferId)
+            acceptWaiters.remove(transferId)
+            completionWaiters.remove(transferId)
         }
-    }
+    }.flowOn(Dispatchers.IO)
 
-    private suspend fun ensureConnection(deviceId: String, linkType: String) {
-        val normalizedLinkType = linkType.uppercase()
-        val connectionType = when {
-            isEmulatorEnvironment() -> ConnectionType.WIFI
-            normalizedLinkType.contains("WIFI_HOTSPOT") -> ConnectionType.HOTSPOT
-            normalizedLinkType.contains("WIFI_LAN") -> ConnectionType.WIFI
-            normalizedLinkType.contains("BLUETOOTH") -> ConnectionType.BLUETOOTH
-            else -> ConnectionType.WIFI
-        }
-
-        val activeConnections = connectionManager.getActiveConnections().first()
-        val existing = activeConnections.firstOrNull { it.deviceId == deviceId }
-        if (existing != null && existing.state == ConnectionState.CONNECTED) {
-            return
+    override fun receiveFile(transferId: String): Flow<FileTransfer> = flow {
+        val transfer = fileRepository.getTransferById(transferId)
+            ?: throw IllegalArgumentException("Transfer not found")
+        if (transfer.direction != TransferDirection.DOWNLOAD) {
+            throw IllegalArgumentException("Transfer is not an incoming file")
         }
 
-        val connectJob = scope.launch {
-            connectionManager.connect(deviceId, connectionType).collect()
-        }
-
-        val connected = withTimeoutOrNull(15_000L) {
-            connectionManager.getActiveConnections()
-                .map { connections ->
-                    connections.firstOrNull {
-                        it.deviceId == deviceId && it.state == ConnectionState.CONNECTED
-                    }
-                }
-                .filterNotNull()
-                .first()
-        }
-        connectJob.cancel()
-
-        if (connected == null) {
-            throw IllegalStateException("Unable to establish connection for $deviceId")
-        }
-    }
-
-    private fun isEmulatorEnvironment(): Boolean {
-        val fingerprint = android.os.Build.FINGERPRINT.orEmpty().lowercase()
-        val model = android.os.Build.MODEL.orEmpty().lowercase()
-        return fingerprint.contains("generic") ||
-            model.contains("sdk_gphone") ||
-            model.contains("emulator")
-    }
-
-    /**
-     * 选择最佳链路
-     */
-    private suspend fun selectBestLink(fileSize: Long, deviceId: String): String {
-        val connections = runCatching { connectionManager.getActiveConnections().first() }.getOrDefault(emptyList())
-        val deviceConnection = connections.find { it.deviceId == deviceId }
-
-        return when {
-            // 大文件优先使用 WiFi
-            fileSize > LARGE_FILE_SIZE -> {
-                when {
-                    deviceConnection?.type == ConnectionType.WIFI -> "WIFI_LAN"
-                    deviceConnection?.type == ConnectionType.HOTSPOT -> "WIFI_HOTSPOT"
-                    else -> {
-                        logger.w("FileTransfer", "Large file but no WiFi connection available")
-                        "BLUETOOTH"
-                    }
-                }
-            }
-            // 中等文件使用 WiFi 或热点
-            fileSize > MEDIUM_FILE_SIZE -> {
-                when (deviceConnection?.type) {
-                    ConnectionType.WIFI -> "WIFI_LAN"
-                    ConnectionType.HOTSPOT -> "WIFI_HOTSPOT"
-                    ConnectionType.BLUETOOTH -> "BLUETOOTH"
-                    else -> "WIFI_LAN"
-                }
-            }
-            // 小文件任意链路
-            else -> {
-                when (deviceConnection?.type) {
-                    ConnectionType.WIFI -> "WIFI_LAN"
-                    ConnectionType.HOTSPOT -> "WIFI_HOTSPOT"
-                    ConnectionType.BLUETOOTH -> "BLUETOOTH"
-                    else -> "BLUETOOTH"
-                }
-            }
-        }
-    }
-
-    private fun resolveFileName(file: File): String {
-        return file.name.ifBlank {
-            file.absolutePath.substringAfterLast('/').substringAfterLast('\\')
-        }
-    }
-
-    /**
-     * 处理接收到的数据
-     */
-    fun handleReceivedData(deviceId: String, data: ByteArray) {
-        scope.launch {
-            try {
-                when (data[0]) {
-                    PROTOCOL_FILE_REQUEST -> handleFileRequest(deviceId, data)
-                    PROTOCOL_FILE_ACCEPT -> handleFileAccept(data)
-                    PROTOCOL_FILE_REJECT -> handleFileReject(data)
-                    PROTOCOL_FILE_SEND -> handleFileMetadata(deviceId, data)
-                    PROTOCOL_FILE_CHUNK -> handleFileChunk(data)
-                    PROTOCOL_FILE_COMPLETE -> handleFileComplete(data)
-                    PROTOCOL_FILE_ERROR -> handleFileError(data)
-                    PROTOCOL_FILE_CANCEL -> handleFileCancel(data)
-                    PROTOCOL_FILE_RESUME -> handleFileResume(deviceId, data)
-                    PROTOCOL_FILE_RESUME_ACK -> handleFileResumeAck(data)
-                }
+        var current = transfer
+        if (current.state == TransferState.PENDING) {
+            // Move the durable state first. The peer is allowed to send its
+            // first chunk as soon as it receives ACCEPT, so accepting after
+            // the state update avoids a lost/racing chunk.
+            val pending = current
+            fileRepository.updateTransfer(
+                transferId,
+                TransferState.TRANSFERRING,
+                pending.progress,
+                pending.bytesTransferred,
+                null
+            )
+            val sent = try {
+                connectionManager.sendData(
+                    current.deviceId,
+                    FilePacketCodec.accept(transferId, current.nextSequence.coerceAtLeast(0))
+                )
+            } catch (e: CancellationException) {
+                throw e
             } catch (e: Exception) {
-                logger.e("FileTransfer", "Handle received data failed: ${e.message}")
+                logger.w(TAG, "Could not send accept packet for $transferId: ${e.message}")
+                false
+            }
+            if (sent) {
+                current = fileRepository.getTransferById(transferId) ?: current
+            } else {
+                fileRepository.updateTransfer(
+                    transferId,
+                    TransferState.PENDING,
+                    pending.progress,
+                    pending.bytesTransferred,
+                    "Could not send accept packet"
+                )
+                current = fileRepository.getTransferById(transferId) ?: pending
+                logger.w(TAG, "Could not send accept packet for $transferId")
+            }
+        }
+        emit(current)
+
+        // Observe until a terminal record is emitted. A receiver that is not
+        // online simply stays at its persisted state and can be resumed later.
+        fileRepository.observeTransfer(transferId)
+            .transformWhile { next ->
+                if (next == null) return@transformWhile false
+                emit(next)
+                next.state !in TERMINAL_STATES
+            }
+            .collect()
+    }.flowOn(Dispatchers.IO)
+
+    override suspend fun cancelTransfer(transferId: String) {
+        val transfer = fileRepository.getTransferById(transferId)
+        if (transfer == null) return
+        if (transfer.state == TransferState.COMPLETED || transfer.state == TransferState.CANCELLED) {
+            logger.d(TAG, "Ignoring cancellation for terminal transfer: $transferId")
+            return
+        }
+        run {
+            val packet = runCatching {
+                if (transfer.direction == TransferDirection.DOWNLOAD &&
+                    transfer.state == TransferState.PENDING
+                ) {
+                    FilePacketCodec.reject(transferId, "Rejected by receiver")
+                } else {
+                    FilePacketCodec.cancel(transferId)
+                }
+            }.getOrNull()
+            if (packet != null) {
+                try {
+                    connectionManager.sendData(transfer.deviceId, packet)
+                } catch (e: CancellationException) {
+                    throw e
+                } catch (e: Exception) {
+                    logger.w(TAG, "Could not send cancellation for $transferId: ${e.message}")
+                }
+            }
+            if (transfer.direction == TransferDirection.DOWNLOAD &&
+                transfer.state != TransferState.COMPLETED
+            ) {
+                transfer.filePath?.let { path -> runCatching { File(path).delete() } }
+            }
+        }
+
+        activeJobs.remove(transferId)?.cancel()
+        acceptWaiters.remove(transferId)?.complete(-1)
+        completionWaiters.remove(transferId)?.complete(false)
+        incomingSessions.remove(transferId)
+        fileRepository.updateTransfer(transferId, TransferState.CANCELLED, 0f, 0L)
+        logger.i(TAG, "Transfer cancelled: $transferId")
+    }
+
+    override suspend fun getTransferHistory(limit: Int): List<FileTransfer> =
+        fileRepository.getTransferHistory(limit.coerceIn(1, MAX_HISTORY_LIMIT))
+
+    override fun getActiveTransfers(): Flow<List<FileTransfer>> =
+        fileRepository.getActiveTransfers()
+
+    override fun retryTransfer(transferId: String): Flow<FileTransfer> = flow {
+        val previous = fileRepository.getTransferById(transferId)
+            ?: throw IllegalArgumentException("Transfer not found")
+        val path = previous.filePath
+            ?: throw IllegalArgumentException("Original file is no longer available")
+        val file = File(path)
+        if (previous.direction != TransferDirection.UPLOAD ||
+            !file.isFile || !file.exists() || !file.canRead()
+        ) {
+            throw IllegalArgumentException("Original file is no longer available")
+        }
+        // A durable checkpoint is safe only for the exact source bytes that
+        // produced it.  If the user edited/replaced the source file after a
+        // failure, start a fresh transfer ID instead of asking the receiver
+        // to append new bytes to an old partial file.
+        val canResume = previous.fileHash?.let { storedHash ->
+            runCatching { sha256File(file).equals(storedHash, ignoreCase = true) }
+                .getOrDefault(false)
+        } == true
+        emitAll(
+            sendFileFlow(
+                file = file,
+                targetDeviceId = previous.deviceId,
+                resumeTransfer = previous.takeIf { canResume }
+            )
+        )
+    }.flowOn(Dispatchers.IO)
+
+    /** Batch helper used by share flows. */
+    suspend fun sendFiles(files: List<File>, targetDeviceId: String): Flow<List<FileTransfer>> = flow {
+        val latest = LinkedHashMap<String, FileTransfer>()
+        for (file in files) {
+            sendFile(file, targetDeviceId).collect { transfer ->
+                latest[transfer.id] = transfer
+                emit(latest.values.toList())
+            }
+        }
+    }.flowOn(Dispatchers.IO)
+
+    /** Called by ConnectionManager for every authenticated raw data packet. */
+    fun handleReceivedData(deviceId: String, data: ByteArray) {
+        scope.launch { handleReceivedDataInternal(deviceId, data) }
+    }
+
+    private suspend fun handleReceivedDataInternal(deviceId: String, data: ByteArray) {
+        incomingPacketMutex.withLock {
+            val packet = FilePacketCodec.decode(data)
+            if (packet == null) {
+                logger.w(TAG, "Ignoring malformed file packet from $deviceId")
+                return@withLock
+            }
+            try {
+                when (packet.type) {
+                    FilePacketCodec.PacketType.REQUEST -> handleRequest(deviceId, packet)
+                    FilePacketCodec.PacketType.ACCEPT -> handleAccept(deviceId, packet)
+                    FilePacketCodec.PacketType.REJECT -> handleReject(deviceId, packet)
+                    FilePacketCodec.PacketType.CHUNK -> handleChunk(deviceId, packet)
+                    FilePacketCodec.PacketType.COMPLETE -> handleComplete(deviceId, packet)
+                    FilePacketCodec.PacketType.CANCEL -> handleCancel(deviceId, packet)
+                    FilePacketCodec.PacketType.ERROR -> handleError(deviceId, packet)
+                    FilePacketCodec.PacketType.ACK -> handleAck(deviceId, packet)
+                }
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                logger.e(TAG, "Failed to handle file packet ${packet.type}", e)
+                try {
+                    connectionManager.sendData(
+                        deviceId,
+                        FilePacketCodec.error(packet.transferId, e.message ?: "Invalid file packet")
+                    )
+                } catch (cancel: CancellationException) {
+                    throw cancel
+                } catch (_: Exception) {
+                    // The link may already be gone; the original packet
+                    // error is still recorded above.
+                }
             }
         }
     }
 
-    /**
-     * 处理文件请求（接收确认）
-     */
-    private suspend fun handleFileRequest(deviceId: String, data: ByteArray) {
-        // 边界检查
-        if (data.size < 47) { // 最小: 1(protocol) + 36(transferId) + 1(nameLen) + 1(minName) + 8(size) + 1(mimeLen)
-            logger.e("FileTransfer", "Invalid file request packet size: ${data.size}")
+    private suspend fun handleAccept(deviceId: String, packet: FilePacketCodec.Packet) {
+        val transfer = fileRepository.getTransferById(packet.transferId) ?: return
+        if (transfer.deviceId != deviceId || transfer.direction != TransferDirection.UPLOAD) {
+            logger.w(TAG, "Ignoring accept for transfer owned by another device: ${packet.transferId}")
+            return
+        }
+        val maxSequence = ((transfer.fileSize + CHUNK_SIZE - 1L) / CHUNK_SIZE)
+            .coerceAtMost(Int.MAX_VALUE.toLong())
+            .toInt()
+        if (packet.sequence !in 0..maxSequence) {
+            logger.w(TAG, "Ignoring invalid accept sequence ${packet.sequence}")
+            return
+        }
+        acceptWaiters[packet.transferId]?.complete(packet.sequence)
+    }
+
+    private suspend fun handleRequest(deviceId: String, packet: FilePacketCodec.Packet) {
+        val metadata = FilePacketCodec.decodeRequestMetadata(packet)
+        val hash = packet.hash
+        val fileSize = packet.totalSize
+        if (metadata == null || hash == null || !isSha256(hash) || fileSize < 0) {
+            throw IllegalArgumentException("Invalid file request")
+        }
+
+        val safeName = sanitizeFileName(metadata.fileName)
+        if (safeName.isBlank()) throw IllegalArgumentException("Invalid file name")
+        val existing = fileRepository.getTransferById(packet.transferId)
+        if (existing != null) {
+            if (existing.deviceId != deviceId || existing.direction != TransferDirection.DOWNLOAD) {
+                throw SecurityException("Transfer id collision")
+            }
+            if (existing.fileSize != fileSize || !existing.fileHash.equals(hash, ignoreCase = true)) {
+                throw SecurityException("Transfer metadata changed")
+            }
+            when (existing.state) {
+                TransferState.TRANSFERRING -> {
+                    val resumed = reconcileIncomingCheckpoint(existing)
+                    connectionManager.sendData(
+                        deviceId,
+                        FilePacketCodec.accept(packet.transferId, resumed.nextSequence.coerceAtLeast(0))
+                    )
+                }
+                TransferState.COMPLETED -> {
+                    // The sender may have missed the final ACK and retried
+                    // REQUEST. Replaying completion ACK is idempotent.
+                    connectionManager.sendData(deviceId, FilePacketCodec.ack(packet.transferId))
+                }
+                TransferState.FAILED, TransferState.CANCELLED -> {
+                    // A fresh request with the same ID starts a new receiver
+                    // session. Do not leave stale partial bytes as a resume
+                    // checkpoint after a terminal failure/cancellation.
+                    existing.filePath?.let { path -> runCatching { File(path).delete() } }
+                    fileRepository.updateTransfer(
+                        packet.transferId,
+                        TransferState.PENDING,
+                        0f,
+                        0L,
+                        null
+                    )
+                    fileRepository.updateTransferSession(packet.transferId, hash, 0)
+                    incomingSessions[packet.transferId] = IncomingSession(nextSequence = 0)
+                }
+                else -> Unit
+            }
             return
         }
 
-        // 解析: [protocol][transferId][fileNameLength][fileName][fileSize][mimeTypeLength][mimeType]
-        var offset = 1
-
-        val transferIdBytes = data.copyOfRange(offset, offset + 36)
-        val transferId = String(transferIdBytes)
-        offset += 36
-
-        val fileNameLength = data[offset].toInt() and 0xFF // 无符号
-        offset += 1
-
-        // 验证文件名长度
-        if (fileNameLength <= 0 || fileNameLength > MAX_FILENAME_LENGTH) {
-            logger.e("FileTransfer", "Invalid filename length: $fileNameLength")
-            return
-        }
-
-        if (offset + fileNameLength > data.size) {
-            logger.e("FileTransfer", "Filename exceeds packet size")
-            return
-        }
-
-        val fileName = String(data.copyOfRange(offset, offset + fileNameLength))
-        offset += fileNameLength
-
-        // 验证文件名安全性
-        val sanitizedFileName = sanitizeFileName(fileName)
-        if (sanitizedFileName.isBlank()) {
-            logger.e("FileTransfer", "Invalid filename after sanitization")
-            return
-        }
-
-        if (offset + 8 > data.size) {
-            logger.e("FileTransfer", "File size field missing")
-            return
-        }
-
-        val fileSize = data.copyOfRange(offset, offset + 8).toLongSafe()
-        offset += 8
-
-        // 验证文件大小
-        if (fileSize <= 0 || fileSize > MAX_FILE_SIZE) {
-            logger.e("FileTransfer", "Invalid file size: $fileSize")
-            return
-        }
-
-        if (offset >= data.size) {
-            logger.e("FileTransfer", "MIME type length missing")
-            return
-        }
-
-        val mimeTypeLength = data[offset].toInt() and 0xFF
-        offset += 1
-
-        if (mimeTypeLength > 100 || offset + mimeTypeLength > data.size) {
-            logger.e("FileTransfer", "Invalid MIME type length: $mimeTypeLength")
-            return
-        }
-
-        val mimeType = if (mimeTypeLength > 0) {
-            String(data.copyOfRange(offset, offset + mimeTypeLength))
-        } else {
-            "application/octet-stream"
-        }
-
-        // 创建待确认的传输记录
+        val output = createDownloadFile(packet.transferId, safeName)
         val transfer = FileTransfer(
-            id = transferId,
-            fileName = sanitizedFileName,
+            id = packet.transferId,
+            fileName = safeName,
             fileSize = fileSize,
-            mimeType = mimeType,
+            mimeType = metadata.mimeType.ifBlank { "application/octet-stream" },
             deviceId = deviceId,
             direction = TransferDirection.DOWNLOAD,
             state = TransferState.PENDING,
             progress = 0f,
-            timestamp = System.currentTimeMillis()
+            timestamp = System.currentTimeMillis(),
+            filePath = output.absolutePath,
+            fileHash = hash
         )
-
-        val downloadDir = File(context.getExternalFilesDir(null), "downloads")
-        downloadDir.mkdirs()
-        val filePath = File(downloadDir, sanitizedFileName).absolutePath
-
-        fileRepository.saveTransfer(transfer, filePath, 0L)
-
-        logger.i("FileTransfer", "File request received: $sanitizedFileName, waiting for user confirmation")
-
-        // 等待前端调用 receiveFile() 显式确认后再继续
+        if (!output.exists()) output.createNewFile()
+        fileRepository.saveTransfer(transfer, output.absolutePath, 0L)
+        fileRepository.updateTransferSession(packet.transferId, hash, 0)
+        incomingSessions[packet.transferId] = IncomingSession(nextSequence = 0)
+        logger.i(TAG, "Incoming file request queued: $safeName ($fileSize bytes)")
     }
 
     /**
-     * 清理文件名，防止路径遍历攻击
+     * Reconcile the durable Room checkpoint with the actual destination file
+     * before accepting a resumed upload. A process can die between the file
+     * write and either Room update; accepting the larger value would create a
+     * hole or append bytes at the wrong offset.
      */
-    private fun sanitizeFileName(fileName: String): String {
-        // 移除路径分隔符和特殊字符
-        return fileName
-            .replace("/", "_")
-            .replace("\\", "_")
-            .replace("..", "_")
-            .replace("\u0000", "")
-            .trim()
-            .take(MAX_FILENAME_LENGTH)
+    private suspend fun reconcileIncomingCheckpoint(transfer: FileTransfer): FileTransfer {
+        val expectedBytes = transfer.bytesTransferred.coerceIn(0L, transfer.fileSize)
+        val path = transfer.filePath ?: return transfer.copy(
+            bytesTransferred = 0L,
+            nextSequence = 0,
+            progress = 0f
+        )
+        val file = File(path)
+        val fileMatchesCheckpoint = file.exists() && file.length() == expectedBytes
+        val durableBytes = if (fileMatchesCheckpoint) expectedBytes else 0L
+        if (!fileMatchesCheckpoint) {
+            file.parentFile?.mkdirs()
+            RandomAccessFile(file, "rw").use { it.setLength(0L) }
+            logger.w(TAG, "Resetting mismatched incoming checkpoint: ${transfer.id}")
+        }
+        val durableSequence = if (durableBytes == 0L) {
+            0
+        } else {
+            ((durableBytes + CHUNK_SIZE - 1L) / CHUNK_SIZE)
+                .coerceAtMost(Int.MAX_VALUE.toLong())
+                .toInt()
+        }
+        val progress = if (transfer.fileSize == 0L) 0f
+        else durableBytes.toFloat() / transfer.fileSize
+        if (transfer.bytesTransferred != durableBytes ||
+            transfer.nextSequence != durableSequence ||
+            transfer.progress != progress
+        ) {
+            fileRepository.updateTransfer(
+                transfer.id,
+                TransferState.TRANSFERRING,
+                progress,
+                durableBytes
+            )
+        }
+        if (transfer.nextSequence != durableSequence) {
+            fileRepository.updateTransferSession(
+                transfer.id,
+                transfer.fileHash,
+                durableSequence
+            )
+        }
+        return transfer.copy(
+            bytesTransferred = durableBytes,
+            nextSequence = durableSequence,
+            progress = progress
+        )
     }
 
-    /**
-     * 处理文件接受
-     */
-    private suspend fun handleFileAccept(data: ByteArray) {
-        val transferId = String(data.copyOfRange(1, 37))
-        logger.i("FileTransfer", "File accepted by receiver: $transferId")
-    }
-
-    /**
-     * 处理文件拒绝
-     */
-    private suspend fun handleFileReject(data: ByteArray) {
-        val transferId = String(data.copyOfRange(1, 37))
-
+    private suspend fun handleReject(deviceId: String, packet: FilePacketCodec.Packet) {
+        val transfer = fileRepository.getTransferById(packet.transferId) ?: return
+        if (transfer.deviceId != deviceId || transfer.direction != TransferDirection.UPLOAD) {
+            logger.w(TAG, "Ignoring reject for transfer owned by another device: ${packet.transferId}")
+            return
+        }
+        if (transfer.state == TransferState.COMPLETED) return
+        acceptWaiters.remove(packet.transferId)?.complete(-1)
+        completionWaiters.remove(packet.transferId)?.complete(false)
         fileRepository.updateTransfer(
-            transferId,
+            packet.transferId,
             TransferState.CANCELLED,
             0f,
             0L,
-            "Rejected by receiver"
+            FilePacketCodec.payloadText(packet).ifBlank { "Rejected by receiver" }
         )
-
-        activeTransfers[transferId]?.cancel()
-        activeTransfers.remove(transferId)
-
-        logger.i("FileTransfer", "File rejected by receiver: $transferId")
     }
 
-    /**
-     * 处理断点续传请求
-     */
-    private suspend fun handleFileResume(deviceId: String, data: ByteArray) {
-        if (data.size < 45) {
-            logger.e("FileTransfer", "Invalid resume packet size")
+    private suspend fun handleChunk(deviceId: String, packet: FilePacketCodec.Packet) {
+        val transfer = fileRepository.getTransferById(packet.transferId) ?: return
+        if (transfer.deviceId != deviceId) {
+            logger.w(TAG, "Ignoring chunk from wrong device for transfer: ${packet.transferId}")
             return
         }
+        if (transfer.direction != TransferDirection.DOWNLOAD ||
+            transfer.state != TransferState.TRANSFERRING
+        ) {
+            try {
+                connectionManager.sendData(
+                    deviceId,
+                    FilePacketCodec.error(packet.transferId, "File was not accepted")
+                )
+            } catch (e: CancellationException) {
+                throw e
+            } catch (_: Exception) {
+                // The peer may already have disconnected.
+            }
+            return
+        }
+        if (packet.sequence < 0 ||
+            packet.totalSize != transfer.fileSize ||
+            packet.payload.isEmpty() ||
+            packet.payload.size > CHUNK_SIZE
+        ) {
+            throw IllegalArgumentException("Chunk size metadata mismatch")
+        }
 
-        val transferId = String(data.copyOfRange(1, 37))
-        val position = data.copyOfRange(37, 45).toLongSafe()
+        val session = incomingSessions.computeIfAbsent(packet.transferId) {
+            IncomingSession(transfer.nextSequence.toLong().coerceAtLeast(0L))
+        }
+        session.mutex.withLock {
+            val current = fileRepository.getTransferById(packet.transferId)
+                ?: throw IllegalStateException("Transfer disappeared")
+            if (current.deviceId != deviceId ||
+                current.direction != TransferDirection.DOWNLOAD ||
+                current.state != TransferState.TRANSFERRING ||
+                current.fileSize != packet.totalSize
+            ) {
+                throw IllegalStateException("File transfer is no longer active")
+            }
+            // bytesTransferred and nextSequence are persisted in separate
+            // Room updates. After a process death, derive the sequence from
+            // the durable byte count so a crash between those updates cannot
+            // append at the wrong offset during resume.
+            val durableSequence = if (current.bytesTransferred <= 0L) {
+                0L
+            } else {
+                (current.bytesTransferred + CHUNK_SIZE - 1L) / CHUNK_SIZE
+            }
+            if (session.nextSequence != durableSequence) {
+                session.nextSequence = durableSequence
+            }
+            if (packet.sequence < session.nextSequence) {
+                // A duplicate is harmless; acknowledge it so the sender can
+                // finish a retry without appending the bytes twice.
+                return@withLock
+            }
+            if (packet.sequence.toLong() != session.nextSequence) {
+                throw IllegalArgumentException("Out-of-order file chunk")
+            }
 
-        logger.i("FileTransfer", "Resume request for $transferId at position $position")
-
-        // 发送确认
-        val ackPacket = buildResumeAckPacket(transferId, position)
-        connectionManager.sendData(deviceId, ackPacket)
+            val path = current.filePath ?: throw IllegalStateException("Missing destination path")
+            val destination = File(path)
+            if (!destination.exists() || destination.length() != current.bytesTransferred) {
+                throw IllegalStateException("Destination checkpoint does not match persisted bytes")
+            }
+            val nextBytes = current.bytesTransferred + packet.payload.size
+            if (nextBytes > current.fileSize) throw IllegalArgumentException("File exceeds declared size")
+            RandomAccessFile(path, "rw").use { file ->
+                file.seek(current.bytesTransferred)
+                file.write(packet.payload)
+            }
+            session.nextSequence = packet.sequence.toLong() + 1L
+            fileRepository.updateTransfer(
+                packet.transferId,
+                TransferState.TRANSFERRING,
+                if (current.fileSize == 0L) 0f else nextBytes.toFloat() / current.fileSize,
+                nextBytes
+            )
+            fileRepository.updateTransferSession(packet.transferId, current.fileHash, session.nextSequence.toInt())
+        }
+        // Send outside the session mutex: a slow transport must not block the
+        // next packet from being validated, while duplicate packets still get
+        // an idempotent ACK.
+        connectionManager.sendData(deviceId, FilePacketCodec.ack(packet.transferId, packet.sequence))
     }
 
-    /**
-     * 处理断点续传确认
-     */
-    private suspend fun handleFileResumeAck(data: ByteArray) {
-        if (data.size < 45) {
-            logger.e("FileTransfer", "Invalid resume ack packet size")
+    private suspend fun handleComplete(deviceId: String, packet: FilePacketCodec.Packet) {
+        val transfer = fileRepository.getTransferById(packet.transferId) ?: return
+        if (transfer.deviceId != deviceId) {
+            logger.w(TAG, "Ignoring completion from wrong device for transfer: ${packet.transferId}")
+            return
+        }
+        val expectedHash = transfer.fileHash
+        val path = transfer.filePath
+        val valid = runCatching {
+            if (transfer.fileSize == 0L && path != null) {
+                File(path).parentFile?.mkdirs()
+                if (!File(path).exists()) File(path).createNewFile()
+            }
+            transfer.direction == TransferDirection.DOWNLOAD &&
+                transfer.bytesTransferred == transfer.fileSize &&
+                packet.sequence == -1 &&
+                packet.totalSize == transfer.fileSize &&
+                packet.hash != null &&
+                expectedHash != null &&
+                packet.hash.equals(expectedHash, ignoreCase = true) &&
+                path != null &&
+                sha256File(File(path)).equals(packet.hash, ignoreCase = true)
+        }.getOrDefault(false)
+
+        if (!valid) {
+            // Do not retain a session after a terminal verification failure.
+            // Otherwise a later chunk can keep a stale mutex/state object alive
+            // until process death, and a retry may observe obsolete sequencing.
+            incomingSessions.remove(packet.transferId)
+            fileRepository.updateTransfer(
+                packet.transferId,
+                TransferState.FAILED,
+                transfer.progress,
+                transfer.bytesTransferred,
+                "File hash or length verification failed"
+            )
+            connectionManager.sendData(deviceId, FilePacketCodec.error(packet.transferId, "File verification failed"))
             return
         }
 
-        val transferId = String(data.copyOfRange(1, 37))
-        val position = data.copyOfRange(37, 45).toLongSafe()
-
-        logger.i("FileTransfer", "Resume acknowledged for $transferId at position $position")
+        fileRepository.updateTransfer(packet.transferId, TransferState.COMPLETED, 1f, transfer.fileSize)
+        incomingSessions.remove(packet.transferId)
+        connectionManager.sendData(deviceId, FilePacketCodec.ack(packet.transferId))
+        logger.i(TAG, "Incoming file verified: ${transfer.fileName}")
     }
 
-    /**
-     * 处理文件元数据
-     */
-    private suspend fun handleFileMetadata(deviceId: String, data: ByteArray) {
-        // 边界检查
-        if (data.size < 47) {
-            logger.e("FileTransfer", "Invalid metadata packet size: ${data.size}")
+    private suspend fun handleCancel(deviceId: String, packet: FilePacketCodec.Packet) {
+        val transfer = fileRepository.getTransferById(packet.transferId) ?: return
+        if (transfer.deviceId != deviceId) {
+            logger.w(TAG, "Ignoring cancel from wrong device for transfer: ${packet.transferId}")
             return
         }
-
-        // 解析元数据: [protocol][transferId][fileNameLength][fileName][fileSize][mimeTypeLength][mimeType]
-        var offset = 1
-
-        val transferIdBytes = data.copyOfRange(offset, offset + 36)
-        val transferId = String(transferIdBytes)
-        offset += 36
-
-        val fileNameLength = data[offset].toInt() and 0xFF
-        offset += 1
-
-        if (fileNameLength <= 0 || fileNameLength > MAX_FILENAME_LENGTH || offset + fileNameLength > data.size) {
-            logger.e("FileTransfer", "Invalid filename in metadata")
-            return
+        if (transfer.state == TransferState.COMPLETED) return
+        acceptWaiters.remove(packet.transferId)?.complete(-1)
+        completionWaiters.remove(packet.transferId)?.complete(false)
+        incomingSessions.remove(packet.transferId)
+        if (transfer.direction == TransferDirection.DOWNLOAD) {
+            transfer.filePath?.let { path -> runCatching { File(path).delete() } }
         }
-
-        val fileName = String(data.copyOfRange(offset, offset + fileNameLength))
-        offset += fileNameLength
-
-        if (offset + 8 > data.size) {
-            logger.e("FileTransfer", "File size missing in metadata")
-            return
-        }
-
-        val fileSize = data.copyOfRange(offset, offset + 8).toLongSafe()
-        offset += 8
-
-        if (fileSize <= 0 || fileSize > MAX_FILE_SIZE) {
-            logger.e("FileTransfer", "Invalid file size in metadata: $fileSize")
-            return
-        }
-
-        if (offset >= data.size) {
-            logger.e("FileTransfer", "MIME type length missing")
-            return
-        }
-
-        val mimeTypeLength = data[offset].toInt() and 0xFF
-        offset += 1
-
-        if (mimeTypeLength > 100 || offset + mimeTypeLength > data.size) {
-            logger.e("FileTransfer", "Invalid MIME type in metadata")
-            return
-        }
-
-        val mimeType = if (mimeTypeLength > 0) {
-            String(data.copyOfRange(offset, offset + mimeTypeLength))
-        } else {
-            "application/octet-stream"
-        }
-
-        val sanitizedFileName = sanitizeFileName(fileName)
-
-        // 创建接收传输记录
-        val transfer = FileTransfer(
-            id = transferId,
-            fileName = sanitizedFileName,
-            fileSize = fileSize,
-            mimeType = mimeType,
-            deviceId = deviceId,
-            direction = TransferDirection.DOWNLOAD,
-            state = TransferState.PENDING,
-            progress = 0f,
-            timestamp = System.currentTimeMillis()
-        )
-
-        // 准备保存路径
-        val downloadDir = File(context.getExternalFilesDir(null), "downloads")
-        downloadDir.mkdirs()
-        val filePath = File(downloadDir, sanitizedFileName).absolutePath
-
-        fileRepository.saveTransfer(transfer, filePath, 0L)
-
-        logger.i("FileTransfer", "Receiving file: $sanitizedFileName")
+        fileRepository.updateTransfer(packet.transferId, TransferState.CANCELLED, 0f, 0L)
     }
 
-    /**
-     * 处理文件数据块
-     */
-    private suspend fun handleFileChunk(data: ByteArray) {
-        // 解析: [protocol][transferId][chunkData]
-        val transferId = String(data.copyOfRange(1, 37))
-        val chunkData = data.copyOfRange(37, data.size)
-
-        val filePath = fileRepository.getFilePath(transferId) ?: return
-        val file = File(filePath)
-
-        FileOutputStream(file, true).use { output ->
-            output.write(chunkData)
+    private suspend fun handleError(deviceId: String, packet: FilePacketCodec.Packet) {
+        val transfer = fileRepository.getTransferById(packet.transferId) ?: return
+        if (transfer.deviceId != deviceId) {
+            logger.w(TAG, "Ignoring error from wrong device for transfer: ${packet.transferId}")
+            return
         }
-
-        val bytesTransferred = fileRepository.getBytesTransferred(transferId) + chunkData.size
-        val transfer = fileRepository.getTransferById(transferId) ?: return
-        val progress = bytesTransferred.toFloat() / transfer.fileSize
-
+        if (transfer.state == TransferState.COMPLETED) return
+        acceptWaiters.remove(packet.transferId)?.complete(-1)
+        completionWaiters.remove(packet.transferId)?.complete(false)
+        incomingSessions.remove(packet.transferId)
         fileRepository.updateTransfer(
-            transferId,
-            TransferState.TRANSFERRING,
-            progress,
-            bytesTransferred
-        )
-    }
-
-    /**
-     * 处理文件传输完成
-     */
-    private suspend fun handleFileComplete(data: ByteArray) {
-        val transferId = String(data.copyOfRange(1, 37))
-        val transfer = fileRepository.getTransferById(transferId) ?: return
-
-        fileRepository.updateTransfer(
-            transferId,
-            TransferState.COMPLETED,
-            1f,
-            transfer.fileSize
-        )
-
-        logger.i("FileTransfer", "File received successfully: ${transfer.fileName}")
-    }
-
-    /**
-     * 处理传输错误
-     */
-    private suspend fun handleFileError(data: ByteArray) {
-        val transferId = String(data.copyOfRange(1, 37))
-        val errorMessage = String(data.copyOfRange(37, data.size))
-
-        fileRepository.updateTransfer(
-            transferId,
+            packet.transferId,
             TransferState.FAILED,
-            0f,
-            0L,
-            errorMessage
+            transfer.progress,
+            transfer.bytesTransferred,
+            FilePacketCodec.payloadText(packet).ifBlank { "Peer reported a file error" }
         )
     }
 
-    /**
-     * 处理传输取消
-     */
-    private suspend fun handleFileCancel(data: ByteArray) {
-        val transferId = String(data.copyOfRange(1, 37))
+    private suspend fun handleAck(deviceId: String, packet: FilePacketCodec.Packet) {
+        val transfer = fileRepository.getTransferById(packet.transferId) ?: return
+        if (transfer.deviceId != deviceId || transfer.direction != TransferDirection.UPLOAD) {
+            logger.w(TAG, "Ignoring ACK for transfer owned by another device: ${packet.transferId}")
+            return
+        }
+        if (packet.sequence >= 0) {
+            chunkAckWaiters[chunkAckKey(packet.transferId, packet.sequence)]?.complete(Unit)
+        } else {
+            completionWaiters[packet.transferId]?.complete(true)
+        }
+    }
 
-        fileRepository.updateTransfer(
-            transferId,
-            TransferState.CANCELLED,
-            0f,
-            0L
+    private suspend fun sendPacketWithRetry(deviceId: String, packet: ByteArray) {
+        var lastError: Throwable? = null
+        repeat(MAX_SEND_ATTEMPTS) { attempt ->
+            try {
+                if (connectionManager.sendData(deviceId, packet)) return
+                lastError = IllegalStateException("Connection rejected file packet")
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                lastError = e
+            }
+            if (attempt + 1 < MAX_SEND_ATTEMPTS) delay(RETRY_DELAY_MS * (attempt + 1))
+        }
+        throw IllegalStateException("Unable to send file packet", lastError)
+    }
+
+    private suspend fun ensureConnection(deviceId: String) {
+        val existing = try {
+            connectionManager.getActiveConnections().first()
+                .firstOrNull { it.deviceId == deviceId && it.state == ConnectionState.CONNECTED }
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            null
+        }
+        if (existing != null) return
+
+        for (connectionType in connectionPolicyStore.get().orderedConnectionTypes()) {
+            var connected = false
+            try {
+                connectionManager.connect(deviceId, connectionType).collect { state ->
+                    if (state.deviceId == deviceId && state.state == ConnectionState.CONNECTED) {
+                        connected = true
+                    }
+                }
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                logger.w(TAG, "${connectionType.name} connection failed: ${e.message}")
+            }
+            if (connected) return
+        }
+        val afterConnect = try {
+            connectionManager.getActiveConnections().first()
+                .any { it.deviceId == deviceId && it.state == ConnectionState.CONNECTED }
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            false
+        }
+        if (!afterConnect) {
+            throw IllegalStateException("Unable to establish connection")
+        }
+    }
+
+    private suspend fun emitCurrent(transferId: String): FileTransfer? =
+        fileRepository.getTransferById(transferId)
+
+    private fun createDownloadFile(transferId: String, fileName: String): File {
+        val base = runCatching {
+            context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS) ?: context.filesDir
+        }.getOrNull() ?: File(System.getProperty("java.io.tmpdir"), "smslink-downloads")
+        val directory = File(base, "SMSlink")
+        directory.mkdirs()
+        return File(directory, "$transferId-$fileName")
+    }
+
+    private fun sanitizeFileName(value: String): String = value
+        .map { character ->
+            when {
+                character.code < 0x20 || character in ILLEGAL_FILENAME_CHARS -> '_'
+                else -> character
+            }
+        }
+        .joinToString("")
+        .replace("..", "_")
+        .trim()
+        .trimEnd('.', ' ')
+        .take(MAX_FILENAME_LENGTH)
+
+    private fun getMimeType(file: File): String = when (file.extension.lowercase()) {
+        "jpg", "jpeg" -> "image/jpeg"
+        "png" -> "image/png"
+        "gif" -> "image/gif"
+        "pdf" -> "application/pdf"
+        "txt", "log", "md" -> "text/plain"
+        "mp4" -> "video/mp4"
+        "mp3" -> "audio/mpeg"
+        "zip" -> "application/zip"
+        else -> "application/octet-stream"
+    }
+
+    private fun sha256File(file: File): String {
+        val digest = MessageDigest.getInstance("SHA-256")
+        FileInputStream(file).use { input ->
+            val buffer = ByteArray(CHUNK_SIZE)
+            while (true) {
+                val count = input.read(buffer)
+                if (count < 0) break
+                digest.update(buffer, 0, count)
+            }
+        }
+        return digest.digest().joinToString("") { "%02x".format(it) }
+    }
+
+    private fun skipFully(input: FileInputStream, bytes: Long) {
+        var remaining = bytes
+        while (remaining > 0L) {
+            val skipped = input.skip(remaining)
+            if (skipped > 0L) {
+                remaining -= skipped
+            } else if (input.read() >= 0) {
+                remaining--
+            } else {
+                throw IllegalStateException("Unable to seek to transfer resume position")
+            }
+        }
+    }
+
+    private fun isSha256(value: String): Boolean = value.matches(Regex("[0-9a-fA-F]{64}"))
+
+    private suspend fun selectLinkType(deviceId: String): String {
+        val type = try {
+            connectionManager.getActiveConnections().first()
+                .firstOrNull { it.deviceId == deviceId && it.state == ConnectionState.CONNECTED }
+                ?.type
+                ?.name
+        } catch (e: CancellationException) {
+            throw e
+        } catch (_: Exception) {
+            null
+        }
+        return type?.let { connectionType ->
+            when (connectionType) {
+                ConnectionType.HOTSPOT.name -> "WIFI_HOTSPOT"
+                ConnectionType.BLUETOOTH.name -> "BLUETOOTH"
+                else -> "WIFI_LAN"
+            }
+        } ?: "WIFI_LAN"
+    }
+
+    private suspend fun ensureActive() {
+        if (!currentCoroutineContext().isActive) throw CancellationException()
+    }
+
+    private fun chunkAckKey(transferId: String, sequence: Int): String = "$transferId:$sequence"
+
+    private data class IncomingSession(
+        var nextSequence: Long,
+        val mutex: Mutex = Mutex()
+    )
+
+    private sealed interface StartSignal {
+        data class Accepted(val sequence: Int) : StartSignal
+        data object AlreadyCompleted : StartSignal
+    }
+
+    companion object {
+        private const val TAG = "FileTransfer"
+        private const val CHUNK_SIZE = 32 * 1024
+        private const val MAX_FILENAME_LENGTH = 255
+        private const val MAX_SEND_ATTEMPTS = 3
+        private const val RETRY_DELAY_MS = 400L
+        private const val CONFIRM_TIMEOUT_MS = 5 * 60 * 1000L
+        private const val CHUNK_ACK_TIMEOUT_MS = 15_000L
+        private const val COMPLETE_ACK_TIMEOUT_MS = 30_000L
+        private const val MAX_HISTORY_LIMIT = 500
+        private val ILLEGAL_FILENAME_CHARS = setOf('/', '\\', ':', '*', '?', '"', '<', '>', '|')
+        private val TERMINAL_STATES = setOf(
+            TransferState.COMPLETED,
+            TransferState.FAILED,
+            TransferState.CANCELLED
         )
-    }
-
-    /**
-     * 构建文件请求包
-     */
-    private fun buildFileRequestPacket(transferId: String, file: File): ByteArray {
-        val fileName = file.name.toByteArray()
-        val mimeType = getMimeType(file).toByteArray()
-        val fileSize = file.length()
-
-        return byteArrayOf(PROTOCOL_FILE_REQUEST) +
-                transferId.toByteArray() +
-                fileName.size.toByte() +
-                fileName +
-                fileSize.toByteArray() +
-                mimeType.size.toByte() +
-                mimeType
-    }
-
-    /**
-     * 构建文件接受包
-     */
-    private fun buildFileAcceptPacket(transferId: String): ByteArray {
-        return byteArrayOf(PROTOCOL_FILE_ACCEPT) + transferId.toByteArray()
-    }
-
-    /**
-     * 构建文件拒绝包
-     */
-    private fun buildFileRejectPacket(transferId: String): ByteArray {
-        return byteArrayOf(PROTOCOL_FILE_REJECT) + transferId.toByteArray()
-    }
-
-    /**
-     * 构建文件取消包
-     */
-    private fun buildFileCancelPacket(transferId: String): ByteArray {
-        return byteArrayOf(PROTOCOL_FILE_CANCEL) + transferId.toByteArray()
-    }
-
-    /**
-     * 构建断点续传包
-     */
-    private fun buildResumePacket(transferId: String, position: Long): ByteArray {
-        return byteArrayOf(PROTOCOL_FILE_RESUME) +
-                transferId.toByteArray() +
-                position.toByteArray()
-    }
-
-    /**
-     * 构建断点续传确认包
-     */
-    private fun buildResumeAckPacket(transferId: String, position: Long): ByteArray {
-        return byteArrayOf(PROTOCOL_FILE_RESUME_ACK) +
-                transferId.toByteArray() +
-                position.toByteArray()
-    }
-
-    /**
-     * 构建文件元数据包
-     */
-    private fun buildFileMetadata(transferId: String, file: File): ByteArray {
-        val fileName = file.name.toByteArray()
-        val mimeType = getMimeType(file).toByteArray()
-        val fileSize = file.length()
-
-        return byteArrayOf(PROTOCOL_FILE_SEND) +
-                transferId.toByteArray() +
-                fileName.size.toByte() +
-                fileName +
-                fileSize.toByteArray() +
-                mimeType.size.toByte() +
-                mimeType
-    }
-
-    /**
-     * 构建数据块包
-     */
-    private fun buildChunkPacket(transferId: String, data: ByteArray, size: Int): ByteArray {
-        return byteArrayOf(PROTOCOL_FILE_CHUNK) +
-                transferId.toByteArray() +
-                data.copyOfRange(0, size)
-    }
-
-    /**
-     * 构建完成包
-     */
-    private fun buildCompletePacket(transferId: String): ByteArray {
-        return byteArrayOf(PROTOCOL_FILE_COMPLETE) + transferId.toByteArray()
-    }
-
-    /**
-     * 获取 MIME 类型
-     */
-    private fun getMimeType(file: File): String {
-        return when (file.extension.lowercase()) {
-            "jpg", "jpeg" -> "image/jpeg"
-            "png" -> "image/png"
-            "gif" -> "image/gif"
-            "pdf" -> "application/pdf"
-            "txt" -> "text/plain"
-            "mp4" -> "video/mp4"
-            "mp3" -> "audio/mpeg"
-            "zip" -> "application/zip"
-            else -> "application/octet-stream"
-        }
-    }
-
-    /**
-     * ByteArray 转 Long (安全版本)
-     */
-    private fun ByteArray.toLongSafe(): Long {
-        if (this.size != 8) {
-            logger.w("FileTransfer", "ByteArray size is ${this.size}, expected 8")
-            return 0L
-        }
-        var result = 0L
-        for (i in 0..7) {
-            result = result or ((this[i].toLong() and 0xFF) shl (8 * i))
-        }
-        return result
-    }
-
-    /**
-     * Long 转 ByteArray
-     */
-    private fun Long.toByteArray(): ByteArray {
-        val result = ByteArray(8)
-        for (i in 0..7) {
-            result[i] = (this shr (8 * i) and 0xFF).toByte()
-        }
-        return result
     }
 }

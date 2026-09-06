@@ -33,6 +33,9 @@ class SmsSyncService : Service() {
     lateinit var smsManager: SmsManagerImpl
 
     @Inject
+    lateinit var smsContentObserver: SmsContentObserver
+
+    @Inject
     lateinit var logger: ILogger
 
     private val serviceScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
@@ -49,6 +52,8 @@ class SmsSyncService : Service() {
         startForeground(NOTIFICATION_ID, createNotification())
 
         // 开始监听
+        runCatching { smsContentObserver.startObserving() }
+            .onFailure { logger.w(TAG, "SMS observer unavailable: ${it.message}") }
         startSyncMonitoring()
     }
 
@@ -65,6 +70,7 @@ class SmsSyncService : Service() {
 
         // 取消所有协程
         syncJob?.cancel()
+        runCatching { smsContentObserver.stopObserving() }
         serviceScope.cancel()
     }
 

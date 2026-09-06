@@ -14,7 +14,9 @@ data class CallControlPayload(
     val state: CallStateType,
     val direction: CallDirection,
     val timestamp: Long,
-    val action: CallAction?
+    val action: CallAction?,
+    val startTime: Long = timestamp,
+    val duration: Long = 0L
 )
 
 /**

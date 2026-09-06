@@ -26,7 +26,8 @@ class CallStateListener @Inject constructor(
     @ApplicationContext private val context: Context,
     private val logger: ILogger
 ) {
-    private val telephonyManager = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+    private val telephonyManager =
+        context.getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager
 
     private val _callState = MutableStateFlow<CallState?>(null)
     val callState: StateFlow<CallState?> = _callState.asStateFlow()
@@ -57,6 +58,11 @@ class CallStateListener @Inject constructor(
         }
 
         try {
+            val manager = telephonyManager
+            if (manager == null) {
+                logger.w(TAG, "Telephony service is unavailable on this device")
+                return
+            }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 // Android 12+
                 val callback = object : TelephonyCallback(), TelephonyCallback.CallStateListener {
@@ -65,11 +71,11 @@ class CallStateListener @Inject constructor(
                     }
                 }
                 telephonyCallback = callback
-                telephonyManager.registerTelephonyCallback(context.mainExecutor, callback)
+                manager.registerTelephonyCallback(context.mainExecutor, callback)
             } else {
                 // Android 11 and below
                 @Suppress("DEPRECATION")
-                telephonyManager.listen(phoneStateListener, PhoneStateListener.LISTEN_CALL_STATE)
+                manager.listen(phoneStateListener, PhoneStateListener.LISTEN_CALL_STATE)
             }
 
             isListening = true
@@ -88,14 +94,15 @@ class CallStateListener @Inject constructor(
         }
 
         try {
+            val manager = telephonyManager ?: return
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 telephonyCallback?.let {
-                    telephonyManager.unregisterTelephonyCallback(it)
+                    manager.unregisterTelephonyCallback(it)
                 }
                 telephonyCallback = null
             } else {
                 @Suppress("DEPRECATION")
-                telephonyManager.listen(phoneStateListener, PhoneStateListener.LISTEN_NONE)
+                manager.listen(phoneStateListener, PhoneStateListener.LISTEN_NONE)
             }
 
             isListening = false
@@ -126,7 +133,11 @@ class CallStateListener @Inject constructor(
                         phoneNumber = currentPhoneNumber ?: "",
                         contactName = null,
                         state = CallStateType.ENDED,
-                        direction = determineCallDirection(),
+                        direction = if (_callState.value?.state == CallStateType.RINGING) {
+                            CallDirection.MISSED
+                        } else {
+                            currentDirection
+                        },
                         startTime = callStartTime,
                         duration = duration
                     )
@@ -136,20 +147,26 @@ class CallStateListener @Inject constructor(
                 currentCallId = null
                 currentPhoneNumber = null
                 callStartTime = 0
+                currentDirection = CallDirection.OUTGOING
             }
 
             TelephonyManager.CALL_STATE_RINGING -> {
                 // 来电响铃
-                currentCallId = UUID.randomUUID().toString()
-                currentPhoneNumber = phoneNumber
-                callStartTime = System.currentTimeMillis()
+                if (currentCallId == null) {
+                    currentCallId = UUID.randomUUID().toString()
+                    currentPhoneNumber = phoneNumber
+                    callStartTime = System.currentTimeMillis()
+                    currentDirection = CallDirection.INCOMING
+                } else if (!phoneNumber.isNullOrBlank()) {
+                    currentPhoneNumber = phoneNumber
+                }
 
                 _callState.value = CallState(
                     callId = currentCallId!!,
-                    phoneNumber = phoneNumber ?: "",
+                    phoneNumber = currentPhoneNumber ?: phoneNumber ?: "",
                     contactName = null,
                     state = CallStateType.RINGING,
-                    direction = CallDirection.INCOMING,
+                    direction = currentDirection,
                     startTime = callStartTime,
                     duration = 0
                 )
@@ -161,6 +178,7 @@ class CallStateListener @Inject constructor(
                     currentCallId = UUID.randomUUID().toString()
                     currentPhoneNumber = phoneNumber
                     callStartTime = System.currentTimeMillis()
+                    currentDirection = CallDirection.OUTGOING
                 }
 
                 _callState.value = CallState(
@@ -168,7 +186,7 @@ class CallStateListener @Inject constructor(
                     phoneNumber = currentPhoneNumber ?: phoneNumber ?: "",
                     contactName = null,
                     state = CallStateType.OFFHOOK,
-                    direction = determineCallDirection(),
+                    direction = currentDirection,
                     startTime = callStartTime,
                     duration = 0
                 )
@@ -179,15 +197,7 @@ class CallStateListener @Inject constructor(
     /**
      * 判断通话方向
      */
-    private fun determineCallDirection(): CallDirection {
-        // 如果是从 RINGING 状态转换来的，则是来电
-        // 否则是去电
-        return if (_callState.value?.state == CallStateType.RINGING) {
-            CallDirection.INCOMING
-        } else {
-            CallDirection.OUTGOING
-        }
-    }
+    private var currentDirection: CallDirection = CallDirection.OUTGOING
 
     companion object {
         private const val TAG = "CallStateListener"

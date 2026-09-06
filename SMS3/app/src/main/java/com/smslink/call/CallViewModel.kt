@@ -11,6 +11,7 @@ import com.smslink.core.model.CallState
 import com.smslink.core.model.Device
 import com.smslink.core.permission.IPermissionManager
 import com.smslink.device.IDeviceManager
+import com.smslink.device.observeLiveConnections
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -39,6 +40,7 @@ class CallViewModel @Inject constructor(
     private val _selectedDeviceId = MutableStateFlow<String?>(null)
     val selectedDeviceId: StateFlow<String?> = _selectedDeviceId.asStateFlow()
     private val allCallLogs = MutableStateFlow<List<CallLog>>(emptyList())
+    private val selectedCallType = MutableStateFlow<CallDirection?>(null)
 
     init {
         observeCallState()
@@ -65,7 +67,10 @@ class CallViewModel @Inject constructor(
                 }
                 .collect { callLogs ->
                     allCallLogs.value = callLogs
-                    _uiState.update { it.copy(isLoading = false, callLogs = callLogs, error = null) }
+                    val filtered = selectedCallType.value?.let { type ->
+                        callLogs.filter { it.type == type }
+                    } ?: callLogs
+                    _uiState.update { it.copy(isLoading = false, callLogs = filtered, error = null) }
                 }
         }
     }
@@ -149,6 +154,7 @@ class CallViewModel @Inject constructor(
     }
 
     fun filterByType(type: CallDirection) {
+        selectedCallType.value = type
         _uiState.update { it.copy(callLogs = allCallLogs.value.filter { log -> log.type == type }) }
     }
 
@@ -159,7 +165,7 @@ class CallViewModel @Inject constructor(
     private fun observeConnectedDevices() {
         val manager = deviceManager ?: return
         viewModelScope.launch {
-            manager.getConnectedDevices()
+            manager.observeLiveConnections()
                 .catch { e -> logger.e(TAG, "Error observing connected devices", e) }
                 .collect { _connectedDevices.value = it }
         }
@@ -173,7 +179,7 @@ class CallViewModel @Inject constructor(
     fun muteCall(callId: String) {
         viewModelScope.launch {
             if (!checkCallControlPermissions()) return@launch
-            val success = (callManager as? CallManagerImpl)?.muteCall(callId) ?: false
+            val success = callManager.muteCall(callId)
             if (!success) _uiState.update { it.copy(error = "Mute failed") }
         }
     }
@@ -181,7 +187,7 @@ class CallViewModel @Inject constructor(
     fun unmuteCall(callId: String) {
         viewModelScope.launch {
             if (!checkCallControlPermissions()) return@launch
-            val success = (callManager as? CallManagerImpl)?.unmuteCall(callId) ?: false
+            val success = callManager.unmuteCall(callId)
             if (!success) _uiState.update { it.copy(error = "Unmute failed") }
         }
     }
@@ -189,7 +195,7 @@ class CallViewModel @Inject constructor(
     fun holdCall(callId: String) {
         viewModelScope.launch {
             if (!checkCallControlPermissions()) return@launch
-            val success = (callManager as? CallManagerImpl)?.holdCall(callId) ?: false
+            val success = callManager.holdCall(callId)
             if (!success) _uiState.update { it.copy(error = "Hold failed") }
         }
     }
@@ -197,7 +203,7 @@ class CallViewModel @Inject constructor(
     fun resumeCall(callId: String) {
         viewModelScope.launch {
             if (!checkCallControlPermissions()) return@launch
-            val success = (callManager as? CallManagerImpl)?.resumeCall(callId) ?: false
+            val success = callManager.resumeCall(callId)
             if (!success) _uiState.update { it.copy(error = "Resume failed") }
         }
     }
@@ -209,7 +215,7 @@ class CallViewModel @Inject constructor(
                 return@launch
             }
             _uiState.update { it.copy(isRemoteControlling = true) }
-            val success = (callManager as? CallManagerImpl)?.sendCallControl(callState, action, targetDeviceId) ?: false
+            val success = callManager.sendCallControl(callState, action, targetDeviceId)
             _uiState.update {
                 it.copy(
                     isRemoteControlling = false,
@@ -263,7 +269,6 @@ class CallViewModel @Inject constructor(
 
     override fun onCleared() {
         super.onCleared()
-        stopListening()
     }
 
     companion object {

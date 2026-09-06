@@ -33,31 +33,43 @@ class NotificationListenerServiceImpl : NotificationListenerService() {
     lateinit var deviceManager: IDeviceManager
 
     @Inject
+    lateinit var notificationManager: NotificationManagerImpl
+
+    @Inject
+    lateinit var interactionHandler: NotificationInteractionHandler
+
+    @Inject
     lateinit var preferences: SharedPreferences
 
     private val notificationFilter by lazy { NotificationFilter(preferences) }
 
     override fun onCreate() {
         super.onCreate()
+        instance = this
         logger.i(TAG, "NotificationListenerService created")
     }
 
     override fun onDestroy() {
         super.onDestroy()
         serviceScope.cancel()
+        if (instance === this) instance = null
         logger.i(TAG, "NotificationListenerService destroyed")
     }
 
     override fun onListenerConnected() {
         super.onListenerConnected()
         logger.i(TAG, "NotificationListenerService connected")
+        notificationManager.onListenerConnected()
     }
 
     override fun onListenerDisconnected() {
         super.onListenerDisconnected()
         logger.w(TAG, "NotificationListenerService disconnected")
+        notificationManager.onListenerDisconnected()
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N &&
+            notificationManager.shouldRebindListener()
+        ) {
             requestRebind(android.content.ComponentName(this, javaClass))
         }
     }
@@ -79,7 +91,12 @@ class NotificationListenerServiceImpl : NotificationListenerService() {
                 val notification = sbn.notification
                 val appNotification = extractNotification(sbn, notification)
 
-                NotificationManagerImpl.getInstance()?.onNotificationPosted(appNotification)
+                interactionHandler.registerNotification(
+                    notificationId = appNotification.id,
+                    sbn = sbn,
+                    sourceDeviceId = appNotification.deviceId
+                )
+                notificationManager.onNotificationPosted(appNotification)
             } catch (e: Exception) {
                 logger.e(TAG, "Failed to process notification", e)
             }
@@ -88,7 +105,13 @@ class NotificationListenerServiceImpl : NotificationListenerService() {
 
     override fun onNotificationRemoved(sbn: StatusBarNotification) {
         try {
-            logger.d(TAG, "Notification removed: ${sbn.packageName}")
+            // Mirrored notifications are posted by this application. Do not
+            // reflect their lifecycle back to the peer as if they were local.
+            if (sbn.packageName == applicationContext.packageName) return
+            val notificationId = generateNotificationId(sbn)
+            interactionHandler.unregisterNotification(notificationId)
+            notificationManager.onNotificationRemoved(notificationId)
+            logger.d(TAG, "Notification removed: $notificationId")
         } catch (e: Exception) {
             logger.e(TAG, "Failed to process notification removal", e)
         }
@@ -139,6 +162,25 @@ class NotificationListenerServiceImpl : NotificationListenerService() {
 
     companion object {
         private const val TAG = "NotificationListener"
+
+        @Volatile
+        private var instance: NotificationListenerServiceImpl? = null
+
+        fun getInstance(): NotificationListenerServiceImpl? = instance
+
+        fun requestRebind(context: android.content.Context) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                NotificationListenerService.requestRebind(
+                    android.content.ComponentName(context, NotificationListenerServiceImpl::class.java)
+                )
+            }
+        }
+
+        fun requestUnbind() {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                instance?.requestUnbind()
+            }
+        }
     }
 }
 

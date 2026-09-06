@@ -12,6 +12,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -29,6 +32,8 @@ class SmsContentObserver @Inject constructor(
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     private var lastSyncTimestamp: Long = 0
     private var isObserving = false
+    private var pendingSyncJob: Job? = null
+    private val syncMutex = Mutex()
 
     /**
      * 开始监听
@@ -46,7 +51,8 @@ class SmsContentObserver @Inject constructor(
             this
         )
         isObserving = true
-        lastSyncTimestamp = System.currentTimeMillis()
+        lastSyncTimestamp = 0L
+        pendingSyncJob = scope.launch { syncNow() }
     }
 
     /**
@@ -60,6 +66,8 @@ class SmsContentObserver @Inject constructor(
         logger.i(TAG, "Stopping SMS content observer")
         context.contentResolver.unregisterContentObserver(this)
         isObserving = false
+        pendingSyncJob?.cancel()
+        pendingSyncJob = null
     }
 
     override fun onChange(selfChange: Boolean) {
@@ -70,9 +78,11 @@ class SmsContentObserver @Inject constructor(
         super.onChange(selfChange, uri)
         logger.d(TAG, "SMS database changed, uri: $uri")
 
-        // 增量同步：只同步最近1分钟的消息
-        scope.launch {
+        // Coalesce provider bursts (one SMS may generate several changes).
+        pendingSyncJob?.cancel()
+        pendingSyncJob = scope.launch {
             try {
+                kotlinx.coroutines.delay(DEBOUNCE_MS)
                 syncRecentMessages()
             } catch (e: Exception) {
                 logger.e(TAG, "Failed to sync recent messages", e)
@@ -84,24 +94,25 @@ class SmsContentObserver @Inject constructor(
      * 同步最近的消息（增量同步）
      */
     private suspend fun syncRecentMessages() {
-        val currentTime = System.currentTimeMillis()
-        val timeSinceLastSync = currentTime - lastSyncTimestamp
-
-        // 只同步最近1分钟的消息
-        if (timeSinceLastSync < SYNC_INTERVAL_MS) {
-            logger.d(TAG, "Skipping sync, too soon since last sync")
-            return
+        syncMutex.withLock {
+            val currentTime = System.currentTimeMillis()
+            logger.d(TAG, "Syncing messages since: $lastSyncTimestamp")
+            // ContentObserver callbacks can arrive after the provider has
+            // coalesced several writes, and SMS_DELIVER/SMS_RECEIVED may
+            // produce more than one callback. Re-read a bounded recent
+            // window on every debounced callback; SmsManagerImpl reconciles
+            // provider rows idempotently.
+            smsManager.syncFromSystem(MAX_SYNC_MESSAGES)
+            lastSyncTimestamp = currentTime
         }
+    }
 
-        logger.d(TAG, "Syncing messages since: $lastSyncTimestamp")
-
-        val messages = readRecentSystemSms(lastSyncTimestamp)
-        if (messages.isNotEmpty()) {
-            smsManager.syncFromSystem(messages.size)
-            logger.i(TAG, "Synced ${messages.size} recent messages")
+    /** Performs the initial bounded import and syncs it to connected peers. */
+    suspend fun syncNow() {
+        syncMutex.withLock {
+            smsManager.syncFromSystem(MAX_SYNC_MESSAGES)
+            lastSyncTimestamp = System.currentTimeMillis()
         }
-
-        lastSyncTimestamp = currentTime
     }
 
     /**
@@ -134,6 +145,7 @@ class SmsContentObserver @Inject constructor(
 
     companion object {
         private const val TAG = "SmsContentObserver"
-        private const val SYNC_INTERVAL_MS = 60_000L // 1分钟
+        private const val DEBOUNCE_MS = 500L
+        private const val MAX_SYNC_MESSAGES = 100
     }
 }

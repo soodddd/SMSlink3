@@ -42,7 +42,7 @@ class DeviceViewModel @Inject constructor(
             )
 
     val connectedDevices: StateFlow<List<Device>> =
-        deviceManager.getConnectedDevices()
+        deviceManager.getLiveConnectedDevices()
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5000),

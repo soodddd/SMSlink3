@@ -1,280 +1,295 @@
 package com.smslink.ui.settings
 
-import android.content.Intent
-import android.net.Uri
-import android.provider.Settings
+import android.app.Activity
+import android.content.Context
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material.icons.filled.BugReport
+import androidx.compose.material.icons.filled.ChevronRight
+import androidx.compose.material.icons.filled.DarkMode
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Language
+import androidx.compose.material.icons.filled.Link
+import androidx.compose.material.icons.filled.Security
+import androidx.compose.material.icons.filled.Sync
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Divider
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBar
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.smslink.BuildConfig
+import com.smslink.network.connection.ConnectionPolicy
 
-/**
- * 设置页面
- */
+/** Settings that are persisted and consumed by the actual runtime services. */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
     onNavigateToPermissions: () -> Unit,
     onNavigateToNotificationSettings: () -> Unit = {},
-    onNavigateToDiagnostic: () -> Unit = {}
+    onNavigateToDiagnostic: () -> Unit = {},
+    viewModel: SettingsViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
+    val connectionPolicy by viewModel.connectionPolicy.collectAsState()
+    val darkTheme by viewModel.darkTheme.collectAsState()
+    val language by viewModel.language.collectAsState()
+    var showPolicyDialog by remember { mutableStateOf(false) }
     var showThemeDialog by remember { mutableStateOf(false) }
     var showLanguageDialog by remember { mutableStateOf(false) }
-    var isDarkTheme by remember { mutableStateOf(false) }
-    var currentLanguage by remember { mutableStateOf("中文") }
+    var showAboutDialog by remember { mutableStateOf(false) }
 
     Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("设置") }
-            )
-        }
+        topBar = { TopAppBar(title = { Text("设置") }) }
     ) { paddingValues ->
         LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues),
+            modifier = Modifier.padding(paddingValues),
             contentPadding = PaddingValues(vertical = 8.dp)
         ) {
-            // 权限中心
-            item {
-                SettingsSection(title = "权限与安全")
-            }
+            item { SettingsSection("权限与安全") }
             item {
                 SettingsItem(
-                    icon = Icons.Default.Security,
-                    title = "权限中心",
-                    subtitle = "管理应用权限",
-                    onClick = onNavigateToPermissions
+                    Icons.Default.Security,
+                    "权限中心",
+                    "管理短信、电话、蓝牙、相机和通知访问",
+                    onNavigateToPermissions
                 )
                 Divider()
             }
 
-            // 连接设置
-            item {
-                SettingsSection(title = "连接")
-            }
+            item { SettingsSection("连接") }
             item {
                 SettingsItem(
-                    icon = Icons.Default.Link,
-                    title = "连接策略",
-                    subtitle = "配置设备连接方式",
-                    onClick = { /* TODO */ }
+                    Icons.Default.Link,
+                    "连接策略",
+                    connectionPolicy.description,
+                    onClick = { showPolicyDialog = true }
                 )
                 Divider()
             }
 
-            // 同步设置
-            item {
-                SettingsSection(title = "同步")
-            }
+            item { SettingsSection("同步") }
             item {
                 SettingsItem(
-                    icon = Icons.Default.Sync,
-                    title = "通知同步策略",
-                    subtitle = "配置通知同步规则",
-                    onClick = onNavigateToNotificationSettings
+                    Icons.Default.Sync,
+                    "通知同步策略",
+                    "配置通知同步规则",
+                    onNavigateToNotificationSettings
                 )
                 Divider()
             }
 
-            // 显示设置
-            item {
-                SettingsSection(title = "显示")
-            }
+            item { SettingsSection("显示") }
             item {
                 SettingsItem(
-                    icon = Icons.Default.DarkMode,
-                    title = "主题",
-                    subtitle = if (isDarkTheme) "深色模式" else "浅色模式",
+                    Icons.Default.DarkMode,
+                    "主题",
+                    if (darkTheme) "深色模式" else "浅色模式",
                     onClick = { showThemeDialog = true }
                 )
                 Divider()
             }
             item {
                 SettingsItem(
-                    icon = Icons.Default.Language,
-                    title = "语言",
-                    subtitle = currentLanguage,
+                    Icons.Default.Language,
+                    "语言",
+                    language,
                     onClick = { showLanguageDialog = true }
                 )
                 Divider()
             }
 
-            // 高级设置
-            item {
-                SettingsSection(title = "高级")
-            }
+            item { SettingsSection("高级") }
             item {
                 SettingsItem(
-                    icon = Icons.Default.BugReport,
-                    title = "诊断日志",
-                    subtitle = "查看应用日志",
-                    onClick = onNavigateToDiagnostic
+                    Icons.Default.BugReport,
+                    "诊断日志",
+                    "查看实时连接、同步和错误日志",
+                    onNavigateToDiagnostic
                 )
                 Divider()
             }
 
-            // 关于
-            item {
-                SettingsSection(title = "关于")
-            }
+            item { SettingsSection("关于") }
             item {
                 SettingsItem(
-                    icon = Icons.Default.Info,
-                    title = "关于 SMS-link",
-                    subtitle = "版本 1.0.0",
-                    onClick = { /* TODO */ }
+                    Icons.Default.Info,
+                    "关于 SMS-link",
+                    "版本 ${BuildConfig.VERSION_NAME}",
+                    onClick = { showAboutDialog = true }
                 )
                 Divider()
             }
         }
     }
 
-    // 主题选择对话框
+    if (showPolicyDialog) {
+        AlertDialog(
+            onDismissRequest = { showPolicyDialog = false },
+            title = { Text("连接策略") },
+            text = {
+                Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                    ConnectionPolicy.values().forEach { option ->
+                        RadioButtonItem(
+                            text = "${option.title}\n${option.description}",
+                            selected = option == connectionPolicy,
+                            onClick = {
+                                viewModel.setConnectionPolicy(option)
+                                showPolicyDialog = false
+                            }
+                        )
+                    }
+                }
+            },
+            confirmButton = {
+                TextButton(onClick = { showPolicyDialog = false }) { Text("关闭") }
+            }
+        )
+    }
+
     if (showThemeDialog) {
         AlertDialog(
             onDismissRequest = { showThemeDialog = false },
             title = { Text("选择主题") },
             text = {
                 Column {
-                    RadioButtonItem(
-                        text = "浅色模式",
-                        selected = !isDarkTheme,
-                        onClick = {
-                            isDarkTheme = false
-                            showThemeDialog = false
-                        }
-                    )
-                    RadioButtonItem(
-                        text = "深色模式",
-                        selected = isDarkTheme,
-                        onClick = {
-                            isDarkTheme = true
-                            showThemeDialog = false
-                        }
-                    )
+                    RadioButtonItem("浅色模式", !darkTheme) {
+                        viewModel.setDarkTheme(false)
+                        showThemeDialog = false
+                        recreate(context)
+                    }
+                    RadioButtonItem("深色模式", darkTheme) {
+                        viewModel.setDarkTheme(true)
+                        showThemeDialog = false
+                        recreate(context)
+                    }
                 }
             },
             confirmButton = {
-                TextButton(onClick = { showThemeDialog = false }) {
-                    Text("取消")
-                }
+                TextButton(onClick = { showThemeDialog = false }) { Text("取消") }
             }
         )
     }
 
-    // 语言选择对话框
     if (showLanguageDialog) {
         AlertDialog(
             onDismissRequest = { showLanguageDialog = false },
-            title = { Text("选择语言") },
+            title = { Text("语言") },
             text = {
                 Column {
                     RadioButtonItem(
-                        text = "中文",
-                        selected = currentLanguage == "中文",
+                        text = "中文（当前版本）",
+                        selected = language == SettingsViewModel.LANGUAGE_ZH_CN,
                         onClick = {
-                            currentLanguage = "中文"
+                            viewModel.setLanguage(SettingsViewModel.LANGUAGE_ZH_CN)
                             showLanguageDialog = false
                         }
                     )
-                    RadioButtonItem(
-                        text = "English",
-                        selected = currentLanguage == "English",
-                        onClick = {
-                            currentLanguage = "English"
-                            showLanguageDialog = false
-                        }
+                    Text(
+                        "当前版本界面仅提供中文。",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(start = 48.dp, top = 4.dp)
                     )
                 }
             },
             confirmButton = {
-                TextButton(onClick = { showLanguageDialog = false }) {
-                    Text("取消")
-                }
+                TextButton(onClick = { showLanguageDialog = false }) { Text("关闭") }
+            }
+        )
+    }
+
+    if (showAboutDialog) {
+        AlertDialog(
+            onDismissRequest = { showAboutDialog = false },
+            title = { Text("SMS-link") },
+            text = {
+                Text(
+                    "版本 ${BuildConfig.VERSION_NAME}（${BuildConfig.VERSION_CODE}）\n\n" +
+                        "Android 13+ 离线设备互联工具。短信、通知、文件和通话功能" +
+                        "均以已配对设备和真实系统权限为前提。"
+                )
+            },
+            confirmButton = {
+                TextButton(onClick = { showAboutDialog = false }) { Text("关闭") }
             }
         )
     }
 }
 
-/**
- * 设置分组标题
- */
+private fun recreate(context: Context) {
+    (context as? Activity)?.recreate()
+}
+
 @Composable
 private fun SettingsSection(title: String) {
     Text(
-        text = title,
+        title,
         style = MaterialTheme.typography.titleSmall,
         color = MaterialTheme.colorScheme.primary,
         modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)
     )
 }
 
-/**
- * 设置项
- */
 @Composable
 private fun SettingsItem(
-    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    icon: ImageVector,
     title: String,
     subtitle: String,
     onClick: () -> Unit
 ) {
-    Surface(
+    Row(
         modifier = Modifier
             .fillMaxWidth()
             .clickable(onClick = onClick)
+            .padding(16.dp),
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Row(
-            modifier = Modifier
-                .padding(16.dp)
-                .fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Icon(
-                imageVector = icon,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-            Spacer(modifier = Modifier.width(16.dp))
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = title,
-                    style = MaterialTheme.typography.bodyLarge
-                )
-                Text(
-                    text = subtitle,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            }
-            Icon(
-                imageVector = Icons.Default.ChevronRight,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onSurfaceVariant
+        Icon(icon, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant)
+        Spacer(Modifier.width(16.dp))
+        Column(Modifier.weight(1f)) {
+            Text(title, style = MaterialTheme.typography.bodyLarge)
+            Text(
+                subtitle,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
+        Icon(
+            Icons.Default.ChevronRight,
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.onSurfaceVariant
+        )
     }
 }
 
-/**
- * 单选按钮项
- */
 @Composable
-private fun RadioButtonItem(
-    text: String,
-    selected: Boolean,
-    onClick: () -> Unit
-) {
+private fun RadioButtonItem(text: String, selected: Boolean, onClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -282,11 +297,8 @@ private fun RadioButtonItem(
             .padding(vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        RadioButton(
-            selected = selected,
-            onClick = onClick
-        )
-        Spacer(modifier = Modifier.width(8.dp))
-        Text(text = text)
+        RadioButton(selected = selected, onClick = onClick)
+        Spacer(Modifier.width(8.dp))
+        Text(text)
     }
 }

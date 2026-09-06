@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Build
 import android.provider.Settings
 import android.telecom.TelecomManager
+import android.app.role.RoleManager
 import androidx.annotation.RequiresApi
 import com.smslink.core.log.ILogger
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -27,6 +28,12 @@ class DefaultPhoneAppGuide @Inject constructor(
     @RequiresApi(Build.VERSION_CODES.M)
     fun isDefaultPhoneApp(): Boolean {
         return try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                val roleManager = context.getSystemService(RoleManager::class.java)
+                if (roleManager?.isRoleAvailable(RoleManager.ROLE_DIALER) == true) {
+                    return roleManager.isRoleHeld(RoleManager.ROLE_DIALER)
+                }
+            }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 val telecomManager = context.getSystemService(Context.TELECOM_SERVICE) as? TelecomManager
                 val defaultDialerPackage = telecomManager?.defaultDialerPackage
@@ -49,6 +56,14 @@ class DefaultPhoneAppGuide @Inject constructor(
     @RequiresApi(Build.VERSION_CODES.M)
     fun requestDefaultPhoneApp(): Intent? {
         return try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                val roleManager = context.getSystemService(RoleManager::class.java)
+                if (roleManager?.isRoleAvailable(RoleManager.ROLE_DIALER) == true) {
+                    return roleManager.createRequestRoleIntent(RoleManager.ROLE_DIALER).apply {
+                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    }
+                }
+            }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 val intent = Intent(TelecomManager.ACTION_CHANGE_DEFAULT_DIALER).apply {
                     putExtra(TelecomManager.EXTRA_CHANGE_DEFAULT_DIALER_PACKAGE_NAME, context.packageName)

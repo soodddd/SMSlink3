@@ -47,7 +47,17 @@ android {
     }
 
     buildFeatures {
+        buildConfig = true
         compose = true
+    }
+
+    // The JVM TLS loopback regression test exercises JSSE's socket address
+    // path.  Java 17 keeps java.net strongly encapsulated by default, while
+    // the Android test stack still reaches that path reflectively.
+    testOptions {
+        unitTests.all { unitTest ->
+            unitTest.jvmArgs("--add-opens=java.base/java.net=ALL-UNNAMED")
+        }
     }
 
     composeOptions {
@@ -96,6 +106,10 @@ dependencies {
 
     // Gson for JSON serialization
     implementation("com.google.code.gson:gson:2.10.1")
+
+    // QR rendering for the signed pairing payload
+    implementation("com.google.zxing:core:3.5.3")
+    implementation("com.journeyapps:zxing-android-embedded:4.3.0")
 
     // Local TLS certificate generation
     implementation("org.bouncycastle:bcpkix-jdk18on:1.78.1")

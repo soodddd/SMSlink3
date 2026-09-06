@@ -22,7 +22,12 @@ data class Device(
     val publicKey: String? = null,
     val lastSeen: Long,
     val isPaired: Boolean,
-    val isConnected: Boolean = false
+    val isConnected: Boolean = false,
+    /** Last discovered LAN/hotspot endpoint. Never use a guessed address. */
+    val ipAddress: String? = null,
+    val port: Int = 1716,
+    /** Bonded Bluetooth Classic address used only for RFCOMM fallback. */
+    val bluetoothAddress: String? = null
 )
 
 /**

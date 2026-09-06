@@ -34,6 +34,10 @@ interface IDeviceManager {
      */
     fun getConnectedDevices(): Flow<List<Device>>
 
+    /** Authenticated live links for business traffic. Compatibility
+     * implementations fall back to getConnectedDevices(). */
+    fun getLiveConnectedDevices(): Flow<List<Device>> = getConnectedDevices()
+
     /**
      * 设置设备角色
      * @param deviceId 设备ID

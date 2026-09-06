@@ -13,7 +13,7 @@ import com.smslink.core.database.dao.NotificationDao
 import com.smslink.core.log.ILogger
 import com.smslink.core.log.LoggerImpl
 import com.smslink.core.permission.IPermissionManager
-import com.smslink.core.permission.PermissionManagerImpl
+import com.smslink.core.permission.EnhancedPermissionManager
 import com.smslink.device.IDeviceManager
 import com.smslink.device.DeviceManagerImpl
 import com.smslink.file.IFileTransferManager
@@ -22,8 +22,8 @@ import com.smslink.file.data.FileTransferDao
 import com.smslink.network.IConnectionManager
 import com.smslink.network.INetworkManager
 import com.smslink.network.NetworkManagerImpl
-import com.smslink.network.connection.ConnectionFactory
 import com.smslink.network.connection.ConnectionManagerImpl
+import com.smslink.network.connection.ConnectionPolicyStore
 import com.smslink.network.connection.LinkSelector
 import com.smslink.network.encryption.EncryptionImpl
 import com.smslink.network.encryption.IEncryption
@@ -59,7 +59,9 @@ object AppModule {
             AppDatabase::class.java,
             AppDatabase.DATABASE_NAME
         )
-            .fallbackToDestructiveMigration()
+            .addMigrations(AppDatabase.MIGRATION_5_6)
+            .addMigrations(AppDatabase.MIGRATION_6_7)
+            .addMigrations(AppDatabase.MIGRATION_7_8)
             .build()
     }
 
@@ -104,7 +106,7 @@ object AppModule {
      */
     @Provides
     @Singleton
-    fun providePermissionManager(impl: PermissionManagerImpl): IPermissionManager {
+    fun providePermissionManager(impl: EnhancedPermissionManager): IPermissionManager {
         return impl
     }
 
@@ -151,23 +153,10 @@ object AppModule {
     @Singleton
     fun provideLinkSelector(
         @ApplicationContext context: Context,
-        logger: ILogger
-    ): LinkSelector {
-        return LinkSelector(context, logger)
-    }
-
-    /**
-     * 提供连接工厂
-     */
-    @Provides
-    @Singleton
-    fun provideConnectionFactory(
-        deviceDao: DeviceDao,
-        encryption: IEncryption,
         logger: ILogger,
-        linkSelector: LinkSelector
-    ): ConnectionFactory {
-        return ConnectionFactory(deviceDao, encryption, logger, linkSelector)
+        policyStore: ConnectionPolicyStore
+    ): LinkSelector {
+        return LinkSelector(context, logger, policyStore)
     }
 
     /**

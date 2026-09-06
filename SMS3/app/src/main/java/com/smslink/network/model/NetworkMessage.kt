@@ -2,6 +2,7 @@ package com.smslink.network.model
 
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import java.util.UUID
 
 /**
  * 网络消息封装
@@ -21,8 +22,39 @@ data class NetworkMessage(
 ) {
     fun toJson(): String = Gson().toJson(this)
 
+    fun isStructurallyValid(
+        expectedSource: String? = null,
+        expectedTarget: String? = null,
+        now: Long = System.currentTimeMillis()
+    ): Boolean = runCatching {
+        if (version != "1.0" ||
+            messageType == null ||
+            payload == null ||
+            payload.toString().length > MAX_PAYLOAD_CHARS ||
+            messageId.isBlank() || messageId.length > 128 ||
+            sourceDevice.isBlank() || sourceDevice.length > 128 ||
+            targetDevice.isBlank() || targetDevice.length > 128 ||
+            timestamp < now - MAX_CLOCK_SKEW_MS || timestamp > now + MAX_CLOCK_SKEW_MS
+        ) return@runCatching false
+        if (expectedSource != null && sourceDevice != expectedSource) return@runCatching false
+        if (expectedTarget != null && targetDevice != expectedTarget) return@runCatching false
+        UUID.fromString(messageId)
+        true
+    }.getOrDefault(false)
+
     companion object {
         fun fromJson(json: String): NetworkMessage = Gson().fromJson(json, NetworkMessage::class.java)
+
+        fun fromJsonOrNull(json: String): NetworkMessage? = runCatching {
+            val parsed = fromJson(json)
+            requireNotNull(parsed.messageType)
+            requireNotNull(parsed.payload)
+            require(parsed.payload.toString().length <= MAX_PAYLOAD_CHARS)
+            parsed
+        }.getOrNull()
+
+        private const val MAX_CLOCK_SKEW_MS = 10 * 60 * 1000L
+        private const val MAX_PAYLOAD_CHARS = 1_000_000
     }
 }
 

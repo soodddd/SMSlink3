@@ -15,6 +15,8 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import java.util.concurrent.ConcurrentHashMap
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -30,11 +32,12 @@ class BleGattServer @Inject constructor(
 ) {
     companion object {
         private const val TAG = "BleGattServer"
+        private const val BLE_NOTIFY_DELAY_MS = 15L
+        private const val MAX_INCOMING_CHUNKS = 0xFFFF
     }
 
     private val bluetoothManager = context.getSystemService(Context.BLUETOOTH_SERVICE) as? BluetoothManager
     private val bluetoothAdapter: BluetoothAdapter? = bluetoothManager?.adapter
-    private val bluetoothLeAdvertiser: BluetoothLeAdvertiser? = bluetoothAdapter?.bluetoothLeAdvertiser
 
     private var gattServer: BluetoothGattServer? = null
     private val scope = CoroutineScope(Dispatchers.Main + SupervisorJob())
@@ -47,6 +50,8 @@ class BleGattServer @Inject constructor(
 
     private var localDeviceInfo: BleDeviceInfo? = null
     private var onPairingRequestReceived: ((BlePairingRequest, BluetoothDevice) -> Unit)? = null
+    private val subscribedDevices = ConcurrentHashMap.newKeySet<BluetoothDevice>()
+    private val incomingChunks = ConcurrentHashMap<String, MutableMap<Int, BleChunkCodec.DecodedChunk>>()
 
     /**
      * 启动 GATT 服务器
@@ -81,12 +86,16 @@ class BleGattServer @Inject constructor(
         )
 
         try {
-            // 创建 GATT 服务器
-            gattServer = bluetoothManager?.openGattServer(context, gattServerCallback)
-
-            // 添加 SMS-link 服务
-            val service = createSmsLinkService()
-            gattServer?.addService(service)
+            // 创建 GATT 服务器并确认服务真正注册成功. Advertising a
+            // device whose GATT database failed to open produces a peer that
+            // can be discovered but can never be paired.
+            val server = bluetoothManager?.openGattServer(context, gattServerCallback)
+                ?: throw IllegalStateException("Bluetooth GATT server unavailable")
+            if (!server.addService(createSmsLinkService())) {
+                server.close()
+                throw IllegalStateException("Unable to register SMS-link GATT service")
+            }
+            gattServer = server
 
             logger.i(TAG, "GATT server started successfully")
 
@@ -107,7 +116,13 @@ class BleGattServer @Inject constructor(
             return
         }
 
-        if (bluetoothLeAdvertiser == null) {
+        if (gattServer == null) {
+            logger.w(TAG, "Cannot advertise before GATT server is ready")
+            return
+        }
+
+        val advertiser = bluetoothAdapter?.bluetoothLeAdvertiser
+        if (advertiser == null) {
             logger.w(TAG, "BLE advertiser not available")
             return
         }
@@ -128,11 +143,13 @@ class BleGattServer @Inject constructor(
                 .addServiceUuid(ParcelUuid(BleConstants.SMSLINK_SERVICE_UUID))
                 .addServiceData(
                     ParcelUuid(BleConstants.SMSLINK_SERVICE_UUID),
-                    localDeviceInfo?.toBytes() ?: ByteArray(0)
+                    // Keep the advertisement within the legacy 31-byte
+                    // budget. Full identity is read over GATT after connect.
+                    byteArrayOf(0x53, 0x4c, BleConstants.PROTOCOL_VERSION.toByte())
                 )
                 .build()
 
-            bluetoothLeAdvertiser?.startAdvertising(settings, data, advertiseCallback)
+            advertiser.startAdvertising(settings, data, advertiseCallback)
 
         } catch (e: SecurityException) {
             logger.e(TAG, "Security exception during advertising", e)
@@ -153,7 +170,7 @@ class BleGattServer @Inject constructor(
         logger.i(TAG, "Stopping BLE advertising")
 
         try {
-            bluetoothLeAdvertiser?.stopAdvertising(advertiseCallback)
+            bluetoothAdapter?.bluetoothLeAdvertiser?.stopAdvertising(advertiseCallback)
             _isAdvertising.value = false
         } catch (e: Exception) {
             logger.e(TAG, "Error stopping advertising", e)
@@ -173,6 +190,8 @@ class BleGattServer @Inject constructor(
             gattServer?.close()
             gattServer = null
             _connectedDevices.value = emptyList()
+            subscribedDevices.clear()
+            incomingChunks.clear()
         } catch (e: Exception) {
             logger.e(TAG, "Error stopping GATT server", e)
         }
@@ -196,11 +215,19 @@ class BleGattServer @Inject constructor(
         service.addCharacteristic(deviceInfoCharacteristic)
 
         // 配对特征（可读写）
-        val pairingCharacteristic = BluetoothGattCharacteristic(
-            BleConstants.PAIRING_CHARACTERISTIC,
-            BluetoothGattCharacteristic.PROPERTY_READ or BluetoothGattCharacteristic.PROPERTY_WRITE,
-            BluetoothGattCharacteristic.PERMISSION_READ or BluetoothGattCharacteristic.PERMISSION_WRITE
-        )
+            val pairingCharacteristic = BluetoothGattCharacteristic(
+                BleConstants.PAIRING_CHARACTERISTIC,
+                BluetoothGattCharacteristic.PROPERTY_READ or
+                    BluetoothGattCharacteristic.PROPERTY_WRITE or
+                    BluetoothGattCharacteristic.PROPERTY_NOTIFY,
+                BluetoothGattCharacteristic.PERMISSION_READ or BluetoothGattCharacteristic.PERMISSION_WRITE
+            )
+            pairingCharacteristic.addDescriptor(
+                BluetoothGattDescriptor(
+                    BleConstants.CLIENT_CHARACTERISTIC_CONFIG_UUID,
+                    BluetoothGattDescriptor.PERMISSION_READ or BluetoothGattDescriptor.PERMISSION_WRITE
+                )
+            )
         service.addCharacteristic(pairingCharacteristic)
 
         // 控制特征（可读写通知）
@@ -225,17 +252,19 @@ class BleGattServer @Inject constructor(
             when (newState) {
                 BluetoothProfile.STATE_CONNECTED -> {
                     logger.i(TAG, "Device connected: ${device.address}")
-                    val devices = _connectedDevices.value.toMutableList()
-                    if (!devices.contains(device)) {
-                        devices.add(device)
-                        _connectedDevices.value = devices
+                    _connectedDevices.update { current ->
+                        current.toMutableList().apply {
+                            if (!contains(device)) add(device)
+                        }
                     }
                 }
                 BluetoothProfile.STATE_DISCONNECTED -> {
                     logger.i(TAG, "Device disconnected: ${device.address}")
-                    val devices = _connectedDevices.value.toMutableList()
-                    devices.remove(device)
-                    _connectedDevices.value = devices
+                    _connectedDevices.update { current ->
+                        current.filterNot { it == device }
+                    }
+                    subscribedDevices.remove(device)
+                    incomingChunks.remove(device.address)
                 }
             }
         }
@@ -252,12 +281,27 @@ class BleGattServer @Inject constructor(
             when (characteristic.uuid) {
                 BleConstants.DEVICE_INFO_CHARACTERISTIC -> {
                     val data = localDeviceInfo?.toBytes() ?: ByteArray(0)
+                    if (offset < 0 || offset > data.size) {
+                        gattServer?.sendResponse(
+                            device,
+                            requestId,
+                            BluetoothGatt.GATT_INVALID_OFFSET,
+                            offset,
+                            null
+                        )
+                        return
+                    }
+                    // A default ATT connection can carry only 20 bytes in a
+                    // response. Android will issue follow-up long-read
+                    // requests with increasing offsets when needed.
+                    val end = minOf(offset + 20, data.size)
+                    val response = data.copyOfRange(offset, end)
                     gattServer?.sendResponse(
                         device,
                         requestId,
                         BluetoothGatt.GATT_SUCCESS,
                         offset,
-                        data
+                        response
                     )
                 }
                 else -> {
@@ -284,14 +328,41 @@ class BleGattServer @Inject constructor(
         ) {
             logger.d(TAG, "Write request from ${device.address} for ${characteristic.uuid}")
 
+            if (offset != 0 || preparedWrite) {
+                if (responseNeeded) {
+                    gattServer?.sendResponse(
+                        device,
+                        requestId,
+                        BluetoothGatt.GATT_REQUEST_NOT_SUPPORTED,
+                        offset,
+                        null
+                    )
+                }
+                return
+            }
+
             when (characteristic.uuid) {
                 BleConstants.PAIRING_CHARACTERISTIC -> {
-                    // 处理配对请求
-                    val pairingRequest = BlePairingRequest.fromBytes(value)
+                    // A request may be split across several characteristic
+                    // writes. An incomplete but valid chunk is accepted and
+                    // must not be reported as GATT_FAILURE; otherwise the
+                    // client stops before the final chunk arrives.
+                    val isValidChunk = BleChunkCodec.decode(value) != null
+                    val pairingRequest = decodePairingRequest(device, value)
                     if (pairingRequest != null) {
                         logger.i(TAG, "Received pairing request from ${pairingRequest.deviceName}")
                         onPairingRequestReceived?.invoke(pairingRequest, device)
 
+                        if (responseNeeded) {
+                            gattServer?.sendResponse(
+                                device,
+                                requestId,
+                                BluetoothGatt.GATT_SUCCESS,
+                                offset,
+                                null
+                            )
+                        }
+                    } else if (isValidChunk && incomingChunks.containsKey(device.address)) {
                         if (responseNeeded) {
                             gattServer?.sendResponse(
                                 device,
@@ -326,6 +397,52 @@ class BleGattServer @Inject constructor(
                 }
             }
         }
+
+        @SuppressLint("MissingPermission")
+        override fun onDescriptorWriteRequest(
+            device: BluetoothDevice,
+            requestId: Int,
+            descriptor: BluetoothGattDescriptor,
+            preparedWrite: Boolean,
+            responseNeeded: Boolean,
+            offset: Int,
+            value: ByteArray
+        ) {
+            if (descriptor.uuid == BleConstants.CLIENT_CHARACTERISTIC_CONFIG_UUID) {
+                when {
+                    value.contentEquals(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE) -> subscribedDevices.add(device)
+                    value.contentEquals(BluetoothGattDescriptor.DISABLE_NOTIFICATION_VALUE) -> subscribedDevices.remove(device)
+                }
+                if (responseNeeded) {
+                    gattServer?.sendResponse(device, requestId, BluetoothGatt.GATT_SUCCESS, offset, null)
+                }
+            } else if (responseNeeded) {
+                gattServer?.sendResponse(device, requestId, BluetoothGatt.GATT_FAILURE, offset, null)
+            }
+        }
+    }
+
+    private fun decodePairingRequest(device: BluetoothDevice, value: ByteArray): BlePairingRequest? {
+        // Accept a complete legacy write as well as the chunked protocol so
+        // older SMS-link builds can still be upgraded through BLE.
+        BlePairingRequest.fromBytes(value)?.let { return it }
+        val chunk = BleChunkCodec.decode(value) ?: return null
+        val chunks = incomingChunks.getOrPut(device.address) { ConcurrentHashMap() }
+        if (chunks.values.firstOrNull()?.total != null &&
+            chunks.values.firstOrNull()?.total != chunk.total
+        ) {
+            chunks.clear()
+        }
+        chunks[chunk.sequence] = chunk
+        if (chunks.size > MAX_INCOMING_CHUNKS ||
+            chunks.values.sumOf { it.payload.size } > BleChunkCodec.MAX_ASSEMBLED_SIZE
+        ) {
+            incomingChunks.remove(device.address)
+            return null
+        }
+        val assembled = BleChunkCodec.assemble(chunks.values) ?: return null
+        incomingChunks.remove(device.address)
+        return BlePairingRequest.fromBytes(assembled)
     }
 
     /**
@@ -361,8 +478,17 @@ class BleGattServer @Inject constructor(
                 val service = gattServer?.getService(BleConstants.SMSLINK_SERVICE_UUID)
                 val characteristic = service?.getCharacteristic(BleConstants.PAIRING_CHARACTERISTIC)
 
-                characteristic?.value = response.toBytes()
-                gattServer?.notifyCharacteristicChanged(device, characteristic, false)
+                if (characteristic == null || !subscribedDevices.contains(device)) {
+                    logger.w(TAG, "Pairing response skipped; client is not subscribed")
+                    return@launch
+                }
+                BleChunkCodec.encode(response.toBytes()).forEach { chunk ->
+                    characteristic.value = chunk
+                    if (gattServer?.notifyCharacteristicChanged(device, characteristic, false) != true) {
+                        throw IllegalStateException("GATT notification was not accepted")
+                    }
+                    delay(BLE_NOTIFY_DELAY_MS)
+                }
 
                 logger.i(TAG, "Sent pairing response to ${device.address}")
             } catch (e: Exception) {
@@ -378,4 +504,5 @@ class BleGattServer @Inject constructor(
         stopServer()
         scope.cancel()
     }
+
 }

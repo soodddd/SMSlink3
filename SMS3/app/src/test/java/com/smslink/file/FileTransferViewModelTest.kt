@@ -132,16 +132,18 @@ class FileTransferViewModelTest {
     }
 
     @Test
-    fun `receiveFile should emit PermissionRequired when no permission`() = runTest {
+    fun `receiveFile should not require broad storage permission`() = runTest {
         // Given
         every { permissionManager.hasPermissions(any()) } returns false
         val transferId = "transfer123"
+        val transfer = createTestTransfer(transferId, TransferState.TRANSFERRING)
+        every { fileTransferManager.receiveFile(transferId) } returns flowOf(transfer)
 
         // When
         viewModel.receiveFile(transferId)
 
         // Then
-        coVerify(exactly = 0) { fileTransferManager.receiveFile(any()) }
+        coVerify { fileTransferManager.receiveFile(transferId) }
     }
 
     @Test
@@ -225,27 +227,12 @@ class FileTransferViewModelTest {
     }
 
     @Test
-    fun `requestStoragePermission should request permissions`() = runTest {
-        // Given
-        val permissionResults: Map<String, PermissionResult> = mapOf(
-            android.Manifest.permission.READ_EXTERNAL_STORAGE to PermissionResult(
-                permission = android.Manifest.permission.READ_EXTERNAL_STORAGE,
-                granted = true,
-                shouldShowRationale = false
-            ),
-            android.Manifest.permission.WRITE_EXTERNAL_STORAGE to PermissionResult(
-                permission = android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                granted = true,
-                shouldShowRationale = false
-            )
-        )
-        every { permissionManager.requestPermissions(any()) } returns flowOf(permissionResults)
-
+    fun `requestStoragePermission should use SAF contract instead of dangerous permission`() = runTest {
         // When
         viewModel.requestStoragePermission()
 
         // Then
-        coVerify { permissionManager.requestPermissions(any()) }
+        verify(exactly = 0) { permissionManager.requestPermissions(any()) }
     }
 
     @Test

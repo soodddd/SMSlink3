@@ -93,10 +93,18 @@ class DeviceRepository @Inject constructor(
         return deviceDao.getAllPaired().map { devices ->
             val currentTime = System.currentTimeMillis()
             devices.filter { device ->
-                currentTime - device.lastSeen < 10000 // 10秒内活跃
+                device.isConnected || currentTime - device.lastSeen < 10000 // 连接状态或最近活动
             }
         }
     }
+
+    /**
+     * Returns only links whose connection manager has an active authenticated
+     * transport. Discovery heartbeats update lastSeen too, so they must not be
+     * treated as permission to send business traffic.
+     */
+    fun getActuallyConnectedDevices(): Flow<List<Device>> =
+        deviceDao.getAllPaired().map { devices -> devices.filter(Device::isConnected) }
 
     /**
      * 更新设备最后可见时间
@@ -106,6 +114,20 @@ class DeviceRepository @Inject constructor(
             deviceDao.updateLastSeen(deviceId, System.currentTimeMillis())
         } catch (e: Exception) {
             logger.e(TAG, "Failed to update last seen", e)
+        }
+    }
+
+    suspend fun updateConnectionState(deviceId: String, connected: Boolean) {
+        try {
+            val device = deviceDao.getById(deviceId) ?: return
+            deviceDao.update(
+                device.copy(
+                    isConnected = connected,
+                    lastSeen = if (connected) System.currentTimeMillis() else device.lastSeen
+                )
+            )
+        } catch (e: Exception) {
+            logger.e(TAG, "Failed to update connection state", e)
         }
     }
 

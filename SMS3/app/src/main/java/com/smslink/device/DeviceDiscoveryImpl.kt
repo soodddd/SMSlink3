@@ -9,11 +9,13 @@ import com.smslink.core.model.DeviceType
 import com.smslink.device.ble.BleDeviceDiscovery
 import com.smslink.device.ble.BleGattServer
 import com.smslink.device.ble.BlePermissionHelper
+import com.smslink.security.DeviceIdentityStore
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import java.net.DatagramPacket
 import java.net.DatagramSocket
 import java.net.InetAddress
@@ -31,20 +33,23 @@ class DeviceDiscoveryImpl @Inject constructor(
     private val bleGattServer: BleGattServer,
     private val blePermissionHelper: BlePermissionHelper,
     private val deviceRepository: DeviceRepository,
-    private val logger: ILogger
+    private val logger: ILogger,
+    private val identityStore: DeviceIdentityStore,
+    private val devicePairing: DevicePairingImpl
 ) {
     companion object {
         private const val DISCOVERY_PORT = 1716
-        private const val EMULATOR_RELAY_PORT = 1816
         private const val BROADCAST_INTERVAL = 3000L // 3绉掑箍鎾竴娆?
         private const val DEVICE_TIMEOUT = 10000L // 10绉掓湭鍝嶅簲瑙嗕负绂荤嚎
         private const val BLE_FALLBACK_DELAY = 5000L
+        private const val MAX_DISCOVERY_PACKET_BYTES = 4096
         private const val TAG = "DeviceDiscovery"
     }
 
     private val gson = Gson()
     private var discoveryJob: Job? = null
     private var broadcastJob: Job? = null
+    private var staleDeviceJob: Job? = null
     private var socket: DatagramSocket? = null
 
     private val _discoveredDevices = MutableStateFlow<List<DiscoveredDevice>>(emptyList())
@@ -63,6 +68,12 @@ class DeviceDiscoveryImpl @Inject constructor(
      * 开始设备发现
      */
     fun startDiscovery(localDevice: Device) {
+        if (discoveryJob?.isActive == true || broadcastJob?.isActive == true ||
+            bleMonitorJob?.isActive == true || bleFallbackJob?.isActive == true
+        ) {
+            logger.d(TAG, "Discovery already running; restarting with current settings")
+            stopDiscovery()
+        }
         logger.i(TAG, "Starting device discovery with mode: ${settings.mode}")
 
         when (settings.mode) {
@@ -95,25 +106,19 @@ class DeviceDiscoveryImpl @Inject constructor(
 
         logger.i(TAG, "Starting BLE discovery")
 
-        bleGattServer.startServer(localDevice) { pairingRequest, _ ->
+        bleGattServer.startServer(localDevice) { pairingRequest, bluetoothDevice ->
             logger.i(TAG, "Received BLE pairing request from ${pairingRequest.deviceName}")
+            devicePairing.receiveBlePairRequest(pairingRequest, bluetoothDevice)
         }
         bleGattServer.startAdvertising()
         bleDeviceDiscovery.startScan()
         startBleDeviceMonitoring()
         scheduleUdpFallback(localDevice)
     }
-    /**
-     * 启动 UDP 或模拟器 relay 发现
-     */
+    /** 启动 UDP 发现。 */
     private fun startUdpDiscovery(localDevice: Device) {
         if (discoveryJob?.isActive == true) {
             logger.d(TAG, "UDP discovery already running")
-            return
-        }
-
-        if (isEmulatorEnvironment()) {
-            startEmulatorRelayDiscovery(localDevice)
             return
         }
 
@@ -139,7 +144,7 @@ class DeviceDiscoveryImpl @Inject constructor(
             }
 
             // 启动设备超时检查任务
-            scope.launch {
+            staleDeviceJob = scope.launch {
                 while (isActive) {
                     delay(5000L)
                     removeStaleDevices()
@@ -148,99 +153,6 @@ class DeviceDiscoveryImpl @Inject constructor(
 
         } catch (e: Exception) {
             logger.e(TAG, "Failed to start UDP discovery", e)
-        }
-    }
-
-    /**
-     * 启动模拟器专用的 relay 发现。
-     * 通过宿主机上的轻量 HTTP relay 交换身份信息，避免模拟器 UDP 广播隔离。
-     */
-    private fun startEmulatorRelayDiscovery(localDevice: Device) {
-        logger.i(TAG, "Starting emulator relay discovery")
-
-        val relayBaseUrl = "http://10.0.2.2:$EMULATOR_RELAY_PORT"
-        val localIdentity = IdentityPacket(
-            deviceId = localDevice.id,
-            deviceName = localDevice.name,
-            deviceType = localDevice.type,
-            protocolVersion = 1
-        )
-
-        broadcastJob?.cancel()
-        broadcastJob = scope.launch {
-            while (isActive) {
-                postRelayIdentity(relayBaseUrl, localIdentity)
-                delay(settings.udpBroadcastInterval)
-            }
-        }
-
-        discoveryJob?.cancel()
-        discoveryJob = scope.launch {
-            while (isActive) {
-                fetchRelayDevices(relayBaseUrl, localDevice.id).forEach { packet ->
-                    if (packet.deviceId != localDevice.id) {
-                        handleDiscoveredDevice(packet, "10.0.2.2")
-                    }
-                }
-                delay(2000L)
-            }
-        }
-
-        scope.launch {
-            while (isActive) {
-                delay(5000L)
-                removeStaleDevices()
-            }
-        }
-    }
-
-    /**
-     * 判断是否运行在模拟器中。
-     */
-    private fun isEmulatorEnvironment(): Boolean {
-        val fingerprint = android.os.Build.FINGERPRINT.lowercase()
-        val model = android.os.Build.MODEL.lowercase()
-        return fingerprint.contains("generic") ||
-            model.contains("sdk_gphone") ||
-            model.contains("emulator")
-    }
-
-    /**
-     * 将本地身份写入宿主机 relay。
-     */
-    private fun postRelayIdentity(baseUrl: String, identityPacket: IdentityPacket) {
-        try {
-            val connection = java.net.URL("$baseUrl/register").openConnection() as java.net.HttpURLConnection
-            connection.requestMethod = "POST"
-            connection.doOutput = true
-            connection.setRequestProperty("Content-Type", "application/json; charset=utf-8")
-            connection.outputStream.use { output ->
-                output.write(gson.toJson(identityPacket).toByteArray(Charsets.UTF_8))
-            }
-            connection.inputStream.use { it.readBytes() }
-            connection.disconnect()
-            logger.d(TAG, "Relay identity posted")
-        } catch (e: Exception) {
-            logger.w(TAG, "Failed to post relay identity: ${e.message}")
-        }
-    }
-
-    /**
-     * 从宿主机 relay 拉取其它设备列表。
-     */
-    private fun fetchRelayDevices(baseUrl: String, deviceId: String): List<IdentityPacket> {
-        return try {
-            val connection = java.net.URL("$baseUrl/peers?deviceId=$deviceId").openConnection() as java.net.HttpURLConnection
-            connection.requestMethod = "GET"
-            connection.connectTimeout = 3000
-            connection.readTimeout = 3000
-            connection.inputStream.bufferedReader().use { reader ->
-                val json = reader.readText()
-                gson.fromJson(json, Array<IdentityPacket>::class.java)?.toList() ?: emptyList()
-            }.also { connection.disconnect() }
-        } catch (e: Exception) {
-            logger.w(TAG, "Failed to fetch relay peers: ${e.message}")
-            emptyList()
         }
     }
 
@@ -253,10 +165,7 @@ class DeviceDiscoveryImpl @Inject constructor(
         }
     }
 
-    /**
-     * 在 BLE 首选模式下，如果一段时间内没有发现任何设备，则自动回落到 UDP。
-     * 这样可以保证模拟器和 BLE 不可用环境仍然具备可验证的发现路径。
-     */
+    /** 在 BLE 首选模式下，如果没有发现 BLE 设备，则自动回落到 UDP。 */
     private fun scheduleUdpFallback(localDevice: Device) {
         if (settings.mode != DiscoveryMode.BLE_FIRST) {
             return
@@ -300,34 +209,43 @@ class DeviceDiscoveryImpl @Inject constructor(
     private fun startBleDeviceMonitoring() {
         bleMonitorJob?.cancel()
         bleFallbackJob?.cancel()
+        staleDeviceJob?.cancel()
+        staleDeviceJob = null
 
         bleMonitorJob = scope.launch {
             bleDeviceDiscovery.discoveredDevices.collect { bleDevices ->
                 // 合并 BLE 发现的设备到总列表
-                val currentDevices = _discoveredDevices.value.toMutableList()
+                _discoveredDevices.update { existingDevices ->
+                    val currentDevices = existingDevices.toMutableList()
 
-                bleDevices.forEach { bleDevice ->
-                    val existingIndex = currentDevices.indexOfFirst {
-                        it.device.id == bleDevice.device.id
+                    bleDevices.forEach { bleDevice ->
+                        val existingIndex = currentDevices.indexOfFirst {
+                            it.device.id == bleDevice.device.id
+                        }
+                        val existing = currentDevices.getOrNull(existingIndex)
+
+                        val discoveredDevice = DiscoveredDevice(
+                            device = bleDevice.device.copy(
+                                ipAddress = existing?.device?.ipAddress,
+                                port = existing?.device?.port ?: bleDevice.device.port,
+                                bluetoothAddress = bleDevice.bleDevice.address
+                            ),
+                            ipAddress = existing?.ipAddress.orEmpty(),
+                            lastSeen = bleDevice.lastSeen,
+                            discoveryMethod = DiscoveryMethod.BLE,
+                            rssi = bleDevice.rssi,
+                            bleDevice = bleDevice.bleDevice
+                        )
+
+                        if (existingIndex >= 0) {
+                            currentDevices[existingIndex] = discoveredDevice
+                        } else {
+                            currentDevices.add(discoveredDevice)
+                        }
                     }
 
-                    val discoveredDevice = DiscoveredDevice(
-                        device = bleDevice.device,
-                        ipAddress = "", // BLE 璁惧娌℃湁 IP 鍦板潃
-                        lastSeen = bleDevice.lastSeen,
-                        discoveryMethod = DiscoveryMethod.BLE,
-                        rssi = bleDevice.rssi,
-                        bleDevice = bleDevice.bleDevice
-                    )
-
-                    if (existingIndex >= 0) {
-                        currentDevices[existingIndex] = discoveredDevice
-                    } else {
-                        currentDevices.add(discoveredDevice)
-                    }
+                    currentDevices
                 }
-
-                _discoveredDevices.value = currentDevices
             }
         }
     }
@@ -344,11 +262,14 @@ class DeviceDiscoveryImpl @Inject constructor(
         bleGattServer.stopServer()
         bleMonitorJob?.cancel()
         bleFallbackJob?.cancel()
-
+        staleDeviceJob?.cancel()
+        staleDeviceJob = null
 
         // 鍋滄 UDP
         discoveryJob?.cancel()
         broadcastJob?.cancel()
+        discoveryJob = null
+        broadcastJob = null
         socket?.close()
         socket = null
 
@@ -359,12 +280,7 @@ class DeviceDiscoveryImpl @Inject constructor(
      * 骞挎挱鏈澶囪韩浠戒俊鎭?     */
     private suspend fun broadcastIdentity(localDevice: Device) {
         try {
-            val identityPacket = IdentityPacket(
-                deviceId = localDevice.id,
-                deviceName = localDevice.name,
-                deviceType = localDevice.type,
-                protocolVersion = 1
-            )
+            val identityPacket = signedIdentityPacket(localDevice)
 
             val message = gson.toJson(identityPacket).toByteArray()
             val broadcastAddresses = getBroadcastAddresses()
@@ -391,7 +307,11 @@ class DeviceDiscoveryImpl @Inject constructor(
     /**
      * 鐩戝惉鍏朵粬璁惧鐨勫箍鎾?     */
     private suspend fun listenForDevices() {
-        val buffer = ByteArray(1024)
+        // RSA signatures and public keys make a signed identity packet larger
+        // than the old 1 KiB buffer on some device names/encodings. A fixed
+        // bounded buffer prevents truncation without accepting unbounded UDP
+        // input.
+        val buffer = ByteArray(MAX_DISCOVERY_PACKET_BYTES)
 
         while (scope.isActive) {
             try {
@@ -411,7 +331,9 @@ class DeviceDiscoveryImpl @Inject constructor(
                 } ?: continue
 
                 // 蹇界暐鏈澶囩殑骞挎挱
-                if (identityPacket.deviceId != getLocalDeviceId()) {
+                if (identityPacket.deviceId != getLocalDeviceId() &&
+                    identityPacket.isAuthentic(identityStore)
+                ) {
                     handleDiscoveredDevice(identityPacket, packet.address.hostAddress ?: "")
                 }
             } catch (e: Exception) {
@@ -425,9 +347,7 @@ class DeviceDiscoveryImpl @Inject constructor(
     /**
      * 澶勭悊鍙戠幇鐨勮澶?     */
     private fun handleDiscoveredDevice(identityPacket: IdentityPacket, ipAddress: String) {
-        val currentDevices = _discoveredDevices.value.toMutableList()
-        val existingIndex = currentDevices.indexOfFirst { it.device.id == identityPacket.deviceId }
-
+        val deviceType = identityPacket.deviceType ?: return
         logger.d(
             TAG,
             "Handling discovered device: id=${identityPacket.deviceId}, name=${identityPacket.deviceName}, ip=$ipAddress"
@@ -437,11 +357,13 @@ class DeviceDiscoveryImpl @Inject constructor(
             device = Device(
                 id = identityPacket.deviceId,
                 name = identityPacket.deviceName,
-                type = identityPacket.deviceType,
+                type = deviceType,
                 role = DeviceRole.SECONDARY,
-                publicKey = null,
+                publicKey = identityPacket.publicKey,
                 lastSeen = System.currentTimeMillis(),
-                isPaired = false
+                isPaired = false,
+                ipAddress = ipAddress,
+                port = identityPacket.port
             ),
             ipAddress = ipAddress,
             lastSeen = System.currentTimeMillis(),
@@ -450,21 +372,38 @@ class DeviceDiscoveryImpl @Inject constructor(
             bleDevice = null
         )
 
-        if (existingIndex >= 0) {
-            currentDevices[existingIndex] = discoveredDevice
-        } else {
-            currentDevices.add(discoveredDevice)
-            logger.i(TAG, "Discovered new device: ${identityPacket.deviceName} at $ipAddress")
+        _discoveredDevices.update { existingDevices ->
+            val currentDevices = existingDevices.toMutableList()
+            val existingIndex = currentDevices.indexOfFirst { it.device.id == identityPacket.deviceId }
+            if (existingIndex >= 0) {
+                currentDevices[existingIndex] = discoveredDevice
+            } else {
+                currentDevices.add(discoveredDevice)
+                logger.i(TAG, "Discovered new device: ${identityPacket.deviceName} at $ipAddress")
+            }
+            currentDevices
         }
-
-        _discoveredDevices.value = currentDevices
         scope.launch {
             val persistedDevice = deviceRepository.getDeviceById(identityPacket.deviceId)
-            val deviceToPersist = (persistedDevice ?: discoveredDevice.device).copy(
-                lastSeen = System.currentTimeMillis(),
-                isPaired = true
-            )
-            deviceRepository.saveDevice(deviceToPersist)
+            if (persistedDevice?.isPaired == true && identityPacket.isAuthentic(identityStore)) {
+                if (!persistedDevice.publicKey.isNullOrBlank() &&
+                    !identityPacket.publicKey.isNullOrBlank() &&
+                    persistedDevice.publicKey != identityPacket.publicKey
+                ) {
+                    logger.w(TAG, "Ignoring discovery key change for pinned device ${identityPacket.deviceId}")
+                    return@launch
+                }
+                deviceRepository.saveDevice(
+                    persistedDevice.copy(
+                        name = identityPacket.deviceName,
+                        type = deviceType,
+                        publicKey = persistedDevice.publicKey ?: identityPacket.publicKey,
+                        lastSeen = System.currentTimeMillis(),
+                        ipAddress = ipAddress,
+                        port = identityPacket.port
+                    )
+                )
+            }
         }
     }
 
@@ -472,13 +411,14 @@ class DeviceDiscoveryImpl @Inject constructor(
      * 绉婚櫎瓒呮椂鐨勮澶?     */
     private fun removeStaleDevices() {
         val currentTime = System.currentTimeMillis()
-        val activeDevices = _discoveredDevices.value.filter {
-            currentTime - it.lastSeen < settings.deviceTimeout
-        }
-
-        if (activeDevices.size != _discoveredDevices.value.size) {
-            logger.d(TAG, "Removed ${_discoveredDevices.value.size - activeDevices.size} stale devices")
-            _discoveredDevices.value = activeDevices
+        _discoveredDevices.update { devices ->
+            val activeDevices = devices.filter {
+                currentTime - it.lastSeen < settings.deviceTimeout
+            }
+            if (activeDevices.size != devices.size) {
+                logger.d(TAG, "Removed ${devices.size - activeDevices.size} stale devices")
+            }
+            activeDevices
         }
     }
 
@@ -509,19 +449,8 @@ class DeviceDiscoveryImpl @Inject constructor(
             logger.e(TAG, "Failed to get broadcast addresses", e)
         }
 
-        val fingerprint = android.os.Build.FINGERPRINT.orEmpty()
-        val model = android.os.Build.MODEL.orEmpty()
-        val isEmulator = fingerprint.contains("generic", ignoreCase = true) ||
-            model.contains("sdk_gphone", ignoreCase = true) ||
-            model.contains("Emulator", ignoreCase = true)
-
         if (addresses.isEmpty()) {
             addresses.add("255.255.255.255")
-        }
-
-        if (isEmulator) {
-            addresses.add("255.255.255.255")
-            addresses.add("10.0.2.255")
         }
 
         return addresses.distinct()
@@ -531,10 +460,20 @@ class DeviceDiscoveryImpl @Inject constructor(
      * 鑾峰彇鏈湴璁惧ID
      */
     private fun getLocalDeviceId(): String {
-        return android.provider.Settings.Secure.getString(
-            context.contentResolver,
-            android.provider.Settings.Secure.ANDROID_ID
+        return identityStore.deviceId()
+    }
+
+    private fun signedIdentityPacket(localDevice: Device): IdentityPacket {
+        val unsigned = IdentityPacket(
+            deviceId = localDevice.id,
+            deviceName = localDevice.name,
+            deviceType = localDevice.type,
+            protocolVersion = 1,
+            publicKey = localDevice.publicKey,
+            port = DISCOVERY_PORT,
+            signature = ""
         )
+        return unsigned.copy(signature = identityStore.sign(unsigned.canonicalPayload()))
     }
 
     /**
@@ -561,9 +500,35 @@ enum class DiscoveryMethod {
 data class IdentityPacket(
     val deviceId: String,
     val deviceName: String,
-    val deviceType: DeviceType,
-    val protocolVersion: Int
-)
+    val deviceType: DeviceType?,
+    val protocolVersion: Int,
+    val publicKey: String? = null,
+    val port: Int = 1716,
+    val signature: String? = null
+) {
+    fun canonicalPayload(): String = listOf(
+        "smslink-discovery",
+        protocolVersion.toString(),
+        deviceId,
+        deviceName,
+        deviceType?.name.orEmpty(),
+        port.toString(),
+        publicKey.orEmpty()
+    ).joinToString("|")
+
+    fun isStructurallyValid(): Boolean =
+        protocolVersion == 1 && deviceId.isNotBlank() && deviceId.length <= 128 &&
+            deviceName.isNotBlank() && deviceName.length <= 128 &&
+            deviceType != null &&
+            port in 1..65535 && (publicKey.isNullOrBlank() || !signature.isNullOrBlank())
+
+    fun isAuthentic(identityStore: DeviceIdentityStore): Boolean {
+        if (!isStructurallyValid()) return false
+        val key = publicKey ?: return false
+        val sig = signature ?: return false
+        return identityStore.verify(key, canonicalPayload(), sig)
+    }
+}
 
 /**
  * 鍙戠幇鐨勮澶? */

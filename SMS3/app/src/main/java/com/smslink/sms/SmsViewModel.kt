@@ -3,11 +3,14 @@ package com.smslink.sms
 import androidx.lifecycle.ViewModel
 import com.smslink.core.log.ILogger
 import com.smslink.core.model.Device
+import com.smslink.core.model.DeviceRole
 import com.smslink.core.model.Message
 import com.smslink.core.permission.IPermissionManager
 import com.smslink.device.IDeviceManager
+import com.smslink.device.observeLiveConnections
 import com.smslink.sms.model.Conversation
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -57,7 +60,19 @@ class SmsViewModel @Inject constructor(
 
     private val _viewMode = MutableStateFlow<ViewMode>(ViewMode.CONVERSATIONS)
     val viewMode: StateFlow<ViewMode> = _viewMode.asStateFlow()
-    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Unconfined)
+
+    // Android uses the main dispatcher for UI-facing state. Plain JVM tests
+    // have no Main dispatcher, so fall back only in that environment.
+    private val scope = CoroutineScope(SupervisorJob() + resolveDispatcher())
+
+    private fun resolveDispatcher(): CoroutineDispatcher {
+        val main = runCatching { Dispatchers.Main.immediate }.getOrDefault(Dispatchers.Unconfined)
+        return if (main.toString().contains("missing", ignoreCase = true)) {
+            Dispatchers.Unconfined
+        } else {
+            main
+        }
+    }
 
     init {
         checkPermissionsAndLoadMessages()
@@ -126,7 +141,7 @@ class SmsViewModel @Inject constructor(
      */
     private fun observeConnectedDevices() {
         scope.launch {
-            deviceManager.getConnectedDevices()
+            deviceManager.observeLiveConnections()
                 .catch { e ->
                     logger.e(TAG, "Failed to observe connected devices", e)
                 }
@@ -168,7 +183,17 @@ class SmsViewModel @Inject constructor(
             _sendState.value = SendState.Sending
 
             try {
-                val success = smsManager.sendMessage(address, body, _selectedSimSlot.value)
+                val selectedSource = _selectedDevice.value
+                val success = if (selectedSource == null) {
+                    smsManager.sendMessage(address, body, _selectedSimSlot.value)
+                } else {
+                    smsManager.sendMessageFromDevice(
+                        address = address,
+                        body = body,
+                        sourceDeviceId = selectedSource.id,
+                        simSlot = _selectedSimSlot.value
+                    )
+                }
                 _sendState.value = if (success) {
                     SendState.Success
                 } else {
@@ -265,6 +290,10 @@ class SmsViewModel @Inject constructor(
      * 检查是否有必需的权限
      */
     private fun hasRequiredPermissions(): Boolean {
+        // Secondary/tablet devices use mirrored Room data and request the
+        // cellular source to send; they do not own local telephony access.
+        val role = runCatching { deviceManager.getLocalDevice().role }.getOrNull()
+        if (role == DeviceRole.SECONDARY) return true
         return permissionManager.hasPermission(android.Manifest.permission.READ_SMS) &&
                 permissionManager.hasPermission(android.Manifest.permission.SEND_SMS) &&
                 permissionManager.hasPermission(android.Manifest.permission.RECEIVE_SMS)

@@ -24,8 +24,17 @@ data class Message(
     val timestamp: Long,
     val type: MessageType,
     val read: Boolean,
-    val deviceId: String
+    val deviceId: String,
+    val deliveryStatus: SmsDeliveryStatus = SmsDeliveryStatus.QUEUED,
+    val deliveryTimestamp: Long? = null
 )
+
+enum class SmsDeliveryStatus {
+    QUEUED,
+    SENT,
+    DELIVERED,
+    FAILED
+}
 
 /**
  * 消息类型

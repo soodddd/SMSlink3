@@ -68,7 +68,7 @@ class CatchupSyncManager @Inject constructor(
             val recentNotifications = notificationRepository.getAllNotifications(100)
                 .first()
                 .filter { notification ->
-                    notification.timestamp >= cutoffTime && !notification.isSynced
+                    notification.timestamp >= cutoffTime
                 }
 
             logger.i(TAG, "Found ${recentNotifications.size} recent notifications to sync")

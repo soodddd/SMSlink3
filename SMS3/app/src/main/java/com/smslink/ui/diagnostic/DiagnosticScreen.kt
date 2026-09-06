@@ -1,5 +1,6 @@
 package com.smslink.ui.diagnostic
 
+import android.content.Intent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -12,7 +13,10 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.smslink.core.log.DiagnosticLog
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -22,19 +26,12 @@ import java.util.*
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DiagnosticScreen(
-    onNavigateBack: () -> Unit = {}
+    onNavigateBack: () -> Unit = {},
+    viewModel: DiagnosticViewModel = hiltViewModel()
 ) {
-    var logs by remember { mutableStateOf(listOf<LogEntry>()) }
+    val context = LocalContext.current
+    val logs by viewModel.logs.collectAsState()
     var showClearDialog by remember { mutableStateOf(false) }
-
-    LaunchedEffect(Unit) {
-        // 模拟日志数据
-        logs = listOf(
-            LogEntry("INFO", "应用启动", System.currentTimeMillis()),
-            LogEntry("DEBUG", "蓝牙服务初始化", System.currentTimeMillis() - 1000),
-            LogEntry("INFO", "权限检查完成", System.currentTimeMillis() - 2000)
-        )
-    }
 
     Scaffold(
         topBar = {
@@ -55,10 +52,17 @@ fun DiagnosticScreen(
                     }
                 },
                 actions = {
-                    IconButton(onClick = { /* TODO: 刷新日志 */ }) {
+                    IconButton(onClick = viewModel::refresh) {
                         Icon(Icons.Default.Refresh, contentDescription = "刷新")
                     }
-                    IconButton(onClick = { /* TODO: 分享日志 */ }) {
+                    IconButton(onClick = {
+                        val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                            type = "text/plain"
+                            putExtra(Intent.EXTRA_SUBJECT, "SMS-link 诊断日志")
+                            putExtra(Intent.EXTRA_TEXT, viewModel.exportText())
+                        }
+                        context.startActivity(Intent.createChooser(shareIntent, "分享诊断日志"))
+                    }) {
                         Icon(Icons.Default.Share, contentDescription = "分享")
                     }
                     IconButton(onClick = { showClearDialog = true }) {
@@ -90,7 +94,7 @@ fun DiagnosticScreen(
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 items(logs) { log ->
-                    LogItem(log)
+                    LogItem(log.toLogEntry())
                 }
             }
         }
@@ -104,7 +108,7 @@ fun DiagnosticScreen(
             confirmButton = {
                 TextButton(
                     onClick = {
-                        logs = emptyList()
+                        viewModel.clear()
                         showClearDialog = false
                     }
                 ) {
@@ -152,7 +156,7 @@ fun LogItem(log: LogEntry) {
             }
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = log.message,
+                text = if (log.tag.isBlank()) log.message else "${log.tag}: ${log.message}",
                 style = MaterialTheme.typography.bodyMedium
             )
         }
@@ -161,8 +165,16 @@ fun LogItem(log: LogEntry) {
 
 data class LogEntry(
     val level: String,
+    val tag: String = "",
     val message: String,
     val timestamp: Long
+)
+
+private fun DiagnosticLog.toLogEntry(): LogEntry = LogEntry(
+    level = level,
+    tag = tag,
+    message = message,
+    timestamp = timestamp
 )
 
 private fun formatTimestamp(timestamp: Long): String {

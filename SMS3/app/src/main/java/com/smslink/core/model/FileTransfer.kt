@@ -12,7 +12,14 @@ data class FileTransfer(
     val direction: TransferDirection,
     val state: TransferState,
     val progress: Float,
-    val timestamp: Long
+    val timestamp: Long,
+    val bytesTransferred: Long = 0L,
+    val errorMessage: String? = null,
+    val filePath: String? = null,
+    val fileHash: String? = null,
+    val nextSequence: Int = 0,
+    val retryCount: Int = 0,
+    val lastError: String? = null
 )
 
 /**

@@ -45,6 +45,22 @@ interface ICallManager {
      */
     suspend fun endCall(callId: String): Boolean
 
+    /** Optional controls stay on the interface so UI code never down-casts
+     * the Hilt binding to a concrete implementation. */
+    suspend fun muteCall(callId: String): Boolean = false
+
+    suspend fun unmuteCall(callId: String): Boolean = false
+
+    suspend fun holdCall(callId: String): Boolean = false
+
+    suspend fun resumeCall(callId: String): Boolean = false
+
+    suspend fun sendCallControl(
+        callState: CallState,
+        action: com.smslink.call.model.CallAction,
+        targetDeviceId: String
+    ): Boolean = false
+
     /**
      * 同步通话状态到其他设备
      * @param callState 通话状态

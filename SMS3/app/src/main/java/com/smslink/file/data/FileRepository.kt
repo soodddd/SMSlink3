@@ -25,7 +25,12 @@ class FileRepository @Inject constructor(
                 progress = transfer.progress,
                 bytesTransferred = bytesTransferred,
                 timestamp = transfer.timestamp,
-                linkType = linkType
+                linkType = linkType,
+                fileHash = transfer.fileHash,
+                nextSequence = transfer.nextSequence,
+                retryCount = transfer.retryCount,
+                lastError = transfer.lastError,
+                protocolVersion = 2
             )
         )
     }
@@ -43,7 +48,12 @@ class FileRepository @Inject constructor(
                 state = transfer.state,
                 progress = transfer.progress,
                 bytesTransferred = bytesTransferred,
-                timestamp = transfer.timestamp
+                timestamp = transfer.timestamp,
+                fileHash = transfer.fileHash,
+                nextSequence = transfer.nextSequence,
+                retryCount = transfer.retryCount,
+                lastError = transfer.lastError,
+                protocolVersion = 2
             )
         )
     }
@@ -68,6 +78,9 @@ class FileRepository @Inject constructor(
 
     suspend fun getTransferById(transferId: String): FileTransfer? = fileTransferDao.getById(transferId)?.toModel()
 
+    fun observeTransfer(transferId: String): Flow<FileTransfer?> =
+        fileTransferDao.observeById(transferId).map { it?.toModel() }
+
     suspend fun getTransferHistory(limit: Int): List<FileTransfer> = fileTransferDao.getAll(limit).map { it.toModel() }
 
     fun getActiveTransfers(): Flow<List<FileTransfer>> = fileTransferDao.getActiveTransfers().map { entities ->
@@ -86,6 +99,21 @@ class FileRepository @Inject constructor(
             entity.copy(
                 retryCount = retryCount,
                 lastError = errorMessage
+            )
+        )
+    }
+
+    suspend fun updateTransferSession(
+        transferId: String,
+        fileHash: String?,
+        nextSequence: Int
+    ) {
+        val entity = fileTransferDao.getById(transferId) ?: return
+        fileTransferDao.update(
+            entity.copy(
+                fileHash = fileHash,
+                nextSequence = nextSequence,
+                protocolVersion = 2
             )
         )
     }
@@ -117,7 +145,14 @@ class FileRepository @Inject constructor(
             direction = direction,
             state = state,
             progress = progress,
-            timestamp = timestamp
+            timestamp = timestamp,
+            bytesTransferred = bytesTransferred,
+            errorMessage = errorMessage,
+            filePath = filePath,
+            fileHash = fileHash,
+            nextSequence = nextSequence,
+            retryCount = retryCount,
+            lastError = lastError
         )
     }
 }
